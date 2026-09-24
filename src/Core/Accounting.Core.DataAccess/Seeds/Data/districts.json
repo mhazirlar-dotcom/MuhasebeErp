@@ -1,0 +1,3674 @@
+[
+  {
+    "name": "Aladağ",
+    "parentCode": "01"
+  },
+  {
+    "name": "Ceyhan",
+    "parentCode": "01"
+  },
+  {
+    "name": "Çukurova",
+    "parentCode": "01"
+  },
+  {
+    "name": "Feke",
+    "parentCode": "01"
+  },
+  {
+    "name": "İmamoğlu",
+    "parentCode": "01"
+  },
+  {
+    "name": "Karaisalı",
+    "parentCode": "01"
+  },
+  {
+    "name": "Karataş",
+    "parentCode": "01"
+  },
+  {
+    "name": "Kozan",
+    "parentCode": "01"
+  },
+  {
+    "name": "Pozantı",
+    "parentCode": "01"
+  },
+  {
+    "name": "Saimbeyli",
+    "parentCode": "01"
+  },
+  {
+    "name": "Sarıçam",
+    "parentCode": "01"
+  },
+  {
+    "name": "Seyhan",
+    "parentCode": "01"
+  },
+  {
+    "name": "Tufanbeyli",
+    "parentCode": "01"
+  },
+  {
+    "name": "Yumurtalık",
+    "parentCode": "01"
+  },
+  {
+    "name": "Yüreğir",
+    "parentCode": "01"
+  },
+  {
+    "name": "Besni",
+    "parentCode": "02"
+  },
+  {
+    "name": "Çelikhan",
+    "parentCode": "02"
+  },
+  {
+    "name": "Gerger",
+    "parentCode": "02"
+  },
+  {
+    "name": "Gölbaşı",
+    "parentCode": "02"
+  },
+  {
+    "name": "Kahta",
+    "parentCode": "02"
+  },
+  {
+    "name": "Samsat",
+    "parentCode": "02"
+  },
+  {
+    "name": "Sincik",
+    "parentCode": "02"
+  },
+  {
+    "name": "Tut",
+    "parentCode": "02"
+  },
+  {
+    "name": "Başmakçı",
+    "parentCode": "03"
+  },
+  {
+    "name": "Bayat",
+    "parentCode": "03"
+  },
+  {
+    "name": "Bolvadin",
+    "parentCode": "03"
+  },
+  {
+    "name": "Çay",
+    "parentCode": "03"
+  },
+  {
+    "name": "Çobanlar",
+    "parentCode": "03"
+  },
+  {
+    "name": "Dazkırı",
+    "parentCode": "03"
+  },
+  {
+    "name": "Dinar",
+    "parentCode": "03"
+  },
+  {
+    "name": "Emirdağ",
+    "parentCode": "03"
+  },
+  {
+    "name": "Evciler",
+    "parentCode": "03"
+  },
+  {
+    "name": "Hocalar",
+    "parentCode": "03"
+  },
+  {
+    "name": "İhsaniye",
+    "parentCode": "03"
+  },
+  {
+    "name": "İscehisar",
+    "parentCode": "03"
+  },
+  {
+    "name": "Kızılören",
+    "parentCode": "03"
+  },
+  {
+    "name": "Sandıklı",
+    "parentCode": "03"
+  },
+  {
+    "name": "Sinanpaşa",
+    "parentCode": "03"
+  },
+  {
+    "name": "Sultandağı",
+    "parentCode": "03"
+  },
+  {
+    "name": "Şuhut",
+    "parentCode": "03"
+  },
+  {
+    "name": "Diyadin",
+    "parentCode": "04"
+  },
+  {
+    "name": "Doğubayazıt",
+    "parentCode": "04"
+  },
+  {
+    "name": "Eleşkirt",
+    "parentCode": "04"
+  },
+  {
+    "name": "Hamur",
+    "parentCode": "04"
+  },
+  {
+    "name": "Patnos",
+    "parentCode": "04"
+  },
+  {
+    "name": "Taşlıçay",
+    "parentCode": "04"
+  },
+  {
+    "name": "Tutak",
+    "parentCode": "04"
+  },
+  {
+    "name": "Göynücek",
+    "parentCode": "05"
+  },
+  {
+    "name": "Gümüşhacıköy",
+    "parentCode": "05"
+  },
+  {
+    "name": "Hamamözü",
+    "parentCode": "05"
+  },
+  {
+    "name": "Merzifon",
+    "parentCode": "05"
+  },
+  {
+    "name": "Suluova",
+    "parentCode": "05"
+  },
+  {
+    "name": "Taşova",
+    "parentCode": "05"
+  },
+  {
+    "name": "Akyurt",
+    "parentCode": "06"
+  },
+  {
+    "name": "Altındağ",
+    "parentCode": "06"
+  },
+  {
+    "name": "Ayaş",
+    "parentCode": "06"
+  },
+  {
+    "name": "Bala",
+    "parentCode": "06"
+  },
+  {
+    "name": "Beypazarı",
+    "parentCode": "06"
+  },
+  {
+    "name": "Çamlıdere",
+    "parentCode": "06"
+  },
+  {
+    "name": "Çankaya",
+    "parentCode": "06"
+  },
+  {
+    "name": "Çubuk",
+    "parentCode": "06"
+  },
+  {
+    "name": "Elmadağ",
+    "parentCode": "06"
+  },
+  {
+    "name": "Etimesgut",
+    "parentCode": "06"
+  },
+  {
+    "name": "Evren",
+    "parentCode": "06"
+  },
+  {
+    "name": "Gölbaşı",
+    "parentCode": "06"
+  },
+  {
+    "name": "Güdül",
+    "parentCode": "06"
+  },
+  {
+    "name": "Haymana",
+    "parentCode": "06"
+  },
+  {
+    "name": "Kalecik",
+    "parentCode": "06"
+  },
+  {
+    "name": "Kahramankazan",
+    "parentCode": "06"
+  },
+  {
+    "name": "Keçiören",
+    "parentCode": "06"
+  },
+  {
+    "name": "Kızılcahamam",
+    "parentCode": "06"
+  },
+  {
+    "name": "Mamak",
+    "parentCode": "06"
+  },
+  {
+    "name": "Nallıhan",
+    "parentCode": "06"
+  },
+  {
+    "name": "Polatlı",
+    "parentCode": "06"
+  },
+  {
+    "name": "Akseki",
+    "parentCode": "07"
+  },
+  {
+    "name": "Aksu",
+    "parentCode": "07"
+  },
+  {
+    "name": "Alanya",
+    "parentCode": "07"
+  },
+  {
+    "name": "Demre",
+    "parentCode": "07"
+  },
+  {
+    "name": "Döşemealtı",
+    "parentCode": "07"
+  },
+  {
+    "name": "Elmalı",
+    "parentCode": "07"
+  },
+  {
+    "name": "Finike",
+    "parentCode": "07"
+  },
+  {
+    "name": "Gazipaşa",
+    "parentCode": "07"
+  },
+  {
+    "name": "Gündoğmuş",
+    "parentCode": "07"
+  },
+  {
+    "name": "İbradı",
+    "parentCode": "07"
+  },
+  {
+    "name": "Kaş",
+    "parentCode": "07"
+  },
+  {
+    "name": "Kemer",
+    "parentCode": "07"
+  },
+  {
+    "name": "Kepez",
+    "parentCode": "07"
+  },
+  {
+    "name": "Konyaaltı",
+    "parentCode": "07"
+  },
+  {
+    "name": "Korkuteli",
+    "parentCode": "07"
+  },
+  {
+    "name": "Kumluca",
+    "parentCode": "07"
+  },
+  {
+    "name": "Manavgat",
+    "parentCode": "07"
+  },
+  {
+    "name": "Muratpaşa",
+    "parentCode": "07"
+  },
+  {
+    "name": "Serik",
+    "parentCode": "07"
+  },
+  {
+    "name": "Ardanuç",
+    "parentCode": "08"
+  },
+  {
+    "name": "Arhavi",
+    "parentCode": "08"
+  },
+  {
+    "name": "Borçka",
+    "parentCode": "08"
+  },
+  {
+    "name": "Hopa",
+    "parentCode": "08"
+  },
+  {
+    "name": "Murgul",
+    "parentCode": "08"
+  },
+  {
+    "name": "Şavşat",
+    "parentCode": "08"
+  },
+  {
+    "name": "Yusufeli",
+    "parentCode": "08"
+  },
+  {
+    "name": "Kemalpaşa",
+    "parentCode": "08"
+  },
+  {
+    "name": "Bozdoğan",
+    "parentCode": "09"
+  },
+  {
+    "name": "Buharkent",
+    "parentCode": "09"
+  },
+  {
+    "name": "Çine",
+    "parentCode": "09"
+  },
+  {
+    "name": "Didim",
+    "parentCode": "09"
+  },
+  {
+    "name": "Efeler",
+    "parentCode": "09"
+  },
+  {
+    "name": "Germencik",
+    "parentCode": "09"
+  },
+  {
+    "name": "İncirliova",
+    "parentCode": "09"
+  },
+  {
+    "name": "Karacasu",
+    "parentCode": "09"
+  },
+  {
+    "name": "Karpuzlu",
+    "parentCode": "09"
+  },
+  {
+    "name": "Koçarlı",
+    "parentCode": "09"
+  },
+  {
+    "name": "Köşk",
+    "parentCode": "09"
+  },
+  {
+    "name": "Kuşadası",
+    "parentCode": "09"
+  },
+  {
+    "name": "Kuyucak",
+    "parentCode": "09"
+  },
+  {
+    "name": "Nazilli",
+    "parentCode": "09"
+  },
+  {
+    "name": "Söke",
+    "parentCode": "09"
+  },
+  {
+    "name": "Sultanhisar",
+    "parentCode": "09"
+  },
+  {
+    "name": "Yenipazar",
+    "parentCode": "09"
+  },
+  {
+    "name": "Altıeylül",
+    "parentCode": "10"
+  },
+  {
+    "name": "Ayvalık",
+    "parentCode": "10"
+  },
+  {
+    "name": "Balya",
+    "parentCode": "10"
+  },
+  {
+    "name": "Bandırma",
+    "parentCode": "10"
+  },
+  {
+    "name": "Bigadiç",
+    "parentCode": "10"
+  },
+  {
+    "name": "Burhaniye",
+    "parentCode": "10"
+  },
+  {
+    "name": "Dursunbey",
+    "parentCode": "10"
+  },
+  {
+    "name": "Edremit",
+    "parentCode": "10"
+  },
+  {
+    "name": "Erdek",
+    "parentCode": "10"
+  },
+  {
+    "name": "Gömeç",
+    "parentCode": "10"
+  },
+  {
+    "name": "Gönen",
+    "parentCode": "10"
+  },
+  {
+    "name": "Havran",
+    "parentCode": "10"
+  },
+  {
+    "name": "İvrindi",
+    "parentCode": "10"
+  },
+  {
+    "name": "Karesi",
+    "parentCode": "10"
+  },
+  {
+    "name": "Kepsut",
+    "parentCode": "10"
+  },
+  {
+    "name": "Manyas",
+    "parentCode": "10"
+  },
+  {
+    "name": "Marmara",
+    "parentCode": "10"
+  },
+  {
+    "name": "Savaştepe",
+    "parentCode": "10"
+  },
+  {
+    "name": "Sındırgı",
+    "parentCode": "10"
+  },
+  {
+    "name": "Susurluk",
+    "parentCode": "10"
+  },
+  {
+    "name": "Bozüyük",
+    "parentCode": "11"
+  },
+  {
+    "name": "Gölpazarı",
+    "parentCode": "11"
+  },
+  {
+    "name": "İnhisar",
+    "parentCode": "11"
+  },
+  {
+    "name": "Osmaneli",
+    "parentCode": "11"
+  },
+  {
+    "name": "Pazaryeri",
+    "parentCode": "11"
+  },
+  {
+    "name": "Söğüt",
+    "parentCode": "11"
+  },
+  {
+    "name": "Yenipazar",
+    "parentCode": "11"
+  },
+  {
+    "name": "Adaklı",
+    "parentCode": "12"
+  },
+  {
+    "name": "Genç",
+    "parentCode": "12"
+  },
+  {
+    "name": "Karlıova",
+    "parentCode": "12"
+  },
+  {
+    "name": "Kiğı",
+    "parentCode": "12"
+  },
+  {
+    "name": "Solhan",
+    "parentCode": "12"
+  },
+  {
+    "name": "Yayladere",
+    "parentCode": "12"
+  },
+  {
+    "name": "Yedisu",
+    "parentCode": "12"
+  },
+  {
+    "name": "Adilcevaz",
+    "parentCode": "13"
+  },
+  {
+    "name": "Ahlat",
+    "parentCode": "13"
+  },
+  {
+    "name": "Güroymak",
+    "parentCode": "13"
+  },
+  {
+    "name": "Hizan",
+    "parentCode": "13"
+  },
+  {
+    "name": "Mutki",
+    "parentCode": "13"
+  },
+  {
+    "name": "Tatvan",
+    "parentCode": "13"
+  },
+  {
+    "name": "Dörtdivan",
+    "parentCode": "14"
+  },
+  {
+    "name": "Gerede",
+    "parentCode": "14"
+  },
+  {
+    "name": "Göynük",
+    "parentCode": "14"
+  },
+  {
+    "name": "Kıbrıscık",
+    "parentCode": "14"
+  },
+  {
+    "name": "Mengen",
+    "parentCode": "14"
+  },
+  {
+    "name": "Mudurnu",
+    "parentCode": "14"
+  },
+  {
+    "name": "Seben",
+    "parentCode": "14"
+  },
+  {
+    "name": "Yeniçağa",
+    "parentCode": "14"
+  },
+  {
+    "name": "Ağlasun",
+    "parentCode": "15"
+  },
+  {
+    "name": "Altınyayla",
+    "parentCode": "15"
+  },
+  {
+    "name": "Bucak",
+    "parentCode": "15"
+  },
+  {
+    "name": "Çavdır",
+    "parentCode": "15"
+  },
+  {
+    "name": "Çeltikçi",
+    "parentCode": "15"
+  },
+  {
+    "name": "Gölhisar",
+    "parentCode": "15"
+  },
+  {
+    "name": "Karamanlı",
+    "parentCode": "15"
+  },
+  {
+    "name": "Kemer",
+    "parentCode": "15"
+  },
+  {
+    "name": "Tefenni",
+    "parentCode": "15"
+  },
+  {
+    "name": "Yeşilova",
+    "parentCode": "15"
+  },
+  {
+    "name": "Büyükorhan",
+    "parentCode": "16"
+  },
+  {
+    "name": "Gemlik",
+    "parentCode": "16"
+  },
+  {
+    "name": "Gürsu",
+    "parentCode": "16"
+  },
+  {
+    "name": "Harmancık",
+    "parentCode": "16"
+  },
+  {
+    "name": "İnegöl",
+    "parentCode": "16"
+  },
+  {
+    "name": "İznik",
+    "parentCode": "16"
+  },
+  {
+    "name": "Karacabey",
+    "parentCode": "16"
+  },
+  {
+    "name": "Keles",
+    "parentCode": "16"
+  },
+  {
+    "name": "Kestel",
+    "parentCode": "16"
+  },
+  {
+    "name": "Mudanya",
+    "parentCode": "16"
+  },
+  {
+    "name": "Mustafakemalpaşa",
+    "parentCode": "16"
+  },
+  {
+    "name": "Nilüfer",
+    "parentCode": "16"
+  },
+  {
+    "name": "Orhaneli",
+    "parentCode": "16"
+  },
+  {
+    "name": "Orhangazi",
+    "parentCode": "16"
+  },
+  {
+    "name": "Osmangazi",
+    "parentCode": "16"
+  },
+  {
+    "name": "Yenişehir",
+    "parentCode": "16"
+  },
+  {
+    "name": "Yıldırım",
+    "parentCode": "16"
+  },
+  {
+    "name": "Ayvacık",
+    "parentCode": "17"
+  },
+  {
+    "name": "Bayramiç",
+    "parentCode": "17"
+  },
+  {
+    "name": "Biga",
+    "parentCode": "17"
+  },
+  {
+    "name": "Bozcaada",
+    "parentCode": "17"
+  },
+  {
+    "name": "Çan",
+    "parentCode": "17"
+  },
+  {
+    "name": "Eceabat",
+    "parentCode": "17"
+  },
+  {
+    "name": "Ezine",
+    "parentCode": "17"
+  },
+  {
+    "name": "Gelibolu",
+    "parentCode": "17"
+  },
+  {
+    "name": "Gökçeada",
+    "parentCode": "17"
+  },
+  {
+    "name": "Lapseki",
+    "parentCode": "17"
+  },
+  {
+    "name": "Yenice",
+    "parentCode": "17"
+  },
+  {
+    "name": "Atkaracalar",
+    "parentCode": "18"
+  },
+  {
+    "name": "Bayramören",
+    "parentCode": "18"
+  },
+  {
+    "name": "Çerkeş",
+    "parentCode": "18"
+  },
+  {
+    "name": "Eldivan",
+    "parentCode": "18"
+  },
+  {
+    "name": "Ilgaz",
+    "parentCode": "18"
+  },
+  {
+    "name": "Kızılırmak",
+    "parentCode": "18"
+  },
+  {
+    "name": "Korgun",
+    "parentCode": "18"
+  },
+  {
+    "name": "Kurşunlu",
+    "parentCode": "18"
+  },
+  {
+    "name": "Orta",
+    "parentCode": "18"
+  },
+  {
+    "name": "Şabanözü",
+    "parentCode": "18"
+  },
+  {
+    "name": "Yapraklı",
+    "parentCode": "18"
+  },
+  {
+    "name": "Alaca",
+    "parentCode": "19"
+  },
+  {
+    "name": "Bayat",
+    "parentCode": "19"
+  },
+  {
+    "name": "Boğazkale",
+    "parentCode": "19"
+  },
+  {
+    "name": "Dodurga",
+    "parentCode": "19"
+  },
+  {
+    "name": "İskilip",
+    "parentCode": "19"
+  },
+  {
+    "name": "Kargı",
+    "parentCode": "19"
+  },
+  {
+    "name": "Laçin",
+    "parentCode": "19"
+  },
+  {
+    "name": "Mecitözü",
+    "parentCode": "19"
+  },
+  {
+    "name": "Oğuzlar",
+    "parentCode": "19"
+  },
+  {
+    "name": "Ortaköy",
+    "parentCode": "19"
+  },
+  {
+    "name": "Osmancık",
+    "parentCode": "19"
+  },
+  {
+    "name": "Sungurlu",
+    "parentCode": "19"
+  },
+  {
+    "name": "Uğurludağ",
+    "parentCode": "19"
+  },
+  {
+    "name": "Acıpayam",
+    "parentCode": "20"
+  },
+  {
+    "name": "Pamukkale",
+    "parentCode": "20"
+  },
+  {
+    "name": "Babadağ",
+    "parentCode": "20"
+  },
+  {
+    "name": "Baklan",
+    "parentCode": "20"
+  },
+  {
+    "name": "Bekilli",
+    "parentCode": "20"
+  },
+  {
+    "name": "Beyağaç",
+    "parentCode": "20"
+  },
+  {
+    "name": "Bozkurt",
+    "parentCode": "20"
+  },
+  {
+    "name": "Buldan",
+    "parentCode": "20"
+  },
+  {
+    "name": "Çal",
+    "parentCode": "20"
+  },
+  {
+    "name": "Çameli",
+    "parentCode": "20"
+  },
+  {
+    "name": "Çardak",
+    "parentCode": "20"
+  },
+  {
+    "name": "Çivril",
+    "parentCode": "20"
+  },
+  {
+    "name": "Güney",
+    "parentCode": "20"
+  },
+  {
+    "name": "Honaz",
+    "parentCode": "20"
+  },
+  {
+    "name": "Kale",
+    "parentCode": "20"
+  },
+  {
+    "name": "Merkezefendi",
+    "parentCode": "20"
+  },
+  {
+    "name": "Sarayköy",
+    "parentCode": "20"
+  },
+  {
+    "name": "Serinhisar",
+    "parentCode": "20"
+  },
+  {
+    "name": "Tavas",
+    "parentCode": "20"
+  },
+  {
+    "name": "Bağlar",
+    "parentCode": "21"
+  },
+  {
+    "name": "Bismil",
+    "parentCode": "21"
+  },
+  {
+    "name": "Çermik",
+    "parentCode": "21"
+  },
+  {
+    "name": "Çınar",
+    "parentCode": "21"
+  },
+  {
+    "name": "Çüngüş",
+    "parentCode": "21"
+  },
+  {
+    "name": "Dicle",
+    "parentCode": "21"
+  },
+  {
+    "name": "Eğil",
+    "parentCode": "21"
+  },
+  {
+    "name": "Ergani",
+    "parentCode": "21"
+  },
+  {
+    "name": "Hani",
+    "parentCode": "21"
+  },
+  {
+    "name": "Hazro",
+    "parentCode": "21"
+  },
+  {
+    "name": "Kayapınar",
+    "parentCode": "21"
+  },
+  {
+    "name": "Kocaköy",
+    "parentCode": "21"
+  },
+  {
+    "name": "Kulp",
+    "parentCode": "21"
+  },
+  {
+    "name": "Lice",
+    "parentCode": "21"
+  },
+  {
+    "name": "Silvan",
+    "parentCode": "21"
+  },
+  {
+    "name": "Sur",
+    "parentCode": "21"
+  },
+  {
+    "name": "Yenişehir",
+    "parentCode": "21"
+  },
+  {
+    "name": "Enez",
+    "parentCode": "22"
+  },
+  {
+    "name": "Havsa",
+    "parentCode": "22"
+  },
+  {
+    "name": "İpsala",
+    "parentCode": "22"
+  },
+  {
+    "name": "Keşan",
+    "parentCode": "22"
+  },
+  {
+    "name": "Lalapaşa",
+    "parentCode": "22"
+  },
+  {
+    "name": "Meriç",
+    "parentCode": "22"
+  },
+  {
+    "name": "Süloğlu",
+    "parentCode": "22"
+  },
+  {
+    "name": "Uzunköprü",
+    "parentCode": "22"
+  },
+  {
+    "name": "Ağın",
+    "parentCode": "23"
+  },
+  {
+    "name": "Alacakaya",
+    "parentCode": "23"
+  },
+  {
+    "name": "Arıcak",
+    "parentCode": "23"
+  },
+  {
+    "name": "Baskil",
+    "parentCode": "23"
+  },
+  {
+    "name": "Karakoçan",
+    "parentCode": "23"
+  },
+  {
+    "name": "Keban",
+    "parentCode": "23"
+  },
+  {
+    "name": "Kovancılar",
+    "parentCode": "23"
+  },
+  {
+    "name": "Maden",
+    "parentCode": "23"
+  },
+  {
+    "name": "Palu",
+    "parentCode": "23"
+  },
+  {
+    "name": "Sivrice",
+    "parentCode": "23"
+  },
+  {
+    "name": "Çayırlı",
+    "parentCode": "24"
+  },
+  {
+    "name": "İliç",
+    "parentCode": "24"
+  },
+  {
+    "name": "Kemah",
+    "parentCode": "24"
+  },
+  {
+    "name": "Kemaliye",
+    "parentCode": "24"
+  },
+  {
+    "name": "Otlukbeli",
+    "parentCode": "24"
+  },
+  {
+    "name": "Refahiye",
+    "parentCode": "24"
+  },
+  {
+    "name": "Tercan",
+    "parentCode": "24"
+  },
+  {
+    "name": "Üzümlü",
+    "parentCode": "24"
+  },
+  {
+    "name": "Aşkale",
+    "parentCode": "25"
+  },
+  {
+    "name": "Aziziye",
+    "parentCode": "25"
+  },
+  {
+    "name": "Çat",
+    "parentCode": "25"
+  },
+  {
+    "name": "Hınıs",
+    "parentCode": "25"
+  },
+  {
+    "name": "Horasan",
+    "parentCode": "25"
+  },
+  {
+    "name": "İspir",
+    "parentCode": "25"
+  },
+  {
+    "name": "Karaçoban",
+    "parentCode": "25"
+  },
+  {
+    "name": "Karayazı",
+    "parentCode": "25"
+  },
+  {
+    "name": "Köprüköy",
+    "parentCode": "25"
+  },
+  {
+    "name": "Narman",
+    "parentCode": "25"
+  },
+  {
+    "name": "Oltu",
+    "parentCode": "25"
+  },
+  {
+    "name": "Olur",
+    "parentCode": "25"
+  },
+  {
+    "name": "Palandöken",
+    "parentCode": "25"
+  },
+  {
+    "name": "Pasinler",
+    "parentCode": "25"
+  },
+  {
+    "name": "Pazaryolu",
+    "parentCode": "25"
+  },
+  {
+    "name": "Şenkaya",
+    "parentCode": "25"
+  },
+  {
+    "name": "Tekman",
+    "parentCode": "25"
+  },
+  {
+    "name": "Tortum",
+    "parentCode": "25"
+  },
+  {
+    "name": "Uzundere",
+    "parentCode": "25"
+  },
+  {
+    "name": "Yakutiye",
+    "parentCode": "25"
+  },
+  {
+    "name": "Alpu",
+    "parentCode": "26"
+  },
+  {
+    "name": "Beylikova",
+    "parentCode": "26"
+  },
+  {
+    "name": "Çifteler",
+    "parentCode": "26"
+  },
+  {
+    "name": "Günyüzü",
+    "parentCode": "26"
+  },
+  {
+    "name": "Han",
+    "parentCode": "26"
+  },
+  {
+    "name": "İnönü",
+    "parentCode": "26"
+  },
+  {
+    "name": "Mahmudiye",
+    "parentCode": "26"
+  },
+  {
+    "name": "Mihalgazi",
+    "parentCode": "26"
+  },
+  {
+    "name": "Mihalıççık",
+    "parentCode": "26"
+  },
+  {
+    "name": "Odunpazarı",
+    "parentCode": "26"
+  },
+  {
+    "name": "Sarıcakaya",
+    "parentCode": "26"
+  },
+  {
+    "name": "Seyitgazi",
+    "parentCode": "26"
+  },
+  {
+    "name": "Sivrihisar",
+    "parentCode": "26"
+  },
+  {
+    "name": "Tepebaşı",
+    "parentCode": "26"
+  },
+  {
+    "name": "Araban",
+    "parentCode": "27"
+  },
+  {
+    "name": "İslahiye",
+    "parentCode": "27"
+  },
+  {
+    "name": "Karkamış",
+    "parentCode": "27"
+  },
+  {
+    "name": "Nizip",
+    "parentCode": "27"
+  },
+  {
+    "name": "Nurdağı",
+    "parentCode": "27"
+  },
+  {
+    "name": "Oğuzeli",
+    "parentCode": "27"
+  },
+  {
+    "name": "Şahinbey",
+    "parentCode": "27"
+  },
+  {
+    "name": "Şehitkamil",
+    "parentCode": "27"
+  },
+  {
+    "name": "Yavuzeli",
+    "parentCode": "27"
+  },
+  {
+    "name": "Alucra",
+    "parentCode": "28"
+  },
+  {
+    "name": "Bulancak",
+    "parentCode": "28"
+  },
+  {
+    "name": "Çamoluk",
+    "parentCode": "28"
+  },
+  {
+    "name": "Çanakçı",
+    "parentCode": "28"
+  },
+  {
+    "name": "Dereli",
+    "parentCode": "28"
+  },
+  {
+    "name": "Doğankent",
+    "parentCode": "28"
+  },
+  {
+    "name": "Espiye",
+    "parentCode": "28"
+  },
+  {
+    "name": "Eynesil",
+    "parentCode": "28"
+  },
+  {
+    "name": "Görele",
+    "parentCode": "28"
+  },
+  {
+    "name": "Güce",
+    "parentCode": "28"
+  },
+  {
+    "name": "Keşap",
+    "parentCode": "28"
+  },
+  {
+    "name": "Piraziz",
+    "parentCode": "28"
+  },
+  {
+    "name": "Şebinkarahisar",
+    "parentCode": "28"
+  },
+  {
+    "name": "Tirebolu",
+    "parentCode": "28"
+  },
+  {
+    "name": "Yağlıdere",
+    "parentCode": "28"
+  },
+  {
+    "name": "Kelkit",
+    "parentCode": "29"
+  },
+  {
+    "name": "Köse",
+    "parentCode": "29"
+  },
+  {
+    "name": "Kürtün",
+    "parentCode": "29"
+  },
+  {
+    "name": "Şiran",
+    "parentCode": "29"
+  },
+  {
+    "name": "Torul",
+    "parentCode": "29"
+  },
+  {
+    "name": "Çukurca",
+    "parentCode": "30"
+  },
+  {
+    "name": "Şemdinli",
+    "parentCode": "30"
+  },
+  {
+    "name": "Yüksekova",
+    "parentCode": "30"
+  },
+  {
+    "name": "Derecik",
+    "parentCode": "30"
+  },
+  {
+    "name": "Altınözü",
+    "parentCode": "31"
+  },
+  {
+    "name": "Antakya",
+    "parentCode": "31"
+  },
+  {
+    "name": "Arsuz",
+    "parentCode": "31"
+  },
+  {
+    "name": "Belen",
+    "parentCode": "31"
+  },
+  {
+    "name": "Defne",
+    "parentCode": "31"
+  },
+  {
+    "name": "Dörtyol",
+    "parentCode": "31"
+  },
+  {
+    "name": "Erzin",
+    "parentCode": "31"
+  },
+  {
+    "name": "Hassa",
+    "parentCode": "31"
+  },
+  {
+    "name": "İskenderun",
+    "parentCode": "31"
+  },
+  {
+    "name": "Kırıkhan",
+    "parentCode": "31"
+  },
+  {
+    "name": "Kumlu",
+    "parentCode": "31"
+  },
+  {
+    "name": "Payas",
+    "parentCode": "31"
+  },
+  {
+    "name": "Reyhanlı",
+    "parentCode": "31"
+  },
+  {
+    "name": "Samandağ",
+    "parentCode": "31"
+  },
+  {
+    "name": "Yayladağı",
+    "parentCode": "31"
+  },
+  {
+    "name": "Aksu",
+    "parentCode": "32"
+  },
+  {
+    "name": "Atabey",
+    "parentCode": "32"
+  },
+  {
+    "name": "Eğirdir",
+    "parentCode": "32"
+  },
+  {
+    "name": "Gelendost",
+    "parentCode": "32"
+  },
+  {
+    "name": "Gönen",
+    "parentCode": "32"
+  },
+  {
+    "name": "Keçiborlu",
+    "parentCode": "32"
+  },
+  {
+    "name": "Senirkent",
+    "parentCode": "32"
+  },
+  {
+    "name": "Sütçüler",
+    "parentCode": "32"
+  },
+  {
+    "name": "Şarkikaraağaç",
+    "parentCode": "32"
+  },
+  {
+    "name": "Uluborlu",
+    "parentCode": "32"
+  },
+  {
+    "name": "Yalvaç",
+    "parentCode": "32"
+  },
+  {
+    "name": "Yenişarbademli",
+    "parentCode": "32"
+  },
+  {
+    "name": "Akdeniz",
+    "parentCode": "33"
+  },
+  {
+    "name": "Anamur",
+    "parentCode": "33"
+  },
+  {
+    "name": "Aydıncık",
+    "parentCode": "33"
+  },
+  {
+    "name": "Bozyazı",
+    "parentCode": "33"
+  },
+  {
+    "name": "Çamlıyayla",
+    "parentCode": "33"
+  },
+  {
+    "name": "Erdemli",
+    "parentCode": "33"
+  },
+  {
+    "name": "Gülnar",
+    "parentCode": "33"
+  },
+  {
+    "name": "Mezitli",
+    "parentCode": "33"
+  },
+  {
+    "name": "Mut",
+    "parentCode": "33"
+  },
+  {
+    "name": "Silifke",
+    "parentCode": "33"
+  },
+  {
+    "name": "Tarsus",
+    "parentCode": "33"
+  },
+  {
+    "name": "Toroslar",
+    "parentCode": "33"
+  },
+  {
+    "name": "Yenişehir",
+    "parentCode": "33"
+  },
+  {
+    "name": "Adalar",
+    "parentCode": "34"
+  },
+  {
+    "name": "Arnavutköy",
+    "parentCode": "34"
+  },
+  {
+    "name": "Ataşehir",
+    "parentCode": "34"
+  },
+  {
+    "name": "Avcılar",
+    "parentCode": "34"
+  },
+  {
+    "name": "Bağcılar",
+    "parentCode": "34"
+  },
+  {
+    "name": "Bahçelievler",
+    "parentCode": "34"
+  },
+  {
+    "name": "Bakırköy",
+    "parentCode": "34"
+  },
+  {
+    "name": "Başakşehir",
+    "parentCode": "34"
+  },
+  {
+    "name": "Bayrampaşa",
+    "parentCode": "34"
+  },
+  {
+    "name": "Beşiktaş",
+    "parentCode": "34"
+  },
+  {
+    "name": "Beykoz",
+    "parentCode": "34"
+  },
+  {
+    "name": "Beylikdüzü",
+    "parentCode": "34"
+  },
+  {
+    "name": "Beyoğlu",
+    "parentCode": "34"
+  },
+  {
+    "name": "Büyükçekmece",
+    "parentCode": "34"
+  },
+  {
+    "name": "Çatalca",
+    "parentCode": "34"
+  },
+  {
+    "name": "Çekmeköy",
+    "parentCode": "34"
+  },
+  {
+    "name": "Esenler",
+    "parentCode": "34"
+  },
+  {
+    "name": "Esenyurt",
+    "parentCode": "34"
+  },
+  {
+    "name": "Eyüp",
+    "parentCode": "34"
+  },
+  {
+    "name": "Fatih",
+    "parentCode": "34"
+  },
+  {
+    "name": "Gaziosmanpaşa",
+    "parentCode": "34"
+  },
+  {
+    "name": "Güngören",
+    "parentCode": "34"
+  },
+  {
+    "name": "Kadıköy",
+    "parentCode": "34"
+  },
+  {
+    "name": "Kağıthane",
+    "parentCode": "34"
+  },
+  {
+    "name": "Kartal",
+    "parentCode": "34"
+  },
+  {
+    "name": "Küçükçekmece",
+    "parentCode": "34"
+  },
+  {
+    "name": "Maltepe",
+    "parentCode": "34"
+  },
+  {
+    "name": "Pendik",
+    "parentCode": "34"
+  },
+  {
+    "name": "Sancaktepe",
+    "parentCode": "34"
+  },
+  {
+    "name": "Sarıyer",
+    "parentCode": "34"
+  },
+  {
+    "name": "Silivri",
+    "parentCode": "34"
+  },
+  {
+    "name": "Sultanbeyli",
+    "parentCode": "34"
+  },
+  {
+    "name": "Sultangazi",
+    "parentCode": "34"
+  },
+  {
+    "name": "Şile",
+    "parentCode": "34"
+  },
+  {
+    "name": "Şişli",
+    "parentCode": "34"
+  },
+  {
+    "name": "Tuzla",
+    "parentCode": "34"
+  },
+  {
+    "name": "Ümraniye",
+    "parentCode": "34"
+  },
+  {
+    "name": "Üsküdar",
+    "parentCode": "34"
+  },
+  {
+    "name": "Zeytinburnu",
+    "parentCode": "34"
+  },
+  {
+    "name": "Aliağa",
+    "parentCode": "35"
+  },
+  {
+    "name": "Balçova",
+    "parentCode": "35"
+  },
+  {
+    "name": "Bayındır",
+    "parentCode": "35"
+  },
+  {
+    "name": "Bayraklı",
+    "parentCode": "35"
+  },
+  {
+    "name": "Bergama",
+    "parentCode": "35"
+  },
+  {
+    "name": "Beydağ",
+    "parentCode": "35"
+  },
+  {
+    "name": "Bornova",
+    "parentCode": "35"
+  },
+  {
+    "name": "Buca",
+    "parentCode": "35"
+  },
+  {
+    "name": "Çeşme",
+    "parentCode": "35"
+  },
+  {
+    "name": "Çiğli",
+    "parentCode": "35"
+  },
+  {
+    "name": "Dikili",
+    "parentCode": "35"
+  },
+  {
+    "name": "Foça",
+    "parentCode": "35"
+  },
+  {
+    "name": "Gaziemir",
+    "parentCode": "35"
+  },
+  {
+    "name": "Güzelbahçe",
+    "parentCode": "35"
+  },
+  {
+    "name": "Karabağlar",
+    "parentCode": "35"
+  },
+  {
+    "name": "Karaburun",
+    "parentCode": "35"
+  },
+  {
+    "name": "Karşıyaka",
+    "parentCode": "35"
+  },
+  {
+    "name": "Kemalpaşa",
+    "parentCode": "35"
+  },
+  {
+    "name": "Kınık",
+    "parentCode": "35"
+  },
+  {
+    "name": "Kiraz",
+    "parentCode": "35"
+  },
+  {
+    "name": "Konak",
+    "parentCode": "35"
+  },
+  {
+    "name": "Menderes",
+    "parentCode": "35"
+  },
+  {
+    "name": "Menemen",
+    "parentCode": "35"
+  },
+  {
+    "name": "Narlıdere",
+    "parentCode": "35"
+  },
+  {
+    "name": "Ödemiş",
+    "parentCode": "35"
+  },
+  {
+    "name": "Seferihisar",
+    "parentCode": "35"
+  },
+  {
+    "name": "Selçuk",
+    "parentCode": "35"
+  },
+  {
+    "name": "Tire",
+    "parentCode": "35"
+  },
+  {
+    "name": "Torbalı",
+    "parentCode": "35"
+  },
+  {
+    "name": "Urla",
+    "parentCode": "35"
+  },
+  {
+    "name": "Akyaka",
+    "parentCode": "36"
+  },
+  {
+    "name": "Arpaçay",
+    "parentCode": "36"
+  },
+  {
+    "name": "Digor",
+    "parentCode": "36"
+  },
+  {
+    "name": "Kağızman",
+    "parentCode": "36"
+  },
+  {
+    "name": "Sarıkamış",
+    "parentCode": "36"
+  },
+  {
+    "name": "Selim",
+    "parentCode": "36"
+  },
+  {
+    "name": "Susuz",
+    "parentCode": "36"
+  },
+  {
+    "name": "Abana",
+    "parentCode": "37"
+  },
+  {
+    "name": "Ağlı",
+    "parentCode": "37"
+  },
+  {
+    "name": "Araç",
+    "parentCode": "37"
+  },
+  {
+    "name": "Azdavay",
+    "parentCode": "37"
+  },
+  {
+    "name": "Bozkurt",
+    "parentCode": "37"
+  },
+  {
+    "name": "Cide",
+    "parentCode": "37"
+  },
+  {
+    "name": "Çatalzeytin",
+    "parentCode": "37"
+  },
+  {
+    "name": "Daday",
+    "parentCode": "37"
+  },
+  {
+    "name": "Devrekani",
+    "parentCode": "37"
+  },
+  {
+    "name": "Doğanyurt",
+    "parentCode": "37"
+  },
+  {
+    "name": "Hanönü",
+    "parentCode": "37"
+  },
+  {
+    "name": "İhsangazi",
+    "parentCode": "37"
+  },
+  {
+    "name": "İnebolu",
+    "parentCode": "37"
+  },
+  {
+    "name": "Küre",
+    "parentCode": "37"
+  },
+  {
+    "name": "Pınarbaşı",
+    "parentCode": "37"
+  },
+  {
+    "name": "Seydiler",
+    "parentCode": "37"
+  },
+  {
+    "name": "Şenpazar",
+    "parentCode": "37"
+  },
+  {
+    "name": "Taşköprü",
+    "parentCode": "37"
+  },
+  {
+    "name": "Tosya",
+    "parentCode": "37"
+  },
+  {
+    "name": "Akkışla",
+    "parentCode": "38"
+  },
+  {
+    "name": "Bünyan",
+    "parentCode": "38"
+  },
+  {
+    "name": "Develi",
+    "parentCode": "38"
+  },
+  {
+    "name": "Felahiye",
+    "parentCode": "38"
+  },
+  {
+    "name": "Hacılar",
+    "parentCode": "38"
+  },
+  {
+    "name": "İncesu",
+    "parentCode": "38"
+  },
+  {
+    "name": "Kocasinan",
+    "parentCode": "38"
+  },
+  {
+    "name": "Melikgazi",
+    "parentCode": "38"
+  },
+  {
+    "name": "Özvatan",
+    "parentCode": "38"
+  },
+  {
+    "name": "Pınarbaşı",
+    "parentCode": "38"
+  },
+  {
+    "name": "Sarıoğlan",
+    "parentCode": "38"
+  },
+  {
+    "name": "Sarız",
+    "parentCode": "38"
+  },
+  {
+    "name": "Talas",
+    "parentCode": "38"
+  },
+  {
+    "name": "Tomarza",
+    "parentCode": "38"
+  },
+  {
+    "name": "Yahyalı",
+    "parentCode": "38"
+  },
+  {
+    "name": "Yeşilhisar",
+    "parentCode": "38"
+  },
+  {
+    "name": "Babaeski",
+    "parentCode": "39"
+  },
+  {
+    "name": "Demirköy",
+    "parentCode": "39"
+  },
+  {
+    "name": "Kofçaz",
+    "parentCode": "39"
+  },
+  {
+    "name": "Lüleburgaz",
+    "parentCode": "39"
+  },
+  {
+    "name": "Pehlivanköy",
+    "parentCode": "39"
+  },
+  {
+    "name": "Pınarhisar",
+    "parentCode": "39"
+  },
+  {
+    "name": "Vize",
+    "parentCode": "39"
+  },
+  {
+    "name": "Akçakent",
+    "parentCode": "40"
+  },
+  {
+    "name": "Akpınar",
+    "parentCode": "40"
+  },
+  {
+    "name": "Boztepe",
+    "parentCode": "40"
+  },
+  {
+    "name": "Çiçekdağı",
+    "parentCode": "40"
+  },
+  {
+    "name": "Kaman",
+    "parentCode": "40"
+  },
+  {
+    "name": "Mucur",
+    "parentCode": "40"
+  },
+  {
+    "name": "Başiskele",
+    "parentCode": "41"
+  },
+  {
+    "name": "Çayırova",
+    "parentCode": "41"
+  },
+  {
+    "name": "Darıca",
+    "parentCode": "41"
+  },
+  {
+    "name": "Derince",
+    "parentCode": "41"
+  },
+  {
+    "name": "Dilovası",
+    "parentCode": "41"
+  },
+  {
+    "name": "Gebze",
+    "parentCode": "41"
+  },
+  {
+    "name": "Gölcük",
+    "parentCode": "41"
+  },
+  {
+    "name": "İzmit",
+    "parentCode": "41"
+  },
+  {
+    "name": "Kandıra",
+    "parentCode": "41"
+  },
+  {
+    "name": "Karamürsel",
+    "parentCode": "41"
+  },
+  {
+    "name": "Kartepe",
+    "parentCode": "41"
+  },
+  {
+    "name": "Körfez",
+    "parentCode": "41"
+  },
+  {
+    "name": "Ahırlı",
+    "parentCode": "42"
+  },
+  {
+    "name": "Akören",
+    "parentCode": "42"
+  },
+  {
+    "name": "Akşehir",
+    "parentCode": "42"
+  },
+  {
+    "name": "Altınekin",
+    "parentCode": "42"
+  },
+  {
+    "name": "Beyşehir",
+    "parentCode": "42"
+  },
+  {
+    "name": "Bozkır",
+    "parentCode": "42"
+  },
+  {
+    "name": "Cihanbeyli",
+    "parentCode": "42"
+  },
+  {
+    "name": "Çeltik",
+    "parentCode": "42"
+  },
+  {
+    "name": "Çumra",
+    "parentCode": "42"
+  },
+  {
+    "name": "Derbent",
+    "parentCode": "42"
+  },
+  {
+    "name": "Derebucak",
+    "parentCode": "42"
+  },
+  {
+    "name": "Doğanhisar",
+    "parentCode": "42"
+  },
+  {
+    "name": "Emirgazi",
+    "parentCode": "42"
+  },
+  {
+    "name": "Ereğli",
+    "parentCode": "42"
+  },
+  {
+    "name": "Güneysınır",
+    "parentCode": "42"
+  },
+  {
+    "name": "Hadim",
+    "parentCode": "42"
+  },
+  {
+    "name": "Halkapınar",
+    "parentCode": "42"
+  },
+  {
+    "name": "Hüyük",
+    "parentCode": "42"
+  },
+  {
+    "name": "Ilgın",
+    "parentCode": "42"
+  },
+  {
+    "name": "Kadınhanı",
+    "parentCode": "42"
+  },
+  {
+    "name": "Karapınar",
+    "parentCode": "42"
+  },
+  {
+    "name": "Karatay",
+    "parentCode": "42"
+  },
+  {
+    "name": "Kulu",
+    "parentCode": "42"
+  },
+  {
+    "name": "Meram",
+    "parentCode": "42"
+  },
+  {
+    "name": "Sarayönü",
+    "parentCode": "42"
+  },
+  {
+    "name": "Selçuklu",
+    "parentCode": "42"
+  },
+  {
+    "name": "Seydişehir",
+    "parentCode": "42"
+  },
+  {
+    "name": "Taşkent",
+    "parentCode": "42"
+  },
+  {
+    "name": "Tuzlukçu",
+    "parentCode": "42"
+  },
+  {
+    "name": "Yalıhüyük",
+    "parentCode": "42"
+  },
+  {
+    "name": "Yunak",
+    "parentCode": "42"
+  },
+  {
+    "name": "Altıntaş",
+    "parentCode": "43"
+  },
+  {
+    "name": "Aslanapa",
+    "parentCode": "43"
+  },
+  {
+    "name": "Çavdarhisar",
+    "parentCode": "43"
+  },
+  {
+    "name": "Domaniç",
+    "parentCode": "43"
+  },
+  {
+    "name": "Dumlupınar",
+    "parentCode": "43"
+  },
+  {
+    "name": "Emet",
+    "parentCode": "43"
+  },
+  {
+    "name": "Gediz",
+    "parentCode": "43"
+  },
+  {
+    "name": "Hisarcık",
+    "parentCode": "43"
+  },
+  {
+    "name": "Pazarlar",
+    "parentCode": "43"
+  },
+  {
+    "name": "Simav",
+    "parentCode": "43"
+  },
+  {
+    "name": "Şaphane",
+    "parentCode": "43"
+  },
+  {
+    "name": "Tavşanlı",
+    "parentCode": "43"
+  },
+  {
+    "name": "Akçadağ",
+    "parentCode": "44"
+  },
+  {
+    "name": "Arapgir",
+    "parentCode": "44"
+  },
+  {
+    "name": "Arguvan",
+    "parentCode": "44"
+  },
+  {
+    "name": "Battalgazi",
+    "parentCode": "44"
+  },
+  {
+    "name": "Darende",
+    "parentCode": "44"
+  },
+  {
+    "name": "Doğanşehir",
+    "parentCode": "44"
+  },
+  {
+    "name": "Doğanyol",
+    "parentCode": "44"
+  },
+  {
+    "name": "Hekimhan",
+    "parentCode": "44"
+  },
+  {
+    "name": "Kale",
+    "parentCode": "44"
+  },
+  {
+    "name": "Kuluncak",
+    "parentCode": "44"
+  },
+  {
+    "name": "Pütürge",
+    "parentCode": "44"
+  },
+  {
+    "name": "Yazıhan",
+    "parentCode": "44"
+  },
+  {
+    "name": "Yeşilyurt",
+    "parentCode": "44"
+  },
+  {
+    "name": "Ahmetli",
+    "parentCode": "45"
+  },
+  {
+    "name": "Akhisar",
+    "parentCode": "45"
+  },
+  {
+    "name": "Alaşehir",
+    "parentCode": "45"
+  },
+  {
+    "name": "Demirci",
+    "parentCode": "45"
+  },
+  {
+    "name": "Gölmarmara",
+    "parentCode": "45"
+  },
+  {
+    "name": "Gördes",
+    "parentCode": "45"
+  },
+  {
+    "name": "Kırkağaç",
+    "parentCode": "45"
+  },
+  {
+    "name": "Köprübaşı",
+    "parentCode": "45"
+  },
+  {
+    "name": "Kula",
+    "parentCode": "45"
+  },
+  {
+    "name": "Salihli",
+    "parentCode": "45"
+  },
+  {
+    "name": "Sarıgöl",
+    "parentCode": "45"
+  },
+  {
+    "name": "Saruhanlı",
+    "parentCode": "45"
+  },
+  {
+    "name": "Selendi",
+    "parentCode": "45"
+  },
+  {
+    "name": "Soma",
+    "parentCode": "45"
+  },
+  {
+    "name": "Şehzadeler",
+    "parentCode": "45"
+  },
+  {
+    "name": "Turgutlu",
+    "parentCode": "45"
+  },
+  {
+    "name": "Yunusemre",
+    "parentCode": "45"
+  },
+  {
+    "name": "Afşin",
+    "parentCode": "46"
+  },
+  {
+    "name": "Andırın",
+    "parentCode": "46"
+  },
+  {
+    "name": "Çağlayancerit",
+    "parentCode": "46"
+  },
+  {
+    "name": "Dulkadiroğlu",
+    "parentCode": "46"
+  },
+  {
+    "name": "Ekinözü",
+    "parentCode": "46"
+  },
+  {
+    "name": "Elbistan",
+    "parentCode": "46"
+  },
+  {
+    "name": "Göksun",
+    "parentCode": "46"
+  },
+  {
+    "name": "Nurhak",
+    "parentCode": "46"
+  },
+  {
+    "name": "Onikişubat",
+    "parentCode": "46"
+  },
+  {
+    "name": "Pazarcık",
+    "parentCode": "46"
+  },
+  {
+    "name": "Türkoğlu",
+    "parentCode": "46"
+  },
+  {
+    "name": "Artuklu",
+    "parentCode": "47"
+  },
+  {
+    "name": "Dargeçit",
+    "parentCode": "47"
+  },
+  {
+    "name": "Derik",
+    "parentCode": "47"
+  },
+  {
+    "name": "Kızıltepe",
+    "parentCode": "47"
+  },
+  {
+    "name": "Mazıdağı",
+    "parentCode": "47"
+  },
+  {
+    "name": "Midyat",
+    "parentCode": "47"
+  },
+  {
+    "name": "Nusaybin",
+    "parentCode": "47"
+  },
+  {
+    "name": "Ömerli",
+    "parentCode": "47"
+  },
+  {
+    "name": "Savur",
+    "parentCode": "47"
+  },
+  {
+    "name": "Yeşilli",
+    "parentCode": "47"
+  },
+  {
+    "name": "Bodrum",
+    "parentCode": "48"
+  },
+  {
+    "name": "Dalaman",
+    "parentCode": "48"
+  },
+  {
+    "name": "Datça",
+    "parentCode": "48"
+  },
+  {
+    "name": "Fethiye",
+    "parentCode": "48"
+  },
+  {
+    "name": "Kavaklıdere",
+    "parentCode": "48"
+  },
+  {
+    "name": "Köyceğiz",
+    "parentCode": "48"
+  },
+  {
+    "name": "Marmaris",
+    "parentCode": "48"
+  },
+  {
+    "name": "Menteşe",
+    "parentCode": "48"
+  },
+  {
+    "name": "Milas",
+    "parentCode": "48"
+  },
+  {
+    "name": "Ortaca",
+    "parentCode": "48"
+  },
+  {
+    "name": "Seydikemer",
+    "parentCode": "48"
+  },
+  {
+    "name": "Ula",
+    "parentCode": "48"
+  },
+  {
+    "name": "Yatağan",
+    "parentCode": "48"
+  },
+  {
+    "name": "Bulanık",
+    "parentCode": "49"
+  },
+  {
+    "name": "Hasköy",
+    "parentCode": "49"
+  },
+  {
+    "name": "Korkut",
+    "parentCode": "49"
+  },
+  {
+    "name": "Malazgirt",
+    "parentCode": "49"
+  },
+  {
+    "name": "Varto",
+    "parentCode": "49"
+  },
+  {
+    "name": "Acıgöl",
+    "parentCode": "50"
+  },
+  {
+    "name": "Avanos",
+    "parentCode": "50"
+  },
+  {
+    "name": "Derinkuyu",
+    "parentCode": "50"
+  },
+  {
+    "name": "Gülşehir",
+    "parentCode": "50"
+  },
+  {
+    "name": "Hacıbektaş",
+    "parentCode": "50"
+  },
+  {
+    "name": "Kozaklı",
+    "parentCode": "50"
+  },
+  {
+    "name": "Ürgüp",
+    "parentCode": "50"
+  },
+  {
+    "name": "Altunhisar",
+    "parentCode": "51"
+  },
+  {
+    "name": "Bor",
+    "parentCode": "51"
+  },
+  {
+    "name": "Çamardı",
+    "parentCode": "51"
+  },
+  {
+    "name": "Çiftlik",
+    "parentCode": "51"
+  },
+  {
+    "name": "Ulukışla",
+    "parentCode": "51"
+  },
+  {
+    "name": "Akkuş",
+    "parentCode": "52"
+  },
+  {
+    "name": "Altınordu",
+    "parentCode": "52"
+  },
+  {
+    "name": "Aybastı",
+    "parentCode": "52"
+  },
+  {
+    "name": "Çamaş",
+    "parentCode": "52"
+  },
+  {
+    "name": "Çatalpınar",
+    "parentCode": "52"
+  },
+  {
+    "name": "Çaybaşı",
+    "parentCode": "52"
+  },
+  {
+    "name": "Fatsa",
+    "parentCode": "52"
+  },
+  {
+    "name": "Gölköy",
+    "parentCode": "52"
+  },
+  {
+    "name": "Gülyalı",
+    "parentCode": "52"
+  },
+  {
+    "name": "Gürgentepe",
+    "parentCode": "52"
+  },
+  {
+    "name": "İkizce",
+    "parentCode": "52"
+  },
+  {
+    "name": "Kabadüz",
+    "parentCode": "52"
+  },
+  {
+    "name": "Kabataş",
+    "parentCode": "52"
+  },
+  {
+    "name": "Korgan",
+    "parentCode": "52"
+  },
+  {
+    "name": "Kumru",
+    "parentCode": "52"
+  },
+  {
+    "name": "Mesudiye",
+    "parentCode": "52"
+  },
+  {
+    "name": "Perşembe",
+    "parentCode": "52"
+  },
+  {
+    "name": "Ulubey",
+    "parentCode": "52"
+  },
+  {
+    "name": "Ünye",
+    "parentCode": "52"
+  },
+  {
+    "name": "Ardeşen",
+    "parentCode": "53"
+  },
+  {
+    "name": "Çamlıhemşin",
+    "parentCode": "53"
+  },
+  {
+    "name": "Çayeli",
+    "parentCode": "53"
+  },
+  {
+    "name": "Derepazarı",
+    "parentCode": "53"
+  },
+  {
+    "name": "Fındıklı",
+    "parentCode": "53"
+  },
+  {
+    "name": "Güneysu",
+    "parentCode": "53"
+  },
+  {
+    "name": "Hemşin",
+    "parentCode": "53"
+  },
+  {
+    "name": "İkizdere",
+    "parentCode": "53"
+  },
+  {
+    "name": "İyidere",
+    "parentCode": "53"
+  },
+  {
+    "name": "Kalkandere",
+    "parentCode": "53"
+  },
+  {
+    "name": "Pazar",
+    "parentCode": "53"
+  },
+  {
+    "name": "Adapazarı",
+    "parentCode": "54"
+  },
+  {
+    "name": "Akyazı",
+    "parentCode": "54"
+  },
+  {
+    "name": "Arifiye",
+    "parentCode": "54"
+  },
+  {
+    "name": "Erenler",
+    "parentCode": "54"
+  },
+  {
+    "name": "Ferizli",
+    "parentCode": "54"
+  },
+  {
+    "name": "Geyve",
+    "parentCode": "54"
+  },
+  {
+    "name": "Hendek",
+    "parentCode": "54"
+  },
+  {
+    "name": "Karapürçek",
+    "parentCode": "54"
+  },
+  {
+    "name": "Karasu",
+    "parentCode": "54"
+  },
+  {
+    "name": "Kaynarca",
+    "parentCode": "54"
+  },
+  {
+    "name": "Kocaali",
+    "parentCode": "54"
+  },
+  {
+    "name": "Pamukova",
+    "parentCode": "54"
+  },
+  {
+    "name": "Sapanca",
+    "parentCode": "54"
+  },
+  {
+    "name": "Serdivan",
+    "parentCode": "54"
+  },
+  {
+    "name": "Söğütlü",
+    "parentCode": "54"
+  },
+  {
+    "name": "Taraklı",
+    "parentCode": "54"
+  },
+  {
+    "name": "Ondokuzmayıs",
+    "parentCode": "55"
+  },
+  {
+    "name": "Alaçam",
+    "parentCode": "55"
+  },
+  {
+    "name": "Asarcık",
+    "parentCode": "55"
+  },
+  {
+    "name": "Atakum",
+    "parentCode": "55"
+  },
+  {
+    "name": "Ayvacık",
+    "parentCode": "55"
+  },
+  {
+    "name": "Bafra",
+    "parentCode": "55"
+  },
+  {
+    "name": "Canik",
+    "parentCode": "55"
+  },
+  {
+    "name": "Çarşamba",
+    "parentCode": "55"
+  },
+  {
+    "name": "Havza",
+    "parentCode": "55"
+  },
+  {
+    "name": "İlkadım",
+    "parentCode": "55"
+  },
+  {
+    "name": "Kavak",
+    "parentCode": "55"
+  },
+  {
+    "name": "Ladik",
+    "parentCode": "55"
+  },
+  {
+    "name": "Salıpazarı",
+    "parentCode": "55"
+  },
+  {
+    "name": "Tekkeköy",
+    "parentCode": "55"
+  },
+  {
+    "name": "Terme",
+    "parentCode": "55"
+  },
+  {
+    "name": "Vezirköprü",
+    "parentCode": "55"
+  },
+  {
+    "name": "Yakakent",
+    "parentCode": "55"
+  },
+  {
+    "name": "Tillo",
+    "parentCode": "56"
+  },
+  {
+    "name": "Baykan",
+    "parentCode": "56"
+  },
+  {
+    "name": "Eruh",
+    "parentCode": "56"
+  },
+  {
+    "name": "Kurtalan",
+    "parentCode": "56"
+  },
+  {
+    "name": "Pervari",
+    "parentCode": "56"
+  },
+  {
+    "name": "Şirvan",
+    "parentCode": "56"
+  },
+  {
+    "name": "Ayancık",
+    "parentCode": "57"
+  },
+  {
+    "name": "Boyabat",
+    "parentCode": "57"
+  },
+  {
+    "name": "Dikmen",
+    "parentCode": "57"
+  },
+  {
+    "name": "Durağan",
+    "parentCode": "57"
+  },
+  {
+    "name": "Erfelek",
+    "parentCode": "57"
+  },
+  {
+    "name": "Gerze",
+    "parentCode": "57"
+  },
+  {
+    "name": "Saraydüzü",
+    "parentCode": "57"
+  },
+  {
+    "name": "Türkeli",
+    "parentCode": "57"
+  },
+  {
+    "name": "Akıncılar",
+    "parentCode": "58"
+  },
+  {
+    "name": "Altınyayla",
+    "parentCode": "58"
+  },
+  {
+    "name": "Divriği",
+    "parentCode": "58"
+  },
+  {
+    "name": "Doğanşar",
+    "parentCode": "58"
+  },
+  {
+    "name": "Gemerek",
+    "parentCode": "58"
+  },
+  {
+    "name": "Gölova",
+    "parentCode": "58"
+  },
+  {
+    "name": "Gürün",
+    "parentCode": "58"
+  },
+  {
+    "name": "Hafik",
+    "parentCode": "58"
+  },
+  {
+    "name": "İmranlı",
+    "parentCode": "58"
+  },
+  {
+    "name": "Kangal",
+    "parentCode": "58"
+  },
+  {
+    "name": "Koyulhisar",
+    "parentCode": "58"
+  },
+  {
+    "name": "Suşehri",
+    "parentCode": "58"
+  },
+  {
+    "name": "Şarkışla",
+    "parentCode": "58"
+  },
+  {
+    "name": "Ulaş",
+    "parentCode": "58"
+  },
+  {
+    "name": "Yıldızeli",
+    "parentCode": "58"
+  },
+  {
+    "name": "Zara",
+    "parentCode": "58"
+  },
+  {
+    "name": "Çerkezköy",
+    "parentCode": "59"
+  },
+  {
+    "name": "Çorlu",
+    "parentCode": "59"
+  },
+  {
+    "name": "Ergene",
+    "parentCode": "59"
+  },
+  {
+    "name": "Hayrabolu",
+    "parentCode": "59"
+  },
+  {
+    "name": "Kapaklı",
+    "parentCode": "59"
+  },
+  {
+    "name": "Malkara",
+    "parentCode": "59"
+  },
+  {
+    "name": "Marmaraereğlisi",
+    "parentCode": "59"
+  },
+  {
+    "name": "Muratlı",
+    "parentCode": "59"
+  },
+  {
+    "name": "Saray",
+    "parentCode": "59"
+  },
+  {
+    "name": "Süleymanpaşa",
+    "parentCode": "59"
+  },
+  {
+    "name": "Şarköy",
+    "parentCode": "59"
+  },
+  {
+    "name": "Almus",
+    "parentCode": "60"
+  },
+  {
+    "name": "Artova",
+    "parentCode": "60"
+  },
+  {
+    "name": "Başçiftlik",
+    "parentCode": "60"
+  },
+  {
+    "name": "Erbaa",
+    "parentCode": "60"
+  },
+  {
+    "name": "Niksar",
+    "parentCode": "60"
+  },
+  {
+    "name": "Pazar",
+    "parentCode": "60"
+  },
+  {
+    "name": "Reşadiye",
+    "parentCode": "60"
+  },
+  {
+    "name": "Sulusaray",
+    "parentCode": "60"
+  },
+  {
+    "name": "Turhal",
+    "parentCode": "60"
+  },
+  {
+    "name": "Yeşilyurt",
+    "parentCode": "60"
+  },
+  {
+    "name": "Zile",
+    "parentCode": "60"
+  },
+  {
+    "name": "Akçaabat",
+    "parentCode": "61"
+  },
+  {
+    "name": "Araklı",
+    "parentCode": "61"
+  },
+  {
+    "name": "Arsin",
+    "parentCode": "61"
+  },
+  {
+    "name": "Beşikdüzü",
+    "parentCode": "61"
+  },
+  {
+    "name": "Çarşıbaşı",
+    "parentCode": "61"
+  },
+  {
+    "name": "Çaykara",
+    "parentCode": "61"
+  },
+  {
+    "name": "Dernekpazarı",
+    "parentCode": "61"
+  },
+  {
+    "name": "Düzköy",
+    "parentCode": "61"
+  },
+  {
+    "name": "Hayrat",
+    "parentCode": "61"
+  },
+  {
+    "name": "Köprübaşı",
+    "parentCode": "61"
+  },
+  {
+    "name": "Maçka",
+    "parentCode": "61"
+  },
+  {
+    "name": "Of",
+    "parentCode": "61"
+  },
+  {
+    "name": "Ortahisar",
+    "parentCode": "61"
+  },
+  {
+    "name": "Sürmene",
+    "parentCode": "61"
+  },
+  {
+    "name": "Şalpazarı",
+    "parentCode": "61"
+  },
+  {
+    "name": "Tonya",
+    "parentCode": "61"
+  },
+  {
+    "name": "Vakfıkebir",
+    "parentCode": "61"
+  },
+  {
+    "name": "Yomra",
+    "parentCode": "61"
+  },
+  {
+    "name": "Çemişgezek",
+    "parentCode": "62"
+  },
+  {
+    "name": "Hozat",
+    "parentCode": "62"
+  },
+  {
+    "name": "Mazgirt",
+    "parentCode": "62"
+  },
+  {
+    "name": "Nazımiye",
+    "parentCode": "62"
+  },
+  {
+    "name": "Ovacık",
+    "parentCode": "62"
+  },
+  {
+    "name": "Pertek",
+    "parentCode": "62"
+  },
+  {
+    "name": "Pülümür",
+    "parentCode": "62"
+  },
+  {
+    "name": "Akçakale",
+    "parentCode": "63"
+  },
+  {
+    "name": "Birecik",
+    "parentCode": "63"
+  },
+  {
+    "name": "Bozova",
+    "parentCode": "63"
+  },
+  {
+    "name": "Ceylanpınar",
+    "parentCode": "63"
+  },
+  {
+    "name": "Eyyübiye",
+    "parentCode": "63"
+  },
+  {
+    "name": "Halfeti",
+    "parentCode": "63"
+  },
+  {
+    "name": "Haliliye",
+    "parentCode": "63"
+  },
+  {
+    "name": "Harran",
+    "parentCode": "63"
+  },
+  {
+    "name": "Hilvan",
+    "parentCode": "63"
+  },
+  {
+    "name": "Karaköprü",
+    "parentCode": "63"
+  },
+  {
+    "name": "Siverek",
+    "parentCode": "63"
+  },
+  {
+    "name": "Suruç",
+    "parentCode": "63"
+  },
+  {
+    "name": "Viranşehir",
+    "parentCode": "63"
+  },
+  {
+    "name": "Banaz",
+    "parentCode": "64"
+  },
+  {
+    "name": "Eşme",
+    "parentCode": "64"
+  },
+  {
+    "name": "Karahallı",
+    "parentCode": "64"
+  },
+  {
+    "name": "Sivaslı",
+    "parentCode": "64"
+  },
+  {
+    "name": "Ulubey",
+    "parentCode": "64"
+  },
+  {
+    "name": "Bahçesaray",
+    "parentCode": "65"
+  },
+  {
+    "name": "Başkale",
+    "parentCode": "65"
+  },
+  {
+    "name": "Çaldıran",
+    "parentCode": "65"
+  },
+  {
+    "name": "Çatak",
+    "parentCode": "65"
+  },
+  {
+    "name": "Edremit",
+    "parentCode": "65"
+  },
+  {
+    "name": "Erciş",
+    "parentCode": "65"
+  },
+  {
+    "name": "Gevaş",
+    "parentCode": "65"
+  },
+  {
+    "name": "Gürpınar",
+    "parentCode": "65"
+  },
+  {
+    "name": "İpekyolu",
+    "parentCode": "65"
+  },
+  {
+    "name": "Muradiye",
+    "parentCode": "65"
+  },
+  {
+    "name": "Özalp",
+    "parentCode": "65"
+  },
+  {
+    "name": "Saray",
+    "parentCode": "65"
+  },
+  {
+    "name": "Tuşba",
+    "parentCode": "65"
+  },
+  {
+    "name": "Akdağmadeni",
+    "parentCode": "66"
+  },
+  {
+    "name": "Aydıncık",
+    "parentCode": "66"
+  },
+  {
+    "name": "Boğazlıyan",
+    "parentCode": "66"
+  },
+  {
+    "name": "Çandır",
+    "parentCode": "66"
+  },
+  {
+    "name": "Çayıralan",
+    "parentCode": "66"
+  },
+  {
+    "name": "Çekerek",
+    "parentCode": "66"
+  },
+  {
+    "name": "Kadışehri",
+    "parentCode": "66"
+  },
+  {
+    "name": "Saraykent",
+    "parentCode": "66"
+  },
+  {
+    "name": "Sarıkaya",
+    "parentCode": "66"
+  },
+  {
+    "name": "Sorgun",
+    "parentCode": "66"
+  },
+  {
+    "name": "Şefaatli",
+    "parentCode": "66"
+  },
+  {
+    "name": "Yenifakılı",
+    "parentCode": "66"
+  },
+  {
+    "name": "Yerköy",
+    "parentCode": "66"
+  },
+  {
+    "name": "Alaplı",
+    "parentCode": "67"
+  },
+  {
+    "name": "Çaycuma",
+    "parentCode": "67"
+  },
+  {
+    "name": "Devrek",
+    "parentCode": "67"
+  },
+  {
+    "name": "Ereğli",
+    "parentCode": "67"
+  },
+  {
+    "name": "Gökçebey",
+    "parentCode": "67"
+  },
+  {
+    "name": "Kilimli",
+    "parentCode": "67"
+  },
+  {
+    "name": "Kozlu",
+    "parentCode": "67"
+  },
+  {
+    "name": "Ağaçören",
+    "parentCode": "68"
+  },
+  {
+    "name": "Eskil",
+    "parentCode": "68"
+  },
+  {
+    "name": "Gülağaç",
+    "parentCode": "68"
+  },
+  {
+    "name": "Güzelyurt",
+    "parentCode": "68"
+  },
+  {
+    "name": "Ortaköy",
+    "parentCode": "68"
+  },
+  {
+    "name": "Sarıyahşi",
+    "parentCode": "68"
+  },
+  {
+    "name": "Sultanhanı",
+    "parentCode": "68"
+  },
+  {
+    "name": "Aydıntepe",
+    "parentCode": "69"
+  },
+  {
+    "name": "Demirözü",
+    "parentCode": "69"
+  },
+  {
+    "name": "Ayrancı",
+    "parentCode": "70"
+  },
+  {
+    "name": "Başyayla",
+    "parentCode": "70"
+  },
+  {
+    "name": "Ermenek",
+    "parentCode": "70"
+  },
+  {
+    "name": "Kazımkarabekir",
+    "parentCode": "70"
+  },
+  {
+    "name": "Sarıveliler",
+    "parentCode": "70"
+  },
+  {
+    "name": "Bahşili",
+    "parentCode": "71"
+  },
+  {
+    "name": "Balışeyh",
+    "parentCode": "71"
+  },
+  {
+    "name": "Çelebi",
+    "parentCode": "71"
+  },
+  {
+    "name": "Delice",
+    "parentCode": "71"
+  },
+  {
+    "name": "Karakeçili",
+    "parentCode": "71"
+  },
+  {
+    "name": "Keskin",
+    "parentCode": "71"
+  },
+  {
+    "name": "Sulakyurt",
+    "parentCode": "71"
+  },
+  {
+    "name": "Yahşihan",
+    "parentCode": "71"
+  },
+  {
+    "name": "Beşiri",
+    "parentCode": "72"
+  },
+  {
+    "name": "Gercüş",
+    "parentCode": "72"
+  },
+  {
+    "name": "Hasankeyf",
+    "parentCode": "72"
+  },
+  {
+    "name": "Kozluk",
+    "parentCode": "72"
+  },
+  {
+    "name": "Sason",
+    "parentCode": "72"
+  },
+  {
+    "name": "Beytüşşebap",
+    "parentCode": "73"
+  },
+  {
+    "name": "Cizre",
+    "parentCode": "73"
+  },
+  {
+    "name": "Güçlükonak",
+    "parentCode": "73"
+  },
+  {
+    "name": "İdil",
+    "parentCode": "73"
+  },
+  {
+    "name": "Silopi",
+    "parentCode": "73"
+  },
+  {
+    "name": "Uludere",
+    "parentCode": "73"
+  },
+  {
+    "name": "Amasra",
+    "parentCode": "74"
+  },
+  {
+    "name": "Kurucaşile",
+    "parentCode": "74"
+  },
+  {
+    "name": "Ulus",
+    "parentCode": "74"
+  },
+  {
+    "name": "Çıldır",
+    "parentCode": "75"
+  },
+  {
+    "name": "Damal",
+    "parentCode": "75"
+  },
+  {
+    "name": "Göle",
+    "parentCode": "75"
+  },
+  {
+    "name": "Hanak",
+    "parentCode": "75"
+  },
+  {
+    "name": "Posof",
+    "parentCode": "75"
+  },
+  {
+    "name": "Aralık",
+    "parentCode": "76"
+  },
+  {
+    "name": "Karakoyunlu",
+    "parentCode": "76"
+  },
+  {
+    "name": "Tuzluca",
+    "parentCode": "76"
+  },
+  {
+    "name": "Altınova",
+    "parentCode": "77"
+  },
+  {
+    "name": "Armutlu",
+    "parentCode": "77"
+  },
+  {
+    "name": "Çınarcık",
+    "parentCode": "77"
+  },
+  {
+    "name": "Çiftlikköy",
+    "parentCode": "77"
+  },
+  {
+    "name": "Termal",
+    "parentCode": "77"
+  },
+  {
+    "name": "Eflani",
+    "parentCode": "78"
+  },
+  {
+    "name": "Eskipazar",
+    "parentCode": "78"
+  },
+  {
+    "name": "Ovacık",
+    "parentCode": "78"
+  },
+  {
+    "name": "Safranbolu",
+    "parentCode": "78"
+  },
+  {
+    "name": "Yenice",
+    "parentCode": "78"
+  },
+  {
+    "name": "Elbeyli",
+    "parentCode": "79"
+  },
+  {
+    "name": "Musabeyli",
+    "parentCode": "79"
+  },
+  {
+    "name": "Polateli",
+    "parentCode": "79"
+  },
+  {
+    "name": "Bahçe",
+    "parentCode": "80"
+  },
+  {
+    "name": "Düziçi",
+    "parentCode": "80"
+  },
+  {
+    "name": "Hasanbeyli",
+    "parentCode": "80"
+  },
+  {
+    "name": "Kadirli",
+    "parentCode": "80"
+  },
+  {
+    "name": "Sumbas",
+    "parentCode": "80"
+  },
+  {
+    "name": "Toprakkale",
+    "parentCode": "80"
+  },
+  {
+    "name": "Akçakoca",
+    "parentCode": "81"
+  },
+  {
+    "name": "Cumayeri",
+    "parentCode": "81"
+  },
+  {
+    "name": "Çilimli",
+    "parentCode": "81"
+  },
+  {
+    "name": "Gölyaka",
+    "parentCode": "81"
+  },
+  {
+    "name": "Gümüşova",
+    "parentCode": "81"
+  },
+  {
+    "name": "Kaynaşlı",
+    "parentCode": "81"
+  },
+  {
+    "name": "Yığılca",
+    "parentCode": "81"
+  }
+]

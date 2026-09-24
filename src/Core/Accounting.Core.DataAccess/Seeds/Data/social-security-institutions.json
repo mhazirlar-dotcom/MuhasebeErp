@@ -1,0 +1,18 @@
+[
+  {
+    "code": "SGK",
+    "name": "Sosyal Sigortalar Kurumu"
+  },
+  {
+    "code": "BAGKUR",
+    "name": "Bağ-Kur"
+  },
+  {
+    "code": "EMEKLI_SANDIGI",
+    "name": "Emekli Sandığı"
+  },
+  {
+    "code": "YOK",
+    "name": "Yok"
+  }
+]

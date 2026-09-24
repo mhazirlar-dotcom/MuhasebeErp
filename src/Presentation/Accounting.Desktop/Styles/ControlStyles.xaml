@@ -1,0 +1,130 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+
+    <!-- ============================================================
+         FIELD BORDER STİLİ (KEY'li, merkezi)
+         ============================================================ -->
+    <Style x:Key="FieldBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#CCCCCC" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Height" Value="26" />
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="Background" Value="LemonChiffon" />
+                <Setter Property="BorderBrush" Value="#FF8F00" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ============================================================
+         SimpleButton — Height 34, CornerRadius 6
+         ============================================================ -->
+    <Style TargetType="dx:SimpleButton">
+        <Setter Property="Height" Value="34" />
+        <Setter Property="CornerRadius" Value="6" />
+    </Style>
+
+    <!-- ============================================================
+         TextEdit (implicit) — serbest metin alanları
+         ============================================================ -->
+    <Style TargetType="dxe:TextEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- ============================================================
+         NumericTextEditStyle (KEY'li) — SADECE RAKAM, SINIRSIZ
+         ============================================================ -->
+    <Style x:Key="NumericTextEditStyle" TargetType="dxe:TextEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MaskType" Value="RegEx" />
+        <Setter Property="Mask" Value="[0-9]*" />
+    </Style>
+
+    <!-- ============================================================
+         TcKimlikNumericStyle (KEY'li) — TC KİMLİK NO (en fazla 11 rakam)
+         ============================================================ -->
+    <Style x:Key="TcKimlikNumericStyle" TargetType="dxe:TextEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MaskType" Value="RegEx" />
+        <Setter Property="Mask" Value="[0-9]{0,11}" />
+    </Style>
+
+    <!-- ============================================================
+         VergiNoNumericStyle (KEY'li) — VERGİ NO (en fazla 10 rakam)
+         ============================================================ -->
+    <Style x:Key="VergiNoNumericStyle" TargetType="dxe:TextEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MaskType" Value="RegEx" />
+        <Setter Property="Mask" Value="[0-9]{0,10}" />
+    </Style>
+
+    <!-- ============================================================
+         NumericEditStyle (KEY'li) — 0,00 formatlı, binlik ayıraçlı
+         ============================================================ -->
+    <Style x:Key="NumericEditStyle" TargetType="dxe:TextEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MaskType" Value="Numeric" />
+        <Setter Property="Mask" Value="n2" />
+        <Setter Property="MaskCulture" Value="tr-TR" />
+        <Setter Property="MaskUseAsDisplayFormat" Value="True" />
+    </Style>
+
+    <!-- ============================================================
+         PasswordBoxEdit (implicit)
+         ============================================================ -->
+    <Style TargetType="dxe:PasswordBoxEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- ============================================================
+         ComboBoxEdit (implicit)
+         ============================================================ -->
+    <Style TargetType="dxe:ComboBoxEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- ============================================================
+         FilteringComboBoxStyle (KEY'li, ZORUNLU)
+         ============================================================ -->
+    <Style x:Key="FilteringComboBoxStyle" TargetType="dxe:ComboBoxEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="IncrementalFiltering" Value="True" />
+        <Setter Property="FilterCondition" Value="Contains" />
+        <Setter Property="ValidateOnTextInput" Value="False" />
+        <Setter Property="AutoComplete" Value="False" />
+        <Setter Property="ImmediatePopup" Value="True" />
+    </Style>
+
+    <!-- ============================================================
+         DateEdit (implicit) — dd.MM.yyyy SABİT format
+         ============================================================ -->
+    <Style TargetType="dxe:DateEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Mask" Value="dd.MM.yyyy" />
+        <Setter Property="MaskType" Value="DateTimeAdvancingCaret" />
+        <Setter Property="MaskCulture" Value="tr-TR" />
+        <Setter Property="MaskUseAsDisplayFormat" Value="True" />
+    </Style>
+
+    <!-- ============================================================
+         ButtonEdit (implicit)
+         ============================================================ -->
+    <Style TargetType="dxe:ButtonEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Accounting.GeneralAccounting.Business\Accounting.GeneralAccounting.Business.csproj" />
+    <ProjectReference Include="..\Accounting.GeneralAccounting.Domain\Accounting.GeneralAccounting.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
+  </ItemGroup>
+
+ 
+</Project>

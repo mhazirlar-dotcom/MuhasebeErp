@@ -1,0 +1,203 @@
+﻿<dx:ThemedWindow x:Class="Accounting.Desktop.Windows.ShellWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:vm="clr-namespace:Accounting.Desktop.ViewModels"
+                 Title="Muhasebe ERP"
+                 Height="720"
+                 Width="1280"
+                 WindowStartupLocation="CenterScreen"
+                 WindowState="Maximized">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ÜST BAR -->
+        <Border Grid.Row="0"
+                Background="#F5F5F5"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1"
+                Padding="8,4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Menu Grid.Column="0" Background="Transparent" VerticalAlignment="Center">
+                    <Menu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="#1F4E79" />
+                            <Setter Property="Padding" Value="12,6" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="IsSubmenuOpen" Value="True" />
+                                    <Setter Property="Foreground" Value="#0B5FA5" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Menu.ItemContainerStyle>
+
+                    <MenuItem Header="Muhasebe">
+                        <MenuItem Header="Hesap Planı İşlemleri">
+                            <MenuItem Header="Hesap Planı Listesi" />
+                            <MenuItem Header="Yeni Hesap Planı" />
+                        </MenuItem>
+                        <MenuItem Header="Yevmiye İşlemleri">
+                            <MenuItem Header="Yevmiye Fişi Listesi" />
+                            <MenuItem Header="Yeni Yevmiye Fişi" />
+                        </MenuItem>
+                        <MenuItem Header="Raporlar">
+                            <MenuItem Header="Mizan" />
+                            <MenuItem Header="Hesap Ekstresi" />
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="İnsan Kaynakları" />
+                    <MenuItem Header="Ticari" />
+                    <MenuItem Header="CRM" />
+                    <MenuItem Header="Raporlar" />
+
+                    <MenuItem Header="Yönetici">
+                        <MenuItem Header="Firma İşlemleri">
+                            <MenuItem Header="Firma Girişi"
+                                      Command="{Binding NavigateCommand}"
+                                      CommandParameter="FirmaGirisi" />
+                            <MenuItem Header="Firma Listesi"
+                                      Command="{Binding NavigateCommand}"
+                                      CommandParameter="FirmaListesi" />
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="Ayarlar" />
+                    <MenuItem Header="Yardım" />
+                </Menu>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Firma:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,8,0" />
+
+                    <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
+                                      ItemsSource="{Binding Companies}"
+                                      SelectedItem="{Binding SelectedCompany}"
+                                      DisplayMember="ShortName"
+                                      NullText="Firma seçin"
+                                      Width="200"
+                                      Margin="0,0,12,0" />
+
+                    <TextBlock Text="Dönem:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,8,0" />
+
+                    <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
+                                      ItemsSource="{Binding Periods}"
+                                      SelectedItem="{Binding SelectedPeriod}"
+                                      DisplayMember="Name"
+                                      NullText="Dönem seçin"
+                                      Width="180"
+                                      IsEnabled="{Binding HasPeriods}"
+                                      Margin="0,0,12,0" />
+
+                    <dx:SimpleButton Content="Tamam"
+                                     Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                                     Command="{Binding ConfirmSelectionCommand}"
+                                     Width="90"
+                                     IsEnabled="{Binding CanConfirmSelection}"
+                                     ToolTip="Seçili firma ve dönemi onayla" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- İÇERİK -->
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
+
+        <!-- ALT BAR -->
+        <Border Grid.Row="2"
+                Background="#F5F5F5"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,1,0,0"
+                Padding="8,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Sol: Kullanıcı + Çıkış (sabit) -->
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="{Binding UserDisplayName}"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="#1F4E79"
+                               VerticalAlignment="Center"
+                               Margin="0,0,12,0" />
+
+                    <dx:SimpleButton Content="Çıkış"
+                                     Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                                     Command="{Binding LogoutCommand}"
+                                     Width="100" />
+                </StackPanel>
+
+                <!-- Sağ: Aktif view'in footer aksiyonları -->
+                <ContentControl Grid.Column="2"
+                                Content="{Binding FooterContent}"
+                                VerticalAlignment="Center">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type vm:CompanyEditViewModel}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <dx:SimpleButton Content="Liste"
+                                                 Glyph="{dx:DXImage Image=Grid_16x16.png}"
+                                                 Command="{Binding CancelCommand}"
+                                                 Width="140"
+                                                 Margin="0,0,8,0" />
+
+                                <dx:SimpleButton Content="Kaydet"
+                                                 Glyph="{dx:DXImage Image=Save_16x16.png}"
+                                                 Command="{Binding SaveActiveSectionCommand}"
+                                                 Width="140"
+                                                 IsEnabled="{Binding IsNotBusy}" />
+                            </StackPanel>
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type vm:CompanyListViewModel}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <dx:SimpleButton Content="Yeni Firma"
+                                                 Glyph="{dx:DXImage Image=Add_16x16.png}"
+                                                 Command="{Binding NewCompanyCommand}"
+                                                 Width="140"
+                                                 Margin="0,0,8,0" />
+
+                                <dx:SimpleButton Content="Sil"
+                                                 Glyph="{dx:DXImage Image=Delete_16x16.png}"
+                                                 Command="{Binding DeactivateCompanyCommand}"
+                                                 Width="100"
+                                                 IsEnabled="{Binding CanDeactivate}"
+                                                 Margin="0,0,8,0" />
+
+                                <dx:SimpleButton Content="Aktifleştir"
+                                                 Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                                                 Command="{Binding ActivateCompanyCommand}"
+                                                 Width="140"
+                                                 IsEnabled="{Binding CanActivate}"
+                                                 Margin="0,0,8,0" />
+
+                                <dx:SimpleButton Content="Detay"
+                                                 Glyph="{dx:DXImage Image=Edit_16x16.png}"
+                                                 Command="{Binding OpenDetailsCommand}"
+                                                 Width="100"
+                                                 IsEnabled="{Binding HasSelection}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Grid>
+        </Border>
+    </Grid>
+</dx:ThemedWindow>

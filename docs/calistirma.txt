@@ -1,0 +1,3 @@
+& "D:\Mehmet\CSharp2026\MuhasebeErp\docs\export-source.ps1"
+
+& "D:\Mehmet\CSharp2026\MuhasebeErp\docs\create-seed-files.ps1"

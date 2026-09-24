@@ -1,0 +1,26 @@
+[
+  {
+    "code": "TICARET_ODASI",
+    "name": "Ticaret Odası"
+  },
+  {
+    "code": "SANAYI_ODASI",
+    "name": "Sanayi Odası"
+  },
+  {
+    "code": "TICARET_VE_SANAYI_ODASI",
+    "name": "Ticaret ve Sanayi Odası"
+  },
+  {
+    "code": "ESNAF_VE_SANATKARLAR_ODASI",
+    "name": "Esnaf ve Sanatkarlar Odası"
+  },
+  {
+    "code": "SMMM_ODASI",
+    "name": "Serbest Muhasebeci Mali Müşavirler Odası"
+  },
+  {
+    "code": "YOK",
+    "name": "Yok"
+  }
+]

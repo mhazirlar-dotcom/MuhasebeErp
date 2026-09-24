@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Core\Accounting.Core.Business\Accounting.Core.Business.csproj" />
+        <ProjectReference Include="..\..\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj" />
+        <ProjectReference Include="..\..\Modules\GeneralAccounting\Accounting.GeneralAccounting.Business\Accounting.GeneralAccounting.Business.csproj" />
+        <ProjectReference Include="..\..\Modules\GeneralAccounting\Accounting.GeneralAccounting.DataAccess\Accounting.GeneralAccounting.DataAccess.csproj" />
+        <ProjectReference Include="..\..\Shared\Accounting.Shared\Accounting.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.12" />
+        <PackageReference Include="Scrutor" Version="7.0.0" />
+    </ItemGroup>
+</Project>

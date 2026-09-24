@@ -1,0 +1,85 @@
+﻿<dx:ThemedWindow x:Class="Accounting.Desktop.Windows.FirstSetupWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 Title="İlk Kurulum"
+                 Width="480"
+                 Height="520"
+                 WindowStartupLocation="CenterScreen"
+                 ResizeMode="NoResize">
+
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="İlk Kurulum"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,8" />
+
+        <TextBlock Grid.Row="1"
+                   Text="Sisteme ilk kez giriş yapılıyor. Yönetici hesabı oluşturun."
+                   FontSize="12"
+                   Foreground="Gray"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Margin="0,0,0,24" />
+
+        <dxe:TextEdit Grid.Row="2"
+                      EditValue="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                      NullText="Kullanıcı Adı"
+                      Margin="0,0,0,12" />
+
+        <dxe:TextEdit Grid.Row="3"
+                      EditValue="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                      NullText="Ad Soyad"
+                      Margin="0,0,0,12" />
+
+        <dxe:TextEdit Grid.Row="4"
+                      EditValue="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                      NullText="E-posta"
+                      Margin="0,0,0,12" />
+
+        <dxe:PasswordBoxEdit Grid.Row="5"
+                             EditValue="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                             NullText="Şifre"
+                             Margin="0,0,0,12" />
+
+        <dxe:PasswordBoxEdit Grid.Row="6"
+                             EditValue="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}"
+                             NullText="Şifre Tekrar"
+                             Margin="0,0,0,20" />
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <dx:SimpleButton Grid.Column="0"
+                             Content="İptal"
+                             Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                             Command="{Binding CancelCommand}"
+                             HorizontalAlignment="Stretch" />
+
+            <dx:SimpleButton Grid.Column="2"
+                             Content="Kaydet"
+                             Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                             Command="{Binding SaveCommand}"
+                             HorizontalAlignment="Stretch"
+                             IsEnabled="{Binding IsNotBusy}" />
+        </Grid>
+    </Grid>
+</dx:ThemedWindow>

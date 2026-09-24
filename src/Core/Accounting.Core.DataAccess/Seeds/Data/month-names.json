@@ -1,0 +1,50 @@
+﻿[
+  {
+    "code": "01",
+    "name": "Ocak"
+  },
+  {
+    "code": "02",
+    "name": "Åubat"
+  },
+  {
+    "code": "03",
+    "name": "Mart"
+  },
+  {
+    "code": "04",
+    "name": "Nisan"
+  },
+  {
+    "code": "05",
+    "name": "MayÄ±s"
+  },
+  {
+    "code": "06",
+    "name": "Haziran"
+  },
+  {
+    "code": "07",
+    "name": "Temmuz"
+  },
+  {
+    "code": "08",
+    "name": "AÄŸustos"
+  },
+  {
+    "code": "09",
+    "name": "EylÃ¼l"
+  },
+  {
+    "code": "10",
+    "name": "Ekim"
+  },
+  {
+    "code": "11",
+    "name": "KasÄ±m"
+  },
+  {
+    "code": "12",
+    "name": "AralÄ±k"
+  }
+]

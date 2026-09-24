@@ -1,0 +1,26 @@
+[
+  {
+    "code": "YETKILI",
+    "name": "Yetkili"
+  },
+  {
+    "code": "MUHASEBE",
+    "name": "Muhasebe"
+  },
+  {
+    "code": "SATIS",
+    "name": "Satış"
+  },
+  {
+    "code": "SATINALMA",
+    "name": "Satın Alma"
+  },
+  {
+    "code": "FINANS",
+    "name": "Finans"
+  },
+  {
+    "code": "TEKNIK",
+    "name": "Teknik"
+  }
+]

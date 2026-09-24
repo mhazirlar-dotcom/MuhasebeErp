@@ -1,0 +1,26 @@
+[
+  {
+    "code": "OZEL",
+    "name": "Özel"
+  },
+  {
+    "code": "KAMU",
+    "name": "Kamu"
+  },
+  {
+    "code": "KARMA",
+    "name": "Karma"
+  },
+  {
+    "code": "KOOPERATIF",
+    "name": "Kooperatif"
+  },
+  {
+    "code": "DERNEK",
+    "name": "Dernek"
+  },
+  {
+    "code": "VAKIF",
+    "name": "Vakıf"
+  }
+]

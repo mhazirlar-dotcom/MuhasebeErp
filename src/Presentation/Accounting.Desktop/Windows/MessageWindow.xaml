@@ -1,0 +1,152 @@
+﻿<dx:ThemedWindow x:Class="Accounting.Desktop.Windows.MessageWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:vm="clr-namespace:Accounting.Desktop.ViewModels"
+                 Title="{Binding Title}"
+                 Width="480"
+                 SizeToContent="Height"
+                 MinHeight="200"
+                 MaxHeight="640"
+                 ResizeMode="NoResize"
+                 WindowStartupLocation="CenterOwner"
+                 ShowInTaskbar="False"
+                 ShowIcon="False"
+                 UseLayoutRounding="True">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- SOL RENK ŞERİDİ -->
+        <Border Grid.Column="0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#0078D4" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MessageType}" Value="Success">
+                            <Setter Property="Background" Value="#107C10" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding MessageType}" Value="Warning">
+                            <Setter Property="Background" Value="#FF8C00" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding MessageType}" Value="Error">
+                            <Setter Property="Background" Value="#D13438" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+
+        <!-- İÇERİK -->
+        <Grid Grid.Column="1" Margin="24,20,24,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Row 0: İkon + Başlık -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                <Image Width="32"
+                       Height="32"
+                       Margin="0,0,14,0"
+                       VerticalAlignment="Top"
+                       RenderOptions.BitmapScalingMode="HighQuality">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{dx:DXImage Image=Info_32x32.png}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MessageType}" Value="Success">
+                                    <Setter Property="Source" Value="{dx:DXImage Image=Apply_32x32.png}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MessageType}" Value="Warning">
+                                    <Setter Property="Source" Value="{dx:DXImage Image=Warning_32x32.png}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MessageType}" Value="Error">
+                                    <Setter Property="Source" Value="{dx:DXImage Image=Cancel_32x32.png}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MessageType}" Value="Confirm">
+                                    <Setter Property="Source" Value="{dx:DXImage Image=Question_32x32.png}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <TextBlock Text="{Binding Title}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="#1F4E79"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!-- Row 1: Mesaj + Hata Listesi -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="{Binding Message}"
+                               FontSize="13"
+                               Foreground="#333333"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,8" />
+
+                    <ItemsControl ItemsSource="{Binding Errors}"
+                                  Visibility="{Binding HasErrors, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#FDF3F4"
+                                        BorderBrush="#F5C6C9"
+                                        BorderThickness="1"
+                                        CornerRadius="4"
+                                        Padding="10,6"
+                                        Margin="0,2,0,2">
+                                    <TextBlock Text="{Binding Message}"
+                                               FontSize="12"
+                                               Foreground="#8A1F23"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Row 2: Butonlar -->
+            <Grid Grid.Row="2" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <dx:SimpleButton Grid.Column="0"
+                                 Content="Kopyala"
+                                 Glyph="{dx:DXImage Image=Copy_16x16.png}"
+                                 Command="{Binding CopyCommand}"
+                                 Width="100"
+                                 ToolTip="Mesajı panoya kopyala" />
+
+                <dx:SimpleButton Grid.Column="2"
+                                 Content="{Binding SecondaryButtonText}"
+                                 Command="{Binding SecondaryCommand}"
+                                 Width="100"
+                                 Margin="0,0,8,0"
+                                 Visibility="{Binding HasSecondaryButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                <dx:SimpleButton Grid.Column="3"
+                                 Content="{Binding PrimaryButtonText}"
+                                 Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                                 Command="{Binding PrimaryCommand}"
+                                 Width="100"
+                                 IsDefault="True" />
+            </Grid>
+        </Grid>
+    </Grid>
+</dx:ThemedWindow>

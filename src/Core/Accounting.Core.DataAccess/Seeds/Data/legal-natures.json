@@ -1,0 +1,34 @@
+[
+  {
+    "code": "LIMITED_SIRKET",
+    "name": "Limited Şirket"
+  },
+  {
+    "code": "ANONIM_SIRKET",
+    "name": "Anonim Şirket"
+  },
+  {
+    "code": "KOLLEKTIF_SIRKET",
+    "name": "Kollektif Şirket"
+  },
+  {
+    "code": "KOMANDIT_SIRKET",
+    "name": "Komandit Şirket"
+  },
+  {
+    "code": "ADI_SIRKET",
+    "name": "Adi Şirket"
+  },
+  {
+    "code": "KOOPERATIF",
+    "name": "Kooperatif"
+  },
+  {
+    "code": "SAHIS_ISLETMESI",
+    "name": "Şahıs İşletmesi"
+  },
+  {
+    "code": "DIGER",
+    "name": "Diğer"
+  }
+]

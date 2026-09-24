@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Accounting.GeneralAccounting.Domain\Accounting.GeneralAccounting.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Core\Accounting.Core.Business\Accounting.Core.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+  </ItemGroup>
+
+ 
+
+</Project>

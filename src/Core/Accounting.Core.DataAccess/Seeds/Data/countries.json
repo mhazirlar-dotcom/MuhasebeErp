@@ -1,0 +1,402 @@
+[
+  {
+    "code": "TR",
+    "name": "Türkiye"
+  },
+  {
+    "code": "DE",
+    "name": "Almanya"
+  },
+  {
+    "code": "US",
+    "name": "Amerika Birleşik Devletleri"
+  },
+  {
+    "code": "GB",
+    "name": "Birleşik Krallık"
+  },
+  {
+    "code": "FR",
+    "name": "Fransa"
+  },
+  {
+    "code": "IT",
+    "name": "İtalya"
+  },
+  {
+    "code": "ES",
+    "name": "İspanya"
+  },
+  {
+    "code": "NL",
+    "name": "Hollanda"
+  },
+  {
+    "code": "BE",
+    "name": "Belçika"
+  },
+  {
+    "code": "AT",
+    "name": "Avusturya"
+  },
+  {
+    "code": "CH",
+    "name": "İsviçre"
+  },
+  {
+    "code": "SE",
+    "name": "İsveç"
+  },
+  {
+    "code": "NO",
+    "name": "Norveç"
+  },
+  {
+    "code": "DK",
+    "name": "Danimarka"
+  },
+  {
+    "code": "FI",
+    "name": "Finlandiya"
+  },
+  {
+    "code": "IE",
+    "name": "İrlanda"
+  },
+  {
+    "code": "PT",
+    "name": "Portekiz"
+  },
+  {
+    "code": "GR",
+    "name": "Yunanistan"
+  },
+  {
+    "code": "PL",
+    "name": "Polonya"
+  },
+  {
+    "code": "CZ",
+    "name": "Çekya"
+  },
+  {
+    "code": "SK",
+    "name": "Slovakya"
+  },
+  {
+    "code": "HU",
+    "name": "Macaristan"
+  },
+  {
+    "code": "RO",
+    "name": "Romanya"
+  },
+  {
+    "code": "BG",
+    "name": "Bulgaristan"
+  },
+  {
+    "code": "HR",
+    "name": "Hırvatistan"
+  },
+  {
+    "code": "SI",
+    "name": "Slovenya"
+  },
+  {
+    "code": "RS",
+    "name": "Sırbistan"
+  },
+  {
+    "code": "BA",
+    "name": "Bosna-Hersek"
+  },
+  {
+    "code": "MK",
+    "name": "Kuzey Makedonya"
+  },
+  {
+    "code": "AL",
+    "name": "Arnavutluk"
+  },
+  {
+    "code": "ME",
+    "name": "Karadağ"
+  },
+  {
+    "code": "XK",
+    "name": "Kosova"
+  },
+  {
+    "code": "RU",
+    "name": "Rusya"
+  },
+  {
+    "code": "UA",
+    "name": "Ukrayna"
+  },
+  {
+    "code": "BY",
+    "name": "Belarus"
+  },
+  {
+    "code": "MD",
+    "name": "Moldova"
+  },
+  {
+    "code": "GE",
+    "name": "Gürcistan"
+  },
+  {
+    "code": "AM",
+    "name": "Ermenistan"
+  },
+  {
+    "code": "AZ",
+    "name": "Azerbaycan"
+  },
+  {
+    "code": "SY",
+    "name": "Suriye"
+  },
+  {
+    "code": "IQ",
+    "name": "Irak"
+  },
+  {
+    "code": "IR",
+    "name": "İran"
+  },
+  {
+    "code": "SA",
+    "name": "Suudi Arabistan"
+  },
+  {
+    "code": "AE",
+    "name": "Birleşik Arap Emirlikleri"
+  },
+  {
+    "code": "QA",
+    "name": "Katar"
+  },
+  {
+    "code": "KW",
+    "name": "Kuveyt"
+  },
+  {
+    "code": "BH",
+    "name": "Bahreyn"
+  },
+  {
+    "code": "OM",
+    "name": "Umman"
+  },
+  {
+    "code": "YE",
+    "name": "Yemen"
+  },
+  {
+    "code": "JO",
+    "name": "Ürdün"
+  },
+  {
+    "code": "LB",
+    "name": "Lübnan"
+  },
+  {
+    "code": "IL",
+    "name": "İsrail"
+  },
+  {
+    "code": "PS",
+    "name": "Filistin"
+  },
+  {
+    "code": "EG",
+    "name": "Mısır"
+  },
+  {
+    "code": "LY",
+    "name": "Libya"
+  },
+  {
+    "code": "TN",
+    "name": "Tunus"
+  },
+  {
+    "code": "DZ",
+    "name": "Cezayir"
+  },
+  {
+    "code": "MA",
+    "name": "Fas"
+  },
+  {
+    "code": "SD",
+    "name": "Sudan"
+  },
+  {
+    "code": "ET",
+    "name": "Etiyopya"
+  },
+  {
+    "code": "SO",
+    "name": "Somali"
+  },
+  {
+    "code": "KE",
+    "name": "Kenya"
+  },
+  {
+    "code": "TZ",
+    "name": "Tanzanya"
+  },
+  {
+    "code": "UG",
+    "name": "Uganda"
+  },
+  {
+    "code": "NG",
+    "name": "Nijerya"
+  },
+  {
+    "code": "GH",
+    "name": "Gana"
+  },
+  {
+    "code": "ZA",
+    "name": "Güney Afrika"
+  },
+  {
+    "code": "CN",
+    "name": "Çin"
+  },
+  {
+    "code": "JP",
+    "name": "Japonya"
+  },
+  {
+    "code": "KR",
+    "name": "Güney Kore"
+  },
+  {
+    "code": "KP",
+    "name": "Kuzey Kore"
+  },
+  {
+    "code": "IN",
+    "name": "Hindistan"
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan"
+  },
+  {
+    "code": "BD",
+    "name": "Bangladeş"
+  },
+  {
+    "code": "ID",
+    "name": "Endonezya"
+  },
+  {
+    "code": "MY",
+    "name": "Malezya"
+  },
+  {
+    "code": "SG",
+    "name": "Singapur"
+  },
+  {
+    "code": "TH",
+    "name": "Tayland"
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam"
+  },
+  {
+    "code": "PH",
+    "name": "Filipinler"
+  },
+  {
+    "code": "AU",
+    "name": "Avustralya"
+  },
+  {
+    "code": "NZ",
+    "name": "Yeni Zelanda"
+  },
+  {
+    "code": "CA",
+    "name": "Kanada"
+  },
+  {
+    "code": "MX",
+    "name": "Meksika"
+  },
+  {
+    "code": "BR",
+    "name": "Brezilya"
+  },
+  {
+    "code": "AR",
+    "name": "Arjantin"
+  },
+  {
+    "code": "CL",
+    "name": "Şili"
+  },
+  {
+    "code": "CO",
+    "name": "Kolombiya"
+  },
+  {
+    "code": "PE",
+    "name": "Peru"
+  },
+  {
+    "code": "VE",
+    "name": "Venezuela"
+  },
+  {
+    "code": "KZ",
+    "name": "Kazakistan"
+  },
+  {
+    "code": "UZ",
+    "name": "Özbekistan"
+  },
+  {
+    "code": "TM",
+    "name": "Türkmenistan"
+  },
+  {
+    "code": "KG",
+    "name": "Kırgızistan"
+  },
+  {
+    "code": "TJ",
+    "name": "Tacikistan"
+  },
+  {
+    "code": "AF",
+    "name": "Afganistan"
+  },
+  {
+    "code": "CY",
+    "name": "Kıbrıs"
+  },
+  {
+    "code": "MT",
+    "name": "Malta"
+  },
+  {
+    "code": "LU",
+    "name": "Lüksemburg"
+  },
+  {
+    "code": "IS",
+    "name": "İzlanda"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "code": "MERKEZ",
+    "name": "Merkez"
+  },
+  {
+    "code": "SUBE",
+    "name": "Şube"
+  },
+  {
+    "code": "FATURA",
+    "name": "Fatura"
+  },
+  {
+    "code": "SEVKIYAT",
+    "name": "Sevkiyat"
+  },
+  {
+    "code": "DEPO",
+    "name": "Depo"
+  },
+  {
+    "code": "IRTIBAT",
+    "name": "İrtibat"
+  }
+]

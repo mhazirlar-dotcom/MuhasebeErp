@@ -1,0 +1,326 @@
+[
+  {
+    "code": "01-TSM",
+    "name": "Adana Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "02-TSM",
+    "name": "Adıyaman Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "03-TSM",
+    "name": "Afyonkarahisar Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "04-TSM",
+    "name": "Ağrı Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "05-TSM",
+    "name": "Amasya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "06-TSM",
+    "name": "Ankara Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "07-TSM",
+    "name": "Antalya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "08-TSM",
+    "name": "Artvin Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "09-TSM",
+    "name": "Aydın Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "10-TSM",
+    "name": "Balıkesir Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "11-TSM",
+    "name": "Bilecik Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "12-TSM",
+    "name": "Bingöl Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "13-TSM",
+    "name": "Bitlis Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "14-TSM",
+    "name": "Bolu Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "15-TSM",
+    "name": "Burdur Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "16-TSM",
+    "name": "Bursa Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "17-TSM",
+    "name": "Çanakkale Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "18-TSM",
+    "name": "Çankırı Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "19-TSM",
+    "name": "Çorum Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "20-TSM",
+    "name": "Denizli Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "21-TSM",
+    "name": "Diyarbakır Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "22-TSM",
+    "name": "Edirne Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "23-TSM",
+    "name": "Elazığ Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "24-TSM",
+    "name": "Erzincan Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "25-TSM",
+    "name": "Erzurum Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "26-TSM",
+    "name": "Eskişehir Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "27-TSM",
+    "name": "Gaziantep Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "28-TSM",
+    "name": "Giresun Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "29-TSM",
+    "name": "Gümüşhane Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "30-TSM",
+    "name": "Hakkari Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "31-TSM",
+    "name": "Hatay Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "32-TSM",
+    "name": "Isparta Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "33-TSM",
+    "name": "Mersin Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "34-TSM",
+    "name": "İstanbul Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "35-TSM",
+    "name": "İzmir Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "36-TSM",
+    "name": "Kars Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "37-TSM",
+    "name": "Kastamonu Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "38-TSM",
+    "name": "Kayseri Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "39-TSM",
+    "name": "Kırklareli Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "40-TSM",
+    "name": "Kırşehir Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "41-TSM",
+    "name": "Kocaeli Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "42-TSM",
+    "name": "Konya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "43-TSM",
+    "name": "Kütahya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "44-TSM",
+    "name": "Malatya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "45-TSM",
+    "name": "Manisa Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "46-TSM",
+    "name": "Kahramanmaraş Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "47-TSM",
+    "name": "Mardin Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "48-TSM",
+    "name": "Muğla Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "49-TSM",
+    "name": "Muş Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "50-TSM",
+    "name": "Nevşehir Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "51-TSM",
+    "name": "Niğde Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "52-TSM",
+    "name": "Ordu Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "53-TSM",
+    "name": "Rize Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "54-TSM",
+    "name": "Sakarya Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "55-TSM",
+    "name": "Samsun Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "56-TSM",
+    "name": "Siirt Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "57-TSM",
+    "name": "Sinop Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "58-TSM",
+    "name": "Sivas Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "59-TSM",
+    "name": "Tekirdağ Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "60-TSM",
+    "name": "Tokat Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "61-TSM",
+    "name": "Trabzon Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "62-TSM",
+    "name": "Tunceli Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "63-TSM",
+    "name": "Şanlıurfa Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "64-TSM",
+    "name": "Uşak Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "65-TSM",
+    "name": "Van Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "66-TSM",
+    "name": "Yozgat Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "67-TSM",
+    "name": "Zonguldak Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "68-TSM",
+    "name": "Aksaray Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "69-TSM",
+    "name": "Bayburt Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "70-TSM",
+    "name": "Karaman Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "71-TSM",
+    "name": "Kırıkkale Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "72-TSM",
+    "name": "Batman Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "73-TSM",
+    "name": "Şırnak Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "74-TSM",
+    "name": "Bartın Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "75-TSM",
+    "name": "Ardahan Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "76-TSM",
+    "name": "Iğdır Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "77-TSM",
+    "name": "Yalova Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "78-TSM",
+    "name": "Karabük Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "79-TSM",
+    "name": "Kilis Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "80-TSM",
+    "name": "Osmaniye Ticaret Sicil Müdürlüğü"
+  },
+  {
+    "code": "81-TSM",
+    "name": "Düzce Ticaret Sicil Müdürlüğü"
+  }
+]

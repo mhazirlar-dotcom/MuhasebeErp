@@ -1,0 +1,407 @@
+[
+  {
+    "code": "01",
+    "name": "Adana",
+    "parentCode": "TR"
+  },
+  {
+    "code": "02",
+    "name": "Adıyaman",
+    "parentCode": "TR"
+  },
+  {
+    "code": "03",
+    "name": "Afyonkarahisar",
+    "parentCode": "TR"
+  },
+  {
+    "code": "04",
+    "name": "Ağrı",
+    "parentCode": "TR"
+  },
+  {
+    "code": "05",
+    "name": "Amasya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "06",
+    "name": "Ankara",
+    "parentCode": "TR"
+  },
+  {
+    "code": "07",
+    "name": "Antalya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "08",
+    "name": "Artvin",
+    "parentCode": "TR"
+  },
+  {
+    "code": "09",
+    "name": "Aydın",
+    "parentCode": "TR"
+  },
+  {
+    "code": "10",
+    "name": "Balıkesir",
+    "parentCode": "TR"
+  },
+  {
+    "code": "11",
+    "name": "Bilecik",
+    "parentCode": "TR"
+  },
+  {
+    "code": "12",
+    "name": "Bingöl",
+    "parentCode": "TR"
+  },
+  {
+    "code": "13",
+    "name": "Bitlis",
+    "parentCode": "TR"
+  },
+  {
+    "code": "14",
+    "name": "Bolu",
+    "parentCode": "TR"
+  },
+  {
+    "code": "15",
+    "name": "Burdur",
+    "parentCode": "TR"
+  },
+  {
+    "code": "16",
+    "name": "Bursa",
+    "parentCode": "TR"
+  },
+  {
+    "code": "17",
+    "name": "Çanakkale",
+    "parentCode": "TR"
+  },
+  {
+    "code": "18",
+    "name": "Çankırı",
+    "parentCode": "TR"
+  },
+  {
+    "code": "19",
+    "name": "Çorum",
+    "parentCode": "TR"
+  },
+  {
+    "code": "20",
+    "name": "Denizli",
+    "parentCode": "TR"
+  },
+  {
+    "code": "21",
+    "name": "Diyarbakır",
+    "parentCode": "TR"
+  },
+  {
+    "code": "22",
+    "name": "Edirne",
+    "parentCode": "TR"
+  },
+  {
+    "code": "23",
+    "name": "Elazığ",
+    "parentCode": "TR"
+  },
+  {
+    "code": "24",
+    "name": "Erzincan",
+    "parentCode": "TR"
+  },
+  {
+    "code": "25",
+    "name": "Erzurum",
+    "parentCode": "TR"
+  },
+  {
+    "code": "26",
+    "name": "Eskişehir",
+    "parentCode": "TR"
+  },
+  {
+    "code": "27",
+    "name": "Gaziantep",
+    "parentCode": "TR"
+  },
+  {
+    "code": "28",
+    "name": "Giresun",
+    "parentCode": "TR"
+  },
+  {
+    "code": "29",
+    "name": "Gümüşhane",
+    "parentCode": "TR"
+  },
+  {
+    "code": "30",
+    "name": "Hakkari",
+    "parentCode": "TR"
+  },
+  {
+    "code": "31",
+    "name": "Hatay",
+    "parentCode": "TR"
+  },
+  {
+    "code": "32",
+    "name": "Isparta",
+    "parentCode": "TR"
+  },
+  {
+    "code": "33",
+    "name": "Mersin",
+    "parentCode": "TR"
+  },
+  {
+    "code": "34",
+    "name": "İstanbul",
+    "parentCode": "TR"
+  },
+  {
+    "code": "35",
+    "name": "İzmir",
+    "parentCode": "TR"
+  },
+  {
+    "code": "36",
+    "name": "Kars",
+    "parentCode": "TR"
+  },
+  {
+    "code": "37",
+    "name": "Kastamonu",
+    "parentCode": "TR"
+  },
+  {
+    "code": "38",
+    "name": "Kayseri",
+    "parentCode": "TR"
+  },
+  {
+    "code": "39",
+    "name": "Kırklareli",
+    "parentCode": "TR"
+  },
+  {
+    "code": "40",
+    "name": "Kırşehir",
+    "parentCode": "TR"
+  },
+  {
+    "code": "41",
+    "name": "Kocaeli",
+    "parentCode": "TR"
+  },
+  {
+    "code": "42",
+    "name": "Konya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "43",
+    "name": "Kütahya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "44",
+    "name": "Malatya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "45",
+    "name": "Manisa",
+    "parentCode": "TR"
+  },
+  {
+    "code": "46",
+    "name": "Kahramanmaraş",
+    "parentCode": "TR"
+  },
+  {
+    "code": "47",
+    "name": "Mardin",
+    "parentCode": "TR"
+  },
+  {
+    "code": "48",
+    "name": "Muğla",
+    "parentCode": "TR"
+  },
+  {
+    "code": "49",
+    "name": "Muş",
+    "parentCode": "TR"
+  },
+  {
+    "code": "50",
+    "name": "Nevşehir",
+    "parentCode": "TR"
+  },
+  {
+    "code": "51",
+    "name": "Niğde",
+    "parentCode": "TR"
+  },
+  {
+    "code": "52",
+    "name": "Ordu",
+    "parentCode": "TR"
+  },
+  {
+    "code": "53",
+    "name": "Rize",
+    "parentCode": "TR"
+  },
+  {
+    "code": "54",
+    "name": "Sakarya",
+    "parentCode": "TR"
+  },
+  {
+    "code": "55",
+    "name": "Samsun",
+    "parentCode": "TR"
+  },
+  {
+    "code": "56",
+    "name": "Siirt",
+    "parentCode": "TR"
+  },
+  {
+    "code": "57",
+    "name": "Sinop",
+    "parentCode": "TR"
+  },
+  {
+    "code": "58",
+    "name": "Sivas",
+    "parentCode": "TR"
+  },
+  {
+    "code": "59",
+    "name": "Tekirdağ",
+    "parentCode": "TR"
+  },
+  {
+    "code": "60",
+    "name": "Tokat",
+    "parentCode": "TR"
+  },
+  {
+    "code": "61",
+    "name": "Trabzon",
+    "parentCode": "TR"
+  },
+  {
+    "code": "62",
+    "name": "Tunceli",
+    "parentCode": "TR"
+  },
+  {
+    "code": "63",
+    "name": "Şanlıurfa",
+    "parentCode": "TR"
+  },
+  {
+    "code": "64",
+    "name": "Uşak",
+    "parentCode": "TR"
+  },
+  {
+    "code": "65",
+    "name": "Van",
+    "parentCode": "TR"
+  },
+  {
+    "code": "66",
+    "name": "Yozgat",
+    "parentCode": "TR"
+  },
+  {
+    "code": "67",
+    "name": "Zonguldak",
+    "parentCode": "TR"
+  },
+  {
+    "code": "68",
+    "name": "Aksaray",
+    "parentCode": "TR"
+  },
+  {
+    "code": "69",
+    "name": "Bayburt",
+    "parentCode": "TR"
+  },
+  {
+    "code": "70",
+    "name": "Karaman",
+    "parentCode": "TR"
+  },
+  {
+    "code": "71",
+    "name": "Kırıkkale",
+    "parentCode": "TR"
+  },
+  {
+    "code": "72",
+    "name": "Batman",
+    "parentCode": "TR"
+  },
+  {
+    "code": "73",
+    "name": "Şırnak",
+    "parentCode": "TR"
+  },
+  {
+    "code": "74",
+    "name": "Bartın",
+    "parentCode": "TR"
+  },
+  {
+    "code": "75",
+    "name": "Ardahan",
+    "parentCode": "TR"
+  },
+  {
+    "code": "76",
+    "name": "Iğdır",
+    "parentCode": "TR"
+  },
+  {
+    "code": "77",
+    "name": "Yalova",
+    "parentCode": "TR"
+  },
+  {
+    "code": "78",
+    "name": "Karabük",
+    "parentCode": "TR"
+  },
+  {
+    "code": "79",
+    "name": "Kilis",
+    "parentCode": "TR"
+  },
+  {
+    "code": "80",
+    "name": "Osmaniye",
+    "parentCode": "TR"
+  },
+  {
+    "code": "81",
+    "name": "Düzce",
+    "parentCode": "TR"
+  }
+]

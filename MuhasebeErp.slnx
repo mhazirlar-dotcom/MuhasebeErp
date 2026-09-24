@@ -1,0 +1,41 @@
+﻿<Solution>
+  <Folder Name="/docs/">
+    <File Path="create-seed-files.ps1" />
+    <File Path="docs/calistirma.txt" />
+    <File Path="docs/PROJE_SOURCE_DUMP.txt" />
+    <File Path="docs/export-source.ps1" />
+    <File Path="docs/PROJE.txt" />
+  </Folder>
+  <Folder Name="/docs/sql/">
+    <File Path="docs/sql/seed-test-company.sql" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="config/appsettings.Development.json" />
+    <File Path="config/appsettings.json" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Composition/">
+    <Project Path="src/Composition/Accounting.Composition/Accounting.Composition.csproj" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="src/Core/Accounting.Core.Business/Accounting.Core.Business.csproj" />
+    <Project Path="src/Core/Accounting.Core.DataAccess/Accounting.Core.DataAccess.csproj" />
+    <Project Path="src/Core/Accounting.Core.Domain/Accounting.Core.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/GeneralAccounting/">
+    <Project Path="src/Modules/GeneralAccounting/Accounting.GeneralAccounting.Business/Accounting.GeneralAccounting.Business.csproj" />
+    <Project Path="src/Modules/GeneralAccounting/Accounting.GeneralAccounting.DataAccess/Accounting.GeneralAccounting.DataAccess.csproj" />
+    <Project Path="src/Modules/GeneralAccounting/Accounting.GeneralAccounting.Domain/Accounting.GeneralAccounting.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="src/Presentation/Accounting.Api/Accounting.Api.csproj" />
+    <Project Path="src/Presentation/Accounting.Desktop/Accounting.Desktop.csproj" />
+    <Project Path="src/Presentation/Accounting.Web/Accounting.Web.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/Accounting.Shared/Accounting.Shared.csproj" />
+  </Folder>
+</Solution>

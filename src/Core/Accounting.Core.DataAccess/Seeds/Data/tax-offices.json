@@ -1,0 +1,4302 @@
+[
+  {
+    "code": "01250",
+    "name": "Adana İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01251",
+    "name": "5 Ocak Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01252",
+    "name": "Yüreğir Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01253",
+    "name": "Seyhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01254",
+    "name": "Ziyapaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01255",
+    "name": "Çukurova Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01201",
+    "name": "Ceyhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01203",
+    "name": "Kozan Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01205",
+    "name": "Karataş Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01256",
+    "name": "Pozantı Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01257",
+    "name": "İmamoğlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01258",
+    "name": "Karaisalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01259",
+    "name": "Yumurtalık Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01260",
+    "name": "Tufanbeyli Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01261",
+    "name": "Feke Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01262",
+    "name": "Saimbeyli Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "01263",
+    "name": "Aladağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "01"
+  },
+  {
+    "code": "02260",
+    "name": "Adıyaman Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02266",
+    "name": "Karakuş Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02261",
+    "name": "Kahta Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02262",
+    "name": "Besni Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02263",
+    "name": "Gölbaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02264",
+    "name": "Çelikhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "02265",
+    "name": "Sincik Vergi Dairesi Müdürlüğü",
+    "parentCode": "02"
+  },
+  {
+    "code": "03201",
+    "name": "Tınaztepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03280",
+    "name": "Kocatepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03273",
+    "name": "Çiğiltepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03260",
+    "name": "Dinar Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03261",
+    "name": "Bolvadin Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03262",
+    "name": "Emirdağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03263",
+    "name": "Sandıklı Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03264",
+    "name": "İscehisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03202",
+    "name": "Çay Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03265",
+    "name": "Sinanpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03266",
+    "name": "Şuhut Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03267",
+    "name": "İhsaniye Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03268",
+    "name": "Sultandağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03269",
+    "name": "Çobanlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03270",
+    "name": "Dazkırı Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03271",
+    "name": "Başmakçı Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "03272",
+    "name": "Evciler Vergi Dairesi Müdürlüğü",
+    "parentCode": "03"
+  },
+  {
+    "code": "04260",
+    "name": "Ağrı Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04266",
+    "name": "İshakpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04261",
+    "name": "Doğubeyazıt Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04262",
+    "name": "Patnos Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04263",
+    "name": "Diyadin Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04264",
+    "name": "Eleşkirt Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "04265",
+    "name": "Tutak Vergi Dairesi Müdürlüğü",
+    "parentCode": "04"
+  },
+  {
+    "code": "05260",
+    "name": "Amasya Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "05261",
+    "name": "Merzifon Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "05262",
+    "name": "Gümüşhacıköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "05263",
+    "name": "Taşova Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "05264",
+    "name": "Suluova Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "05265",
+    "name": "Göynücek Vergi Dairesi Müdürlüğü",
+    "parentCode": "05"
+  },
+  {
+    "code": "06280",
+    "name": "Anadolu İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06281",
+    "name": "Ankara İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06282",
+    "name": "Harçlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06283",
+    "name": "Ankara Kurumlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06284",
+    "name": "İvedik Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06285",
+    "name": "100. Yıl İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06252",
+    "name": "Veraset ve İntikal Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06253",
+    "name": "Kavaklıdere Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06254",
+    "name": "Maltepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06255",
+    "name": "Yenimahalle Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06257",
+    "name": "Çankaya Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06258",
+    "name": "Kızılbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06259",
+    "name": "Mithatpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06260",
+    "name": "Ulus Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06261",
+    "name": "Yıldırım Beyazıt Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06262",
+    "name": "Seğmenler Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06264",
+    "name": "Dikimevi Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06265",
+    "name": "Doğanbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06266",
+    "name": "Yeğenbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06268",
+    "name": "Hitit Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06269",
+    "name": "Yahya Galip Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06270",
+    "name": "Muhammet Karagüzel Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06271",
+    "name": "Ostim Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06272",
+    "name": "Gölbaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06273",
+    "name": "Sincan Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06274",
+    "name": "Dışkapı Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06275",
+    "name": "Etimesgut Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06276",
+    "name": "Başkent Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06277",
+    "name": "Cumhuriyet Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06278",
+    "name": "Keçiören Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06292",
+    "name": "Beytepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06279",
+    "name": "Kahramankazan Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06205",
+    "name": "Polatlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06207",
+    "name": "Şereflikoçhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06209",
+    "name": "Beypazarı Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06211",
+    "name": "Çubuk Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06213",
+    "name": "Haymana Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06215",
+    "name": "Elmadağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06286",
+    "name": "Akyurt Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06287",
+    "name": "Kızılcahamam Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06288",
+    "name": "Nallıhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06289",
+    "name": "Ayaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06290",
+    "name": "Bala Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "06291",
+    "name": "Kalecik Vergi Dairesi Müdürlüğü",
+    "parentCode": "06"
+  },
+  {
+    "code": "07251",
+    "name": "Üçkapılar Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07252",
+    "name": "Kalekapı Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07253",
+    "name": "Muratpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07254",
+    "name": "Düden Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07255",
+    "name": "Antalya Kurumlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07256",
+    "name": "Antalya İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07263",
+    "name": "Falez Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07257",
+    "name": "Korkuteli Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07201",
+    "name": "Alanya Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07202",
+    "name": "Serik Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07203",
+    "name": "Manavgat Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07204",
+    "name": "Elmalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07205",
+    "name": "Kemer Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07206",
+    "name": "Kumluca Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07259",
+    "name": "Finike Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07260",
+    "name": "Gazipaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07258",
+    "name": "Kaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07261",
+    "name": "Demre Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "07262",
+    "name": "Akseki Vergi Dairesi Müdürlüğü",
+    "parentCode": "07"
+  },
+  {
+    "code": "08260",
+    "name": "Artvin Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08261",
+    "name": "Hopa Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08262",
+    "name": "Arhavi Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08263",
+    "name": "Borçka Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08264",
+    "name": "Yusufeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08265",
+    "name": "Şavşat Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "08266",
+    "name": "Ardanuç Vergi Dairesi Müdürlüğü",
+    "parentCode": "08"
+  },
+  {
+    "code": "09201",
+    "name": "Efeler Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09280",
+    "name": "Güzelhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09260",
+    "name": "Nazilli Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09261",
+    "name": "Söke Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09262",
+    "name": "Çine Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09263",
+    "name": "Germencik Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09265",
+    "name": "Kuşadası Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09281",
+    "name": "Didim Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09282",
+    "name": "İncirliova Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09283",
+    "name": "Kuyucak Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09284",
+    "name": "Bozdoğan Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09285",
+    "name": "Sultanhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09286",
+    "name": "Karacasu Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09287",
+    "name": "Koçarlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09288",
+    "name": "Buharkent Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09289",
+    "name": "Köşk Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09290",
+    "name": "Yenipazar Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "09291",
+    "name": "Karpuzlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "09"
+  },
+  {
+    "code": "10201",
+    "name": "Karesi Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10280",
+    "name": "Kurtdereli Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10277",
+    "name": "Koca Seyit Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10260",
+    "name": "Ayvalık Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10261",
+    "name": "Bandırma Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10262",
+    "name": "Burhaniye Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10263",
+    "name": "Edremit Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10264",
+    "name": "Gönen Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10265",
+    "name": "Susurluk Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10266",
+    "name": "Erdek Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10267",
+    "name": "Bigadiç Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10268",
+    "name": "Sındırgı Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10269",
+    "name": "Dursunbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10270",
+    "name": "Gömeç Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10271",
+    "name": "Havran Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10272",
+    "name": "İvrindi Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10273",
+    "name": "Manyas Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10274",
+    "name": "Kepsut Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10275",
+    "name": "Marmara Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "10276",
+    "name": "Savaştepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "10"
+  },
+  {
+    "code": "11260",
+    "name": "Bilecik Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "11265",
+    "name": "Kayı Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "11261",
+    "name": "Bozüyük Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "11262",
+    "name": "Osmaneli Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "11263",
+    "name": "Söğüt Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "11264",
+    "name": "Gölpazarı Vergi Dairesi Müdürlüğü",
+    "parentCode": "11"
+  },
+  {
+    "code": "12260",
+    "name": "Bingöl Vergi Dairesi Müdürlüğü",
+    "parentCode": "12"
+  },
+  {
+    "code": "12264",
+    "name": "Yüzen Ada Vergi Dairesi Müdürlüğü",
+    "parentCode": "12"
+  },
+  {
+    "code": "12261",
+    "name": "Solhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "12"
+  },
+  {
+    "code": "12262",
+    "name": "Genç Vergi Dairesi Müdürlüğü",
+    "parentCode": "12"
+  },
+  {
+    "code": "12263",
+    "name": "Karlıova Vergi Dairesi Müdürlüğü",
+    "parentCode": "12"
+  },
+  {
+    "code": "13260",
+    "name": "Bitlis Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "13261",
+    "name": "Tatvan Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "13262",
+    "name": "Ahlat Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "13263",
+    "name": "Güroymak Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "13264",
+    "name": "Hizan Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "13265",
+    "name": "Adilcevaz Vergi Dairesi Müdürlüğü",
+    "parentCode": "13"
+  },
+  {
+    "code": "14260",
+    "name": "Bolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14267",
+    "name": "Köroğlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14262",
+    "name": "Gerede Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14263",
+    "name": "Göynük Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14264",
+    "name": "Mudurnu Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14265",
+    "name": "Mengen Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "14266",
+    "name": "Yeniçağa Vergi Dairesi Müdürlüğü",
+    "parentCode": "14"
+  },
+  {
+    "code": "15260",
+    "name": "Burdur Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15267",
+    "name": "Salda Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15261",
+    "name": "Bucak Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15262",
+    "name": "Gölhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15263",
+    "name": "Çavdır Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15264",
+    "name": "Yeşilova Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15265",
+    "name": "Tefenni Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "15266",
+    "name": "Karamanlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "15"
+  },
+  {
+    "code": "16250",
+    "name": "Bursa İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16251",
+    "name": "Osmangazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16252",
+    "name": "Yıldırım Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16253",
+    "name": "Çekirge Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16254",
+    "name": "Setbaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16255",
+    "name": "Uludağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16256",
+    "name": "Yeşil Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16257",
+    "name": "Nilüfer Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16258",
+    "name": "Ertuğrulgazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16259",
+    "name": "Gökdere Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16260",
+    "name": "Bursa Veraset ve Harçlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16262",
+    "name": "Kozahan Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16201",
+    "name": "Gemlik Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16202",
+    "name": "İnegöl Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16203",
+    "name": "Karacabey Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16204",
+    "name": "Mustafakemalpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16205",
+    "name": "Mudanya Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16206",
+    "name": "Orhangazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16207",
+    "name": "İznik Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16208",
+    "name": "Yenişehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "16261",
+    "name": "Orhaneli Vergi Dairesi Müdürlüğü",
+    "parentCode": "16"
+  },
+  {
+    "code": "17260",
+    "name": "Çanakkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17261",
+    "name": "Biga Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17262",
+    "name": "Çan Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17263",
+    "name": "Gelibolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17265",
+    "name": "Ezine Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17264",
+    "name": "Ayvacık Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17266",
+    "name": "Lapseki Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17267",
+    "name": "Gökçeada Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17268",
+    "name": "Bayramiç Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17269",
+    "name": "Yenice Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17270",
+    "name": "Eceabat Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "17271",
+    "name": "Bozcaada Vergi Dairesi Müdürlüğü",
+    "parentCode": "17"
+  },
+  {
+    "code": "18260",
+    "name": "Çankırı Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "18265",
+    "name": "Karatekin Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "18261",
+    "name": "Çerkeş Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "18262",
+    "name": "Ilgaz Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "18263",
+    "name": "Orta Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "18264",
+    "name": "Şabanözü Vergi Dairesi Müdürlüğü",
+    "parentCode": "18"
+  },
+  {
+    "code": "19260",
+    "name": "Çorum Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19262",
+    "name": "Hasanpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19269",
+    "name": "Akşemseddin Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19261",
+    "name": "Sungurlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19263",
+    "name": "Osmancık Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19264",
+    "name": "İskilip Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19265",
+    "name": "Alaca Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19266",
+    "name": "Kargı Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19267",
+    "name": "Mecitözü Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "19268",
+    "name": "Bayat Vergi Dairesi Müdürlüğü",
+    "parentCode": "19"
+  },
+  {
+    "code": "20201",
+    "name": "Saraylar Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20202",
+    "name": "Çınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20203",
+    "name": "Gökpınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20250",
+    "name": "Denizli İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20280",
+    "name": "Pamukkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20275",
+    "name": "Bayramyeri Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20260",
+    "name": "Sarayköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20261",
+    "name": "Acıpayam Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20262",
+    "name": "Tavas Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20263",
+    "name": "Buldan Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20264",
+    "name": "Çal Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20265",
+    "name": "Çivril Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20266",
+    "name": "Honaz Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20267",
+    "name": "Kale Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20268",
+    "name": "Serinhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20269",
+    "name": "Çameli Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20270",
+    "name": "Babadağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20271",
+    "name": "Bozkurt Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20272",
+    "name": "Çardak Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20273",
+    "name": "Güney Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "20274",
+    "name": "Bekilli Vergi Dairesi Müdürlüğü",
+    "parentCode": "20"
+  },
+  {
+    "code": "21251",
+    "name": "Gökalp Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21281",
+    "name": "Süleyman Nazif Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21282",
+    "name": "Cahit Sıtkı Tarancı Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21290",
+    "name": "Kayapınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21283",
+    "name": "Ergani Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21284",
+    "name": "Bismil Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21285",
+    "name": "Silvan Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21286",
+    "name": "Çınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21287",
+    "name": "Çermik Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21288",
+    "name": "Hani Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "21289",
+    "name": "Lice Vergi Dairesi Müdürlüğü",
+    "parentCode": "21"
+  },
+  {
+    "code": "22201",
+    "name": "Arda Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22260",
+    "name": "Kırkpınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22267",
+    "name": "Tunca Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22261",
+    "name": "Keşan Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22262",
+    "name": "Uzunköprü Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22263",
+    "name": "Havsa Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22264",
+    "name": "İpsala Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22265",
+    "name": "Enez Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "22266",
+    "name": "Meriç Vergi Dairesi Müdürlüğü",
+    "parentCode": "22"
+  },
+  {
+    "code": "23201",
+    "name": "Harput Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "23280",
+    "name": "Hazar Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "23284",
+    "name": "Elazığ Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "23281",
+    "name": "Karakoçan Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "23282",
+    "name": "Kovancılar Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "23283",
+    "name": "Palu Vergi Dairesi Müdürlüğü",
+    "parentCode": "23"
+  },
+  {
+    "code": "24260",
+    "name": "Fevzipaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "24"
+  },
+  {
+    "code": "24262",
+    "name": "Ergan Vergi Dairesi Müdürlüğü",
+    "parentCode": "24"
+  },
+  {
+    "code": "24261",
+    "name": "Tercan Vergi Dairesi Müdürlüğü",
+    "parentCode": "24"
+  },
+  {
+    "code": "25251",
+    "name": "Aziziye Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25280",
+    "name": "Kazımkarabekir Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25287",
+    "name": "Palandöken Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25281",
+    "name": "Horasan Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25252",
+    "name": "Oltu Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25282",
+    "name": "Pasinler Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25283",
+    "name": "Aşkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25284",
+    "name": "Hınıs Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25285",
+    "name": "İspir Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "25286",
+    "name": "Karayazı Vergi Dairesi Müdürlüğü",
+    "parentCode": "25"
+  },
+  {
+    "code": "26250",
+    "name": "Eskişehir Defterdarlığı (*)",
+    "parentCode": "26"
+  },
+  {
+    "code": "27250",
+    "name": "Gaziantep İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27252",
+    "name": "Şehitkamil Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27253",
+    "name": "Şahinbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27254",
+    "name": "Gazikent Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27255",
+    "name": "Kozanlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27251",
+    "name": "Suburcu Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27202",
+    "name": "Nizip Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27203",
+    "name": "İslahiye Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27256",
+    "name": "Oğuzeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27257",
+    "name": "Nurdağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27258",
+    "name": "Araban Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "27259",
+    "name": "Yavuzeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "27"
+  },
+  {
+    "code": "28260",
+    "name": "Giresun Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28271",
+    "name": "Ada Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28261",
+    "name": "Bulancak Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28262",
+    "name": "Tirebolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28264",
+    "name": "Espiye Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28263",
+    "name": "Görele Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28265",
+    "name": "Dereli Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28266",
+    "name": "Keşap Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28267",
+    "name": "Şebinkarahisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28268",
+    "name": "Eynesil Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28269",
+    "name": "Piraziz Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "28270",
+    "name": "Yağlıdere Vergi Dairesi Müdürlüğü",
+    "parentCode": "28"
+  },
+  {
+    "code": "29260",
+    "name": "Gümüşhane Vergi Dairesi Müdürlüğü",
+    "parentCode": "29"
+  },
+  {
+    "code": "29261",
+    "name": "Kelkit Vergi Dairesi Müdürlüğü",
+    "parentCode": "29"
+  },
+  {
+    "code": "29262",
+    "name": "Şiran Vergi Dairesi Müdürlüğü",
+    "parentCode": "29"
+  },
+  {
+    "code": "29263",
+    "name": "Torul Vergi Dairesi Müdürlüğü",
+    "parentCode": "29"
+  },
+  {
+    "code": "29264",
+    "name": "Kürtün Vergi Dairesi Müdürlüğü",
+    "parentCode": "29"
+  },
+  {
+    "code": "30260",
+    "name": "Hakkari Vergi Dairesi Müdürlüğü",
+    "parentCode": "30"
+  },
+  {
+    "code": "30261",
+    "name": "Yüksekova Vergi Dairesi Müdürlüğü",
+    "parentCode": "30"
+  },
+  {
+    "code": "30262",
+    "name": "Şemdinli Vergi Dairesi Müdürlüğü",
+    "parentCode": "30"
+  },
+  {
+    "code": "31201",
+    "name": "23 Temmuz Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31203",
+    "name": "Antakya Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31280",
+    "name": "Şükrükanatlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31202",
+    "name": "Sahil Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31281",
+    "name": "Akdeniz Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31290",
+    "name": "Asım Gündüz Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31260",
+    "name": "Dörtyol Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31261",
+    "name": "Kırıkhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31262",
+    "name": "Reyhanlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31263",
+    "name": "Samandağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31264",
+    "name": "Hassa Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31282",
+    "name": "Erzin Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31265",
+    "name": "Yayladağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31267",
+    "name": "Altınözü Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31268",
+    "name": "Belen Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "31283",
+    "name": "Kumlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "31"
+  },
+  {
+    "code": "32201",
+    "name": "Davraz Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32260",
+    "name": "Kaymakkapı Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32267",
+    "name": "Gülkent Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32261",
+    "name": "Eğirdir Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32262",
+    "name": "Yalvaç Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32263",
+    "name": "Şarkikaraağaç Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32264",
+    "name": "Keçiborlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32265",
+    "name": "Senirkent Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "32266",
+    "name": "Gelendost Vergi Dairesi Müdürlüğü",
+    "parentCode": "32"
+  },
+  {
+    "code": "33250",
+    "name": "İstiklal Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33252",
+    "name": "Uray Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33254",
+    "name": "Liman Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33255",
+    "name": "Toros Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33256",
+    "name": "Mersin İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33201",
+    "name": "Erdemli Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33202",
+    "name": "Silifke Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33203",
+    "name": "Anamur Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33204",
+    "name": "Kızılmurat Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33205",
+    "name": "Şehitkerim Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33257",
+    "name": "Mut Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33258",
+    "name": "Bozyazı Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33259",
+    "name": "Gülnar Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "33260",
+    "name": "Aydıncık Vergi Dairesi Müdürlüğü",
+    "parentCode": "33"
+  },
+  {
+    "code": "34220",
+    "name": "Haliç İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34221",
+    "name": "Vatan İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34222",
+    "name": "Çamlıca İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34223",
+    "name": "Alemdağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34224",
+    "name": "Yenikapı Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34207",
+    "name": "Büyük Mükellefler Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34231",
+    "name": "Boğaziçi Kurumlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34232",
+    "name": "Marmara Kurumlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34234",
+    "name": "Davutpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34235",
+    "name": "Esenler Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34236",
+    "name": "Fatih Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34237",
+    "name": "Küçükköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34239",
+    "name": "Merter Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34242",
+    "name": "Sultanbeyli Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34244",
+    "name": "Anadolu Kurumlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34245",
+    "name": "Tuzla Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34246",
+    "name": "Kozyatağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34247",
+    "name": "Maslak Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34248",
+    "name": "Zincirlikuyu Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34249",
+    "name": "İkitelli Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34251",
+    "name": "Beşiktaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34252",
+    "name": "Ümraniye Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34253",
+    "name": "Yeditepe Veraset ve Harçlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34254",
+    "name": "Kasımpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34255",
+    "name": "Erenköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34256",
+    "name": "Hisar Veraset ve Harçlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34257",
+    "name": "Tuna Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34258",
+    "name": "Rıhtım Veraset ve Harçlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34259",
+    "name": "Güngören Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34260",
+    "name": "Kocasinan Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34261",
+    "name": "Güneşli Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34262",
+    "name": "Küçükyalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34263",
+    "name": "Pendik Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34264",
+    "name": "Bayrampaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34265",
+    "name": "Beyazıt Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34266",
+    "name": "Beyoğlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34269",
+    "name": "Gaziosmanpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34270",
+    "name": "Göztepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34271",
+    "name": "Hocapaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34272",
+    "name": "Kadıköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34273",
+    "name": "Kocamustafapaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34274",
+    "name": "Mecidiyeköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34276",
+    "name": "Şişli Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34277",
+    "name": "Üsküdar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34278",
+    "name": "Halkalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34279",
+    "name": "Kağıthane Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34280",
+    "name": "Zeytinburnu Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34281",
+    "name": "Beykoz Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34283",
+    "name": "Sarıyer Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34284",
+    "name": "Bakırköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34285",
+    "name": "Kartal Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34287",
+    "name": "Nakil Vasıtaları Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34288",
+    "name": "Sarıgazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34291",
+    "name": "Atışalanı Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34292",
+    "name": "Yakacık Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34293",
+    "name": "Yenibosna Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34294",
+    "name": "Avcılar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34295",
+    "name": "Adalar Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34296",
+    "name": "Küçükçekmece Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34297",
+    "name": "Beylikdüzü Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34298",
+    "name": "Esenyurt Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34299",
+    "name": "Başakşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34203",
+    "name": "Silivri Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34204",
+    "name": "Büyükçekmece Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "34205",
+    "name": "Şile Vergi Dairesi Müdürlüğü",
+    "parentCode": "34"
+  },
+  {
+    "code": "35250",
+    "name": "İzmir İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35251",
+    "name": "9 Eylül Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35252",
+    "name": "Yamanlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35254",
+    "name": "Belkahve Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35256",
+    "name": "Karşıyaka Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35257",
+    "name": "Kemeraltı Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35258",
+    "name": "Konak Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35259",
+    "name": "Kordon Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35260",
+    "name": "Şirinyer Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35261",
+    "name": "Kadifekale Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35262",
+    "name": "Taşıtlar Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35263",
+    "name": "Hasan Tahsin Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35264",
+    "name": "Bornova Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35266",
+    "name": "Balçova Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35267",
+    "name": "Gaziemir Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35268",
+    "name": "Ege Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35269",
+    "name": "Çiğli Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35270",
+    "name": "Çakabey İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35201",
+    "name": "Bayındır Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35202",
+    "name": "Bergama Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35203",
+    "name": "Menemen Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35204",
+    "name": "Ödemiş Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35205",
+    "name": "Tire Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35206",
+    "name": "Torbalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35207",
+    "name": "Kemalpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35208",
+    "name": "Urla Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35209",
+    "name": "Selçuk Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35210",
+    "name": "Kınık Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35211",
+    "name": "Kiraz Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35212",
+    "name": "Çeşme Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35213",
+    "name": "Aliağa Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35215",
+    "name": "Menderes Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35271",
+    "name": "Dikili Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35272",
+    "name": "Seferihisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35273",
+    "name": "Foça Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35274",
+    "name": "Karaburun Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "35275",
+    "name": "Beydağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "35"
+  },
+  {
+    "code": "36260",
+    "name": "Kars Vergi Dairesi Müdürlüğü",
+    "parentCode": "36"
+  },
+  {
+    "code": "36264",
+    "name": "Kafkas Vergi Dairesi Müdürlüğü",
+    "parentCode": "36"
+  },
+  {
+    "code": "36261",
+    "name": "Sarıkamış Vergi Dairesi Müdürlüğü",
+    "parentCode": "36"
+  },
+  {
+    "code": "36262",
+    "name": "Kağızman Vergi Dairesi Müdürlüğü",
+    "parentCode": "36"
+  },
+  {
+    "code": "36263",
+    "name": "Selim Vergi Dairesi Müdürlüğü",
+    "parentCode": "36"
+  },
+  {
+    "code": "37260",
+    "name": "Kastamonu Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37270",
+    "name": "Atabey Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37261",
+    "name": "Tosya Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37262",
+    "name": "Taşköprü Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37263",
+    "name": "Cide Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37264",
+    "name": "İnebolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37265",
+    "name": "Araç Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37266",
+    "name": "Devrekani Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37267",
+    "name": "Azdavay Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37268",
+    "name": "Bozkurt Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "37269",
+    "name": "Daday Vergi Dairesi Müdürlüğü",
+    "parentCode": "37"
+  },
+  {
+    "code": "38250",
+    "name": "Kayseri İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38251",
+    "name": "Mimar Sinan Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38252",
+    "name": "Erciyes Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38253",
+    "name": "Kaleönü Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38254",
+    "name": "Gevher Nesibe Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38260",
+    "name": "Kültepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38201",
+    "name": "Develi Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38202",
+    "name": "Pınarbaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38203",
+    "name": "Bünyan Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38255",
+    "name": "Yahyalı Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38256",
+    "name": "İncesu Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38257",
+    "name": "Tomarza Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38258",
+    "name": "Yeşilhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "38259",
+    "name": "Sarız Vergi Dairesi Müdürlüğü",
+    "parentCode": "38"
+  },
+  {
+    "code": "39260",
+    "name": "Kırklareli Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39266",
+    "name": "Kırk Şehitler Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39261",
+    "name": "Lüleburgaz Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39262",
+    "name": "Babaeski Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39263",
+    "name": "Pınarhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39264",
+    "name": "Vize Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "39265",
+    "name": "Demirköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "39"
+  },
+  {
+    "code": "40260",
+    "name": "Kırşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "40"
+  },
+  {
+    "code": "40264",
+    "name": "Cacabey Vergi Dairesi Müdürlüğü",
+    "parentCode": "40"
+  },
+  {
+    "code": "40261",
+    "name": "Kaman Vergi Dairesi Müdürlüğü",
+    "parentCode": "40"
+  },
+  {
+    "code": "40262",
+    "name": "Mucur Vergi Dairesi Müdürlüğü",
+    "parentCode": "40"
+  },
+  {
+    "code": "40263",
+    "name": "Çiçekdağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "40"
+  },
+  {
+    "code": "41250",
+    "name": "Kocaeli İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41252",
+    "name": "Tepecik Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41253",
+    "name": "Alemdar Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41290",
+    "name": "Acısu Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41254",
+    "name": "Gebze İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41202",
+    "name": "Uluçınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41203",
+    "name": "İlyasbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41204",
+    "name": "Gölcük Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41205",
+    "name": "Karamürsel Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41206",
+    "name": "Körfez Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41207",
+    "name": "Derince Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "41255",
+    "name": "Kandıra Vergi Dairesi Müdürlüğü",
+    "parentCode": "41"
+  },
+  {
+    "code": "42250",
+    "name": "Konya İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42251",
+    "name": "Selçuk Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42252",
+    "name": "Mevlana Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42253",
+    "name": "Meram Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42254",
+    "name": "Alaaddin Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42262",
+    "name": "Karatay Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42201",
+    "name": "Akşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42202",
+    "name": "Ereğli Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42204",
+    "name": "Beyşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42205",
+    "name": "Cihanbeyli Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42206",
+    "name": "Çumra Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42207",
+    "name": "Seydişehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42208",
+    "name": "Ilgın Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42209",
+    "name": "Kulu Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42210",
+    "name": "Karapınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42211",
+    "name": "Kadınhanı Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42255",
+    "name": "Sarayönü Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42256",
+    "name": "Bozkır Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42257",
+    "name": "Yunak Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42258",
+    "name": "Hüyük Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42259",
+    "name": "Altınekin Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42260",
+    "name": "Emirgazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "42261",
+    "name": "Doğanhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "42"
+  },
+  {
+    "code": "43201",
+    "name": "30 Ağustos Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43280",
+    "name": "Çinili Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43267",
+    "name": "Çaltepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43260",
+    "name": "Gediz Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43261",
+    "name": "Simav Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43262",
+    "name": "Tavşanlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43263",
+    "name": "Emet Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43264",
+    "name": "Altıntaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43265",
+    "name": "Domaniç Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "43266",
+    "name": "Hisarcık Vergi Dairesi Müdürlüğü",
+    "parentCode": "43"
+  },
+  {
+    "code": "44251",
+    "name": "Fırat Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44252",
+    "name": "Beydağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44258",
+    "name": "Battalgazi Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44253",
+    "name": "Doğanşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44254",
+    "name": "Darende Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44255",
+    "name": "Akçadağ Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44256",
+    "name": "Arapgir Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "44257",
+    "name": "Hekimhan Vergi Dairesi Müdürlüğü",
+    "parentCode": "44"
+  },
+  {
+    "code": "45250",
+    "name": "Manisa İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45251",
+    "name": "Şehit Cihan Güneş Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45252",
+    "name": "Mesir Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45201",
+    "name": "Akhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45202",
+    "name": "Alaşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45203",
+    "name": "Demirci Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45204",
+    "name": "Kırkağaç Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45205",
+    "name": "Salihli Adil Oral Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45206",
+    "name": "Sarıgöl Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45207",
+    "name": "Saruhanlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45208",
+    "name": "Soma Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45209",
+    "name": "Turgutlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45210",
+    "name": "Gördes Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45211",
+    "name": "Kula Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45253",
+    "name": "Ahmetli Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45254",
+    "name": "Gölmarmara Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45255",
+    "name": "Selendi Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "45256",
+    "name": "Köprübaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "45"
+  },
+  {
+    "code": "46280",
+    "name": "Aksu Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46201",
+    "name": "Aslanbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46260",
+    "name": "Elbistan Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46261",
+    "name": "Afşin Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46262",
+    "name": "Pazarcık Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46264",
+    "name": "Göksun Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46263",
+    "name": "Andırın Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46265",
+    "name": "Türkoğlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46266",
+    "name": "Çağlayancerit Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "46267",
+    "name": "Nurhak Vergi Dairesi Müdürlüğü",
+    "parentCode": "46"
+  },
+  {
+    "code": "47260",
+    "name": "Mardin Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47261",
+    "name": "Kızıltepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47262",
+    "name": "Nusaybin Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47263",
+    "name": "Midyat Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47264",
+    "name": "Derik Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47265",
+    "name": "Mazıdağı Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47266",
+    "name": "Ömerli Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47268",
+    "name": "Savur Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "47269",
+    "name": "Dargeçit Vergi Dairesi Müdürlüğü",
+    "parentCode": "47"
+  },
+  {
+    "code": "48260",
+    "name": "Muğla Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48261",
+    "name": "Bodrum Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48262",
+    "name": "Fethiye Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48263",
+    "name": "Köyceğiz Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48264",
+    "name": "Milas Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48265",
+    "name": "Marmaris Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48266",
+    "name": "Yatağan Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48267",
+    "name": "Ortaca Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48268",
+    "name": "Datça Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48269",
+    "name": "Dalaman Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48270",
+    "name": "Seydikemer Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48271",
+    "name": "Ula Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "48272",
+    "name": "Kavaklıdere Vergi Dairesi Müdürlüğü",
+    "parentCode": "48"
+  },
+  {
+    "code": "49260",
+    "name": "Muş Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "49261",
+    "name": "Bulanık Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "49262",
+    "name": "Malazgirt Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "49263",
+    "name": "Varto Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "49264",
+    "name": "Hasköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "49265",
+    "name": "Korkut Vergi Dairesi Müdürlüğü",
+    "parentCode": "49"
+  },
+  {
+    "code": "50260",
+    "name": "Nevşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50261",
+    "name": "Ürgüp Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50262",
+    "name": "Derinkuyu Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50263",
+    "name": "Avanos Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50264",
+    "name": "Gülşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50265",
+    "name": "Hacıbektaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50266",
+    "name": "Acıgöl Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "50267",
+    "name": "Kozaklı Vergi Dairesi Müdürlüğü",
+    "parentCode": "50"
+  },
+  {
+    "code": "51260",
+    "name": "Niğde Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "51262",
+    "name": "Bor Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "51263",
+    "name": "Ulukışla Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "51264",
+    "name": "Çiftlik Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "51265",
+    "name": "Altunhisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "51266",
+    "name": "Çamardı Vergi Dairesi Müdürlüğü",
+    "parentCode": "51"
+  },
+  {
+    "code": "52201",
+    "name": "Boztepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52260",
+    "name": "Köprübaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52274",
+    "name": "Altınordu Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52261",
+    "name": "Fatsa Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52262",
+    "name": "Ünye Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52264",
+    "name": "Aybastı Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52263",
+    "name": "Gölköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52265",
+    "name": "Korgan Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52266",
+    "name": "Kumru Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52267",
+    "name": "Perşembe Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52268",
+    "name": "Akkuş Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52269",
+    "name": "Çatalpınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52270",
+    "name": "Ulubey Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52271",
+    "name": "Gürgentepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52272",
+    "name": "Çaybaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "52273",
+    "name": "Kabataş Vergi Dairesi Müdürlüğü",
+    "parentCode": "52"
+  },
+  {
+    "code": "53201",
+    "name": "Kaçkar Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53260",
+    "name": "Yeşilçay Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53266",
+    "name": "Rize Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53261",
+    "name": "Çayeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53262",
+    "name": "Pazar Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53263",
+    "name": "Ardeşen Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53264",
+    "name": "Fındıklı Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "53265",
+    "name": "Çamlıhemşin Vergi Dairesi Müdürlüğü",
+    "parentCode": "53"
+  },
+  {
+    "code": "54250",
+    "name": "Sakarya İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54252",
+    "name": "Ali Fuat Cebesoy Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54251",
+    "name": "Gümrükönü Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54253",
+    "name": "Sapanca Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54201",
+    "name": "Akyazı Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54202",
+    "name": "Geyve Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54203",
+    "name": "Hendek Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54204",
+    "name": "Karasu Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54254",
+    "name": "Pamukova Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54255",
+    "name": "Kaynarca Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54256",
+    "name": "Kocaali Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "54257",
+    "name": "Karapürçek Vergi Dairesi Müdürlüğü",
+    "parentCode": "54"
+  },
+  {
+    "code": "55251",
+    "name": "19 Mayıs Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55290",
+    "name": "Zafer Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55252",
+    "name": "Gaziler Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55202",
+    "name": "Bafra Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55203",
+    "name": "Çarşamba Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55204",
+    "name": "Terme Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55205",
+    "name": "Havza Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55291",
+    "name": "Vezirköprü Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55254",
+    "name": "19 Mayıs Ballıca Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55253",
+    "name": "Kavak Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55255",
+    "name": "Salıpazarı Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55256",
+    "name": "Alaçam Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55257",
+    "name": "Ladik Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55258",
+    "name": "Asarcık Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "55259",
+    "name": "Yakakent Vergi Dairesi Müdürlüğü",
+    "parentCode": "55"
+  },
+  {
+    "code": "56260",
+    "name": "Siirt Vergi Dairesi Müdürlüğü",
+    "parentCode": "56"
+  },
+  {
+    "code": "56263",
+    "name": "Deliklitaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "56"
+  },
+  {
+    "code": "56261",
+    "name": "Kurtalan Vergi Dairesi Müdürlüğü",
+    "parentCode": "56"
+  },
+  {
+    "code": "56262",
+    "name": "Baykan Vergi Dairesi Müdürlüğü",
+    "parentCode": "56"
+  },
+  {
+    "code": "57260",
+    "name": "Sinop Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57261",
+    "name": "Boyabat Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57263",
+    "name": "Ayancık Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57262",
+    "name": "Gerze Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57264",
+    "name": "Türkeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57265",
+    "name": "Durağan Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "57266",
+    "name": "Erfelek Vergi Dairesi Müdürlüğü",
+    "parentCode": "57"
+  },
+  {
+    "code": "58201",
+    "name": "Kale Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58280",
+    "name": "Site Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58268",
+    "name": "4 Eylül Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58260",
+    "name": "Şarkışla Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58261",
+    "name": "Suşehri Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58262",
+    "name": "Yıldızeli Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58263",
+    "name": "Kangal Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58264",
+    "name": "Zara Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58265",
+    "name": "Gemerek Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58266",
+    "name": "Gürün Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "58267",
+    "name": "Divriği Vergi Dairesi Müdürlüğü",
+    "parentCode": "58"
+  },
+  {
+    "code": "59201",
+    "name": "Süleymanpaşa Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59260",
+    "name": "Namık Kemal Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59250",
+    "name": "Çorlu İhtisas Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59261",
+    "name": "Çerkezköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59262",
+    "name": "Çorlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59263",
+    "name": "Hayrabolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59264",
+    "name": "Malkara Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59265",
+    "name": "Muratlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59266",
+    "name": "Şarköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59267",
+    "name": "Kapaklı Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59268",
+    "name": "Saray Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "59269",
+    "name": "Marmaraereğlisi Vergi Dairesi Müdürlüğü",
+    "parentCode": "59"
+  },
+  {
+    "code": "60260",
+    "name": "Tokat Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60268",
+    "name": "Topçam Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60261",
+    "name": "Erbaa Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60262",
+    "name": "Niksar Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60263",
+    "name": "Turhal Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60264",
+    "name": "Zile Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60265",
+    "name": "Reşadiye Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60266",
+    "name": "Almus Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "60267",
+    "name": "Pazar Vergi Dairesi Müdürlüğü",
+    "parentCode": "60"
+  },
+  {
+    "code": "61201",
+    "name": "Hızırbey Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61280",
+    "name": "Karadeniz Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61292",
+    "name": "Ortahisar Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61260",
+    "name": "Akçaabat Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61261",
+    "name": "Of Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61262",
+    "name": "Vakfıkebir Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61281",
+    "name": "Araklı Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61282",
+    "name": "Yomra Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61283",
+    "name": "Sürmene Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61284",
+    "name": "Arsin Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61285",
+    "name": "Çaykara Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61286",
+    "name": "Maçka Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61287",
+    "name": "Beşikdüzü Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61288",
+    "name": "Çarşıbaşı Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61289",
+    "name": "Tonya Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61290",
+    "name": "Şalpazarı Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "61291",
+    "name": "Düzköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "61"
+  },
+  {
+    "code": "62260",
+    "name": "Tunceli Vergi Dairesi Müdürlüğü",
+    "parentCode": "62"
+  },
+  {
+    "code": "62261",
+    "name": "Munzur Vergi Dairesi Müdürlüğü",
+    "parentCode": "62"
+  },
+  {
+    "code": "63201",
+    "name": "Şehitlik Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63280",
+    "name": "Topçu Meydanı Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63281",
+    "name": "Göbeklitepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63260",
+    "name": "Siverek Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63261",
+    "name": "Viranşehir Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63262",
+    "name": "Birecik Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63263",
+    "name": "Suruç Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63282",
+    "name": "Ceylanpınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63283",
+    "name": "Akçakale Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63284",
+    "name": "Hilvan Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63285",
+    "name": "Bozova Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63286",
+    "name": "Halfeti Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "63287",
+    "name": "Harran Vergi Dairesi Müdürlüğü",
+    "parentCode": "63"
+  },
+  {
+    "code": "64260",
+    "name": "Uşak Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "64261",
+    "name": "Banaz Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "64262",
+    "name": "Eşme Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "64263",
+    "name": "Sivaslı Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "64264",
+    "name": "Ulubey Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "64265",
+    "name": "Karahallı Vergi Dairesi Müdürlüğü",
+    "parentCode": "64"
+  },
+  {
+    "code": "65260",
+    "name": "Van Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65267",
+    "name": "Akdamar Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65201",
+    "name": "Erciş Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65261",
+    "name": "Özalp Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65262",
+    "name": "Çaldıran Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65202",
+    "name": "Edremit Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65263",
+    "name": "Muradiye Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65264",
+    "name": "Gevaş Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65265",
+    "name": "Gürpınar Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "65266",
+    "name": "Başkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "65"
+  },
+  {
+    "code": "66260",
+    "name": "Yozgat Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66271",
+    "name": "Çamlık Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66261",
+    "name": "Boğazlıyan Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66262",
+    "name": "Sorgun Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66263",
+    "name": "Yerköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66264",
+    "name": "Akdağmadeni Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66265",
+    "name": "Şefaatli Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66266",
+    "name": "Sarıkaya Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66267",
+    "name": "Çekerek Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66268",
+    "name": "Çayıralan Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66269",
+    "name": "Aydıncık Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "66270",
+    "name": "Saraykent Vergi Dairesi Müdürlüğü",
+    "parentCode": "66"
+  },
+  {
+    "code": "67201",
+    "name": "Uzunmehmet Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67280",
+    "name": "Kara Elmas Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67261",
+    "name": "Ereğli Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67263",
+    "name": "Çaycuma Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67264",
+    "name": "Devrek Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67265",
+    "name": "Alaplı Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "67266",
+    "name": "Gökçebey Vergi Dairesi Müdürlüğü",
+    "parentCode": "67"
+  },
+  {
+    "code": "68201",
+    "name": "Aksaray Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68202",
+    "name": "Ortaköy Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68203",
+    "name": "Eskil Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68204",
+    "name": "Gülağaç Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68205",
+    "name": "Ağaçören Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68206",
+    "name": "Güzelyurt Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "68207",
+    "name": "Sultanhanı Vergi Dairesi Müdürlüğü",
+    "parentCode": "68"
+  },
+  {
+    "code": "69201",
+    "name": "Bayburt Vergi Dairesi Müdürlüğü",
+    "parentCode": "69"
+  },
+  {
+    "code": "70201",
+    "name": "Karaman Vergi Dairesi Müdürlüğü",
+    "parentCode": "70"
+  },
+  {
+    "code": "70204",
+    "name": "Larende Vergi Dairesi Müdürlüğü",
+    "parentCode": "70"
+  },
+  {
+    "code": "70202",
+    "name": "Ermenek Vergi Dairesi Müdürlüğü",
+    "parentCode": "70"
+  },
+  {
+    "code": "70203",
+    "name": "Sarıveliler Vergi Dairesi Müdürlüğü",
+    "parentCode": "70"
+  },
+  {
+    "code": "71201",
+    "name": "Irmak Vergi Dairesi Müdürlüğü",
+    "parentCode": "71"
+  },
+  {
+    "code": "71202",
+    "name": "Kaletepe Vergi Dairesi Müdürlüğü",
+    "parentCode": "71"
+  },
+  {
+    "code": "71205",
+    "name": "Kırıkkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "71"
+  },
+  {
+    "code": "71203",
+    "name": "Keskin Vergi Dairesi Müdürlüğü",
+    "parentCode": "71"
+  },
+  {
+    "code": "71204",
+    "name": "Delice Vergi Dairesi Müdürlüğü",
+    "parentCode": "71"
+  },
+  {
+    "code": "72260",
+    "name": "Batman Vergi Dairesi Müdürlüğü",
+    "parentCode": "72"
+  },
+  {
+    "code": "72262",
+    "name": "Raman Vergi Dairesi Müdürlüğü",
+    "parentCode": "72"
+  },
+  {
+    "code": "72261",
+    "name": "Kozluk Vergi Dairesi Müdürlüğü",
+    "parentCode": "72"
+  },
+  {
+    "code": "73260",
+    "name": "Şırnak Vergi Dairesi Müdürlüğü",
+    "parentCode": "73"
+  },
+  {
+    "code": "73261",
+    "name": "Cizre Vergi Dairesi Müdürlüğü",
+    "parentCode": "73"
+  },
+  {
+    "code": "73262",
+    "name": "Silopi Vergi Dairesi Müdürlüğü",
+    "parentCode": "73"
+  },
+  {
+    "code": "73263",
+    "name": "Uludere Vergi Dairesi Müdürlüğü",
+    "parentCode": "73"
+  },
+  {
+    "code": "73264",
+    "name": "İdil Vergi Dairesi Müdürlüğü",
+    "parentCode": "73"
+  },
+  {
+    "code": "74260",
+    "name": "Bartın Vergi Dairesi Müdürlüğü",
+    "parentCode": "74"
+  },
+  {
+    "code": "74261",
+    "name": "Ulus Vergi Dairesi Müdürlüğü",
+    "parentCode": "74"
+  },
+  {
+    "code": "74262",
+    "name": "Amasra Vergi Dairesi Müdürlüğü",
+    "parentCode": "74"
+  },
+  {
+    "code": "75201",
+    "name": "Ardahan Vergi Dairesi Müdürlüğü",
+    "parentCode": "75"
+  },
+  {
+    "code": "75202",
+    "name": "Göle Vergi Dairesi Müdürlüğü",
+    "parentCode": "75"
+  },
+  {
+    "code": "76201",
+    "name": "Iğdır Vergi Dairesi Müdürlüğü",
+    "parentCode": "76"
+  },
+  {
+    "code": "76203",
+    "name": "Aras Vergi Dairesi Müdürlüğü",
+    "parentCode": "76"
+  },
+  {
+    "code": "76202",
+    "name": "Tuzluca Vergi Dairesi Müdürlüğü",
+    "parentCode": "76"
+  },
+  {
+    "code": "77201",
+    "name": "Yalova Vergi Dairesi Müdürlüğü",
+    "parentCode": "77"
+  },
+  {
+    "code": "77202",
+    "name": "Çınarcık Vergi Dairesi Müdürlüğü",
+    "parentCode": "77"
+  },
+  {
+    "code": "77203",
+    "name": "Altınova Vergi Dairesi Müdürlüğü",
+    "parentCode": "77"
+  },
+  {
+    "code": "77204",
+    "name": "Armutlu Vergi Dairesi Müdürlüğü",
+    "parentCode": "77"
+  },
+  {
+    "code": "78201",
+    "name": "Karabük Vergi Dairesi Müdürlüğü",
+    "parentCode": "78"
+  },
+  {
+    "code": "78261",
+    "name": "Demirkent Vergi Dairesi Müdürlüğü",
+    "parentCode": "78"
+  },
+  {
+    "code": "78260",
+    "name": "Safranbolu Vergi Dairesi Müdürlüğü",
+    "parentCode": "78"
+  },
+  {
+    "code": "78202",
+    "name": "Yenice Vergi Dairesi Müdürlüğü",
+    "parentCode": "78"
+  },
+  {
+    "code": "78203",
+    "name": "Eskipazar Vergi Dairesi Müdürlüğü",
+    "parentCode": "78"
+  },
+  {
+    "code": "79201",
+    "name": "Kilis Vergi Dairesi Müdürlüğü",
+    "parentCode": "79"
+  },
+  {
+    "code": "80201",
+    "name": "Osmaniye Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "80205",
+    "name": "Amanos Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "80260",
+    "name": "Kadirli Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "80202",
+    "name": "Düziçi Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "80203",
+    "name": "Bahçe Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "80204",
+    "name": "Toprakkale Vergi Dairesi Müdürlüğü",
+    "parentCode": "80"
+  },
+  {
+    "code": "81260",
+    "name": "Düzce Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81261",
+    "name": "Akçakoca Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81262",
+    "name": "Gölyaka Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81263",
+    "name": "Kaynaşlı Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81264",
+    "name": "Gümüşova Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81265",
+    "name": "Cumayeri Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81266",
+    "name": "Çilimli Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  },
+  {
+    "code": "81267",
+    "name": "Yığılca Vergi Dairesi Müdürlüğü",
+    "parentCode": "81"
+  }
+]
