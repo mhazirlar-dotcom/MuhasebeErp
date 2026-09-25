@@ -67,7 +67,7 @@
     </Style>
 
     <!-- ============================================================
-         NumericEditStyle (KEY'li) — 0,00 formatlı, binlik ayıraçlı
+         NumericEditStyle (KEY'li) — 0,00 formatlı, binlik ayıraçlı, SAĞA DAYALI
          ============================================================ -->
     <Style x:Key="NumericEditStyle" TargetType="dxe:TextEdit">
         <Setter Property="Background" Value="Transparent" />
@@ -76,6 +76,7 @@
         <Setter Property="Mask" Value="n2" />
         <Setter Property="MaskCulture" Value="tr-TR" />
         <Setter Property="MaskUseAsDisplayFormat" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
     </Style>
 
     <!-- ============================================================

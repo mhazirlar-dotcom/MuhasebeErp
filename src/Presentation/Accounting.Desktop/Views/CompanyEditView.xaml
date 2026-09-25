@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:behaviors="clr-namespace:Accounting.Desktop.Behaviors">
 
     <UserControl.Resources>
@@ -285,7 +284,9 @@
                     </Border>
                     <TextBlock Grid.Row="9" Grid.Column="3" Text="Bordro Kesinleşme Tarihi" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="9" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable}" />
+                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable}"
+                                      Tag="Bordro Kesinleşme Tarihi"
+                                      behaviors:MinFoundationDateBehavior.IsEnabled="True" />
                     </Border>
 
                     <TextBlock Grid.Row="10" Grid.Column="0" Text="Gelir İdaresi Kullanıcı Adı" VerticalAlignment="Center" Margin="0,0,8,4" />
@@ -316,197 +317,8 @@
                 </Grid>
             </ScrollViewer>
 
-            <Grid Visibility="{Binding IsDonemSection, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="280" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
-                    <dx:SimpleButton Content="Dönem Ekle"
-                                     Glyph="{dx:DXImage Image=Add_16x16.png}"
-                                     Command="{Binding AddPeriodCommand}"
-                                     Width="140"
-                                     Margin="0,0,8,0" />
-                    <dx:SimpleButton Content="Sil"
-                                     Glyph="{dx:DXImage Image=Delete_16x16.png}"
-                                     Command="{Binding DeletePeriodCommand}"
-                                     Width="100" />
-                </StackPanel>
-
-                <Border Grid.Row="1"
-                        Background="#F9F9F9"
-                        BorderBrush="#E0E0E0"
-                        BorderThickness="1"
-                        CornerRadius="6"
-                        Padding="16">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="24" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
-                                       Text="ORTAK BİLGİLER"
-                                       FontSize="13" FontWeight="Bold" Foreground="#1F4E79"
-                                       Margin="0,0,0,8" />
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Başlangıç" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="1" Grid.Column="1"
-                                    Style="{StaticResource FieldBorderStyle}"
-                                    Background="#F0F0F0"
-                                    Margin="0,0,0,4">
-                                <dxe:TextEdit IsReadOnly="True"
-                                              EditValue="{Binding SelectedPeriod.StartDate, StringFormat='dd.MM.yyyy', Mode=OneWay}" />
-                            </Border>
-                            <TextBlock Grid.Row="1" Grid.Column="3" Text="Bitiş" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="1" Grid.Column="4"
-                                    Style="{StaticResource FieldBorderStyle}"
-                                    Background="#F0F0F0"
-                                    Margin="0,0,0,4">
-                                <dxe:TextEdit IsReadOnly="True"
-                                              EditValue="{Binding SelectedPeriod.EndDate, StringFormat='dd.MM.yyyy', Mode=OneWay}" />
-                            </Border>
-
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Kapanış Tarihi" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                                <dxe:DateEdit EditValue="{Binding SelectedPeriod.FinalizationDate}" />
-                            </Border>
-                            <TextBlock Grid.Row="2" Grid.Column="3" Text="Muhasebe Yöntemi" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                                <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
-                                                  ItemsSource="{Binding AccountingMethodList}"
-                                                  DisplayMember="Name" ValueMember="Code"
-                                                  EditValue="{Binding SelectedPeriod.AccountingMethod}"
-                                                  NullText="Seçin" />
-                            </Border>
-
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Firma Sınıfı *" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                                <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
-                                                  ItemsSource="{Binding FirmClassList}"
-                                                  DisplayMember="Name"
-                                                  ValueMember="Value"
-                                                  EditValue="{Binding SelectedFirmClass, Mode=TwoWay}"
-                                                  NullText="Sınıf seçin" />
-                            </Border>
-                            <TextBlock Grid.Row="3" Grid.Column="3" Text="Diğer Zarar" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="3" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                                <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
-                                              EditValue="{Binding SelectedPeriod.OtherLoss}" />
-                            </Border>
-
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="İstisna Zarar" VerticalAlignment="Center" Margin="0,0,8,4" />
-                            <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                                <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
-                                              EditValue="{Binding SelectedPeriod.ExceptionLoss}" />
-                            </Border>
-                            <StackPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,0,0,4">
-                                <dxe:CheckEdit Content="Kapalı" IsChecked="{Binding SelectedPeriod.IsClosed}" />
-                                <dxe:CheckEdit Content="Aktif" IsChecked="{Binding SelectedPeriod.IsActive}" Margin="16,0,0,0" />
-                            </StackPanel>
-
-                            <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5"
-                                       Text="1. SINIF ALANLARI"
-                                       FontSize="13" FontWeight="Bold" Foreground="#1F4E79"
-                                       Margin="0,12,0,8"
-                                       Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Brüt Ücret" VerticalAlignment="Center" Margin="0,0,8,4"
-                                       Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4"
-                                    Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
-                                              EditValue="{Binding SelectedPeriod.GrossWage}" />
-                            </Border>
-                            <TextBlock Grid.Row="6" Grid.Column="3" Text="Net Ücret" VerticalAlignment="Center" Margin="0,0,8,4"
-                                       Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Border Grid.Row="6" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4"
-                                    Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
-                                              EditValue="{Binding SelectedPeriod.NetWage}" />
-                            </Border>
-
-                            <TextBlock Grid.Row="7" Grid.Column="0" Text="KDV Oranı" VerticalAlignment="Center" Margin="0,0,8,4"
-                                       Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4"
-                                    Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
-                                                  ItemsSource="{Binding VatRateList}"
-                                                  DisplayMember="Name" ValueMember="Code"
-                                                  EditValue="{Binding SelectedPeriod.VatRate}"
-                                                  NullText="Seçin" />
-                            </Border>
-                            <TextBlock Grid.Row="7" Grid.Column="3" Text="KDV Tutarı" VerticalAlignment="Center" Margin="0,0,8,4"
-                                       Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Border Grid.Row="7" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4"
-                                    Visibility="{Binding SelectedPeriod.IsClass1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
-                                              EditValue="{Binding SelectedPeriod.VatAmount}" />
-                            </Border>
-                        </Grid>
-                    </ScrollViewer>
-                </Border>
-
-                <TextBlock Grid.Row="2" Text="" Height="8" />
-
-                <dxg:GridControl Grid.Row="3"
-                                 ItemsSource="{Binding Periods}"
-                                 SelectedItem="{Binding SelectedPeriod}"
-                                 AutoGenerateColumns="None">
-                    <dxg:GridControl.Columns>
-                        <dxg:GridColumn FieldName="DisplayName" Header="Dönem" Width="220" ReadOnly="True" />
-                        <dxg:GridColumn FieldName="FirmClassDisplay" Header="Sınıf" Width="100" ReadOnly="True" />
-                        <dxg:GridColumn FieldName="JournalStartNumber" Header="Yevmiye Başlangıç No" Width="160">
-                            <dxg:GridColumn.EditSettings>
-                                <dxe:SpinEditSettings MinValue="0" MaxValue="999999" />
-                            </dxg:GridColumn.EditSettings>
-                        </dxg:GridColumn>
-                        <dxg:GridColumn FieldName="IncomeStartNumber" Header="Gelir Başlangıç No" Width="150">
-                            <dxg:GridColumn.EditSettings>
-                                <dxe:SpinEditSettings MinValue="0" MaxValue="999999" />
-                            </dxg:GridColumn.EditSettings>
-                        </dxg:GridColumn>
-                        <dxg:GridColumn FieldName="ExpenseStartNumber" Header="Gider Başlangıç No" Width="150">
-                            <dxg:GridColumn.EditSettings>
-                                <dxe:SpinEditSettings MinValue="0" MaxValue="999999" />
-                            </dxg:GridColumn.EditSettings>
-                        </dxg:GridColumn>
-                        <dxg:GridColumn FieldName="GrossWage" Header="Brüt Ücret" Width="140">
-                            <dxg:GridColumn.EditSettings>
-                                <dxe:TextEditSettings MaskType="Numeric"
-                                                      Mask="n2"
-                                                      MaskCulture="tr-TR"
-                                                      MaskUseAsDisplayFormat="True" />
-                            </dxg:GridColumn.EditSettings>
-                        </dxg:GridColumn>
-                    </dxg:GridControl.Columns>
-                    <dxg:GridControl.View>
-                        <dxg:TableView AllowEditing="False"
-                                       ShowGroupPanel="False"
-                                       ShowSearchPanelMode="Never"
-                                       NavigationStyle="Row"
-                                       AutoWidth="True"
-                                       AlternateRowBackground="#F5F8FB" />
-                    </dxg:GridControl.View>
-                </dxg:GridControl>
-            </Grid>
+            <ContentControl x:Name="DonemContent"
+                            Visibility="{Binding IsDonemSection, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <Border Background="#F9F9F9"
                     BorderBrush="#E0E0E0"

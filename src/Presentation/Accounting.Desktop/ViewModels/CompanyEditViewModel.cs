@@ -1,5 +1,4 @@
-﻿using Accounting.Core.Business.Extensions;
-using Accounting.Core.Business.Interfaces.CrossCutting;
+﻿using Accounting.Core.Business.Interfaces.CrossCutting;
 using Accounting.Core.Business.Interfaces.Services;
 using Accounting.Core.Business.Options;
 using Accounting.Core.Domain.Constants;
@@ -14,7 +13,7 @@ using System.Globalization;
 
 namespace Accounting.Desktop.ViewModels;
 
-public partial class CompanyEditViewModel(ICompanyService companyService , IPeriodService periodService , ILookupValueService lookupValueService , IOptions<CompanyDatabaseOptions> options , IMessageService messageService) : ObservableObject, ITransientService
+public partial class CompanyEditViewModel : ObservableObject, ITransientService
 {
     #region Constants
     public const string SectionFirma = "Firma";
@@ -33,25 +32,46 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
     #endregion Events
 
     #region Fields
+    private readonly ICompanyService _companyService;
+    private readonly ILookupValueService _lookupValueService;
+    private readonly IMessageService _messageService;
+    private readonly CompanyDatabaseOptions _dbOptions;
+
     private Guid _companyId = Guid.Empty;
     private bool _isEditMode = false;
     private string _selectedSection = SectionFirma;
-
-    private bool _periodsLoaded = false;
-    private readonly HashSet<Guid> _deletedPeriodIds = [];
-    private readonly HashSet<Guid> _existingPeriodIds = [];
-
-    private DateTime _companyFoundationDate = DateTime.MinValue;
     #endregion Fields
+
+    #region Constructor
+    public CompanyEditViewModel(
+        ICompanyService companyService ,
+        ILookupValueService lookupValueService ,
+        IMessageService messageService ,
+        IOptions<CompanyDatabaseOptions> options ,
+        PeriodListViewModel periodList)
+    {
+        _companyService = companyService;
+        _lookupValueService = lookupValueService;
+        _messageService = messageService;
+        _dbOptions = options.Value;
+
+        PeriodList = periodList;
+    }
+    #endregion Constructor
 
     #region Properties
     [ObservableProperty]
     private string _title = "Firma Girişi";
 
+    [ObservableProperty]
+    private bool _isBusy;
+
+    public bool IsNotBusy => !IsBusy;
+
     public bool IsEditMode
     {
         get => _isEditMode;
-        set
+        private set
         {
             if (SetProperty(ref _isEditMode , value))
             {
@@ -192,63 +212,6 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
     [ObservableProperty]
     private string _databaseName = string.Empty;
 
-    [ObservableProperty]
-    private bool _isBusy;
-
-    [ObservableProperty]
-    private bool _isBusyDonem;
-
-    private Period _selectedPeriod = new();
-    public Period SelectedPeriod
-    {
-        get => _selectedPeriod;
-        set
-        {
-            if (SetProperty(ref _selectedPeriod , value ?? new Period()))
-            {
-                OnPropertyChanged(nameof(SelectedMonthName));
-                OnPropertyChanged(nameof(SelectedFirmClass));
-            }
-        }
-    }
-
-    public string SelectedMonthName
-    {
-        get => SelectedPeriod.MonthNumber.ToString(TurkishCulture);
-        set
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return;
-            }
-
-            if (int.TryParse(value , NumberStyles.Integer , TurkishCulture , out int monthNumber))
-            {
-                SelectedPeriod.MonthNumber = monthNumber;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public int SelectedFirmClass
-    {
-        get => SelectedPeriod.FirmClass;
-        set
-        {
-            if (SelectedPeriod.FirmClass == value)
-            {
-                return;
-            }
-
-            SelectedPeriod.FirmClass = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool IsNotBusy => !IsBusy;
-
-    public bool IsNotBusyDonem => !IsBusyDonem;
-
     public bool IsNotEditMode => !IsEditMode;
 
     public bool IsFirmaSection => SelectedSection == SectionFirma;
@@ -261,6 +224,8 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
         ? "Bu bölüm henüz geliştirme aşamasındadır."
         : "Bu bölümü kullanmak için önce firmayı kaydedin.";
 
+    public PeriodListViewModel PeriodList { get; }
+
     public ObservableCollection<LookupValue> LegalStatusList { get; } = [];
     public ObservableCollection<LookupValue> LegalNatureList { get; } = [];
     public ObservableCollection<LookupValue> SocialSecurityInstitutionList { get; } = [];
@@ -270,38 +235,18 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
     public ObservableCollection<LookupValue> Create302RecordList { get; } = [];
     public ObservableCollection<LookupValue> TaxOfficeList { get; } = [];
     public ObservableCollection<LookupValue> ActivityCodeList { get; } = [];
-
-    public ObservableCollection<LookupValue> AccountingMethodList { get; } = [];
-    public ObservableCollection<LookupValue> CurrencyList { get; } = [];
-    public ObservableCollection<LookupValue> DeclarationTypeList { get; } = [];
-    public ObservableCollection<LookupValue> ExchangeRateModeList { get; } = [];
-    public ObservableCollection<LookupValue> LedgerTypeList { get; } = [];
-    public ObservableCollection<LookupValue> VatRateList { get; } = [];
-    public ObservableCollection<LookupValue> VoucherNumberLengthList { get; } = [];
-    public ObservableCollection<LookupValue> VoucherSortModeList { get; } = [];
-    public ObservableCollection<LookupValue> MonthNameList { get; } = [];
-
-    public ObservableCollection<FirmClassItem> FirmClassList { get; } =
-    [
-        new FirmClassItem(FirmClasses.Class1 , "1. Sınıf"),
-        new FirmClassItem(FirmClasses.Class2 , "2. Sınıf")
-    ];
-
-    public ObservableCollection<Period> Periods { get; } = [];
     #endregion Properties
 
     #region Operations
-    public async Task LoadAsync(Guid companyId)
+    public async Task LoadAsync(Guid companyId , string? initialSection = null)
     {
         ResetForm();
 
         await LoadLookupsAsync();
 
-        CompanyDatabaseOptions dbOptions = options.Value;
-
         if (companyId == Guid.Empty)
         {
-            ServerName = dbOptions.ServerName;
+            ServerName = _dbOptions.ServerName;
             DatabaseName = "Firma kaydedildiğinde otomatik üretilecek";
             return;
         }
@@ -310,10 +255,10 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
         _companyId = companyId;
         IsEditMode = true;
 
-        Result<Company> result = await companyService.GetByIdAsync(companyId);
+        Result<Company> result = await _companyService.GetByIdAsync(companyId);
         if (result.IsFailure)
         {
-            messageService.ShowErrors("Firma yüklenemedi" , result.Errors);
+            _messageService.ShowErrors("Firma yüklenemedi" , result.Errors);
             return;
         }
 
@@ -348,7 +293,10 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
         ServerName = company.ServerName;
         DatabaseName = company.DatabaseName;
 
-        _companyFoundationDate = company.FoundationDate;
+        if (!string.IsNullOrWhiteSpace(initialSection))
+        {
+            await SelectSectionAsync(initialSection);
+        }
     }
 
     [RelayCommand]
@@ -390,7 +338,8 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
 
         if (IsDonemSection)
         {
-            await SavePeriodsAsync();
+            // Dönem sekmesi artık ayrı bir view (PeriodEditView) tarafından yönetilir.
+            return;
         }
     }
 
@@ -415,142 +364,10 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
 
         SelectedSection = section;
 
-        if (section == SectionDonem && IsEditMode && !_periodsLoaded)
+        if (section == SectionDonem && IsEditMode)
         {
-            await LoadPeriodsAsync();
+            await PeriodList.LoadAsync(_companyId);
         }
-    }
-
-    [RelayCommand]
-    private void AddPeriod()
-    {
-        if (!IsEditMode)
-        {
-            return;
-        }
-
-        if (MonthNameList.Count == 0)
-        {
-            messageService.ShowWarning("Ay listesi yüklenemedi. Lütfen API'nin çalıştığından ve seed verisinin yüklendiğinden emin olun.");
-            return;
-        }
-
-        DateTime foundationDate = _companyFoundationDate == DateTime.MinValue ? FoundationDate : _companyFoundationDate;
-
-        AddPeriodDialogViewModel dialogViewModel = new(foundationDate , [.. Periods] , [.. MonthNameList]);
-        Windows.AddPeriodDialog dialog = new(dialogViewModel);
-
-        if (dialog.ShowDialog() != true)
-        {
-            return;
-        }
-
-        Period? newPeriod = dialogViewModel.Result;
-
-        if (newPeriod is null)
-        {
-            return;
-        }
-
-        newPeriod.CompanyId = _companyId;
-
-        Periods.Add(newPeriod);
-        SelectedPeriod = newPeriod;
-    }
-
-    [RelayCommand]
-    private void DeletePeriod()
-    {
-        if (!IsEditMode)
-        {
-            return;
-        }
-
-        if (SelectedPeriod is null || SelectedPeriod.Id == Guid.Empty)
-        {
-            messageService.ShowWarning("Silinecek dönemi seçin.");
-            return;
-        }
-
-        if (!Periods.Contains(SelectedPeriod))
-        {
-            messageService.ShowWarning("Silinecek dönemi seçin.");
-            return;
-        }
-
-        if (_existingPeriodIds.Contains(SelectedPeriod.Id))
-        {
-            _deletedPeriodIds.Add(SelectedPeriod.Id);
-        }
-
-        Periods.Remove(SelectedPeriod);
-        SelectedPeriod = new Period();
-    }
-
-    [RelayCommand]
-    private async Task SavePeriodsAsync()
-    {
-        if (_companyId == Guid.Empty)
-        {
-            messageService.ShowWarning("Önce firmayı kaydedin.");
-            return;
-        }
-
-        IsBusyDonem = true;
-
-        try
-        {
-            foreach (Guid id in _deletedPeriodIds)
-            {
-                Result deleteResult = await periodService.DeleteAsync(id);
-                if (deleteResult.IsFailure)
-                {
-                    messageService.ShowErrors("Dönem silinemedi" , deleteResult.Errors);
-                    return;
-                }
-            }
-
-            foreach (Period period in Periods)
-            {
-                period.CompanyId = _companyId;
-
-                if (!_existingPeriodIds.Contains(period.Id))
-                {
-                    Result<Period> createResult = await periodService.CreateAsync(period);
-                    if (createResult.IsFailure)
-                    {
-                        messageService.ShowErrors("Dönem kaydedilemedi" , createResult.Errors);
-                        return;
-                    }
-                }
-                else
-                {
-                    Result updateResult = await periodService.UpdateAsync(period);
-                    if (updateResult.IsFailure)
-                    {
-                        messageService.ShowErrors("Dönem güncellenemedi" , updateResult.Errors);
-                        return;
-                    }
-                }
-            }
-
-            messageService.ShowSuccess("Dönemler kaydedildi.");
-        }
-        finally
-        {
-            IsBusyDonem = false;
-        }
-
-        _periodsLoaded = false;
-        await LoadPeriodsAsync();
-    }
-
-    [RelayCommand]
-    private async Task CancelPeriodsAsync()
-    {
-        _periodsLoaded = false;
-        await LoadPeriodsAsync();
-        messageService.ShowInfo("Değişiklikler geri alındı.");
     }
     #endregion Operations
 
@@ -560,15 +377,9 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
         OnPropertyChanged(nameof(IsNotBusy));
     }
 
-    partial void OnIsBusyDonemChanged(bool value)
-    {
-        OnPropertyChanged(nameof(IsNotBusyDonem));
-    }
-
     private void ResetForm()
     {
         _companyId = Guid.Empty;
-        _companyFoundationDate = DateTime.MinValue;
         Title = "Firma Girişi";
         IsEditMode = false;
         SelectedSection = SectionFirma;
@@ -601,45 +412,6 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
         IsActive = true;
         ServerName = string.Empty;
         DatabaseName = string.Empty;
-
-        ResetPeriodState();
-    }
-
-    private void ResetPeriodState()
-    {
-        _periodsLoaded = false;
-        _deletedPeriodIds.Clear();
-        _existingPeriodIds.Clear();
-        Periods.Clear();
-        SelectedPeriod = new Period();
-        IsBusyDonem = false;
-    }
-
-    private async Task LoadPeriodsAsync()
-    {
-        ResetPeriodState();
-
-        if (_companyId == Guid.Empty)
-        {
-            _periodsLoaded = true;
-            return;
-        }
-
-        Result<IReadOnlyList<Period>> result = await periodService.GetByCompanyIdAsync(_companyId);
-
-        if (result.IsFailure)
-        {
-            messageService.ShowErrors("Dönem listesi yüklenemedi" , result.Errors);
-            return;
-        }
-
-        foreach (Period period in result.Data)
-        {
-            Periods.Add(period);
-            _existingPeriodIds.Add(period.Id);
-        }
-
-        _periodsLoaded = true;
     }
 
     private async Task LoadLookupsAsync()
@@ -654,16 +426,7 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
             (LookupTypes.WithholdingDeclarationMethod , WithholdingDeclarationMethodList),
             (LookupTypes.Create302Record , Create302RecordList),
             (LookupTypes.TaxOffice , TaxOfficeList),
-            (LookupTypes.ActivityCode , ActivityCodeList),
-            (LookupTypes.AccountingMethod , AccountingMethodList),
-            (LookupTypes.Currency , CurrencyList),
-            (LookupTypes.DeclarationType , DeclarationTypeList),
-            (LookupTypes.ExchangeRateMode , ExchangeRateModeList),
-            (LookupTypes.LedgerType , LedgerTypeList),
-            (LookupTypes.VatRate , VatRateList),
-            (LookupTypes.VoucherNumberLength , VoucherNumberLengthList),
-            (LookupTypes.VoucherSortMode , VoucherSortModeList),
-            (LookupTypes.MonthName , MonthNameList)
+            (LookupTypes.ActivityCode , ActivityCodeList)
         ];
 
         foreach ((string type , ObservableCollection<LookupValue> target) in lookups)
@@ -679,16 +442,14 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
             return;
         }
 
-        Result<IReadOnlyList<LookupValue>> result = await lookupValueService.GetByTypeAsync(type);
+        Result<IReadOnlyList<LookupValue>> result = await _lookupValueService.GetByTypeAsync(type);
 
         if (result.IsFailure)
         {
             return;
         }
 
-        IEnumerable<LookupValue> sorted = type == LookupTypes.MonthName
-            ? result.Data.OrderBy(x => int.TryParse(x.Code , out int n) ? n : int.MaxValue)
-            : result.Data.OrderBy(x => x.Name , StringComparer.Create(TurkishCulture , true));
+        IEnumerable<LookupValue> sorted = result.Data.OrderBy(x => x.Name , StringComparer.Create(TurkishCulture , true));
 
         foreach (LookupValue item in sorted)
         {
@@ -740,20 +501,19 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
     {
         Company company = BuildCompanyFromForm();
 
-        Result<Company> saveResult = await companyService.CreateAsync(company);
+        Result<Company> saveResult = await _companyService.CreateAsync(company);
         if (saveResult.IsFailure)
         {
-            messageService.ShowErrors("Firma kaydedilemedi" , saveResult.Errors);
+            _messageService.ShowErrors("Firma kaydedilemedi" , saveResult.Errors);
             return false;
         }
 
         _companyId = company.Id;
-        _companyFoundationDate = company.FoundationDate;
         DatabaseName = company.DatabaseName;
         Title = "Firma Düzenle";
         IsEditMode = true;
 
-        messageService.ShowSuccess("Firma kaydedildi.");
+        _messageService.ShowSuccess("Firma kaydedildi.");
         return true;
     }
 
@@ -761,16 +521,14 @@ public partial class CompanyEditViewModel(ICompanyService companyService , IPeri
     {
         Company company = BuildCompanyFromForm();
 
-        Result saveResult = await companyService.UpdateAsync(company);
+        Result saveResult = await _companyService.UpdateAsync(company);
         if (saveResult.IsFailure)
         {
-            messageService.ShowErrors("Firma güncellenemedi" , saveResult.Errors);
+            _messageService.ShowErrors("Firma güncellenemedi" , saveResult.Errors);
             return false;
         }
 
-        _companyFoundationDate = company.FoundationDate;
-
-        messageService.ShowSuccess("Firma güncellendi.");
+        _messageService.ShowSuccess("Firma güncellendi.");
         return true;
     }
     #endregion Helpers

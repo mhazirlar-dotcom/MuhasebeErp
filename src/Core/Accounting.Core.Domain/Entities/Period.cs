@@ -51,5 +51,23 @@ public sealed class Period : AuditableEntity
     public string FirmClassDisplay => FirmClass == 1 ? "1. Sınıf" : "2. Sınıf";
     public bool IsClass1 => FirmClass == 1;
     public bool IsClass2 => FirmClass == 2;
+
+    public DateTime? StartDateNullable
+    {
+        get => StartDate == DateTime.MinValue ? null : StartDate;
+        set => StartDate = value ?? DateTime.MinValue;
+    }
+
+    public DateTime? EndDateNullable
+    {
+        get => EndDate == DateTime.MinValue ? null : EndDate;
+        set => EndDate = value ?? DateTime.MinValue;
+    }
+
+    public DateTime? FinalizationDateNullable
+    {
+        get => FinalizationDate == DateTime.MinValue ? null : FinalizationDate;
+        set => FinalizationDate = value ?? DateTime.MinValue;
+    }
     #endregion Computed
 }

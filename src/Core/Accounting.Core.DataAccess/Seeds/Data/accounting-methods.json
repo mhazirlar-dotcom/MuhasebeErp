@@ -1,7 +1,7 @@
 ﻿[
   {
     "code": "ISLETME",
-    "name": "Ä°ÅŸletme Defteri"
+    "name": "İşletme Defteri"
   },
   {
     "code": "SERBEST_MESLEK",
@@ -9,6 +9,6 @@
   },
   {
     "code": "BILANCO",
-    "name": "BilanÃ§o EsasÄ±"
+    "name": "Bilanço Esası"
   }
 ]

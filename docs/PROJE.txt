@@ -1,7 +1,7 @@
 =====================================================================
 MUHASEBE PROJESİ - BAĞLAM DOSYASI
 =====================================================================
-Son güncelleme: 2026-09-24 (Directory.Build.props + dönem yapısı planı)
+Son güncelleme: 2026-09-25 (Aşama 1 + Aşama 2 tamamlandı, Aşama C beklemede)
 Durum: 
        ✅ Faz 0-2C (Core + Firma + Dönem + Shell)
        ✅ IDbContextLock (kaldırıldı, Faz G'de)
@@ -25,26 +25,15 @@ Durum:
        ✅ Firma pasif/aktif çalışıyor (PUT /api/companies/{id}/active)
        ✅ Faz F (temizlik): CopyFields'e IsActive + CompanyEditViewModel IsActive state
        ✅ Faz A: Dönem master-detail (bug'lar çözüldü)
-       ✅ Faz A: Bug 1 - AddPeriod sıradaki yıl dialog ile seçim
-       ✅ Faz A: Bug 2 - Firma Sınıfı ComboBox (FirmClassItem + EditValue)
-       ✅ Faz A: Bug 3 - Ay alanı ComboBox (MonthNameList)
-       ✅ Faz A: AddPeriodDialog (ay + yıl ComboBox + 12 aylık dönem hesabı)
-       ✅ Faz A: İş kuralları (ardışık, kuruluş tarihi, yıl üst sınırı)
        ✅ Firma Listesi çift tıklama ile detay açma
-       ✅ Kuruluş/Bordro tarihleri boş gösterim (DateEdit + Nullable)
-       ✅ Kuruluş Tarihi zorunlu (*) işareti
-       ✅ TC Kimlik No max 11 karakter (TcKimlikNumericStyle)
-       ✅ Vergi No max 10 karakter (VergiNoNumericStyle)
-       ✅ CompanyValidator: FoundationDate zorunlu + PayrollCutoffDate kontrolü
-       ✅ PeriodService: ICompanyRepository inject + tarih kontrolü
        ✅ Directory.Build.props: Nullable=enable + ImplicitUsings=enable
-       ✅ Directory.Build.props: Desktop ve Web csproj'lardan tekrar eden
-          PropertyGroup temizlendi (TargetFramework, Nullable, ImplicitUsings)
-       ✅ Solution adı değişikliği notu (slnx XML — relative path, güvenli)
-       ⏳ BEKLEYEN: Aşama 1 — Tarih alanlarında canlı kuruluş tarihi uyarısı
-       ⏳ BEKLEYEN: Aşama 2 — Dönem yapısı (yıl bazlı + varsayılan Ocak)
-       ⏳ BEKLEYEN: Aşama 3 — Özel Dönem
-       ⏳ BEKLEYEN: Faz A eksikleri (2. Sınıf alanları, 1. Sınıf ek alanları, hesaplamalar)
+       ✅ AŞAMA 1: Canlı Kuruluş Tarihi Uyarısı (MinFoundationDateBehavior)
+       ✅ AŞAMA 2: Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
+       ✅ Tutar alanları sağa dayalı (form + grid)
+       ✅ Tarih alanları boş gösterim (nullable pattern, global kural)
+       ⏳ BEKLEYEN: Aşama C — AddPeriodDialog + AddPeriodDialogViewModel silinmesi
+       ⏳ BEKLEYEN: Aşama 3 — Özel Dönem tam akış (uyarı + onay + IsSpecial bayrağı)
+       ⏳ BEKLEYEN: Faz A eksikleri (2. Sınıf alanları XAML, 1. Sınıf ek alanları XAML, hesaplamalar)
        ⏳ BEKLEYEN: Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
        ⏳ BEKLEYEN: Lookup Admin Ekranı
        ⏳ BEKLEYEN: Genel Muhasebe (Hesap Planı + Yevmiye)
@@ -188,28 +177,33 @@ AĞAÇ YAPISI:
 48. GLOBAL: SetActiveAsync pattern (Faz G sonrası)
 49. GLOBAL: Kuruluş tarihi zorunludur (Faz A)
 50. GLOBAL: Uygulamadaki tüm tarihler kuruluş tarihinden önce olamaz (Faz A)
+    * UI: MinFoundationDateBehavior (attached behavior, DateEdit.Tag = alan adı)
+    * Business: CompanyValidator + PeriodService.EnsureDatesAfterFoundation
+    * Kaynak: ITenantContext.CurrentCompany.FoundationDate
 51. GLOBAL: Merkezi derleme ayarları — Directory.Build.props
     (TargetFramework, Nullable, ImplicitUsings, Version, Company vb.)
+52. GLOBAL: Tarih alanları — değer yoksa BOŞ gösterilir
+    * Pattern: XxxNullable computed property (DateTime.MinValue → null)
+    * DateEdit.EditValue = DateTime? kabul eder → null = boş
+    * CompanyEditViewModel: FoundationDateNullable, PayrollCutoffDateNullable
+    * Period: StartDateNullable, EndDateNullable, FinalizationDateNullable
+53. GLOBAL: Tutar alanları SAĞA DAYALI gösterilir
+    * Form: NumericEditStyle.HorizontalContentAlignment = Right
+    * Grid: EditSettings.HorizontalContentAlignment = Right
+    (optimized mode uyumlu — LightweightCellEditor CellStyle KULLANILMAZ)
 
 ---------------------------------------------------------------------
 5. SOLUTION YAPISI
 ---------------------------------------------------------------------
 MuhasebeErp.slnx
 ├── Directory.Build.props                   (FİZİKSEL - solution kökü)
-│   └── Merkezi derleme ayarları:
-│       • TargetFramework = net10.0
-│       • LangVersion = latest
-│       • Nullable = enable
-│       • ImplicitUsings = enable
-│       • EnableNETAnalyzers = true
-│       • Company/Product/Version metadata
 ├── .editorconfig
 ├── docs/                                   (FİZİKSEL klasör)
 │   ├── PROJE.txt                           (bu dosya)
 │   ├── PROJE_SOURCE_DUMP.txt
 │   ├── calistirma.txt
 │   ├── export-source.ps1
-│   ├── create-seed-files.ps1               (9 eksik seed JSON üretici)
+│   ├── create-seed-files.ps1
 │   ├── convert-nace.ps1
 │   ├── meslek-gruplari.txt
 │   └── sql/
@@ -237,7 +231,11 @@ MuhasebeErp.slnx
 │   │   │   └── Entities/                   (hepsi sealed)
 │   │   │       ├── Company (IsActive, 22 alan)
 │   │   │       ├── LookupValue (Type, Code, Name, ParentId)
-│   │   │       ├── Period (32 alan + IsClass1/IsClass2 computed)
+│   │   │       ├── Period (32 alan + computed)
+│   │   │       │   * DisplayName, FirmClassDisplay
+│   │   │       │   * IsClass1, IsClass2
+│   │   │       │   * StartDateNullable, EndDateNullable,
+│   │   │       │     FinalizationDateNullable  (AŞAMA 2)
 │   │   │       ├── RefreshToken
 │   │   │       ├── User, UserCompany, Role, UserRole,
 │   │   │       │   Permission, RolePermission
@@ -278,11 +276,9 @@ MuhasebeErp.slnx
 │   │       │   ├── Constants/              (TableNames, SqlTypes)
 │   │       │   ├── DesignTime/             (Factories, Clock, CurrentUser)
 │   │       │   ├── Master/                 (MasterDbContext + Configs)
+│   │       │   │   * PeriodConfiguration → Ignore (computed property'ler)
 │   │       │   └── Companies/              (AppDbContext + Configs)
-│   │       ├── Seeds/
-│   │       │   ├── Data/                   (23 JSON - 23 seed ediliyor)
-│   │       │   ├── LookupValueSeedDto.cs
-│   │       │   └── LookupValueSeeder.cs
+│   │       ├── Seeds/                      (23 JSON, LookupValueSeeder)
 │   │       ├── Repositories/               (RepositoryBase, UserRepository,
 │   │       │                                CompanyRepository,
 │   │       │                                LookupValueRepository,
@@ -301,12 +297,16 @@ MuhasebeErp.slnx
 │   │       └── ServiceRegistration.cs      (AddAccountingLocal + AddAccountingApi)
 │   └── Presentation/
 │       ├── Accounting.Desktop               (WPF + DevExpress)
-│       │   ├── Windows/                     (Login, FirstSetup, Shell, Message,
-│       │   │                                AddPeriodDialog)
-│       │   ├── Views/                       (Welcome, Empty, CompanyEdit, CompanyList)
+│       │   ├── Windows/                     (Login, FirstSetup, Shell, Message)
+│       │   │                                ⏳ AddPeriodDialog SİLİNECEK (Aşama C)
+│       │   ├── Views/                       (Welcome, Empty, CompanyEdit,
+│       │   │                                CompanyList, PeriodEdit,
+│       │   │                                PeriodList)
 │       │   ├── ViewModels/                  (Login, FirstSetup, Shell, Welcome,
 │       │   │                                CompanyEdit, CompanyList, Message,
-│       │   │                                AddPeriodDialog, FirmClassItem)
+│       │   │                                PeriodEdit, PeriodList,
+│       │   │                                FirmClassItem)
+│       │   │                                ⏳ AddPeriodDialogViewModel SİLİNECEK
 │       │   ├── Converters/                  (StringToVisibilityConverter,
 │       │   │                                MinValueToEmptyConverter)
 │       │   ├── Enums/                       (MessageType)
@@ -321,23 +321,21 @@ MuhasebeErp.slnx
 │       │   ├── Extensions/                  (HttpResponseExtensions,
 │       │   │                                DesktopHttpClientExtensions)
 │       │   ├── Behaviors/                   (ProperCaseBehavior,
-│       │   │                                ComboBoxContainsFilterBehavior)
+│       │   │                                ComboBoxContainsFilterBehavior,
+│       │   │                                MinFoundationDateBehavior) ← AŞAMA 1
+│       │   ├── Models/                      (MonthItem — SİLİNECEK?)
 │       │   ├── Styles/                      (ControlStyles.xaml)
 │       │   ├── App.xaml / App.xaml.cs
 │       │   └── .editorconfig
 │       ├── Accounting.Api
-│       │   ├── Controllers/
-│       │   │   ├── Common/                  (ApiControllerBase, CrudControllerBase)
-│       │   │   └── Master/                  (AuthController, CompaniesController,
-│       │   │                                PeriodsController, LookupsController)
+│       │   ├── Controllers/                 (Common + Master: 4 controller)
 │       │   ├── Options/                     (JwtSettings)
 │       │   ├── Interfaces/                  (IJwtTokenGenerator, IAuthTokenService)
 │       │   ├── Services/                    (JwtTokenGenerator, AuthTokenService,
 │       │   │                                HttpCurrentUser, HttpTenantContext)
 │       │   ├── Filters/                     (ResultActionFilter)
 │       │   ├── Extensions/                  (ResultExtensions, HttpContextExtensions)
-│       │   ├── Program.cs                   (IgnoreCycles + koşullu HttpsRedirection
-│       │   │                                + RunStartupSeedersAsync)
+│       │   ├── Program.cs
 │       │   ├── appsettings.json
 │       │   └── Properties/launchSettings.json
 │       └── Accounting.Web                   (Blazor - henüz aktif değil)
@@ -345,7 +343,7 @@ MuhasebeErp.slnx
 │   ├── Accounting.Core.UnitTests
 │   ├── Accounting.GeneralAccounting.UnitTests
 │   └── Accounting.IntegrationTests
-└── Directory.Build.props (buraya referans — yukarıda detay)
+└── Directory.Build.props
 
 ---------------------------------------------------------------------
 6. RESULT PATTERN (MERKEZİ)
@@ -458,6 +456,11 @@ Desktop/Services:
 - Http/HttpAuthService, Http/HttpCompanyService
 - Http/HttpPeriodService, Http/HttpLookupValueService
 
+Desktop/Behaviors:
+- ProperCaseBehavior (TextEdit için global proper-case)
+- ComboBoxContainsFilterBehavior (ComboBox için Contains filtresi)
+- MinFoundationDateBehavior (AŞAMA 1 — kuruluş tarihi öncesi uyarı)
+
 ---------------------------------------------------------------------
 9. FİRMA MODELİ (Company)
 ---------------------------------------------------------------------
@@ -493,11 +496,6 @@ Firma Silme = Soft Delete (GLOBAL KURAL):
 - DELETE /api/companies/{id} → 422 BusinessRuleViolation
 - PUT /api/companies/{id}/active { isActive: false } → pasif
 - PUT /api/companies/{id}/active { isActive: true } → aktif
-- CompanyListViewModel: "Sil" → DeleteAsync? (Henüz SetActiveAsync ile)
-
-CopyFields'te IsActive ARTIK VAR (Faz F sonrası):
-- UpdateAsync IsActive'e dokunmaz (form dışı korunur)
-- CompanyEditViewModel.IsActive state taşır (edit'te mevcut değer)
 
 VALIDASYON KURALLARI (CompanyValidator):
 - ShortName: NotEmpty, Max 64
@@ -510,25 +508,26 @@ VALIDASYON KURALLARI (CompanyValidator):
 
 UI NOTLARI (Firma sekmesi):
 - Kuruluş Tarihi: `*` zorunlu işareti, `DateEdit` + `FoundationDateNullable`
-- Bordro Kesilme Tarihi: `DateEdit` + `PayrollCutoffDateNullable`
+- Bordro Kesinleşme Tarihi: `DateEdit` + `PayrollCutoffDateNullable`
 - Her ikisi de boş gösterim (MinValue → null → boş)
 - TC Kimlik No: `TcKimlikNumericStyle` (11 rakam max)
 - Vergi No: `VergiNoNumericStyle` (10 rakam max)
+- Tüm tutar alanları sağa dayalı (Kural 53)
 
-CANLI TARİH UYARISI (Aşama 1 — PLANLANAN):
-- Bordro Kesilme Tarihi: `Validate` + `ValidateOnTextInput="True"`
-- Kapanış Tarihi (Dönem sekmesi): `Validate` + `ValidateOnTextInput="True"`
-- Hata mesajı formatı (detaylı):
-  * "Bordro kesilme tarihi (15.03.2024) kuruluş tarihinden (01.01.2025) önce olamaz."
-  * "Kapanış tarihi (01.01.2024) kuruluş tarihinden (01.01.2025) önce olamaz."
-- Handler konumu: CompanyEditView.xaml.cs
-- FoundationDate == DateTime.MinValue ise validasyon atlanır (yeni firmada)
-- Kırmızı çerçeve + tooltip (DevExpress ValidationEventArgs)
+CANLI TARİH UYARISI (AŞAMA 1 — TAMAMLANDI):
+- `MinFoundationDateBehavior` (attached behavior, global)
+- Kullanım: `<dxe:DateEdit Tag="Alan Adı" behaviors:MinFoundationDateBehavior.IsEnabled="True" />`
+- Kaynak: `ITenantContext.CurrentCompany.FoundationDate`
+- Firma yoksa veya kuruluş tarihi MinValue ise sessizce geçer
+- Mesaj: `"{Tag} (dd.MM.yyyy) kuruluş tarihinden (dd.MM.yyyy) önce olamaz."`
+- Bağlı alanlar:
+  * Bordro Kesinleşme Tarihi (Firma sekmesi)
+  * Kapanış Tarihi (Dönem — artık PeriodEditView'de)
 
 ---------------------------------------------------------------------
 10. PERIOD MODELİ (Dönem)
 ---------------------------------------------------------------------
-Period (sealed) : AuditableEntity — 32 alan
+Period (sealed) : AuditableEntity — 32 alan + computed
 
 ORTAK:
 - CompanyId (Guid), Year (int), MonthNumber (int, 1-12)
@@ -558,8 +557,11 @@ GEÇMİŞ YIL ZARARLARI:
 Computed (EF Core ignore):
 - DisplayName => "{StartDate:dd.MM.yyyy} - {EndDate:dd.MM.yyyy}"
 - FirmClassDisplay => "1. Sınıf" / "2. Sınıf"
-- IsClass1 => FirmClass == 1 (Faz A)
-- IsClass2 => FirmClass == 2 (Faz A)
+- IsClass1 => FirmClass == 1
+- IsClass2 => FirmClass == 2
+- StartDateNullable => StartDate == MinValue ? null : StartDate (AŞAMA 2)
+- EndDateNullable => EndDate == MinValue ? null : EndDate (AŞAMA 2)
+- FinalizationDateNullable => FinalizationDate == MinValue ? null : FinalizationDate (AŞAMA 2)
 
 Validasyon (PeriodValidator):
 - CompanyId: NotEmpty
@@ -579,62 +581,70 @@ Validasyon (PeriodValidator):
     değilse → BusinessRuleViolation
 - UpdateAsync: Aynı tarih kontrolü
 
-DÖNEM AKIŞI (Faz A - MEVCUT):
-- AddPeriodDialog: Ay + Yıl ComboBox
-- 12 aylık dönem: StartDate = 01.{Month}.{Year}, EndDate = StartDate.AddMonths(12).AddDays(-1)
-- Örnek: Haziran 2026 → 01.06.2026 - 31.05.2027
-- Ardışık zorunlu: Yeni dönem, en son dönemin EndDate + 1 gün başlamalı
-- Kuruluş tarihinden önce dönem açılamaz
-- Yıl üst sınırı: İçinde bulunulan yıl
-- Çakışma reddedilir
+DÖNEM AKIŞI (AŞAMA 2 — MEVCUT):
+- Yeni ayrı sayfa: PeriodEditView (Dialog DEĞİL)
+- PeriodEditView: yıl seç → Başlangıç/Bitiş otomatik (readonly)
+- Özel Dönem checkbox: işaretlenirse Ay ComboBox görünür
+- Firma Sınıfı ComboBox: 1/2 → ilgili bölüm (1. Sınıf / 2. Sınıf) görünür
+- Hesaplamalar (otomatik + override):
+  * VatAmount = GrossWage × VatRate / 100
+  * StorageAmount = GrossWage × StorageRate / 100
+- Kaydet → Dönem listesine geri dön (aynı firma, Dönem sekmesi açık)
 
-DÖNEM AKIŞI (Aşama 2 — PLANLANAN — YIL BAZLI):
-- AddPeriodDialog: Ay + Yıl ComboBox (ay kalıyor)
-- Varsayılan ay: Ocak
-- Kullanıcı genelde sadece "Yıl"ı değiştirir, ay "Ocak" kalır
-- İlk dönem (kuruluş yılı):
+TARİH HESAPLAMA (AŞAMA 2):
+- İlk dönem (kuruluş yılı veya hiç dönem yoksa):
   * StartDate = max(kuruluş tarihi, 01.01.YYYY)
   * EndDate = 31.12.YYYY
-  * Örnek: Kuruluş 15.06.2026 → StartDate = 15.06.2026, EndDate = 31.12.2026
-- Sonraki dönemler (standart takvim yılı):
+- Sonraki dönemler (standart):
   * StartDate = 01.01.YYYY
   * EndDate = 31.12.YYYY
-  * Örnek: 2027 → 01.01.2027 - 31.12.2027
-- Ay ≠ Ocak (özel dönem — Aşama 3'e ertelenmiş):
-  * StartDate = 01.{Ay}.{Yıl}, EndDate = StartDate.AddMonths(12).AddDays(-1)
+- Özel dönem (IsSpecialPeriod = true):
+  * StartDate = 01.{Ay}.{Yıl}
+  * EndDate = StartDate.AddMonths(12).AddDays(-1)
 
-İKİ FARKLI GÖSTERİM (Aşama 2):
-- Period.DisplayName (kavramsal — Grid + Detay):
-  * Her zaman takvim yılı: "01.01.2026 - 31.12.2026"
-  * Year üzerinden hesaplanır
-- Period.EffectiveDisplayName (fiili — ComboBox Shell üst bar):
-  * İlk dönem: "15.06.2026 - 31.12.2026" (kuruluş tarihinden)
-  * Sonraki: "01.01.2027 - 31.12.2027"
-  * StartDate/EndDate üzerinden hesaplanır
-- DB'de saklanan: StartDate/EndDate = FİİLİ tarihler (kuruluş kısıtlı)
+YIL SINIRI:
+- Yıl listesi: kuruluş yılı → içinde bulunulan yıl (IClock.Now.Year)
+- Düzenleme modunda Yıl readonly (unique index + fiş numaralandırma)
 
-ÖZEL DÖNEM (Aşama 3 — PLANLANAN):
-- Kullanıcı Ocak dışı ay seçebilir
+DÖNEM LİSTESİ (AŞAMA 2):
+- CompanyEditView → Dönem sekmesi → PeriodListView (gömülü)
+- Toolbar: Dönem Ekle / Düzenle / Sil
+- Grid: DisplayName, FirmClassDisplay, 3 sayısal başlangıç no, GrossWage,
+        IsClosed, IsActive
+- Sil kuralı: IsClosed = true olan silinemez, onay diyalogu
+- Çift tıklama → Düzenle
+
+İKİ FARKLI GÖSTERİM (AŞAMA 2/3 ileri):
+- DisplayName (kavramsal — Grid): "01.01.2026 - 31.12.2026"
+- EffectiveDisplayName (fiili — Shell üst bar) → AŞAMA 3'te netleşecek
+
+ÖZEL DÖNEM (AŞAMA 3 — PLANLANAN):
+- Kullanıcı "Özel Dönem" checkbox'ı ile Ocak dışı ay seçebilir
 - Uyarı + onay akışı
-- Period.IsSpecial bayrağı (muhtemelen)
-- Detaylar Aşama 3'te netleşecek
+- Period.IsSpecial bayrağı (muhtemelen, migration gerekebilir)
 
 ---------------------------------------------------------------------
 11. WPF MİMARİSİ (DevExpress v26.1.3)
 ---------------------------------------------------------------------
 Pencereler:
 - LoginWindow, FirstSetupWindow, ShellWindow, MessageWindow
-- AddPeriodDialog (yeni)
+- AddPeriodDialog → SİLİNECEK (Aşama C)
+
+Views:
+- WelcomeView, EmptyView
+- CompanyEditView (Firma/Ortaklar/Adres/İletişim/Kontak)
+- CompanyListView (Firma Listesi + 3 filtre)
+- PeriodListView (Dönem Listesi — CompanyEditView içine gömülü)
+- PeriodEditView (Dönem Ekle/Düzenle — ayrı sayfa)
 
 ShellWindow (3 satır, footer 2 kolon):
 - Row 0: Menu + Firma ComboBox + Dönem ComboBox + Tamam
 - Row 1: ContentControl (CurrentView)
 - Row 2: Sol (UserDisplayName + Çıkış) + Sağ (FooterContent)
-
-İçerikler:
-- WelcomeView, EmptyView
-- CompanyEditView: Section Bar (Firma/Dönem/Ortaklar/Adres/İletişim/Kontak)
-- CompanyListView: Firma Listesi + 3 filtre + çift tıklama ile detay
+- Footer DataTemplate'ler:
+  * CompanyEditViewModel → [Liste] [Kaydet]
+  * CompanyListViewModel → [Yeni Firma] [Sil] [Aktifleştir] [Detay]
+  * PeriodEditViewModel → [Vazgeç] [Kaydet]
 
 STARTUP AKIŞI:
 1. Tema: Office2019Colorful
@@ -648,22 +658,29 @@ STARTUP AKIŞI:
 7. Dönem seç + Tamam → tenantContext.Set* → WelcomeView
 8. Menü: Yönetici → Firma Girişi/Listesi
 
-DÖNEM BÖLÜMÜ (Faz A - Master-Detail):
-- Toolbar: "Dönem Ekle" (dialog açar) + "Sil"
-- Detay paneli (üst): ORTAK + 1. Sınıf alanları (FirmClass'a göre dinamik)
-- Grid (alt): Dönem, Sınıf, Yevmiye Baş. No, Gelir Baş. No,
-              Gider Baş. No, Brüt Ücret
-- Grid SelectedItem → SelectedPeriod → detay formu otomatik güncellenir
-- Başlangıç/Bitiş tarihleri read-only (hesaplanan)
+DÖNEM SEKMESİ AKIŞI (AŞAMA 2 — YENİ):
+1. CompanyEditView → Dönem sekmesi
+2. `CompanyEditViewModel.SelectSectionAsync("Dönem")` → `PeriodList.LoadAsync(companyId)`
+3. `CompanyEditView.Loaded` → `DonemContent.Content = new PeriodListView(PeriodList)`
+4. Kullanıcı "Dönem Ekle" → `PeriodList.AddRequested` event → Shell `OpenPeriodEditViewAsync(Guid.Empty)`
+5. `PeriodEditView` açılır → `PeriodEditViewModel.LoadAsync(companyId, Guid.Empty)`
+6. Kaydet → `SaveCompleted` → Shell `OpenCompanyEditViewAsync(_currentCompanyId, "Dönem")`
+7. CompanyEditView yeniden açılır, Dönem sekmesi otomatik aktif → liste yenilenir
 
 FORMAT/STİL ALTYAPISI (ControlStyles.xaml):
 - FieldBorderStyle — Border
 - NumericTextEditStyle — Sadece rakam, sınırsız
 - TcKimlikNumericStyle — TC Kimlik No (11 max)
-- VergiNoNumericStyle — Vergi No (10 max)
-- NumericEditStyle — 0,00 formatlı (n2, tr-TR)
+- VergiNoNumericStyle — Vergi No (10 rakam max)
+- NumericEditStyle — 0,00 formatlı (n2, tr-TR) + SAĞA DAYALI (Kural 53)
 - FilteringComboBoxStyle — IncrementalFiltering + Contains
 - DateEdit implicit — dd.MM.yyyy (DateTimeAdvancingCaret)
+- NumericGridCellStyle → KALDIRILDI (optimized mode uyumsuz)
+
+GRID SAYISAL KOLON HİZALAMA (Kural 53):
+- `CellStyle` KULLANILMAZ (optimized mode'da desteklenmiyor)
+- `EditSettings.HorizontalContentAlignment = Right` kullanılır
+- Örnek: SpinEditSettings, TextEditSettings
 
 ---------------------------------------------------------------------
 12. DI LIFETIME
@@ -672,7 +689,8 @@ Desktop: CurrentUser, TenantContext, InMemoryTokenStore,
          AuthTokenRefresher → ILocalSingletonService
 Desktop VM:
 - Root (Login, FirstSetup, Shell) → IScopedService
-- Geçici (CompanyEdit, CompanyList, Welcome) → ITransientService
+- Geçici (CompanyEdit, CompanyList, PeriodEdit, PeriodList, Welcome)
+  → ITransientService
 - MessageService → ISingletonService
 API: HttpCurrentUser, HttpTenantContext → IScopedService
 DbContext, Repository, Service → SCOPED
@@ -716,66 +734,32 @@ Entity: LookupValue (sealed) : AuditableEntity
 - DisplayText (computed): "{Code} - {Name}"
 - Relations: Parent, Children
 
-LookupTypes (23 tip - Faz A sonrası):
-1. AccountingMethod (YENİ - Faz A)
+LookupTypes (23 tip):
+1. AccountingMethod
 2. ActivityCode
 3. AddressType
 4. City
 5. ContactType
 6. Country
 7. Create302Record
-8. Currency (YENİ)
-9. DeclarationType (YENİ)
+8. Currency
+9. DeclarationType
 10. District
-11. ExchangeRateMode (YENİ)
-12. LedgerType (YENİ)
+11. ExchangeRateMode
+12. LedgerType
 13. LegalNature
 14. LegalStatus
-15. MonthName (YENİ)
+15. MonthName
 16. ProfessionalOrganization
 17. SocialSecurityInstitution
 18. TaxOffice
 19. TradeRegistryOffice
-20. VatRate (YENİ)
-21. VoucherNumberLength (YENİ)
-22. VoucherSortMode (YENİ)
+20. VatRate
+21. VoucherNumberLength
+22. VoucherSortMode
 23. WithholdingDeclarationMethod
 
-LookupCodes:
-- LegalStatusOzel = "OZEL"
-- SocialSecurityInstitutionSgk = "SGK"
-- WithholdingDeclarationMethodSirketBazinda = "SIRKET_BAZINDA"
-- Create302RecordOlustur = "OLUSTUR"
-
-Seed Yapısı:
-- Konum: Seeds/Data/*.json (EmbeddedResource)
-- INSERT-ONLY (mevcut veriye dokunmaz)
-- 23 dosya seed ediliyor (Faz A sonrası)
-
-23 SEED DOSYASI:
-1. accounting-methods.json (3)
-2. activity-codes.json
-3. address-types.json
-4. cities.json
-5. contact-types.json
-6. countries.json
-7. create-302-records.json
-8. currencies.json (4)
-9. declaration-types.json (3)
-10. districts.json
-11. exchange-rate-modes.json (4)
-12. ledger-types.json (3)
-13. legal-natures.json
-14. legal-statuses.json
-15. month-names.json (12)
-16. professional-organizations.json
-17. social-security-institutions.json
-18. tax-offices.json
-19. trade-registry-offices.json
-20. vat-rates.json (6)
-21. voucher-number-lengths.json (6)
-22. voucher-sort-modes.json (3)
-23. withholding-declaration-methods.json
+Seed: 23 dosya, INSERT-ONLY, EmbeddedResource
 
 CRUD (Admin - PLANLANAN):
 - CREATE: Type + Code + Name zorunlu
@@ -789,12 +773,6 @@ IAuthService:
 - HasAnyUserAsync() → Result<bool>
 - LoginAsync(LoginRequest, ipAddress, ct) → Result<User>
 - CreateFirstAdminAsync(FirstSetupRequest, ct) → Result<User>
-
-AuthService: FluentValidation chain
-- LoginAsync: Validate → GetByUserName → MapFailure → Ensure(IsActive)
-  → Ensure(Verify) → UpdateLastLogin
-- CreateFirstAdminAsync: Validate → HasAnyUser → EnsureFalse
-  → EnsureEmailNotUsed → CreateAdmin
 
 API Endpoints:
 - POST /api/auth/login
@@ -818,46 +796,38 @@ Desktop Token Yönetimi:
 ---------------------------------------------------------------------
 16. YAPILACAKLAR SIRASI (Sonraki Adımlar)
 ---------------------------------------------------------------------
-**AŞAMA 1 — Tarih Alanlarında Canlı Kuruluş Tarihi Uyarısı** (SIRADAKİ)
-- CompanyEditView.xaml.cs → iki event handler:
-  * OnPayrollCutoffDateValidate
-  * OnFinalizationDateValidate
-- CompanyEditView.xaml → iki DateEdit'e bağla:
-  * Bordro Kesilme Tarihi: Validate + ValidateOnTextInput="True"
-  * Kapanış Tarihi (Dönem detayı): Validate + ValidateOnTextInput="True"
-- Format: Detaylı hata mesajı
-  * "Bordro kesilme tarihi (X) kuruluş tarihinden (Y) önce olamaz."
-- DateTime.MinValue durumunda validasyon atlanır
-- İki dosya tek mesajda sunulacak (Kural 16 — gerekçeli esnetme)
+**AŞAMA C — Temizlik** (SIRADAKİ)
+- `Windows/AddPeriodDialog.xaml` + `.cs` silinecek
+- `ViewModels/AddPeriodDialogViewModel.cs` silinecek
+- `Models/MonthItem.cs` silinecek (önce grep ile doğrula)
+- Build + test
 
-**AŞAMA 2 — Dönem Yapısı (Yıl Bazlı)**
-- AddPeriodDialogViewModel:
-  * Varsayılan ay = Ocak
-  * İlk dönem: StartDate = max(kuruluş, 01.01.YYYY), EndDate = 31.12.YYYY
-  * Sonraki: StartDate = 01.01.YYYY, EndDate = 31.12.YYYY
-- AddPeriodDialog.xaml: ay ComboBox kalıyor
-- Period entity: DisplayName + EffectiveDisplayName (iki property)
-- Grid → DisplayName, ComboBox → EffectiveDisplayName
-- Test senaryoları: kuruluş 15.06.2026 → sonraki 2027, 2028
-
-**AŞAMA 3 — Özel Dönem**
-- Kullanıcı Ocak dışı ay seçebilir
+**AŞAMA 3 — Özel Dönem Tam Akış**
+- "Özel Dönem" checkbox zaten var (PeriodEditView)
 - Uyarı + onay akışı
-- Period.IsSpecial bayrağı
-- Migration gerekebilir
+- Period.IsSpecial bayrağı (migration gerekebilir)
+- Period.DisplayName (kavramsal) + EffectiveDisplayName (fiili) ayrımı
+- Grid → DisplayName, Shell ComboBox → EffectiveDisplayName
 
-**Faz A eksikleri (Aşama 2/3 sonrası)**
-- 2. Sınıf Alanları (6): LedgerType, IncomeStartNumber,
-  ExpenseStartNumber, CarryoverVat, IsVatTaxpayer, UseDbsStockLedger
-- 1. Sınıf Ek Alanları (8): JournalStartNumber, DeclarationType,
+**Faz A eksikleri**
+- 2. Sınıf Alanları tam XAML (PeriodEditView'de çoğu zaten var)
+- 1. Sınıf ek alanları (StorageRate, StorageAmount, DeclarationType,
   VoucherSortMode, RenumberVouchers, VoucherNumberLength,
-  UseForeignCurrency, SystemCurrency, ExchangeRateMode
-- Hesaplamalar: VatAmount = GrossWage × VatRate / 100
-                StorageAmount = GrossWage × StorageRate / 100
+  UseForeignCurrency, SystemCurrency, ExchangeRateMode)
+  → Çoğu zaten eklendi
+- Hesaplamalar → TAMAMLANDI (PeriodEditViewModel.RecalculateAmounts)
 
-**Firma Detayları (D)** — Ortaklar/Adres/İletişim/Kontak
-**Lookup Admin Ekranı (C)** — CRUD
-**Genel Muhasebe (E)** — Hesap Planı + Yevmiye
+**Firma Detayları (D)**
+- Ortaklar / Adres / İletişim / Kontak sekmeleri
+- Şu an placeholder
+
+**Lookup Admin Ekranı (C)**
+- CRUD
+- HttpLookupValueService stub'ları doldurulacak
+
+**Genel Muhasebe (E)**
+- Hesap Planı + Yevmiye
+
 **Faz J (Test)**
 
 ---------------------------------------------------------------------
@@ -870,27 +840,34 @@ Desktop Token Yönetimi:
 2026-09-20: Faz F (temizlik) — CopyFields.IsActive + CompanyEditViewModel.IsActive
 2026-09-20: Faz A (Dönem master-detail) — kısmen uygulandı, bug'lar bekliyordu
 2026-09-23: Faz A tamamlandı
-  - Bug 1: AddPeriod sıradaki yıl (dialog ile kullanıcı seçer)
-  - Bug 2: Firma Sınıfı ComboBox (FirmClassItem + EditValue)
-  - Bug 3: Ay alanı ComboBox (MonthNameList)
-  - AddPeriodDialog (ay + yıl ComboBox + 12 aylık dönem hesabı)
-  - İş kuralları: ardışık zorunlu, kuruluş tarihi kontrolü, yıl üst sınırı
-  - Firma Listesi çift tıklama ile detay açma
-  - Kuruluş/Bordro tarihleri boş gösterim (DateEdit + Nullable)
-  - Kuruluş Tarihi zorunlu (*) işareti
-  - TC Kimlik No max 11 (TcKimlikNumericStyle)
-  - Vergi No max 10 (VergiNoNumericStyle)
-  - CompanyValidator: FoundationDate zorunlu + PayrollCutoffDate kontrolü
-  - PeriodService: ICompanyRepository inject + tarih kontrolü
-  - MinValueToEmptyConverter (opsiyonel, kullanılmıyor artık)
 2026-09-24: Directory.Build.props merkezi yapılandırma
-  - Nullable: disable → enable
-  - ImplicitUsings: disable → enable
-  - Desktop ve Web .csproj'lardan tekrar eden PropertyGroup temizlendi
-  - Solution adı değişikliği notu (slnx XML — relative path, güvenli)
-  - Kural 7 güncellendi (nullable KULLANILIR)
-  - Dönem yapısı Aşama 2/3 planı netleşti (yıl bazlı + özel dönem)
-  - Aşama 1 (tarih validasyonu) detayları netleşti
+2026-09-25: AŞAMA 1 — Canlı Kuruluş Tarihi Uyarısı
+  - MinFoundationDateBehavior (attached behavior, global)
+  - CompanyEditView → Bordro Kesinleşme Tarihi bağlandı
+  - CompanyValidator mesaj düzeltmesi (Kesilme → Kesinleşme)
+  - Kural 50 netleştirildi (UI + Business + kaynak)
+
+2026-09-25: AŞAMA 2 — Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
+  - Period entity → StartDateNullable, EndDateNullable, FinalizationDateNullable
+  - PeriodConfiguration → Ignore düzeltmesi (computed property'ler DB'ye gitmiyor)
+  - Kural 52 eklendi (tarih alanları boş gösterim)
+  - Kural 53 eklendi (tutar alanları sağa dayalı)
+  - ControlStyles.xaml → NumericEditStyle.HorizontalContentAlignment = Right
+  - ControlStyles.xaml → NumericGridCellStyle KALDIRILDI (optimized mode uyumsuz)
+  - CompanyEditView grid → EditSettings.HorizontalContentAlignment = Right
+  - AddPeriodDialog (popup) → KALDIRILDI, yerine PeriodEditView (ayrı sayfa)
+  - PeriodEditViewModel (yıl + özel dönem + hesaplamalar + kayıt)
+  - PeriodEditView.xaml + .cs (yeni tam sayfa)
+  - PeriodListViewModel + PeriodListView (grid + toolbar)
+  - CompanyEditViewModel → dönem kodu temizlendi, PeriodList property eklendi
+  - CompanyEditViewModel.LoadAsync(companyId, initialSection = null)
+  - CompanyEditView → Dönem sekmesi ContentControl (code-behind'da PeriodListView)
+  - ShellViewModel → OpenPeriodEditViewAsync, _currentCompanyId state
+  - ShellViewModel → OpenCompanyEditViewAsync(companyId, initialSection = null)
+  - ShellWindow.xaml → PeriodEditViewModel footer DataTemplate
+  - Build: 11 succeeded, 0 failed
+  - ⏳ Aşama C (silme) beklemede
+  - ⏳ Runtime testi beklemede
 
 ---------------------------------------------------------------------
 18. SONRAKİ SOHBET BAŞLATMA TALİMATI
@@ -899,28 +876,27 @@ Desktop Token Yönetimi:
 içeriği var. Kaldığımız yerden devam edelim.
 
 Son durum:
-- Directory.Build.props merkezi yapılandırma tamam ✅
-- Nullable + ImplicitUsings = enable
-- Dönem yapısı Aşama 2/3 planı netleşti ✅
+- AŞAMA 1 (Canlı Kuruluş Tarihi Uyarısı) tamamlandı ✅
+- AŞAMA 2 (Yıl Bazlı Dönem + Ayrı Sayfa) tamamlandı ✅
+- Build: 11 succeeded, 0 failed ✅
+- Kural 52 (tarih alanları boş) + Kural 53 (tutar sağa dayalı) eklendi
 
-Sıradaki adım: AŞAMA 1 — Tarih Alanlarında Canlı Kuruluş Tarihi Uyarısı
-- CompanyEditView.xaml.cs → iki event handler
-  * OnPayrollCutoffDateValidate
-  * OnFinalizationDateValidate
-- CompanyEditView.xaml → iki DateEdit'e Validate bağla
-  * Validate + ValidateOnTextInput="True"
-- Format: detaylı hata mesajı
-  * "Bordro kesilme tarihi (X) kuruluş tarihinden (Y) önce olamaz."
-  * "Kapanış tarihi (X) kuruluş tarihinden (Y) önce olamaz."
-- DateTime.MinValue → validasyon atlanır
-- İki dosya tek mesajda sunulacak (Kural 16 esnetme)
+Sıradaki adım: AŞAMA C — Temizlik
+1. Windows/AddPeriodDialog.xaml + .cs silinecek
+2. ViewModels/AddPeriodDialogViewModel.cs silinecek
+3. Models/MonthItem.cs silinecek (önce grep ile doğrula)
+4. Build + runtime testi
 
-Sonra: AŞAMA 2 (Dönem yapısı — yıl bazlı)
-- AddPeriodDialogViewModel: varsayılan ay = Ocak
-- İlk dönem: StartDate = max(kuruluş, 01.01.YYYY), EndDate = 31.12.YYYY
-- Sonraki: StartDate = 01.01.YYYY, EndDate = 31.12.YYYY
-- Period.DisplayName (kavramsal) + Period.EffectiveDisplayName (fiili)
-- Grid → DisplayName, ComboBox → EffectiveDisplayName
+Önce runtime testi yapılacak:
+- Firma Düzenle → Dönem sekmesi → Dönem listesi görünüyor mu?
+- Dönem Ekle → ayrı sayfa açılıyor mu?
+- Yıl seç → Başlangıç/Bitiş otomatik doluyor mu?
+- Özel Dönem → Ay ComboBox görünüyor mu?
+- Firma Sınıfı değişince ilgili bölüm görünüyor mu?
+- KDV Tutarı otomatik hesaplanıyor mu?
+- Kaydet → Dönem sekmesine geri dönüyor mu?
+
+Sonra: AŞAMA 3 (Özel Dönem tam akış) veya Faz A eksikleri
 "
 
 =====================================================================

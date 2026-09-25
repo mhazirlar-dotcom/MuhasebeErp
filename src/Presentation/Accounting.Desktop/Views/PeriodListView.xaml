@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Accounting.Desktop.Views.PeriodListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <dx:SimpleButton Content="Dönem Ekle"
+                             Glyph="{dx:DXImage Image=Add_16x16.png}"
+                             Command="{Binding AddCommand}"
+                             Width="140"
+                             Margin="0,0,8,0"
+                             IsEnabled="{Binding IsNotBusy}" />
+
+            <dx:SimpleButton Content="Düzenle"
+                             Glyph="{dx:DXImage Image=Edit_16x16.png}"
+                             Command="{Binding EditCommand}"
+                             Width="120"
+                             IsEnabled="{Binding CanEdit}"
+                             Margin="0,0,8,0" />
+
+            <dx:SimpleButton Content="Sil"
+                             Glyph="{dx:DXImage Image=Delete_16x16.png}"
+                             Command="{Binding DeleteCommand}"
+                             Width="100"
+                             IsEnabled="{Binding CanDelete}" />
+        </StackPanel>
+
+        <!-- Grid -->
+        <dxg:GridControl Grid.Row="1"
+                         x:Name="PeriodGrid"
+                         ItemsSource="{Binding Periods}"
+                         SelectedItem="{Binding SelectedPeriod}"
+                         AutoGenerateColumns="None"
+                         MouseDoubleClick="OnGridMouseDoubleClick">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="DisplayName" Header="Dönem" Width="220" ReadOnly="True" />
+                <dxg:GridColumn FieldName="FirmClassDisplay" Header="Sınıf" Width="100" ReadOnly="True" />
+                <dxg:GridColumn FieldName="JournalStartNumber" Header="Yevmiye Başlangıç No" Width="160" ReadOnly="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MinValue="0" MaxValue="999999"
+                                              HorizontalContentAlignment="Right" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="IncomeStartNumber" Header="Gelir Başlangıç No" Width="150" ReadOnly="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MinValue="0" MaxValue="999999"
+                                              HorizontalContentAlignment="Right" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="ExpenseStartNumber" Header="Gider Başlangıç No" Width="150" ReadOnly="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MinValue="0" MaxValue="999999"
+                                              HorizontalContentAlignment="Right" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="GrossWage" Header="Brüt Ücret" Width="140" ReadOnly="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings MaskType="Numeric"
+                                              Mask="n2"
+                                              MaskCulture="tr-TR"
+                                              MaskUseAsDisplayFormat="True"
+                                              HorizontalContentAlignment="Right" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="IsClosed" Header="Kapalı" Width="80" ReadOnly="True" />
+                <dxg:GridColumn FieldName="IsActive" Header="Aktif" Width="80" ReadOnly="True" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowEditing="False"
+                               ShowGroupPanel="False"
+                               ShowSearchPanelMode="Never"
+                               NavigationStyle="Row"
+                               AutoWidth="True"
+                               AlternateRowBackground="#F5F8FB" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

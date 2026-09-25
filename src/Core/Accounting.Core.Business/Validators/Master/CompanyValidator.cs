@@ -35,7 +35,7 @@ public sealed class CompanyValidator : AbstractValidator<Company>
 
         RuleFor(x => x.PayrollCutoffDate)
             .Must((company , cutoffDate) => cutoffDate == DateTime.MinValue || cutoffDate >= company.FoundationDate)
-            .WithMessage("Bordro kesilme tarihi kuruluş tarihinden önce olamaz.")
+            .WithMessage("Bordro Kesinleşme Tarihi Kuruluş Tarihinden Önce Olamaz.")
             .When(x => x.FoundationDate != DateTime.MinValue);
     }
     #endregion Constructor

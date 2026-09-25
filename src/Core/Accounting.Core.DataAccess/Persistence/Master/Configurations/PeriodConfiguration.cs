@@ -140,6 +140,11 @@ public sealed class PeriodConfiguration : AuditableEntityConfiguration<Period>
         // --- Computed ---
         builder.Ignore(x => x.DisplayName);
         builder.Ignore(x => x.FirmClassDisplay);
+        builder.Ignore(x => x.IsClass1);
+        builder.Ignore(x => x.IsClass2);
+        builder.Ignore(x => x.StartDateNullable);
+        builder.Ignore(x => x.EndDateNullable);
+        builder.Ignore(x => x.FinalizationDateNullable);
 
         // --- Relations ---
         builder.HasOne<Company>()

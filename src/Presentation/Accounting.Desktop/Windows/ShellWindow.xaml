@@ -195,6 +195,22 @@
                                                  IsEnabled="{Binding HasSelection}" />
                             </StackPanel>
                         </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type vm:PeriodEditViewModel}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <dx:SimpleButton Content="Vazgeç"
+                                                 Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                                                 Command="{Binding CancelCommand}"
+                                                 Width="140"
+                                                 Margin="0,0,8,0" />
+
+                                <dx:SimpleButton Content="Kaydet"
+                                                 Glyph="{dx:DXImage Image=Save_16x16.png}"
+                                                 Command="{Binding SaveCommand}"
+                                                 Width="140"
+                                                 IsEnabled="{Binding IsNotBusy}" />
+                            </StackPanel>
+                        </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>

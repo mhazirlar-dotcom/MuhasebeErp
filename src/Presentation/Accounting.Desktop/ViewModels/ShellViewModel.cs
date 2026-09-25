@@ -28,6 +28,8 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
     private readonly ITokenStore _tokenStore;
     private bool _suppressCompanyChanged = false;
     private bool _disposed = false;
+
+    private Guid _currentCompanyId = Guid.Empty;
     #endregion Fields
 
     #region Constructor
@@ -123,15 +125,36 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
         FooterContent = null!;
     }
 
-    public async Task OpenCompanyEditViewAsync(Guid companyId)
+    public async Task OpenCompanyEditViewAsync(Guid companyId , string? initialSection = null)
     {
+        _currentCompanyId = companyId;
+
         CompanyEditViewModel editViewModel = _serviceProvider.GetRequiredService<CompanyEditViewModel>();
-        await editViewModel.LoadAsync(companyId);
+        await editViewModel.LoadAsync(companyId , initialSection);
 
         Views.CompanyEditView view = new(editViewModel , this);
 
         view.SaveCompleted += async (_ , _) => await OnCompanyEditSavedAsync();
         view.Cancelled += (_ , _) => OnCompanyEditCancelled();
+
+        CurrentView = view;
+    }
+
+    public async Task OpenPeriodEditViewAsync(Guid periodId)
+    {
+        if (_currentCompanyId == Guid.Empty)
+        {
+            _messageService.ShowWarning("Önce bir firma seçin.");
+            return;
+        }
+
+        PeriodEditViewModel periodEditViewModel = _serviceProvider.GetRequiredService<PeriodEditViewModel>();
+        await periodEditViewModel.LoadAsync(_currentCompanyId , periodId);
+
+        Views.PeriodEditView view = new(periodEditViewModel , this);
+
+        view.SaveCompleted += async (_ , _) => await OnPeriodEditSavedAsync();
+        view.Cancelled += async (_ , _) => await OnPeriodEditCancelledAsync();
 
         CurrentView = view;
     }
@@ -306,6 +329,16 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
     private void OnCompanyEditCancelled()
     {
         ShowCompanyListView();
+    }
+
+    private async Task OnPeriodEditSavedAsync()
+    {
+        await OpenCompanyEditViewAsync(_currentCompanyId , CompanyEditViewModel.SectionDonem);
+    }
+
+    private async Task OnPeriodEditCancelledAsync()
+    {
+        await OpenCompanyEditViewAsync(_currentCompanyId , CompanyEditViewModel.SectionDonem);
     }
 
     private void OnTokenStoreLoggedOut(object? sender , EventArgs e)
