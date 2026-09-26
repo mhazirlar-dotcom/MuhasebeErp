@@ -177,7 +177,7 @@
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Kuruluş Tarihi *" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                        <dxe:DateEdit EditValue="{Binding FoundationDateNullable}" />
+                        <dxe:DateEdit EditValue="{Binding FoundationDateNullable, UpdateSourceTrigger=PropertyChanged}" />
                     </Border>
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="Vergi Dairesi" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
@@ -284,7 +284,7 @@
                     </Border>
                     <TextBlock Grid.Row="9" Grid.Column="3" Text="Bordro Kesinleşme Tarihi" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="9" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable}"
+                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable, UpdateSourceTrigger=PropertyChanged}"
                                       Tag="Bordro Kesinleşme Tarihi"
                                       behaviors:MinFoundationDateBehavior.IsEnabled="True" />
                     </Border>

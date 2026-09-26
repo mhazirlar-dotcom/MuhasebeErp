@@ -140,7 +140,7 @@
                                Margin="0,0,12,0" />
 
                     <dx:SimpleButton Content="Çıkış"
-                                     Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                                     Glyph="/Resources/Icons/ExitButton.png"
                                      Command="{Binding LogoutCommand}"
                                      Width="100" />
                 </StackPanel>

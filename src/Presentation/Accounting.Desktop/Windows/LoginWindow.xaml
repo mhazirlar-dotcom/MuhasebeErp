@@ -49,14 +49,14 @@
 
             <dx:SimpleButton Grid.Column="0"
                              Content="Giriş"
-                             Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                             Glyph="/Resources/Icons/Login.png"
                              Command="{Binding LoginCommand}"
                              HorizontalAlignment="Stretch"
                              IsEnabled="{Binding IsNotBusy}" />
 
             <dx:SimpleButton Grid.Column="2"
                              Content="Çıkış"
-                             Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                             Glyph="/Resources/Icons/ExitButton.png"
                              Command="{Binding ExitCommand}"
                              HorizontalAlignment="Stretch" />
         </Grid>

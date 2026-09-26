@@ -8,7 +8,7 @@ public class MasterDbContextFactory : IDesignTimeDbContextFactory<MasterDbContex
 {
     #region Constants
     private const string DesignTimeMasterConnection =
-        "Server=.;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
+        "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
     #endregion Constants
 
     #region Operations

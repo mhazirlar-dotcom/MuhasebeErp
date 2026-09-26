@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20260917093403_InitialMaster")]
+    [Migration("20260926163245_InitialMaster")]
     partial class InitialMaster
     {
         /// <inheritdoc />
@@ -135,7 +135,7 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 
                     b.Property<string>("TaxNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("TaxOffice")
                         .IsRequired()
@@ -242,6 +242,13 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AccountingMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<decimal>("CarryoverVat")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -252,24 +259,75 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(128)");
 
+                    b.Property<string>("DeclarationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("ExceptionLoss")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("ExchangeRateMode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<int>("ExpenseStartNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FinalizationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FirmClass")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("GrossWage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IncomeStartNumber")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
+                    b.Property<bool>("IsVatTaxpayer")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("JournalStartNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LedgerType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<int>("MonthNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("NetWage")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("OtherLoss")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("RenumberVouchers")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("StorageAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("StorageRate")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("SystemCurrency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -277,6 +335,27 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(128)");
+
+                    b.Property<bool>("UseDbsStockLedger")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UseForeignCurrency")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("VatAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("VatRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("VoucherNumberLength")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("VoucherSortMode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -337,6 +416,64 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                         .HasDatabaseName("IX_Permissions_Module");
 
                     b.ToTable("Permissions", (string)null);
+                });
+
+            modelBuilder.Entity("Accounting.Core.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("CreatedByIp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(45)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReplacedByTokenHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime?>("RevokedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpiresAt")
+                        .HasDatabaseName("IX_RefreshTokens_ExpiresAt");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique()
+                        .HasDatabaseName("IX_RefreshTokens_TokenHash");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("IX_RefreshTokens_UserId");
+
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("Accounting.Core.Domain.Entities.Role", b =>
@@ -527,6 +664,17 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Accounting.Core.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("Accounting.Core.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Accounting.Core.Domain.Entities.RolePermission", b =>

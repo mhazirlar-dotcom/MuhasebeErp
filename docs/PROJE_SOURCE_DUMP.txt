@@ -1,7 +1,7 @@
 ﻿======================================================================
 MUHASEBE ERP - KAYNAK KOD DUMP
-Tarih: 2026-09-25 21:54:23
-Toplam Dosya: 226
+Tarih: 2026-09-26 21:54:18
+Toplam Dosya: 223
 ======================================================================
 
 ======================================================================
@@ -39,7 +39,7 @@ indent_size = 2
 
 {
   "ConnectionStrings": {
-    "Company": "Server=.;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
+    "Company": "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   }
 }
 
@@ -50,10 +50,10 @@ indent_size = 2
 
 {
   "ConnectionStrings": {
-    "Master": "Server=.;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
+    "Master": "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   },
   "CompanyDatabase": {
-    "ServerName": ".",
+    "ServerName": "DESKTOP-DFL2OBF",
     "IntegratedSecurity": true,
     "DbUserName": "",
     "DbPassword": "",
@@ -2055,153 +2055,6 @@ public class AppDbContext(
 
 
 ======================================================================
-=== FILE: src\Core\Accounting.Core.DataAccess\Persistence\Companies\Configurations\AuditLogConfiguration.cs ===
-======================================================================
-
-using Accounting.Core.DataAccess.Persistence.Constants;
-using Accounting.Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Data;
-
-namespace Accounting.Core.DataAccess.Persistence.Companies.Configurations;
-
-public sealed class AuditLogConfiguration : BaseEntityConfiguration<AuditLog>
-{
-    #region Methods
-    protected override void ConfigureEntity(EntityTypeBuilder<AuditLog> builder)
-    {
-        builder.ToTable(TableNames.AuditLogs);
-
-        builder.Property(x => x.UserId)
-            .HasColumnType(SqlDbType.UniqueIdentifier.GetSqlType())
-            .IsRequired();
-
-        builder.Property(x => x.UserName)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(128))
-            .IsRequired();
-
-        builder.Property(x => x.Action)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(32))
-            .IsRequired();
-
-        builder.Property(x => x.EntityName)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(128))
-            .IsRequired();
-
-        builder.Property(x => x.EntityId)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(64))
-            .IsRequired();
-
-        // AuditLog istisnası: OldValues/NewValues JSON olup kesilemez, nvarchar(max) kullanılır.
-        builder.Property(x => x.OldValues)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType());
-
-        // AuditLog istisnası: OldValues/NewValues JSON olup kesilemez, nvarchar(max) kullanılır.
-        builder.Property(x => x.NewValues)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType());
-
-        builder.Property(x => x.Timestamp)
-            .HasColumnType(SqlDbType.DateTime2.GetSqlType())
-            .IsRequired();
-
-        builder.Property(x => x.IpAddress)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(45));
-
-        builder.HasIndex(x => x.Timestamp)
-            .HasDatabaseName("IX_AuditLogs_Timestamp");
-
-        builder.HasIndex(x => new { x.EntityName , x.EntityId })
-            .HasDatabaseName("IX_AuditLogs_EntityName_EntityId");
-
-        builder.HasIndex(x => x.UserId)
-            .HasDatabaseName("IX_AuditLogs_UserId");
-    }
-    #endregion Methods
-}
-
-
-======================================================================
-=== FILE: src\Core\Accounting.Core.DataAccess\Persistence\Companies\Configurations\NumberSequenceConfiguration.cs ===
-======================================================================
-
-using Accounting.Core.DataAccess.Persistence.Constants;
-using Accounting.Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Data;
-
-namespace Accounting.Core.DataAccess.Persistence.Companies.Configurations;
-
-public sealed class NumberSequenceConfiguration : AuditableEntityConfiguration<NumberSequence>
-{
-    #region Methods
-    protected override void ConfigureEntity(EntityTypeBuilder<NumberSequence> builder)
-    {
-        builder.ToTable(TableNames.NumberSequences);
-
-        builder.Property(x => x.Code)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(64))
-            .IsRequired();
-
-        builder.Property(x => x.Prefix)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(16));
-
-        builder.Property(x => x.LastNumber)
-            .HasColumnType(SqlDbType.Int.GetSqlType())
-            .IsRequired();
-
-        builder.Property(x => x.Padding)
-            .HasColumnType(SqlDbType.Int.GetSqlType())
-            .IsRequired();
-
-        builder.HasIndex(x => x.Code)
-            .IsUnique()
-            .HasDatabaseName("IX_NumberSequences_Code");
-    }
-    #endregion Methods
-}
-
-
-======================================================================
-=== FILE: src\Core\Accounting.Core.DataAccess\Persistence\Companies\Configurations\SettingConfiguration.cs ===
-======================================================================
-
-using Accounting.Core.DataAccess.Persistence.Constants;
-using Accounting.Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Data;
-
-namespace Accounting.Core.DataAccess.Persistence.Companies.Configurations;
-
-public sealed class SettingConfiguration : AuditableEntityConfiguration<Setting>
-{
-    #region Methods
-    protected override void ConfigureEntity(EntityTypeBuilder<Setting> builder)
-    {
-        builder.ToTable(TableNames.Settings);
-
-        builder.Property(x => x.Key)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(128))
-            .IsRequired();
-
-        builder.Property(x => x.Value)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(2048))
-            .IsRequired();
-
-        builder.Property(x => x.Description)
-            .HasColumnType(SqlDbType.NVarChar.GetSqlType(512));
-
-        builder.HasIndex(x => x.Key)
-            .IsUnique()
-            .HasDatabaseName("IX_Settings_Key");
-    }
-    #endregion Methods
-}
-
-
-======================================================================
 === FILE: src\Core\Accounting.Core.DataAccess\Persistence\CompanyConnectionStringBuilder.cs ===
 ======================================================================
 
@@ -2347,7 +2200,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
     #region Constants
     private const string DesignTimeCompanyConnection =
-        "Server=.;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
+        "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
     #endregion Constants
 
     #region Operations
@@ -2427,7 +2280,7 @@ public class MasterDbContextFactory : IDesignTimeDbContextFactory<MasterDbContex
 {
     #region Constants
     private const string DesignTimeMasterConnection =
-        "Server=.;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
+        "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
     #endregion Constants
 
     #region Operations
@@ -16359,7 +16212,7 @@ public sealed class UserRole : BaseEntity
 
 {
   "ConnectionStrings": {
-    "Company": "Server=.;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
+    "Company": "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   }
 }
 
@@ -16370,10 +16223,10 @@ public sealed class UserRole : BaseEntity
 
 {
   "ConnectionStrings": {
-    "Master": "Server=.;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
+    "Master": "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   },
   "CompanyDatabase": {
-    "ServerName": ".",
+    "ServerName": "DESKTOP-DFL2OBF",
     "IntegratedSecurity": true,
     "DbUserName": "",
     "DbPassword": "",
@@ -16381,12 +16234,9 @@ public sealed class UserRole : BaseEntity
   },
   "Jwt": {
     "Issuer": "Accounting.Api",
-
     "Audience": "Accounting.Desktop",
     "SecretKey": "b7fK9pQx2mZ4vN8sL3jR6tY1wH5cD0gA9uE2iM7oP4bX8nQ3sV1kJ6fR9tZ0yL5dW2cB7hG4aS0mP3nK8xQ1vT6jR9fD2wY5cB8hL0pN7sV3kM1tX4yQ9dF2gH6aZ0jR5uE8wT3bP7nC1mK4vL9sX2yD0fQ6hB3gW8tR5zJ1pN7kM4sV9cX2yL0fD6hB3gW8tR5zJ1pN7",
-
     "AccessTokenMinutes": 60,
-    
     "RefreshTokenDays": 30
   },
   "Api": {
@@ -16402,9 +16252,7 @@ public sealed class UserRole : BaseEntity
       }
     },
     "WriteTo": [
-      {
-        "Name": "Console"
-      },
+      { "Name": "Console" },
       {
         "Name": "File",
         "Args": {
@@ -17532,6 +17380,10 @@ public sealed class JwtTokenGenerator(
     </PropertyGroup>
 
     <ItemGroup>
+        <Resource Include="Resources\Icons\*.png" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Using Remove="System.Windows.Forms" />
     </ItemGroup>
 
@@ -17569,7 +17421,7 @@ public sealed class JwtTokenGenerator(
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
+      <Folder Include="Resources\Icons\" />
     </ItemGroup>
 
 </Project>
@@ -21808,7 +21660,7 @@ public partial class WelcomeViewModel(ICurrentUser currentUser , ITenantContext 
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Kuruluş Tarihi *" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                        <dxe:DateEdit EditValue="{Binding FoundationDateNullable}" />
+                        <dxe:DateEdit EditValue="{Binding FoundationDateNullable, UpdateSourceTrigger=PropertyChanged}" />
                     </Border>
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="Vergi Dairesi" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
@@ -21915,7 +21767,7 @@ public partial class WelcomeViewModel(ICurrentUser currentUser , ITenantContext 
                     </Border>
                     <TextBlock Grid.Row="9" Grid.Column="3" Text="Bordro Kesinleşme Tarihi" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="9" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
-                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable}"
+                        <dxe:DateEdit EditValue="{Binding PayrollCutoffDateNullable, UpdateSourceTrigger=PropertyChanged}"
                                       Tag="Bordro Kesinleşme Tarihi"
                                       behaviors:MinFoundationDateBehavior.IsEnabled="True" />
                     </Border>
@@ -23077,14 +22929,14 @@ public partial class FirstSetupWindow : ThemedWindow
 
             <dx:SimpleButton Grid.Column="0"
                              Content="Giriş"
-                             Glyph="{dx:DXImage Image=Apply_16x16.png}"
+                             Glyph="/Resources/Icons/Login.png"
                              Command="{Binding LoginCommand}"
                              HorizontalAlignment="Stretch"
                              IsEnabled="{Binding IsNotBusy}" />
 
             <dx:SimpleButton Grid.Column="2"
                              Content="Çıkış"
-                             Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                             Glyph="/Resources/Icons/ExitButton.png"
                              Command="{Binding ExitCommand}"
                              HorizontalAlignment="Stretch" />
         </Grid>
@@ -23481,7 +23333,7 @@ public partial class MessageWindow : ThemedWindow
                                Margin="0,0,12,0" />
 
                     <dx:SimpleButton Content="Çıkış"
-                                     Glyph="{dx:DXImage Image=Cancel_16x16.png}"
+                                     Glyph="/Resources/Icons/ExitButton.png"
                                      Command="{Binding LogoutCommand}"
                                      Width="100" />
                 </StackPanel>

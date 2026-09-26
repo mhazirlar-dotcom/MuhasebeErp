@@ -1,3 +1,13 @@
 & "D:\Mehmet\CSharp2026\MuhasebeErp\docs\export-source.ps1"
 
 & "D:\Mehmet\CSharp2026\MuhasebeErp\docs\create-seed-files.ps1"
+
+dotnet ef migrations add InitialMaster --project src\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj --startup-project src\Presentation\Accounting.Api\Accounting.Api.csproj --context MasterDbContext --output-dir Persistence\Master\Migrations
+
+dotnet ef database update --project src\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj --startup-project src\Presentation\Accounting.Api\Accounting.Api.csproj --context MasterDbContext
+
+
+dotnet ef migrations add InitialCompany --project src\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj --startup-project src\Presentation\Accounting.Api\Accounting.Api.csproj --context AppDbContext --output-dir Persistence\Companies\Migrations
+
+
+dotnet ef database update --project src\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj --startup-project src\Presentation\Accounting.Api\Accounting.Api.csproj --context AppDbContext

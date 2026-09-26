@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
+namespace Accounting.Core.DataAccess.Persistence.Companies.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRefreshTokens : Migration
+    public partial class InitialCompany : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

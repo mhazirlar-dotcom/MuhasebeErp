@@ -7,6 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Resource Include="Resources\Icons\*.png" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Using Remove="System.Windows.Forms" />
     </ItemGroup>
 
@@ -44,7 +48,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
+      <Folder Include="Resources\Icons\" />
     </ItemGroup>
 
 </Project>

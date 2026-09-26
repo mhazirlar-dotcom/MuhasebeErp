@@ -132,7 +132,7 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 
                     b.Property<string>("TaxNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("TaxOffice")
                         .IsRequired()

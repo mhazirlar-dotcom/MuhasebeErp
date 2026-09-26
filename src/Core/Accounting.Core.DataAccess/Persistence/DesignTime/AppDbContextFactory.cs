@@ -8,7 +8,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
     #region Constants
     private const string DesignTimeCompanyConnection =
-        "Server=.;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
+        "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
     #endregion Constants
 
     #region Operations

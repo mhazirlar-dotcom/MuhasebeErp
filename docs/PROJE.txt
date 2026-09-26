@@ -1,7 +1,7 @@
 =====================================================================
 MUHASEBE PROJESİ - BAĞLAM DOSYASI
 =====================================================================
-Son güncelleme: 2026-09-25 (Aşama 1 + Aşama 2 tamamlandı, Aşama C beklemede)
+Son güncelleme: 2026-09-26 (Migration + SQL bağlantı + Firma kaydetme düzeltmesi + Kural 54/55)
 Durum: 
        ✅ Faz 0-2C (Core + Firma + Dönem + Shell)
        ✅ IDbContextLock (kaldırıldı, Faz G'de)
@@ -31,9 +31,14 @@ Durum:
        ✅ AŞAMA 2: Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
        ✅ Tutar alanları sağa dayalı (form + grid)
        ✅ Tarih alanları boş gösterim (nullable pattern, global kural)
-       ⏳ BEKLEYEN: Aşama C — AddPeriodDialog + AddPeriodDialogViewModel silinmesi
+       ✅ Kural 54: Çıkış butonu özel PNG ikonu (ExitButton.png + Login.png)
+       ✅ SQL Server bağlantı düzeltmesi (DESKTOP-DFL2OBF)
+       ✅ Migration + Veritabanı sıfırlama tamamlandı
+       ✅ Firma kaydetme çalışıyor (UpdateSourceTrigger düzeltmesi)
+       ✅ Models\ klasörü silindi (AddPeriodDialog kalıntısı)
+       ⏳ BEKLEYEN: Aşama C — AddPeriodDialog + AddPeriodDialogViewModel silinmesi (zaten yok)
        ⏳ BEKLEYEN: Aşama 3 — Özel Dönem tam akış (uyarı + onay + IsSpecial bayrağı)
-       ⏳ BEKLEYEN: Faz A eksikleri (2. Sınıf alanları XAML, 1. Sınıf ek alanları XAML, hesaplamalar)
+       ⏳ BEKLEYEN: Faz A eksikleri (hesaplamalar tamam, XAML gözden geçirme)
        ⏳ BEKLEYEN: Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
        ⏳ BEKLEYEN: Lookup Admin Ekranı
        ⏳ BEKLEYEN: Genel Muhasebe (Hesap Planı + Yevmiye)
@@ -82,6 +87,11 @@ DevExpress Lisans:
 - Versiyon: v26.1.3 (Licensed Active)
 - Lisans dosyası: %AppData%\DevExpress\DevExpress_License.txt
 - DX1001 uyarısı NoWarn ile susturuldu
+
+DevExpress Ikon Kullanımı:
+- Hazır ikonlar: dx:DXImage Image=... (16x16, 32x32)
+- Özel PNG ikonlar: Resources/Icons/ altında, Build Action = Resource
+- Kural 54: Çıkış butonu özel PNG kullanır (DevExpress hazır setinde eşleşme yok)
 
 Çalıştırma:
 - Geliştirme sırasında Ctrl+F5 (Start Without Debugging)
@@ -181,7 +191,6 @@ AĞAÇ YAPISI:
     * Business: CompanyValidator + PeriodService.EnsureDatesAfterFoundation
     * Kaynak: ITenantContext.CurrentCompany.FoundationDate
 51. GLOBAL: Merkezi derleme ayarları — Directory.Build.props
-    (TargetFramework, Nullable, ImplicitUsings, Version, Company vb.)
 52. GLOBAL: Tarih alanları — değer yoksa BOŞ gösterilir
     * Pattern: XxxNullable computed property (DateTime.MinValue → null)
     * DateEdit.EditValue = DateTime? kabul eder → null = boş
@@ -191,6 +200,26 @@ AĞAÇ YAPISI:
     * Form: NumericEditStyle.HorizontalContentAlignment = Right
     * Grid: EditSettings.HorizontalContentAlignment = Right
     (optimized mode uyumlu — LightweightCellEditor CellStyle KULLANILMAZ)
+54. GLOBAL: Çıkış butonu ikonu — özel PNG (kırmızı power-off)
+    * Uygulama noktaları: ShellWindow.xaml (alt bar) + LoginWindow.xaml
+    * Yerleşim: Resources/Icons/ExitButton.png
+    * Giriş butonu ikonu: Resources/Icons/Login.png
+    * Build Action: Resource
+    * Bağlama: SimpleButton.Glyph="/Resources/Icons/ExitButton.png"
+    * Bağlama: SimpleButton.Glyph="/Resources/Icons/Login.png"
+    * DevExpress hazır ikon setinde birebir eşleşme YOK
+    * ✅ TAMAMLANDI (2026-09-26)
+55. GLOBAL: Tarih alanlarında UpdateSourceTrigger=PropertyChanged ZORUNLU
+    * DateEdit.EditValue binding'lerinde varsayılan LostFocus'tur
+    * Kullanıcı tarih seçip başka alana tıklamadan Kaydet'e basarsa,
+      ViewModel güncellenmemiş olur → API 400 ValidationError
+    * Çözüm: DateEdit binding'lerine
+      UpdateSourceTrigger=PropertyChanged eklenir
+    * Geçerli alanlar:
+      - CompanyEditView.xaml: FoundationDateNullable, PayrollCutoffDateNullable
+      * PeriodEditView.xaml: StartDateNullable (OneWay), EndDateNullable (OneWay),
+                            FinalizationDateNullable
+    * ✅ TAMAMLANDI (2026-09-26) — Firma kaydetme düzeltildi
 
 ---------------------------------------------------------------------
 5. SOLUTION YAPISI
@@ -209,8 +238,8 @@ MuhasebeErp.slnx
 │   └── sql/
 │       └── seed-test-company.sql
 ├── config/                                 (FİZİKSEL klasör)
-│   ├── appsettings.json
-│   └── appsettings.Development.json
+│   ├── appsettings.json                    (Server=DESKTOP-DFL2OBF)
+│   └── appsettings.Development.json        (Server=DESKTOP-DFL2OBF)
 ├── src/
 │   ├── Shared/
 │   │   └── Accounting.Shared
@@ -235,14 +264,14 @@ MuhasebeErp.slnx
 │   │   │       │   * DisplayName, FirmClassDisplay
 │   │   │       │   * IsClass1, IsClass2
 │   │   │       │   * StartDateNullable, EndDateNullable,
-│   │   │       │     FinalizationDateNullable  (AŞAMA 2)
+│   │   │       │     FinalizationDateNullable
 │   │   │       ├── RefreshToken
 │   │   │       ├── User, UserCompany, Role, UserRole,
 │   │   │       │   Permission, RolePermission
 │   │   │       └── Setting, NumberSequence, AuditLog
 │   │   ├── Accounting.Core.Business
 │   │   │   ├── Extensions/
-│   │   │   │   ├── ValidationExtensions.cs
+│   │   │   │   └── ValidationExtensions.cs
 │   │   │   ├── Interfaces/
 │   │   │   │   ├── IEntityOperations.cs
 │   │   │   │   ├── ICrudOperations.cs
@@ -275,9 +304,13 @@ MuhasebeErp.slnx
 │   │       │   ├── CompanyConnectionStringBuilder.cs
 │   │       │   ├── Constants/              (TableNames, SqlTypes)
 │   │       │   ├── DesignTime/             (Factories, Clock, CurrentUser)
+│   │       │   │   * AppDbContextFactory → Server=DESKTOP-DFL2OBF
+│   │       │   │   * MasterDbContextFactory → Server=DESKTOP-DFL2OBF
 │   │       │   ├── Master/                 (MasterDbContext + Configs)
 │   │       │   │   * PeriodConfiguration → Ignore (computed property'ler)
+│   │       │   │   * Migrations/           (InitialMaster - oluşturuldu)
 │   │       │   └── Companies/              (AppDbContext + Configs)
+│   │       │       * Migrations/           (InitialCompany - oluşturuldu)
 │   │       ├── Seeds/                      (23 JSON, LookupValueSeeder)
 │   │       ├── Repositories/               (RepositoryBase, UserRepository,
 │   │       │                                CompanyRepository,
@@ -297,8 +330,11 @@ MuhasebeErp.slnx
 │   │       └── ServiceRegistration.cs      (AddAccountingLocal + AddAccountingApi)
 │   └── Presentation/
 │       ├── Accounting.Desktop               (WPF + DevExpress)
+│       │   ├── Resources/                   (Kural 54)
+│       │   │   └── Icons/
+│       │   │       ├── ExitButton.png       (Çıkış butonu)
+│       │   │       └── Login.png            (Giriş butonu)
 │       │   ├── Windows/                     (Login, FirstSetup, Shell, Message)
-│       │   │                                ⏳ AddPeriodDialog SİLİNECEK (Aşama C)
 │       │   ├── Views/                       (Welcome, Empty, CompanyEdit,
 │       │   │                                CompanyList, PeriodEdit,
 │       │   │                                PeriodList)
@@ -306,7 +342,6 @@ MuhasebeErp.slnx
 │       │   │                                CompanyEdit, CompanyList, Message,
 │       │   │                                PeriodEdit, PeriodList,
 │       │   │                                FirmClassItem)
-│       │   │                                ⏳ AddPeriodDialogViewModel SİLİNECEK
 │       │   ├── Converters/                  (StringToVisibilityConverter,
 │       │   │                                MinValueToEmptyConverter)
 │       │   ├── Enums/                       (MessageType)
@@ -322,8 +357,7 @@ MuhasebeErp.slnx
 │       │   │                                DesktopHttpClientExtensions)
 │       │   ├── Behaviors/                   (ProperCaseBehavior,
 │       │   │                                ComboBoxContainsFilterBehavior,
-│       │   │                                MinFoundationDateBehavior) ← AŞAMA 1
-│       │   ├── Models/                      (MonthItem — SİLİNECEK?)
+│       │   │                                MinFoundationDateBehavior)
 │       │   ├── Styles/                      (ControlStyles.xaml)
 │       │   ├── App.xaml / App.xaml.cs
 │       │   └── .editorconfig
@@ -336,7 +370,7 @@ MuhasebeErp.slnx
 │       │   ├── Filters/                     (ResultActionFilter)
 │       │   ├── Extensions/                  (ResultExtensions, HttpContextExtensions)
 │       │   ├── Program.cs
-│       │   ├── appsettings.json
+│       │   ├── appsettings.json             (Server=DESKTOP-DFL2OBF)
 │       │   └── Properties/launchSettings.json
 │       └── Accounting.Web                   (Blazor - henüz aktif değil)
 ├── tests/
@@ -508,7 +542,9 @@ VALIDASYON KURALLARI (CompanyValidator):
 
 UI NOTLARI (Firma sekmesi):
 - Kuruluş Tarihi: `*` zorunlu işareti, `DateEdit` + `FoundationDateNullable`
+  → UpdateSourceTrigger=PropertyChanged (Kural 55)
 - Bordro Kesinleşme Tarihi: `DateEdit` + `PayrollCutoffDateNullable`
+  → UpdateSourceTrigger=PropertyChanged (Kural 55)
 - Her ikisi de boş gösterim (MinValue → null → boş)
 - TC Kimlik No: `TcKimlikNumericStyle` (11 rakam max)
 - Vergi No: `VergiNoNumericStyle` (10 rakam max)
@@ -516,13 +552,13 @@ UI NOTLARI (Firma sekmesi):
 
 CANLI TARİH UYARISI (AŞAMA 1 — TAMAMLANDI):
 - `MinFoundationDateBehavior` (attached behavior, global)
-- Kullanım: `<dxe:DateEdit Tag="Alan Adı" behaviors:MinFoundationDateBehavior.IsEnabled="True" />`
+- Kullanım: <dxe:DateEdit Tag="Alan Adı" behaviors:MinFoundationDateBehavior.IsEnabled="True" />
 - Kaynak: `ITenantContext.CurrentCompany.FoundationDate`
 - Firma yoksa veya kuruluş tarihi MinValue ise sessizce geçer
-- Mesaj: `"{Tag} (dd.MM.yyyy) kuruluş tarihinden (dd.MM.yyyy) önce olamaz."`
+- Mesaj: "{Tag} (dd.MM.yyyy) kuruluş tarihinden (dd.MM.yyyy) önce olamaz."
 - Bağlı alanlar:
   * Bordro Kesinleşme Tarihi (Firma sekmesi)
-  * Kapanış Tarihi (Dönem — artık PeriodEditView'de)
+  * Kapanış Tarihi (PeriodEditView — Dönem detay)
 
 ---------------------------------------------------------------------
 10. PERIOD MODELİ (Dönem)
@@ -559,9 +595,9 @@ Computed (EF Core ignore):
 - FirmClassDisplay => "1. Sınıf" / "2. Sınıf"
 - IsClass1 => FirmClass == 1
 - IsClass2 => FirmClass == 2
-- StartDateNullable => StartDate == MinValue ? null : StartDate (AŞAMA 2)
-- EndDateNullable => EndDate == MinValue ? null : EndDate (AŞAMA 2)
-- FinalizationDateNullable => FinalizationDate == MinValue ? null : FinalizationDate (AŞAMA 2)
+- StartDateNullable => StartDate == MinValue ? null : StartDate
+- EndDateNullable => EndDate == MinValue ? null : EndDate
+- FinalizationDateNullable => FinalizationDate == MinValue ? null : FinalizationDate
 
 Validasyon (PeriodValidator):
 - CompanyId: NotEmpty
@@ -607,16 +643,16 @@ YIL SINIRI:
 - Düzenleme modunda Yıl readonly (unique index + fiş numaralandırma)
 
 DÖNEM LİSTESİ (AŞAMA 2):
-- CompanyEditView → Dönem sekmesi → PeriodListView (gömülü)
+- CompanyEditView → Dönem sekmesi → PeriodListView (gömülü, code-behind ile)
 - Toolbar: Dönem Ekle / Düzenle / Sil
 - Grid: DisplayName, FirmClassDisplay, 3 sayısal başlangıç no, GrossWage,
         IsClosed, IsActive
 - Sil kuralı: IsClosed = true olan silinemez, onay diyalogu
 - Çift tıklama → Düzenle
 
-İKİ FARKLI GÖSTERİM (AŞAMA 2/3 ileri):
+İKİ FARKLI GÖSTERİM (AŞAMA 3 — PLANLANAN):
 - DisplayName (kavramsal — Grid): "01.01.2026 - 31.12.2026"
-- EffectiveDisplayName (fiili — Shell üst bar) → AŞAMA 3'te netleşecek
+- EffectiveDisplayName (fiili — Shell üst bar): StartDate/EndDate üzerinden
 
 ÖZEL DÖNEM (AŞAMA 3 — PLANLANAN):
 - Kullanıcı "Özel Dönem" checkbox'ı ile Ocak dışı ay seçebilir
@@ -628,7 +664,6 @@ DÖNEM LİSTESİ (AŞAMA 2):
 ---------------------------------------------------------------------
 Pencereler:
 - LoginWindow, FirstSetupWindow, ShellWindow, MessageWindow
-- AddPeriodDialog → SİLİNECEK (Aşama C)
 
 Views:
 - WelcomeView, EmptyView
@@ -645,6 +680,7 @@ ShellWindow (3 satır, footer 2 kolon):
   * CompanyEditViewModel → [Liste] [Kaydet]
   * CompanyListViewModel → [Yeni Firma] [Sil] [Aktifleştir] [Detay]
   * PeriodEditViewModel → [Vazgeç] [Kaydet]
+- Çıkış butonu → /Resources/Icons/ExitButton.png (Kural 54 ✅)
 
 STARTUP AKIŞI:
 1. Tema: Office2019Colorful
@@ -658,11 +694,11 @@ STARTUP AKIŞI:
 7. Dönem seç + Tamam → tenantContext.Set* → WelcomeView
 8. Menü: Yönetici → Firma Girişi/Listesi
 
-DÖNEM SEKMESİ AKIŞI (AŞAMA 2 — YENİ):
+DÖNEM SEKMESİ AKIŞI (AŞAMA 2):
 1. CompanyEditView → Dönem sekmesi
 2. `CompanyEditViewModel.SelectSectionAsync("Dönem")` → `PeriodList.LoadAsync(companyId)`
 3. `CompanyEditView.Loaded` → `DonemContent.Content = new PeriodListView(PeriodList)`
-4. Kullanıcı "Dönem Ekle" → `PeriodList.AddRequested` event → Shell `OpenPeriodEditViewAsync(Guid.Empty)`
+4. "Dönem Ekle" → `PeriodList.AddRequested` → Shell `OpenPeriodEditViewAsync(Guid.Empty)`
 5. `PeriodEditView` açılır → `PeriodEditViewModel.LoadAsync(companyId, Guid.Empty)`
 6. Kaydet → `SaveCompleted` → Shell `OpenCompanyEditViewAsync(_currentCompanyId, "Dönem")`
 7. CompanyEditView yeniden açılır, Dönem sekmesi otomatik aktif → liste yenilenir
@@ -672,7 +708,7 @@ FORMAT/STİL ALTYAPISI (ControlStyles.xaml):
 - NumericTextEditStyle — Sadece rakam, sınırsız
 - TcKimlikNumericStyle — TC Kimlik No (11 max)
 - VergiNoNumericStyle — Vergi No (10 rakam max)
-- NumericEditStyle — 0,00 formatlı (n2, tr-TR) + SAĞA DAYALI (Kural 53)
+- NumericEditStyle — 0,00 formatlı (n2, tr-TR) + SAĞA DAYALI
 - FilteringComboBoxStyle — IncrementalFiltering + Contains
 - DateEdit implicit — dd.MM.yyyy (DateTimeAdvancingCaret)
 - NumericGridCellStyle → KALDIRILDI (optimized mode uyumsuz)
@@ -698,18 +734,29 @@ DbContext, Repository, Service → SCOPED
 ---------------------------------------------------------------------
 13. CONNECTION STRING YÖNETİMİ
 ---------------------------------------------------------------------
+**SQL Server Örnek Adı: DESKTOP-DFL2OBF** (2026-09-26 güncellemesi)
+
 config/appsettings.json:
 {
   "ConnectionStrings": {
-    "Master": "Server=.;Database=Accounting_Master;..."
+    "Master": "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   },
   "CompanyDatabase": {
-    "ServerName": ".",
+    "ServerName": "DESKTOP-DFL2OBF",
     "IntegratedSecurity": true,
+    "DbUserName": "",
+    "DbPassword": "",
     "DatabaseNameTemplate": "Accounting_{Id}"
   },
   "Api": {
     "BaseUrl": "http://localhost:5233"
+  }
+}
+
+config/appsettings.Development.json:
+{
+  "ConnectionStrings": {
+    "Company": "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   }
 }
 
@@ -722,9 +769,16 @@ Api/appsettings.json ek alanı:
   "RefreshTokenDays": 30
 }
 
+Design-Time Factory'ler:
+- AppDbContextFactory.cs → Server=DESKTOP-DFL2OBF
+- MasterDbContextFactory.cs → Server=DESKTOP-DFL2OBF
+
 CompanyConnectionStringBuilder:
 - BuildFromOptions(CompanyDatabaseOptions, Company)
 - BuildFromCompany(Company, decryptedPassword)
+
+NOT: Yerel makinede çalışan SQL Server örnek adı DEĞİŞEBİLİR.
+Kontrol: services.msc veya sqlcmd -L
 
 ---------------------------------------------------------------------
 14. LOOKUPVALUE MİMARİSİ
@@ -796,25 +850,17 @@ Desktop Token Yönetimi:
 ---------------------------------------------------------------------
 16. YAPILACAKLAR SIRASI (Sonraki Adımlar)
 ---------------------------------------------------------------------
-**AŞAMA C — Temizlik** (SIRADAKİ)
-- `Windows/AddPeriodDialog.xaml` + `.cs` silinecek
-- `ViewModels/AddPeriodDialogViewModel.cs` silinecek
-- `Models/MonthItem.cs` silinecek (önce grep ile doğrula)
-- Build + test
-
 **AŞAMA 3 — Özel Dönem Tam Akış**
-- "Özel Dönem" checkbox zaten var (PeriodEditView)
+- "Özel Dönem" checkbox zaten var
 - Uyarı + onay akışı
 - Period.IsSpecial bayrağı (migration gerekebilir)
 - Period.DisplayName (kavramsal) + EffectiveDisplayName (fiili) ayrımı
 - Grid → DisplayName, Shell ComboBox → EffectiveDisplayName
 
 **Faz A eksikleri**
-- 2. Sınıf Alanları tam XAML (PeriodEditView'de çoğu zaten var)
-- 1. Sınıf ek alanları (StorageRate, StorageAmount, DeclarationType,
-  VoucherSortMode, RenumberVouchers, VoucherNumberLength,
+- PeriodEditView XAML gözden geçirme (StorageRate, StorageAmount,
+  DeclarationType, VoucherSortMode, RenumberVouchers, VoucherNumberLength,
   UseForeignCurrency, SystemCurrency, ExchangeRateMode)
-  → Çoğu zaten eklendi
 - Hesaplamalar → TAMAMLANDI (PeriodEditViewModel.RecalculateAmounts)
 
 **Firma Detayları (D)**
@@ -841,6 +887,7 @@ Desktop Token Yönetimi:
 2026-09-20: Faz A (Dönem master-detail) — kısmen uygulandı, bug'lar bekliyordu
 2026-09-23: Faz A tamamlandı
 2026-09-24: Directory.Build.props merkezi yapılandırma
+
 2026-09-25: AŞAMA 1 — Canlı Kuruluş Tarihi Uyarısı
   - MinFoundationDateBehavior (attached behavior, global)
   - CompanyEditView → Bordro Kesinleşme Tarihi bağlandı
@@ -849,7 +896,7 @@ Desktop Token Yönetimi:
 
 2026-09-25: AŞAMA 2 — Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
   - Period entity → StartDateNullable, EndDateNullable, FinalizationDateNullable
-  - PeriodConfiguration → Ignore düzeltmesi (computed property'ler DB'ye gitmiyor)
+  - PeriodConfiguration → Ignore düzeltmesi
   - Kural 52 eklendi (tarih alanları boş gösterim)
   - Kural 53 eklendi (tutar alanları sağa dayalı)
   - ControlStyles.xaml → NumericEditStyle.HorizontalContentAlignment = Right
@@ -866,8 +913,39 @@ Desktop Token Yönetimi:
   - ShellViewModel → OpenCompanyEditViewAsync(companyId, initialSection = null)
   - ShellWindow.xaml → PeriodEditViewModel footer DataTemplate
   - Build: 11 succeeded, 0 failed
-  - ⏳ Aşama C (silme) beklemede
-  - ⏳ Runtime testi beklemede
+
+2026-09-25 (devam): Kural 54 — Çıkış butonu ikonu notu
+  - Kullanıcı özel kırmızı power-off PNG sağlayacak
+  - Uygulama noktaları: ShellWindow + LoginWindow
+  - Yerleşim: Resources/Icons/ExitButton.png
+  - Build Action: Resource
+  - DevExpress hazır ikon setinde birebir eşleşme yok
+  - ⏳ Henüz uygulanmadı
+
+2026-09-26: Kural 54 TAMAMLANDI + Migration + SQL bağlantı + Firma kaydetme
+  - Resources/Icons/ExitButton.png oluşturuldu (kullanıcı sağladı)
+  - Resources/Icons/Login.png oluşturuldu (kullanıcı sağladı)
+  - ShellWindow.xaml → Çıkış butonu Glyph güncellendi
+  - LoginWindow.xaml → Giriş + Çıkış butonu Glyph güncellendi
+  - Accounting.Desktop.csproj → <Resource Include="Resources\Icons\*.png" /> eklendi
+  - Models\ klasörü silindi (boş kalmıştı)
+  - SQL Server örnek adı tespit edildi: DESKTOP-DFL2OBF
+  - config/appsettings.json → Server=DESKTOP-DFL2OBF
+  - config/appsettings.Development.json → Server=DESKTOP-DFL2OBF
+  - src/Presentation/Accounting.Api/appsettings.json → Server=DESKTOP-DFL2OBF
+  - src/Presentation/Accounting.Api/appsettings.Development.json → Server=DESKTOP-DFL2OBF
+  - AppDbContextFactory.cs → DesignTimeCompanyConnection = DESKTOP-DFL2OBF
+  - MasterDbContextFactory.cs → DesignTimeMasterConnection = DESKTOP-DFL2OBF
+  - Accounting_Master + Accounting_DesignTime veritabanları silindi
+  - InitialMaster migration oluşturuldu
+  - InitialCompany migration oluşturuldu
+  - Update-Database (MasterDbContext) çalıştırıldı
+  - Update-Database (AppDbContext) çalıştırıldı
+  - Firma kaydetme sorunu: FoundationDate boş gidiyordu → API 400
+  - KÖK NEDEN: DateEdit.EditValue binding varsayılan LostFocus
+  - ÇÖZÜM: UpdateSourceTrigger=PropertyChanged eklendi (Kural 55)
+  - CompanyEditView.xaml → FoundationDateNullable + PayrollCutoffDateNullable
+  - Firma kaydetme ÇALIŞIYOR ✅
 
 ---------------------------------------------------------------------
 18. SONRAKİ SOHBET BAŞLATMA TALİMATI
@@ -876,27 +954,21 @@ Desktop Token Yönetimi:
 içeriği var. Kaldığımız yerden devam edelim.
 
 Son durum:
-- AŞAMA 1 (Canlı Kuruluş Tarihi Uyarısı) tamamlandı ✅
-- AŞAMA 2 (Yıl Bazlı Dönem + Ayrı Sayfa) tamamlandı ✅
-- Build: 11 succeeded, 0 failed ✅
-- Kural 52 (tarih alanları boş) + Kural 53 (tutar sağa dayalı) eklendi
+- Kural 54 (çıkış butonu ikonu) TAMAMLANDI ✅
+- SQL Server bağlantı düzeltmesi YAPILDI (DESKTOP-DFL2OBF) ✅
+- Migration + Veritabanı sıfırlama TAMAMLANDI ✅
+- Firma kaydetme ÇALIŞIYOR ✅ (Kural 55: UpdateSourceTrigger)
+- Models\ klasörü silindi ✅
 
-Sıradaki adım: AŞAMA C — Temizlik
-1. Windows/AddPeriodDialog.xaml + .cs silinecek
-2. ViewModels/AddPeriodDialogViewModel.cs silinecek
-3. Models/MonthItem.cs silinecek (önce grep ile doğrula)
-4. Build + runtime testi
+Sıradaki adımlar:
+1. AŞAMA 3 — Özel Dönem tam akış (uyarı + onay + IsSpecial bayrağı)
+2. Faz A eksikleri — PeriodEditView XAML gözden geçirme
+3. Firma Detayları — Ortaklar/Adres/İletişim/Kontak sekmeleri
+4. Lookup Admin Ekranı
+5. Genel Muhasebe (Hesap Planı + Yevmiye)
+6. Faz J (Test)
 
-Önce runtime testi yapılacak:
-- Firma Düzenle → Dönem sekmesi → Dönem listesi görünüyor mu?
-- Dönem Ekle → ayrı sayfa açılıyor mu?
-- Yıl seç → Başlangıç/Bitiş otomatik doluyor mu?
-- Özel Dönem → Ay ComboBox görünüyor mu?
-- Firma Sınıfı değişince ilgili bölüm görünüyor mu?
-- KDV Tutarı otomatik hesaplanıyor mu?
-- Kaydet → Dönem sekmesine geri dönüyor mu?
-
-Sonra: AŞAMA 3 (Özel Dönem tam akış) veya Faz A eksikleri
+Öncelik sizde — hangisiyle devam edelim?
 "
 
 =====================================================================
