@@ -1,14 +1,10 @@
 ﻿[
   {
-    "code": "AYLIK",
-    "name": "AylÄ±k"
+    "code": "GELİR",
+    "name": "Gelir"
   },
   {
-    "code": "UC_AYLIK",
-    "name": "ÃœÃ§ AylÄ±k"
-  },
-  {
-    "code": "YILLIK",
-    "name": "YÄ±llÄ±k"
+    "code": "KURUMLAR",
+    "name": "Kurumlar"
   }
 ]

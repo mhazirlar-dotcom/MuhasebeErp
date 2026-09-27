@@ -13,6 +13,7 @@ public sealed class Period : AuditableEntity
     public DateTime EndDate { get; set; }
     public bool IsClosed { get; set; } = false;
     public bool IsActive { get; set; } = true;
+    public bool IsSpecial { get; set; } = false;
     public DateTime FinalizationDate { get; set; } = DateTime.MinValue;
     public string AccountingMethod { get; set; } = string.Empty;
     public int FirmClass { get; set; } = 1;
@@ -28,7 +29,7 @@ public sealed class Period : AuditableEntity
     public decimal VatAmount { get; set; } = 0m;
     public decimal StorageRate { get; set; } = 0m;
     public decimal StorageAmount { get; set; } = 0m;
-    public int JournalStartNumber { get; set; } = 0;
+    public int JournalStartNumber { get; set; } = 1;
     public string DeclarationType { get; set; } = string.Empty;
     public string VoucherSortMode { get; set; } = string.Empty;
     public bool RenumberVouchers { get; set; } = false;
@@ -39,8 +40,8 @@ public sealed class Period : AuditableEntity
 
     // --- 2. Sınıf ---
     public string LedgerType { get; set; } = string.Empty;
-    public int IncomeStartNumber { get; set; } = 0;
-    public int ExpenseStartNumber { get; set; } = 0;
+    public int IncomeStartNumber { get; set; } = 1;
+    public int ExpenseStartNumber { get; set; } = 1;
     public decimal CarryoverVat { get; set; } = 0m;
     public bool IsVatTaxpayer { get; set; } = false;
     public bool UseDbsStockLedger { get; set; } = false;
@@ -51,6 +52,7 @@ public sealed class Period : AuditableEntity
     public string FirmClassDisplay => FirmClass == 1 ? "1. Sınıf" : "2. Sınıf";
     public bool IsClass1 => FirmClass == 1;
     public bool IsClass2 => FirmClass == 2;
+    public bool IsStandard => !IsSpecial;
 
     public DateTime? StartDateNullable
     {

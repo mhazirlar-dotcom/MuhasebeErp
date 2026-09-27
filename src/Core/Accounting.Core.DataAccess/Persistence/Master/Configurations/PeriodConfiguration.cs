@@ -43,6 +43,10 @@ public sealed class PeriodConfiguration : AuditableEntityConfiguration<Period>
             .HasColumnType(SqlDbType.Bit.GetSqlType())
             .IsRequired();
 
+        builder.Property(x => x.IsSpecial)
+            .HasColumnType(SqlDbType.Bit.GetSqlType())
+            .IsRequired();
+
         builder.Property(x => x.FinalizationDate)
             .HasColumnType(SqlDbType.DateTime2.GetSqlType());
 
@@ -142,6 +146,7 @@ public sealed class PeriodConfiguration : AuditableEntityConfiguration<Period>
         builder.Ignore(x => x.FirmClassDisplay);
         builder.Ignore(x => x.IsClass1);
         builder.Ignore(x => x.IsClass2);
+        builder.Ignore(x => x.IsStandard);
         builder.Ignore(x => x.StartDateNullable);
         builder.Ignore(x => x.EndDateNullable);
         builder.Ignore(x => x.FinalizationDateNullable);

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20260926163245_InitialMaster")]
+    [Migration("20260927122938_InitialMaster")]
     partial class InitialMaster
     {
         /// <inheritdoc />
@@ -292,6 +292,9 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSpecial")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsVatTaxpayer")

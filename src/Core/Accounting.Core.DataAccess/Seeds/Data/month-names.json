@@ -5,7 +5,7 @@
   },
   {
     "code": "02",
-    "name": "Åubat"
+    "name": "Şubat"
   },
   {
     "code": "03",
@@ -17,7 +17,7 @@
   },
   {
     "code": "05",
-    "name": "MayÄ±s"
+    "name": "Mayıs"
   },
   {
     "code": "06",
@@ -29,11 +29,11 @@
   },
   {
     "code": "08",
-    "name": "AÄŸustos"
+    "name": "Ağustos"
   },
   {
     "code": "09",
-    "name": "EylÃ¼l"
+    "name": "Eylül"
   },
   {
     "code": "10",
@@ -41,10 +41,10 @@
   },
   {
     "code": "11",
-    "name": "KasÄ±m"
+    "name": "Kasım"
   },
   {
     "code": "12",
-    "name": "AralÄ±k"
+    "name": "Aralık"
   }
 ]

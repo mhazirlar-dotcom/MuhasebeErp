@@ -12,7 +12,12 @@ using System.Globalization;
 
 namespace Accounting.Desktop.ViewModels;
 
-public partial class PeriodEditViewModel : ObservableObject, ITransientService
+public partial class PeriodEditViewModel(
+    IPeriodService periodService ,
+    ICompanyService companyService ,
+    ILookupValueService lookupValueService ,
+    IMessageService messageService ,
+    IClock clock) : ObservableObject, ITransientService
 {
     #region Constants
     private const int FallbackFoundationYear = 1900;
@@ -28,11 +33,11 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
     #endregion Events
 
     #region Fields
-    private readonly IPeriodService _periodService;
-    private readonly ICompanyService _companyService;
-    private readonly ILookupValueService _lookupValueService;
-    private readonly IMessageService _messageService;
-    private readonly IClock _clock;
+    private readonly IPeriodService _periodService = periodService;
+    private readonly ICompanyService _companyService = companyService;
+    private readonly ILookupValueService _lookupValueService = lookupValueService;
+    private readonly IMessageService _messageService = messageService;
+    private readonly IClock _clock = clock;
 
     private Guid _companyId = Guid.Empty;
     private Guid _periodId = Guid.Empty;
@@ -40,25 +45,13 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
     private bool _isInitializing = true;
     private bool _isVatAmountOverridden = false;
     private bool _isStorageAmountOverridden = false;
+    private bool _suppressSpecialConfirm = false;
 
     private DateTime _companyFoundationDate = DateTime.MinValue;
     private IReadOnlyList<Period> _existingPeriods = [];
-    #endregion Fields
 
+    #endregion Fields
     #region Constructor
-    public PeriodEditViewModel(
-        IPeriodService periodService ,
-        ICompanyService companyService ,
-        ILookupValueService lookupValueService ,
-        IMessageService messageService ,
-        IClock clock)
-    {
-        _periodService = periodService;
-        _companyService = companyService;
-        _lookupValueService = lookupValueService;
-        _messageService = messageService;
-        _clock = clock;
-    }
     #endregion Constructor
 
     #region Properties
@@ -69,7 +62,6 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
     private bool _isBusy;
 
     public bool IsNotBusy => !IsBusy;
-
     public bool IsEditMode
     {
         get => _isEditMode;
@@ -121,18 +113,42 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
         get => _isSpecialPeriod;
         set
         {
-            if (SetProperty(ref _isSpecialPeriod , value) && !_isInitializing)
+            if (_isSpecialPeriod == value)
+            {
+                return;
+            }
+
+            if (!_suppressSpecialConfirm && value && !_isInitializing)
+            {
+                bool confirmed = _messageService.Confirm(
+                    "Özel Dönem Onayı" ,
+                    "Özel dönem; standart dönemden farklı bir başlangıç ayı ile 12 aylık bir mali dönem oluşturur.\n\n" +
+                    "Bu işlem, aynı yıl için farklı bir dönem yapısı oluşturacağından dikkatli kullanılmalıdır.\n\n" +
+                    "Özel dönem oluşturmak istediğinize emin misiniz?");
+
+                if (!confirmed)
+                {
+                    OnPropertyChanged(nameof(IsSpecialPeriod));
+                    OnPropertyChanged(nameof(IsMonthSelectorVisible));
+                    return;
+                }
+            }
+
+            if (SetProperty(ref _isSpecialPeriod , value))
             {
                 OnPropertyChanged(nameof(IsMonthSelectorVisible));
 
-                if (!value && AvailableMonths.Count > 0)
+                if (!_suppressSpecialConfirm && !value && !_isInitializing && AvailableMonths.Count > 0)
                 {
                     _isInitializing = true;
                     SelectedMonth = AvailableMonths.FirstOrDefault(m => ParseMonthNumber(m.Code) == MonthJanuary) ?? AvailableMonths[0];
                     _isInitializing = false;
                 }
 
-                RecalculateDates();
+                if (!_isInitializing)
+                {
+                    RecalculateDates();
+                }
             }
         }
     }
@@ -283,7 +299,7 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
     }
 
     [ObservableProperty]
-    private int _journalStartNumber;
+    private int _journalStartNumber=1;
 
     [ObservableProperty]
     private string _declarationType = string.Empty;
@@ -311,10 +327,10 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
     private string _ledgerType = string.Empty;
 
     [ObservableProperty]
-    private int _incomeStartNumber;
+    private int _incomeStartNumber=1;
 
     [ObservableProperty]
-    private int _expenseStartNumber;
+    private int _expenseStartNumber=1;
 
     [ObservableProperty]
     private decimal _carryoverVat;
@@ -473,9 +489,13 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
         AvailableYears.Clear();
         AvailableMonths.Clear();
 
+        _suppressSpecialConfirm = true;
+
         SelectedYear = 0;
         SelectedMonth = null!;
         IsSpecialPeriod = false;
+
+        _suppressSpecialConfirm = false;
 
         StartDate = DateTime.MinValue;
         EndDate = DateTime.MinValue;
@@ -584,7 +604,9 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
 
         SelectedMonth = AvailableMonths.FirstOrDefault(m => ParseMonthNumber(m.Code) == MonthJanuary) ?? AvailableMonths[0];
 
+        _suppressSpecialConfirm = true;
         IsSpecialPeriod = false;
+        _suppressSpecialConfirm = false;
 
         _isInitializing = false;
     }
@@ -606,7 +628,10 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
 
         SelectedYear = period.Year;
         SelectedMonth = AvailableMonths.FirstOrDefault(m => ParseMonthNumber(m.Code) == period.MonthNumber) ?? AvailableMonths[0];
-        IsSpecialPeriod = period.MonthNumber != MonthJanuary;
+
+        _suppressSpecialConfirm = true;
+        IsSpecialPeriod = period.IsSpecial;
+        _suppressSpecialConfirm = false;
 
         FinalizationDate = period.FinalizationDate;
         AccountingMethod = period.AccountingMethod;
@@ -720,6 +745,16 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
             return "Bitiş tarihi başlangıç tarihinden sonra olmalıdır.";
         }
 
+        if (IsSpecialPeriod)
+        {
+            int monthNumber = ParseMonthNumber(SelectedMonth?.Code ?? string.Empty);
+
+            if (monthNumber == MonthJanuary)
+            {
+                return "Özel dönem için Ocak ayı seçilemez. Lütfen farklı bir başlangıç ayı seçin veya özel dönemi iptal edin.";
+            }
+        }
+
         if (_existingPeriods.Count > 0 && !IsEditMode)
         {
             DateTime lastEnd = _existingPeriods.Max(p => p.EndDate).Date;
@@ -761,6 +796,7 @@ public partial class PeriodEditViewModel : ObservableObject, ITransientService
             EndDate = EndDate,
             IsClosed = IsClosed,
             IsActive = IsActive,
+            IsSpecial = IsSpecialPeriod,
             FinalizationDate = FinalizationDate,
             AccountingMethod = AccountingMethod,
             FirmClass = FirmClass,

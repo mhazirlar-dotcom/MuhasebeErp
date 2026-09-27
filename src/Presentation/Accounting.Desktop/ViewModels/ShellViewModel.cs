@@ -290,6 +290,50 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
         HasPeriods = Periods.Count > 0;
     }
 
+    private async Task ReloadPeriodsForCurrentCompanyAsync()
+    {
+        if (_currentCompanyId == Guid.Empty)
+        {
+            return;
+        }
+
+        Company? company = Companies.FirstOrDefault(c => c.Id == _currentCompanyId);
+
+        if (company is null)
+        {
+            // Firma listede yoksa (yeni kaydedilmiş olabilir) listeyi tazele.
+            await LoadCompaniesAsync();
+
+            company = Companies.FirstOrDefault(c => c.Id == _currentCompanyId);
+
+            if (company is null)
+            {
+                return;
+            }
+        }
+
+        await LoadPeriodsAsync(company);
+
+        // SelectedCompany referansını listedeki gerçek instance ile eşleştir.
+        if (SelectedCompany?.Id != company.Id)
+        {
+            _suppressCompanyChanged = true;
+            SelectedCompany = company;
+            _suppressCompanyChanged = false;
+        }
+
+        // En son eklenen (en yüksek yıl) dönemi otomatik seç.
+        Period? lastPeriod = Periods
+            .OrderByDescending(p => p.Year)
+            .ThenByDescending(p => p.MonthNumber)
+            .FirstOrDefault();
+
+        if (lastPeriod is not null)
+        {
+            SelectedPeriod = lastPeriod;
+        }
+    }
+
     private void ApplySelectedCompanyAndPeriod()
     {
         if (!CanConfirmSelection)
@@ -324,6 +368,7 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
     private async Task OnCompanyEditSavedAsync()
     {
         await LoadCompaniesAsync();
+        await ReloadPeriodsForCurrentCompanyAsync();
     }
 
     private void OnCompanyEditCancelled()
@@ -333,11 +378,13 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
     private async Task OnPeriodEditSavedAsync()
     {
+        await ReloadPeriodsForCurrentCompanyAsync();
         await OpenCompanyEditViewAsync(_currentCompanyId , CompanyEditViewModel.SectionDonem);
     }
 
     private async Task OnPeriodEditCancelledAsync()
     {
+        await ReloadPeriodsForCurrentCompanyAsync();
         await OpenCompanyEditViewAsync(_currentCompanyId , CompanyEditViewModel.SectionDonem);
     }
 

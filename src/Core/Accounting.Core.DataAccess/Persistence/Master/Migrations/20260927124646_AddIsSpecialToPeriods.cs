@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Accounting.Core.DataAccess.Persistence.Companies.Migrations
+namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCompany : Migration
+    public partial class AddIsSpecialToPeriods : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

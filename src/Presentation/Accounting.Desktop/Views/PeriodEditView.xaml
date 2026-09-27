@@ -63,12 +63,21 @@
                                           NullText="Yıl seçin" />
                     </Border>
 
-                    <dxe:CheckEdit Grid.Row="0" Grid.Column="3"
-                                   Content="Özel Dönem"
-                                   IsChecked="{Binding IsSpecialPeriod}"
-                                   VerticalAlignment="Center"
-                                   FontWeight="SemiBold"
-                                   Margin="0,0,0,8" />
+                    <StackPanel Grid.Row="0" Grid.Column="3"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Margin="0,0,0,8">
+                        <dxe:CheckEdit Content="Özel Dönem"
+                                       IsChecked="{Binding IsSpecialPeriod, Mode=TwoWay}"
+                                       FontWeight="SemiBold" />
+                        <Image Width="16"
+                               Height="16"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               Cursor="Help"
+                               Source="{dx:DXImage Image=Warning_16x16.png}"
+                               ToolTip="Özel dönem; standart Ocak ayı yerine farklı bir başlangıç ayı ile 12 aylık bir mali dönem oluşturur.&#x0a;&#x0a;Aynı yıl için yalnızca bir adet özel dönem tanımlanabilir." />
+                    </StackPanel>
 
                     <TextBlock Grid.Row="0" Grid.Column="6"
                                Text="Başlangıç Ayı *"
@@ -240,12 +249,12 @@
                                       EditValue="{Binding VatAmount}" />
                     </Border>
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Depolama Oranı" VerticalAlignment="Center" Margin="0,0,8,4" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Stopaj Oranı" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
                         <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
                                       EditValue="{Binding StorageRate}" />
                     </Border>
-                    <TextBlock Grid.Row="3" Grid.Column="3" Text="Depolama Tutarı" VerticalAlignment="Center" Margin="0,0,8,4" />
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="Stopaj Tutarı" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="3" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
                         <dxe:TextEdit Style="{StaticResource NumericEditStyle}"
                                       EditValue="{Binding StorageAmount}" />
@@ -256,7 +265,7 @@
                         <dxe:TextEdit Style="{StaticResource NumericTextEditStyle}"
                                       EditValue="{Binding JournalStartNumber}" />
                     </Border>
-                    <TextBlock Grid.Row="4" Grid.Column="3" Text="Beyanname Türü" VerticalAlignment="Center" Margin="0,0,8,4" />
+                    <TextBlock Grid.Row="4" Grid.Column="3" Text="Beyan Türü" VerticalAlignment="Center" Margin="0,0,8,4" />
                     <Border Grid.Row="4" Grid.Column="4" Style="{StaticResource FieldBorderStyle}" Margin="0,0,0,4">
                         <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
                                           ItemsSource="{Binding DeclarationTypeList}"

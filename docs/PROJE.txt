@@ -1,7 +1,7 @@
 =====================================================================
 MUHASEBE PROJESİ - BAĞLAM DOSYASI
 =====================================================================
-Son güncelleme: 2026-09-26 (Migration + SQL bağlantı + Firma kaydetme düzeltmesi + Kural 54/55)
+Son güncelleme: 2026-09-27 (AŞAMA 3 kod tarafı + IsSpecial + Kural 56/57 + Migration sorunu)
 Durum: 
        ✅ Faz 0-2C (Core + Firma + Dönem + Shell)
        ✅ IDbContextLock (kaldırıldı, Faz G'de)
@@ -36,9 +36,18 @@ Durum:
        ✅ Migration + Veritabanı sıfırlama tamamlandı
        ✅ Firma kaydetme çalışıyor (UpdateSourceTrigger düzeltmesi)
        ✅ Models\ klasörü silindi (AddPeriodDialog kalıntısı)
-       ⏳ BEKLEYEN: Aşama C — AddPeriodDialog + AddPeriodDialogViewModel silinmesi (zaten yok)
-       ⏳ BEKLEYEN: Aşama 3 — Özel Dönem tam akış (uyarı + onay + IsSpecial bayrağı)
-       ⏳ BEKLEYEN: Faz A eksikleri (hesaplamalar tamam, XAML gözden geçirme)
+       ✅ Kural 55: DateEdit UpdateSourceTrigger=PropertyChanged (firma kaydetme)
+       ✅ Dönem ComboBox DisplayMember düzeltmesi (Name → DisplayName)
+       ✅ ShellViewModel ReloadPeriodsForCurrentCompanyAsync (dönem ekleme sonrası tazeleme)
+       ✅ Kural 56: Period.IsSpecial + IsStandard + onay akışı
+       ✅ Kural 57: Yevmiye/Gelir/Gider Başlangıç No default = 1
+       ✅ PeriodConfiguration IsSpecial + IsStandard Ignore
+       ✅ PeriodService EnsureSpecialPeriodUniqueAsync (aynı yıl tek özel dönem)
+       ✅ PeriodEditViewModel SaveAsync öncesi RecalculateDates
+       ✅ PeriodEditViewModel özel dönem onay akışı (Confirm)
+       ✅ PeriodEditViewModel özel dönem Ocak ayı reddi
+       ⏳ BEKLEYEN: Migration sorunu — 'Invalid column name IsSpecial' + boş AddIsSpecialToPeriods
+       ⏳ BEKLEYEN: Faz A eksikleri (XAML gözden geçirme)
        ⏳ BEKLEYEN: Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
        ⏳ BEKLEYEN: Lookup Admin Ekranı
        ⏳ BEKLEYEN: Genel Muhasebe (Hesap Planı + Yevmiye)
@@ -51,7 +60,7 @@ C# + SQL Server ile geliştirilen modüler muhasebe/ERP uygulaması.
 
 Modüller:
 - Core (kullanıcı, firma, dönem, yetki, log, ayar, lookup) [AKTİF]
-- GeneralAccounting (Genel Muhasebe) [AKTİF - Hafta 3'ün asıl konusu]
+- GeneralAccounting (Genel Muhasebe) [AKTİF - sonraki ana konu]
 - Commercial (Ticari) [sonra]
 - Crm [sonra]
 - HumanResources [sonra]
@@ -217,9 +226,34 @@ AĞAÇ YAPISI:
       UpdateSourceTrigger=PropertyChanged eklenir
     * Geçerli alanlar:
       - CompanyEditView.xaml: FoundationDateNullable, PayrollCutoffDateNullable
-      * PeriodEditView.xaml: StartDateNullable (OneWay), EndDateNullable (OneWay),
+      - PeriodEditView.xaml: StartDateNullable (OneWay), EndDateNullable (OneWay),
                             FinalizationDateNullable
     * ✅ TAMAMLANDI (2026-09-26) — Firma kaydetme düzeltildi
+56. GLOBAL: Özel Dönem (IsSpecial) akışı
+    * Period.IsSpecial (bool, default false) + Period.IsStandard (computed)
+    * UI: PeriodEditView "Özel Dönem" checkbox + Warning_16x16 ikon + ToolTip
+    * Onay akışı: IsSpecialPeriod=true set edildiğinde IMessageService.Confirm
+      çağrılır. Reddedilirse değer false'a döner (_suppressSpecialConfirm
+      bayrağı ile Load/Reset programatik setlerde devre dışı bırakılır).
+    * İş kuralı: Aynı firma + aynı yıl için yalnızca BİR özel dönem olabilir.
+      PeriodService.EnsureSpecialPeriodUniqueAsync (Create + Update).
+    * Validasyon: Özel dönemde ay Ocak (1) olamaz (PeriodEditViewModel.Validate).
+    * Tarih hesabı: Özel dönem = StartDate.AddMonths(12).AddDays(-1);
+      Standart dönem = 31.12.YYYY.
+    * EF: PeriodConfiguration.IsSpecial bit IsRequired;
+      Period.IsStandard → builder.Ignore (computed).
+    * ⚠️ MIGRATION SORUNU: 'Invalid column name IsSpecial' hatası alındı.
+      AddIsSpecialToPeriods migration boş üretildi. Çözüm bekliyor
+      (muhtemelen veritabanı + migration snapshot uyumsuzluğu; bkz. bölüm 16).
+    * ✅ KOD TAMAMLANDI (2026-09-27) — Migration bekliyor
+57. GLOBAL: Dönem başlangıç numaraları varsayılan 1
+    * JournalStartNumber, IncomeStartNumber, ExpenseStartNumber
+    * Entity: Period.cs default = 1
+    * ViewModel: PeriodEditViewModel [ObservableProperty] default = 1,
+      Reset() içinde = 1
+    * FillFromPeriod: kaydedilmiş değer ne ise yüklenir
+    * DB migration GEREKMEZ (C# default, DB constraint yok)
+    * ✅ TAMAMLANDI (2026-09-27)
 
 ---------------------------------------------------------------------
 5. SOLUTION YAPISI
@@ -260,9 +294,9 @@ MuhasebeErp.slnx
 │   │   │   └── Entities/                   (hepsi sealed)
 │   │   │       ├── Company (IsActive, 22 alan)
 │   │   │       ├── LookupValue (Type, Code, Name, ParentId)
-│   │   │       ├── Period (32 alan + computed)
+│   │   │       ├── Period (32 alan + IsSpecial + computed)
 │   │   │       │   * DisplayName, FirmClassDisplay
-│   │   │       │   * IsClass1, IsClass2
+│   │   │       │   * IsClass1, IsClass2, IsStandard
 │   │   │       │   * StartDateNullable, EndDateNullable,
 │   │   │       │     FinalizationDateNullable
 │   │   │       ├── RefreshToken
@@ -308,7 +342,7 @@ MuhasebeErp.slnx
 │   │       │   │   * MasterDbContextFactory → Server=DESKTOP-DFL2OBF
 │   │       │   ├── Master/                 (MasterDbContext + Configs)
 │   │       │   │   * PeriodConfiguration → Ignore (computed property'ler)
-│   │       │   │   * Migrations/           (InitialMaster - oluşturuldu)
+│   │       │   │   * Migrations/           (InitialMaster + AddIsSpecialToPeriods*)
 │   │       │   └── Companies/              (AppDbContext + Configs)
 │   │       │       * Migrations/           (InitialCompany - oluşturuldu)
 │   │       ├── Seeds/                      (23 JSON, LookupValueSeeder)
@@ -563,12 +597,13 @@ CANLI TARİH UYARISI (AŞAMA 1 — TAMAMLANDI):
 ---------------------------------------------------------------------
 10. PERIOD MODELİ (Dönem)
 ---------------------------------------------------------------------
-Period (sealed) : AuditableEntity — 32 alan + computed
+Period (sealed) : AuditableEntity — 32 alan + IsSpecial + computed
 
 ORTAK:
 - CompanyId (Guid), Year (int), MonthNumber (int, 1-12)
 - StartDate, EndDate (DateTime)
 - IsClosed, IsActive (bool)
+- IsSpecial (bool, default false)              [KURAL 56 — 2026-09-27]
 - FinalizationDate (DateTime)
 - AccountingMethod (string Code)
 - FirmClass (int, 1 veya 2)
@@ -581,12 +616,13 @@ GEÇMİŞ YIL ZARARLARI:
 - VatRate, DeclarationType, VoucherSortMode, VoucherNumberLength,
   SystemCurrency, ExchangeRateMode (string Code)
 - StorageRate (decimal 18,4)
-- JournalStartNumber (int)
+- JournalStartNumber (int, default = 1)        [KURAL 57 — 2026-09-27]
 - RenumberVouchers, UseForeignCurrency (bool)
 
 2. SINIF ALANLARI:
 - LedgerType (string Code)
-- IncomeStartNumber, ExpenseStartNumber (int)
+- IncomeStartNumber (int, default = 1)         [KURAL 57 — 2026-09-27]
+- ExpenseStartNumber (int, default = 1)        [KURAL 57 — 2026-09-27]
 - CarryoverVat (decimal)
 - IsVatTaxpayer, UseDbsStockLedger (bool)
 
@@ -595,6 +631,7 @@ Computed (EF Core ignore):
 - FirmClassDisplay => "1. Sınıf" / "2. Sınıf"
 - IsClass1 => FirmClass == 1
 - IsClass2 => FirmClass == 2
+- IsStandard => !IsSpecial                    [KURAL 56 — 2026-09-27]
 - StartDateNullable => StartDate == MinValue ? null : StartDate
 - EndDateNullable => EndDate == MinValue ? null : EndDate
 - FinalizationDateNullable => FinalizationDate == MinValue ? null : FinalizationDate
@@ -615,7 +652,9 @@ Validasyon (PeriodValidator):
   * Aynı firma + aynı yıl için dönem zaten mevcutsa → Conflict
   * StartDate / EndDate / FinalizationDate ≥ Company.FoundationDate
     değilse → BusinessRuleViolation
-- UpdateAsync: Aynı tarih kontrolü
+  * IsSpecial=true ve aynı firma + aynı yıl için başka özel dönem
+    varsa → BusinessRuleViolation (EnsureSpecialPeriodUniqueAsync)  [KURAL 56]
+- UpdateAsync: Aynı tarih + özel dönem kontrolü (kendi Id'si hariç tutulur)
 
 DÖNEM AKIŞI (AŞAMA 2 — MEVCUT):
 - Yeni ayrı sayfa: PeriodEditView (Dialog DEĞİL)
@@ -634,7 +673,7 @@ TARİH HESAPLAMA (AŞAMA 2):
 - Sonraki dönemler (standart):
   * StartDate = 01.01.YYYY
   * EndDate = 31.12.YYYY
-- Özel dönem (IsSpecialPeriod = true):
+- Özel dönem (IsSpecial = true):
   * StartDate = 01.{Ay}.{Yıl}
   * EndDate = StartDate.AddMonths(12).AddDays(-1)
 
@@ -650,14 +689,24 @@ DÖNEM LİSTESİ (AŞAMA 2):
 - Sil kuralı: IsClosed = true olan silinemez, onay diyalogu
 - Çift tıklama → Düzenle
 
-İKİ FARKLI GÖSTERİM (AŞAMA 3 — PLANLANAN):
-- DisplayName (kavramsal — Grid): "01.01.2026 - 31.12.2026"
-- EffectiveDisplayName (fiili — Shell üst bar): StartDate/EndDate üzerinden
+ÖZEL DÖNEM AKIŞI (AŞAMA 3 — KOD TAMAMLANDI):
+- "Özel Dönem" checkbox'a basıldığında IMessageService.Confirm ile onay
+- Onay reddi: değer false'a döner (_suppressSpecialConfirm koruması)
+- Özel dönemde Ocak ayı seçilirse kaydetme reddedilir (Validate)
+- Aynı firma + aynı yıl için ikinci özel dönem engellenir (PeriodService)
+- Period.IsSpecial bayrağı eklendi (migration bekliyor)
+- ⚠️ Migration sorunu: 'Invalid column name IsSpecial' — bkz. bölüm 16
 
-ÖZEL DÖNEM (AŞAMA 3 — PLANLANAN):
-- Kullanıcı "Özel Dönem" checkbox'ı ile Ocak dışı ay seçebilir
-- Uyarı + onay akışı
-- Period.IsSpecial bayrağı (muhtemelen, migration gerekebilir)
+KURAL 56 (ÖZEL DÖNEM) — ÖZET:
+- Onay akışı + iş kuralı + validasyon tek çatı altında
+- UI: Warning_16x16 ikon + ToolTip (PeriodEditView)
+- Business: EnsureSpecialPeriodUniqueAsync (PeriodService)
+- EF: IsSpecial (bit, IsRequired), IsStandard → Ignore
+
+KURAL 57 (BAŞLANGIÇ NUMARALARI) — ÖZET:
+- JournalStartNumber, IncomeStartNumber, ExpenseStartNumber default = 1
+- Entity + ViewModel + Reset() senkron
+- FillFromPeriod mevcut değeri korur
 
 ---------------------------------------------------------------------
 11. WPF MİMARİSİ (DevExpress v26.1.3)
@@ -682,6 +731,11 @@ ShellWindow (3 satır, footer 2 kolon):
   * PeriodEditViewModel → [Vazgeç] [Kaydet]
 - Çıkış butonu → /Resources/Icons/ExitButton.png (Kural 54 ✅)
 
+DÖNEM COMBOBOX DÜZELTMESİ (2026-09-27):
+- ShellWindow.xaml → DisplayMember="Name" → "DisplayName"
+- Sebep: Period entity'sinde Name property'si yok
+- Width: 180 → 220 (DisplayName formatı daha uzun)
+
 STARTUP AKIŞI:
 1. Tema: Office2019Colorful
 2. Host + Serilog + AddAccountingLocal + AddDesktopHttpClients
@@ -702,6 +756,15 @@ DÖNEM SEKMESİ AKIŞI (AŞAMA 2):
 5. `PeriodEditView` açılır → `PeriodEditViewModel.LoadAsync(companyId, Guid.Empty)`
 6. Kaydet → `SaveCompleted` → Shell `OpenCompanyEditViewAsync(_currentCompanyId, "Dönem")`
 7. CompanyEditView yeniden açılır, Dönem sekmesi otomatik aktif → liste yenilenir
+
+DÖNEM EKLEME SONRASI COMBO TAZELEME (2026-09-27):
+- ShellViewModel.OnPeriodEditSavedAsync → ReloadPeriodsForCurrentCompanyAsync
+- Aynı: OnPeriodEditCancelledAsync, OnCompanyEditSavedAsync
+- ReloadPeriodsForCurrentCompanyAsync:
+  * _currentCompanyId üzerinden firma bul (yoksa LoadCompaniesAsync)
+  * LoadPeriodsAsync(company)
+  * SelectedCompany referansını listeyle senkronla (_suppressCompanyChanged)
+  * En son dönemi (en yüksek yıl + ay) otomatik seç
 
 FORMAT/STİL ALTYAPISI (ControlStyles.xaml):
 - FieldBorderStyle — Border
@@ -850,17 +913,41 @@ Desktop Token Yönetimi:
 ---------------------------------------------------------------------
 16. YAPILACAKLAR SIRASI (Sonraki Adımlar)
 ---------------------------------------------------------------------
-**AŞAMA 3 — Özel Dönem Tam Akış**
-- "Özel Dönem" checkbox zaten var
-- Uyarı + onay akışı
-- Period.IsSpecial bayrağı (migration gerekebilir)
-- Period.DisplayName (kavramsal) + EffectiveDisplayName (fiili) ayrımı
-- Grid → DisplayName, Shell ComboBox → EffectiveDisplayName
+**ÖNCELİK 1 — Migration Sorunu (KRİTİK)**
+Semptom:
+- `Invalid column name 'IsSpecial'` (API log 13:39:52)
+- `Add-Migration AddIsSpecialToPeriods` → BOŞ migration üretildi
+- `POST /api/periods responded 400` (15:42, 15:43)
+
+Olası kök neden:
+- InitialMaster migration snapshot'ı IsSpecial içeriyor,
+  ancak veritabanı snapshot'ı uygulamamış (veya iki farklı DB)
+- VEYA InitialMaster migration'ı IsSpecial eklenmeden üretildi
+  ve snapshot güncellenmedi
+
+Çözüm adımları (uygulanacak):
+1. SSMS: Accounting_Master DROP (SET SINGLE_USER + ROLLBACK IMMEDIATE)
+2. Migrations klasörünü TAMAMEN boşalt (InitialMaster + AddIsSpecial
+   + snapshot .cs dosyaları)
+3. Add-Migration InitialMaster -Project Accounting.Core.DataAccess
+   -StartupProject Accounting.Api -Context MasterDbContext
+   -OutputDir Persistence\Master\Migrations
+4. Üretilen InitialMaster.cs içinde IsSpecial kolonu KONTROL ET
+   (yoksa Period.cs + PeriodConfiguration.cs tekrar gözden geçir)
+5. Update-Database -Project Accounting.Core.DataAccess
+   -StartupProject Accounting.Api -Context MasterDbContext
+6. API + Desktop yeniden başlat, test et
+
+**ÖNCELİK 2 — AŞAMA 3 doğrulama (Kod hazır, test bekliyor)**
+- Firma seç → Dönem ekle → Kaydet
+- "Özel Dönem" checkbox onay akışını test et
+- Aynı yıl ikinci özel dönem denemesi → engellenmeli
+- Özel dönemde Ocak ayı seç → reddedilmeli
+- 3 başlangıç no = 1 gelmeli (yeni dönem)
+- Shell Dönem ComboBox güncellenmeli (ReloadPeriodsForCurrentCompanyAsync)
 
 **Faz A eksikleri**
-- PeriodEditView XAML gözden geçirme (StorageRate, StorageAmount,
-  DeclarationType, VoucherSortMode, RenumberVouchers, VoucherNumberLength,
-  UseForeignCurrency, SystemCurrency, ExchangeRateMode)
+- PeriodEditView XAML gözden geçirme (tüm alanlar var, doğrula)
 - Hesaplamalar → TAMAMLANDI (PeriodEditViewModel.RecalculateAmounts)
 
 **Firma Detayları (D)**
@@ -947,6 +1034,36 @@ Desktop Token Yönetimi:
   - CompanyEditView.xaml → FoundationDateNullable + PayrollCutoffDateNullable
   - Firma kaydetme ÇALIŞIYOR ✅
 
+2026-09-27: AŞAMA 3 (Kod) + IsSpecial + Kural 56/57 + Dönem combo düzeltmesi
+  - Period.cs → IsSpecial eklendi (bool, default false)
+  - Period.cs → IsStandard computed eklendi
+  - Period.cs → JournalStartNumber/IncomeStartNumber/ExpenseStartNumber default = 1
+  - PeriodConfiguration.cs → IsSpecial bit IsRequired + IsStandard Ignore
+  - PeriodService.cs → CopyFields.IsSpecial + EnsureSpecialPeriodUniqueAsync
+  - PeriodService.cs → Create + Update'te özel dönem tekillik kontrolü
+  - PeriodEditViewModel.cs → IsSpecialPeriod setter'ında Confirm onay akışı
+  - PeriodEditViewModel.cs → _suppressSpecialConfirm bayrağı
+  - PeriodEditViewModel.cs → Validate → özel dönemde Ocak ayı reddi
+  - PeriodEditViewModel.cs → BuildPeriodFromForm → IsSpecial eklendi
+  - PeriodEditViewModel.cs → FillFromPeriod → IsSpecial yüklendi
+  - PeriodEditViewModel.cs → RecalculateDates → Save öncesi çağrı
+  - PeriodEditViewModel.cs → 3 başlangıç no default = 1
+  - PeriodEditView.xaml → Özel Dönem Warning ikon + ToolTip
+  - PeriodEditView.xaml → Year ComboBox Mode=TwoWay
+  - ShellWindow.xaml → Dönem ComboBox DisplayMember Name → DisplayName
+  - ShellWindow.xaml → Dönem ComboBox Width 180 → 220
+  - ShellViewModel.cs → OnPeriodEditSavedAsync → ReloadPeriodsForCurrentCompanyAsync
+  - ShellViewModel.cs → OnPeriodEditCancelledAsync → ReloadPeriodsForCurrentCompanyAsync
+  - ShellViewModel.cs → OnCompanyEditSavedAsync → LoadCompanies + ReloadPeriods
+  - ShellViewModel.cs → ReloadPeriodsForCurrentCompanyAsync (yeni metot)
+  - ShellViewModel.cs → SelectedCompany referans senkronu (_suppressCompanyChanged)
+  - Kural 56 eklendi (Özel Dönem akışı — UI + Business + EF)
+  - Kural 57 eklendi (Başlangıç numaraları default = 1)
+  - Add-Migration AddIsSpecialToPeriods → BOŞ üretildi (kök neden araştırılıyor)
+  - API log: 'Invalid column name IsSpecial' (13:39:52)
+  - API log: POST /api/periods 400 (15:42, 15:43)
+  - ⏳ Migration sorunu — ÖNCELİK 1 (bkz. bölüm 16)
+
 ---------------------------------------------------------------------
 18. SONRAKİ SOHBET BAŞLATMA TALİMATI
 ---------------------------------------------------------------------
@@ -954,19 +1071,35 @@ Desktop Token Yönetimi:
 içeriği var. Kaldığımız yerden devam edelim.
 
 Son durum:
-- Kural 54 (çıkış butonu ikonu) TAMAMLANDI ✅
-- SQL Server bağlantı düzeltmesi YAPILDI (DESKTOP-DFL2OBF) ✅
-- Migration + Veritabanı sıfırlama TAMAMLANDI ✅
-- Firma kaydetme ÇALIŞIYOR ✅ (Kural 55: UpdateSourceTrigger)
-- Models\ klasörü silindi ✅
+- AŞAMA 3 (Özel Dönem) KOD tarafı TAMAMLANDI ✅
+  * Period.IsSpecial + IsStandard
+  * PeriodService özel dönem tekillik iş kuralı
+  * PeriodEditViewModel onay akışı + Ocak reddi
+  * PeriodEditView Warning ikon + ToolTip
+  * Kural 56 (Özel Dönem) + Kural 57 (Başlangıç no = 1)
+- Dönem ComboBox DisplayMember düzeltmesi YAPILDI ✅
+- ShellViewModel dönem tazeleme (ReloadPeriodsForCurrentCompanyAsync) YAPILDI ✅
+- 3 başlangıç numarası default = 1 ✅
+- Firma kaydetme ÇALIŞIYOR ✅
+- ⚠️ KRİTİK SORUN: Migration
+  * Add-Migration AddIsSpecialToPeriods BOŞ üretildi
+  * API log: 'Invalid column name IsSpecial'
+  * POST /api/periods → 400 BadRequest
+  * Olası neden: DB + migration snapshot uyumsuzluğu
 
 Sıradaki adımlar:
-1. AŞAMA 3 — Özel Dönem tam akış (uyarı + onay + IsSpecial bayrağı)
-2. Faz A eksikleri — PeriodEditView XAML gözden geçirme
-3. Firma Detayları — Ortaklar/Adres/İletişim/Kontak sekmeleri
-4. Lookup Admin Ekranı
-5. Genel Muhasebe (Hesap Planı + Yevmiye)
-6. Faz J (Test)
+1. ÖNCELİK 1 — Migration sorunu çözümü
+   - Accounting_Master DROP + Migrations klasörü temizle
+   - Add-Migration InitialMaster (yeniden)
+   - InitialMaster.cs içinde IsSpecial VAR MI kontrol et
+   - Update-Database
+   - API + Desktop restart + test
+2. AŞAMA 3 doğrulama testi (özel dönem akışı)
+3. Faz A eksikleri (PeriodEditView XAML gözden geçirme)
+4. Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
+5. Lookup Admin Ekranı
+6. Genel Muhasebe (Hesap Planı + Yevmiye)
+7. Faz J (Test)
 
 Öncelik sizde — hangisiyle devam edelim?
 "

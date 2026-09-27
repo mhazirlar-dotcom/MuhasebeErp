@@ -96,7 +96,7 @@
                     <dxe:ComboBoxEdit Style="{StaticResource FilteringComboBoxStyle}"
                                       ItemsSource="{Binding Periods}"
                                       SelectedItem="{Binding SelectedPeriod}"
-                                      DisplayMember="Name"
+                                      DisplayMember="DisplayName"
                                       NullText="Dönem seçin"
                                       Width="180"
                                       IsEnabled="{Binding HasPeriods}"

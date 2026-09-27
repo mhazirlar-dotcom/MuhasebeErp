@@ -155,6 +155,7 @@ namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsClosed = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsSpecial = table.Column<bool>(type: "bit", nullable: false),
                     FinalizationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountingMethod = table.Column<string>(type: "nvarchar(32)", nullable: false),
                     FirmClass = table.Column<int>(type: "int", nullable: false),

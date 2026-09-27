@@ -39,6 +39,12 @@ public sealed class PeriodService(IPeriodRepository periodRepository , ICompanyR
             return Result<Period>.Failure(companyResult.Message , companyResult.Status);
         }
 
+        Result specialResult = await EnsureSpecialPeriodUniqueAsync(period , excludePeriodId: Guid.Empty , cancellationToken);
+        if (specialResult.IsFailure)
+        {
+            return Result<Period>.Failure(specialResult.Message , specialResult.Status);
+        }
+
         return await _repository.CreateAsync(period , cancellationToken);
     }
 
@@ -56,6 +62,12 @@ public sealed class PeriodService(IPeriodRepository periodRepository , ICompanyR
             return companyResult;
         }
 
+        Result specialResult = await EnsureSpecialPeriodUniqueAsync(period , excludePeriodId: period.Id , cancellationToken);
+        if (specialResult.IsFailure)
+        {
+            return specialResult;
+        }
+
         return await base.UpdateAsync(period , cancellationToken);
     }
     #endregion Operations
@@ -70,6 +82,7 @@ public sealed class PeriodService(IPeriodRepository periodRepository , ICompanyR
         target.EndDate = source.EndDate;
         target.IsClosed = source.IsClosed;
         target.IsActive = source.IsActive;
+        target.IsSpecial = source.IsSpecial;
         target.FinalizationDate = source.FinalizationDate;
         target.AccountingMethod = source.AccountingMethod;
         target.FirmClass = source.FirmClass;
@@ -132,6 +145,33 @@ public sealed class PeriodService(IPeriodRepository periodRepository , ICompanyR
         if (period.FinalizationDate != DateTime.MinValue && period.FinalizationDate < foundationDate)
         {
             return Result.BusinessRuleViolation($"Kapanış tarihi ({period.FinalizationDate:dd.MM.yyyy}) firma kuruluş tarihinden ({foundationDate:dd.MM.yyyy}) önce olamaz.");
+        }
+
+        return Result.Success();
+    }
+
+    private async Task<Result> EnsureSpecialPeriodUniqueAsync(Period period , Guid excludePeriodId , CancellationToken cancellationToken)
+    {
+        if (!period.IsSpecial)
+        {
+            return Result.Success();
+        }
+
+        Result<IReadOnlyList<Period>> periodsResult = await _repository.GetByCompanyIdAsync(period.CompanyId , cancellationToken);
+
+        if (periodsResult.IsFailure)
+        {
+            return Result.Failure(periodsResult.Message , periodsResult.Status);
+        }
+
+        Period? existingSpecial = periodsResult.Data
+            .Where(p => p.Id != excludePeriodId)
+            .Where(p => p.Year == period.Year)
+            .FirstOrDefault(p => p.IsSpecial);
+
+        if (existingSpecial is not null)
+        {
+            return Result.BusinessRuleViolation($"{period.Year} yılı için zaten bir özel dönem mevcut. Özel dönem başlangıç tarihi: {existingSpecial.StartDate:dd.MM.yyyy}.");
         }
 
         return Result.Success();

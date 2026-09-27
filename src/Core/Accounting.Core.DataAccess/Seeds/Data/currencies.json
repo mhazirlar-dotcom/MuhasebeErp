@@ -1,11 +1,11 @@
 ﻿[
   {
     "code": "TRY",
-    "name": "TÃ¼rk LirasÄ±"
+    "name": "Türk Lirası"
   },
   {
     "code": "USD",
-    "name": "Amerikan DolarÄ±"
+    "name": "Amerikan Doları"
   },
   {
     "code": "EUR",
@@ -13,6 +13,6 @@
   },
   {
     "code": "GBP",
-    "name": "Ä°ngiliz Sterlini"
+    "name": "İngiliz Sterlini"
   }
 ]
