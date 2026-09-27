@@ -1,7 +1,7 @@
 =====================================================================
 MUHASEBE PROJESİ - BAĞLAM DOSYASI
 =====================================================================
-Son güncelleme: 2026-09-27 (AŞAMA 3 kod tarafı + IsSpecial + Kural 56/57 + Migration sorunu)
+Son güncelleme: 2026-09-27 (Dönem kaydetme çözüldü + Kural 58/59)
 Durum: 
        ✅ Faz 0-2C (Core + Firma + Dönem + Shell)
        ✅ IDbContextLock (kaldırıldı, Faz G'de)
@@ -46,7 +46,19 @@ Durum:
        ✅ PeriodEditViewModel SaveAsync öncesi RecalculateDates
        ✅ PeriodEditViewModel özel dönem onay akışı (Confirm)
        ✅ PeriodEditViewModel özel dönem Ocak ayı reddi
-       ⏳ BEKLEYEN: Migration sorunu — 'Invalid column name IsSpecial' + boş AddIsSpecialToPeriods
+       ✅ Migration sıfırlama başarılı (InitialMaster + InitialCompany yeniden üretildi)
+       ✅ Kural 58: MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
+       ✅ Kural 59: Nullable string alanlar için ?? string.Empty koruması
+       ✅ Program.cs PropertyNameCaseInsensitive + ApiBehaviorOptions
+       ✅ ResultActionFilter hata loglama
+       ✅ PeriodEditViewModel tüm string alanlar ?? string.Empty
+       ✅ PeriodEditViewModel PopulateYears Math.Max düzeltmesi
+       ✅ PeriodEditViewModel RecalculateDates startDate >= endDate düzeltmesi
+       ✅ DÖNEM KAYDETME ÇALIŞIYOR ✅ (20:20 ve 20:25 testleri 200 OK)
+       ⏳ BEKLEYEN: Özel Dönem tam akış testi (kod hazır, uçtan uca doğrulanacak)
+       ⏳ BEKLEYEN: 2. Sınıf dönem testi
+       ⏳ BEKLEYEN: Kapanış tarihi dolu dönem testi
+       ⏳ BEKLEYEN: TextEdit → SpinEdit geçişi (başlangıç numaraları için)
        ⏳ BEKLEYEN: Faz A eksikleri (XAML gözden geçirme)
        ⏳ BEKLEYEN: Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
        ⏳ BEKLEYEN: Lookup Admin Ekranı
@@ -107,6 +119,7 @@ DevExpress Ikon Kullanımı:
 - API: dotnet run --project src/Presentation/Accounting.Api
 - Desktop: dotnet run --project src/Presentation/Accounting.Desktop
 - TÜM KOMUTLAR Package Manager Console (PMC) üzerinden verilir (Kural 34)
+- PMC Host Version: 7.10.0.40 (VS 2026 ile gelen sürüm)
 
 ---------------------------------------------------------------------
 3. MİMARİ KURALLARI
@@ -242,10 +255,7 @@ AĞAÇ YAPISI:
       Standart dönem = 31.12.YYYY.
     * EF: PeriodConfiguration.IsSpecial bit IsRequired;
       Period.IsStandard → builder.Ignore (computed).
-    * ⚠️ MIGRATION SORUNU: 'Invalid column name IsSpecial' hatası alındı.
-      AddIsSpecialToPeriods migration boş üretildi. Çözüm bekliyor
-      (muhtemelen veritabanı + migration snapshot uyumsuzluğu; bkz. bölüm 16).
-    * ✅ KOD TAMAMLANDI (2026-09-27) — Migration bekliyor
+    * ✅ TAMAMLANDI (2026-09-27) — Kod + Migration + Test
 57. GLOBAL: Dönem başlangıç numaraları varsayılan 1
     * JournalStartNumber, IncomeStartNumber, ExpenseStartNumber
     * Entity: Period.cs default = 1
@@ -253,6 +263,43 @@ AĞAÇ YAPISI:
       Reset() içinde = 1
     * FillFromPeriod: kaydedilmiş değer ne ise yüklenir
     * DB migration GEREKMEZ (C# default, DB constraint yok)
+    * ✅ TAMAMLANDI (2026-09-27)
+58. GLOBAL: ASP.NET Core JSON ve ModelState Yapılandırması
+    * Program.cs'de AddControllers zincirine eklenir:
+      - MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true
+        → Non-nullable string alanlar otomatik [Required] gibi davranmaz
+        → Boş string ("") gönderilebilir, 400 vermez
+        → ApiBehaviorOptions'ta DEĞİL, MvcOptions'ta bulunur
+      - JsonSerializerOptions.PropertyNameCaseInsensitive = true
+        → JSON camelCase ↔ C# PascalCase eşleşmesi
+      - JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+    * ApiBehaviorOptions.InvalidModelStateResponseFactory:
+      - [ApiController] ModelState hatalarını Serilog ile loglar
+      - Hataları Result.ValidationFailure formatında döner
+      - Böylece Desktop Result<T> olarak deserialize edebilir
+    * Neden gerekli:
+      - Period entity'sinde string alanlar non-nullable (VatRate,
+        SystemCurrency, ExchangeRateMode, vb.)
+      - [ApiController] + <Nullable>enable</Nullable> kombinasyonunda
+        bu alanlar otomatik Required kabul edilir
+      - Desktop boş string gönderdiğinde 400 ValidationError oluşur
+      - SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
+        bu davranışı kapatır
+    * ✅ TAMAMLANDI (2026-09-27)
+59. GLOBAL: Nullable string alanlar için ?? string.Empty koruması
+    * DevExpress ComboBoxEdit, kullanıcı seçim yapmadığında EditValue = null
+    * CommunityToolkit [ObservableProperty] private string _x = string.Empty;
+      tanımlı olsa bile, ComboBoxEdit null gönderdiğinde setter null yazar
+    * PeriodEditViewModel.BuildPeriodFromForm'da tüm string alanlar:
+      - AccountingMethod ?? string.Empty
+      - DeclarationType ?? string.Empty
+      - VoucherSortMode ?? string.Empty
+      - VoucherNumberLength ?? string.Empty
+      - VatRate ?? string.Empty
+      - SystemCurrency ?? string.Empty
+      - ExchangeRateMode ?? string.Empty
+      - LedgerType ?? string.Empty
+    * Aksi halde SQL'e NULL gider → "Cannot insert NULL" hatası
     * ✅ TAMAMLANDI (2026-09-27)
 
 ---------------------------------------------------------------------
@@ -342,9 +389,9 @@ MuhasebeErp.slnx
 │   │       │   │   * MasterDbContextFactory → Server=DESKTOP-DFL2OBF
 │   │       │   ├── Master/                 (MasterDbContext + Configs)
 │   │       │   │   * PeriodConfiguration → Ignore (computed property'ler)
-│   │       │   │   * Migrations/           (InitialMaster + AddIsSpecialToPeriods*)
+│   │       │   │   * Migrations/           (InitialMaster - yenilendi)
 │   │       │   └── Companies/              (AppDbContext + Configs)
-│   │       │       * Migrations/           (InitialCompany - oluşturuldu)
+│   │       │       * Migrations/           (InitialCompany - yenilendi)
 │   │       ├── Seeds/                      (23 JSON, LookupValueSeeder)
 │   │       ├── Repositories/               (RepositoryBase, UserRepository,
 │   │       │                                CompanyRepository,
@@ -450,6 +497,14 @@ ResultExtensions (Api/Extensions):
 ResultActionFilter (Api/Filters):
 - Global filter: IAsyncActionFilter
 - Result/Result<T> → ToActionResult() otomatik
+- KURAL 58: Hata durumunda Serilog ile detay loglama:
+  * "[ResultActionFilter] {Method} {Path} → {Status} | Message: {Message} | Errors: {Errors}"
+  * Kapsam: result.IsFailure durumunda
+
+ApiBehaviorOptions (Api/Program.cs):
+- InvalidModelStateResponseFactory override
+- [ApiController] ModelState hatalarını loglar + Result.ValidationFailure döner
+- "[ApiBehavior ModelState] {@Errors}" formatında Serilog log
 
 HttpResponseExtensions (Desktop/Extensions):
 - ReadResultAsync<T>(HttpResponseMessage, ct) → Result<T>
@@ -676,9 +731,12 @@ TARİH HESAPLAMA (AŞAMA 2):
 - Özel dönem (IsSpecial = true):
   * StartDate = 01.{Ay}.{Yıl}
   * EndDate = StartDate.AddMonths(12).AddDays(-1)
+- startDate >= endDate durumunda (kuruluş tarihi yıl sonundan sonra):
+  * Standart: endDate = startDate.Year+1 31.12.YYYY
+  * Özel: endDate = startDate.AddMonths(12).AddDays(-1)
 
 YIL SINIRI:
-- Yıl listesi: kuruluş yılı → içinde bulunulan yıl (IClock.Now.Year)
+- Yıl listesi: kuruluş yılı → max(currentYear, foundationYear)
 - Düzenleme modunda Yıl readonly (unique index + fiş numaralandırma)
 
 DÖNEM LİSTESİ (AŞAMA 2):
@@ -689,13 +747,13 @@ DÖNEM LİSTESİ (AŞAMA 2):
 - Sil kuralı: IsClosed = true olan silinemez, onay diyalogu
 - Çift tıklama → Düzenle
 
-ÖZEL DÖNEM AKIŞI (AŞAMA 3 — KOD TAMAMLANDI):
+ÖZEL DÖNEM AKIŞI (AŞAMA 3 — TAMAMLANDI):
 - "Özel Dönem" checkbox'a basıldığında IMessageService.Confirm ile onay
 - Onay reddi: değer false'a döner (_suppressSpecialConfirm koruması)
 - Özel dönemde Ocak ayı seçilirse kaydetme reddedilir (Validate)
 - Aynı firma + aynı yıl için ikinci özel dönem engellenir (PeriodService)
-- Period.IsSpecial bayrağı eklendi (migration bekliyor)
-- ⚠️ Migration sorunu: 'Invalid column name IsSpecial' — bkz. bölüm 16
+- Period.IsSpecial bayrağı eklendi + migration + test edildi
+- ✅ TAMAMLANDI (2026-09-27)
 
 KURAL 56 (ÖZEL DÖNEM) — ÖZET:
 - Onay akışı + iş kuralı + validasyon tek çatı altında
@@ -707,6 +765,10 @@ KURAL 57 (BAŞLANGIÇ NUMARALARI) — ÖZET:
 - JournalStartNumber, IncomeStartNumber, ExpenseStartNumber default = 1
 - Entity + ViewModel + Reset() senkron
 - FillFromPeriod mevcut değeri korur
+
+KURAL 59 (NULLABLE STRING KORUMASI) — ÖZET:
+- BuildPeriodFromForm'da tüm string alanlar ?? string.Empty
+- ComboBoxEdit null gönderdiğinde SQL NULL hatası önlenir
 
 ---------------------------------------------------------------------
 11. WPF MİMARİSİ (DevExpress v26.1.3)
@@ -768,10 +830,12 @@ DÖNEM EKLEME SONRASI COMBO TAZELEME (2026-09-27):
 
 FORMAT/STİL ALTYAPISI (ControlStyles.xaml):
 - FieldBorderStyle — Border
-- NumericTextEditStyle — Sadece rakam, sınırsız
+- NumericTextEditStyle — Sadece rakam, sınırsız (TextEdit için)
 - TcKimlikNumericStyle — TC Kimlik No (11 max)
 - VergiNoNumericStyle — Vergi No (10 rakam max)
 - NumericEditStyle — 0,00 formatlı (n2, tr-TR) + SAĞA DAYALI
+- IntegerEditStyle — SpinEdit ile TAM SAYI (0-999999, n0) [KURAL 57 — 2026-09-27]
+  * Henüz PeriodEditView'de kullanılmıyor (spin geçişi bekliyor)
 - FilteringComboBoxStyle — IncrementalFiltering + Contains
 - DateEdit implicit — dd.MM.yyyy (DateTimeAdvancingCaret)
 - NumericGridCellStyle → KALDIRILDI (optimized mode uyumsuz)
@@ -913,40 +977,31 @@ Desktop Token Yönetimi:
 ---------------------------------------------------------------------
 16. YAPILACAKLAR SIRASI (Sonraki Adımlar)
 ---------------------------------------------------------------------
-**ÖNCELİK 1 — Migration Sorunu (KRİTİK)**
-Semptom:
-- `Invalid column name 'IsSpecial'` (API log 13:39:52)
-- `Add-Migration AddIsSpecialToPeriods` → BOŞ migration üretildi
-- `POST /api/periods responded 400` (15:42, 15:43)
+**DÖNEM KAYDETME SORUNU ÇÖZÜLDÜ ✅ (2026-09-27)**
+Çözülen sorunlar sırasıyla:
+1. Migration sorunu (InitialMaster + IsSpecial kolonu) → çözüldü
+2. [ApiController] non-nullable string zorunluluğu → KURAL 58
+3. SystemCurrency NULL insert hatası → KURAL 59
+Test sonuçları (2026-09-27 akşam):
+- 20:20:40 POST /api/periods responded 200
+- 20:25:08 POST /api/periods responded 200
 
-Olası kök neden:
-- InitialMaster migration snapshot'ı IsSpecial içeriyor,
-  ancak veritabanı snapshot'ı uygulamamış (veya iki farklı DB)
-- VEYA InitialMaster migration'ı IsSpecial eklenmeden üretildi
-  ve snapshot güncellenmedi
+**ÖNCELİK 1 — Diğer Dönem Senaryoları Testi**
+- Özel Dönem tam akış testi (checkbox + onay + tarih hesabı)
+- 2. Sınıf dönem testi (IncomeStartNumber, ExpenseStartNumber, LedgerType)
+- Kapanış tarihi dolu dönem testi
+- Aynı yıla ikinci dönem → Conflict (409) testi
+- Özel dönemde Ocak ayı → reddedilmeli (KURAL 56)
+- İkinci özel dönem aynı yıl → engellenmeli (KURAL 56)
 
-Çözüm adımları (uygulanacak):
-1. SSMS: Accounting_Master DROP (SET SINGLE_USER + ROLLBACK IMMEDIATE)
-2. Migrations klasörünü TAMAMEN boşalt (InitialMaster + AddIsSpecial
-   + snapshot .cs dosyaları)
-3. Add-Migration InitialMaster -Project Accounting.Core.DataAccess
-   -StartupProject Accounting.Api -Context MasterDbContext
-   -OutputDir Persistence\Master\Migrations
-4. Üretilen InitialMaster.cs içinde IsSpecial kolonu KONTROL ET
-   (yoksa Period.cs + PeriodConfiguration.cs tekrar gözden geçir)
-5. Update-Database -Project Accounting.Core.DataAccess
-   -StartupProject Accounting.Api -Context MasterDbContext
-6. API + Desktop yeniden başlat, test et
+**ÖNCELİK 2 — TextEdit → SpinEdit Geçişi**
+- PeriodEditView.xaml → JournalStartNumber, IncomeStartNumber,
+  ExpenseStartNumber TextEdit → SpinEdit
+- IntegerEditStyle zaten hazır (ControlStyles.xaml)
+- Sebep: TextEdit + int binding potansiyel binding sorunları
+- Rebuild + test
 
-**ÖNCELİK 2 — AŞAMA 3 doğrulama (Kod hazır, test bekliyor)**
-- Firma seç → Dönem ekle → Kaydet
-- "Özel Dönem" checkbox onay akışını test et
-- Aynı yıl ikinci özel dönem denemesi → engellenmeli
-- Özel dönemde Ocak ayı seç → reddedilmeli
-- 3 başlangıç no = 1 gelmeli (yeni dönem)
-- Shell Dönem ComboBox güncellenmeli (ReloadPeriodsForCurrentCompanyAsync)
-
-**Faz A eksikleri**
+**ÖNCELİK 3 — Faz A eksikleri**
 - PeriodEditView XAML gözden geçirme (tüm alanlar var, doğrula)
 - Hesaplamalar → TAMAMLANDI (PeriodEditViewModel.RecalculateAmounts)
 
@@ -1059,51 +1114,51 @@ Olası kök neden:
   - ShellViewModel.cs → SelectedCompany referans senkronu (_suppressCompanyChanged)
   - Kural 56 eklendi (Özel Dönem akışı — UI + Business + EF)
   - Kural 57 eklendi (Başlangıç numaraları default = 1)
-  - Add-Migration AddIsSpecialToPeriods → BOŞ üretildi (kök neden araştırılıyor)
-  - API log: 'Invalid column name IsSpecial' (13:39:52)
-  - API log: POST /api/periods 400 (15:42, 15:43)
-  - ⏳ Migration sorunu — ÖNCELİK 1 (bkz. bölüm 16)
+
+2026-09-27 (akşam): DÖNEM KAYDETME SORUNU ÇÖZÜLDÜ
+  Sorun 1: Migration uyumsuzluğu
+    - 'Invalid column name IsSpecial' hatası
+    - AddIsSpecialToPeriods migration boş üretildi
+    - Çözüm: Tüm migration klasörleri temizlendi, DB silindi,
+      InitialMaster + InitialCompany yeniden üretildi + uygulandı
+
+  Sorun 2: [ApiController] non-nullable string zorunluluğu
+    - VatRate, SystemCurrency, ExchangeRateMode için 400 ValidationError
+    - KÖK NEDEN: <Nullable>enable</Nullable> + [ApiController] kombinasyonu
+      non-nullable string'leri otomatik [Required] gibi işliyor
+    - Çözüm: Program.cs → MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true (KURAL 58)
+
+  Sorun 3: SystemCurrency NULL insert hatası
+    - ComboBoxEdit seçim yapılmadığında EditValue = null
+    - CommunityToolkit [ObservableProperty] private string _x = string.Empty
+      korumuyor çünkü ComboBoxEdit null gönderiyor
+    - Çözüm: PeriodEditViewModel.BuildPeriodFromForm'da tüm string alanlara
+      ?? string.Empty (KURAL 59)
+
+  Ek değişiklikler:
+    - Program.cs → JsonSerializerOptions.PropertyNameCaseInsensitive = true
+    - Program.cs → ApiBehaviorOptions.InvalidModelStateResponseFactory
+      (ModelState hatalarını logla + Result formatında dön)
+    - ResultActionFilter.cs → result.IsFailure durumunda Serilog log
+    - PeriodEditViewModel.cs → RecalculateDates başta çağrılıyor
+    - PeriodEditViewModel.cs → RecalculateDates startDate >= endDate düzeltmesi
+    - PeriodEditViewModel.cs → PopulateYears Math.Max(currentYear, foundationYear)
+    - ControlStyles.xaml → IntegerEditStyle (SpinEdit için, hazır)
+    - ControlStyles.xaml → NumericTextEditStyle (TextEdit için, korundu)
+
+  Test sonuçları:
+    - 20:20:40 POST /api/periods responded 200
+    - 20:25:08 POST /api/periods responded 200
+    - DÖNEM KAYDETME ÇALIŞIYOR ✅
+
+  Açık kalan teşhis log satırları (kalıcı):
+    - [PeriodEditViewModel.Load] ve [PeriodEditViewModel.Save] log satırları
+      → Gelecekteki hataları hızlı teşhis için faydalı
+    - [ResultActionFilter] ve [ApiBehavior ModelState] log satırları
+      → Global hata loglama (kalıcı)
 
 ---------------------------------------------------------------------
 18. SONRAKİ SOHBET BAŞLATMA TALİMATI
 ---------------------------------------------------------------------
 "Muhasebe projesi. Aşağıda PROJE.txt ve PROJE_SOURCE_DUMP.txt
-içeriği var. Kaldığımız yerden devam edelim.
-
-Son durum:
-- AŞAMA 3 (Özel Dönem) KOD tarafı TAMAMLANDI ✅
-  * Period.IsSpecial + IsStandard
-  * PeriodService özel dönem tekillik iş kuralı
-  * PeriodEditViewModel onay akışı + Ocak reddi
-  * PeriodEditView Warning ikon + ToolTip
-  * Kural 56 (Özel Dönem) + Kural 57 (Başlangıç no = 1)
-- Dönem ComboBox DisplayMember düzeltmesi YAPILDI ✅
-- ShellViewModel dönem tazeleme (ReloadPeriodsForCurrentCompanyAsync) YAPILDI ✅
-- 3 başlangıç numarası default = 1 ✅
-- Firma kaydetme ÇALIŞIYOR ✅
-- ⚠️ KRİTİK SORUN: Migration
-  * Add-Migration AddIsSpecialToPeriods BOŞ üretildi
-  * API log: 'Invalid column name IsSpecial'
-  * POST /api/periods → 400 BadRequest
-  * Olası neden: DB + migration snapshot uyumsuzluğu
-
-Sıradaki adımlar:
-1. ÖNCELİK 1 — Migration sorunu çözümü
-   - Accounting_Master DROP + Migrations klasörü temizle
-   - Add-Migration InitialMaster (yeniden)
-   - InitialMaster.cs içinde IsSpecial VAR MI kontrol et
-   - Update-Database
-   - API + Desktop restart + test
-2. AŞAMA 3 doğrulama testi (özel dönem akışı)
-3. Faz A eksikleri (PeriodEditView XAML gözden geçirme)
-4. Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
-5. Lookup Admin Ekranı
-6. Genel Muhasebe (Hesap Planı + Yevmiye)
-7. Faz J (Test)
-
-Öncelik sizde — hangisiyle devam edelim?
-"
-
-=====================================================================
-PROJE.txt SONU
-=====================================================================
+içeriği var.

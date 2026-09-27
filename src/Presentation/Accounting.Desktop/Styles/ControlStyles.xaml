@@ -80,6 +80,22 @@
     </Style>
 
     <!-- ============================================================
+         IntegerEditStyle (KEY'li) — SpinEdit ile TAM SAYI (0 - 999999)
+         KURAL 57: Dönem başlangıç numaraları için kullanılır
+         ============================================================ -->
+    <Style x:Key="IntegerEditStyle" TargetType="dxe:SpinEdit">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MinValue" Value="0" />
+        <Setter Property="MaxValue" Value="999999" />
+        <Setter Property="IsFloatValue" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="MaskUseAsDisplayFormat" Value="True" />
+        <Setter Property="Mask" Value="n0" />
+        <Setter Property="MaskCulture" Value="tr-TR" />
+    </Style>
+
+    <!-- ============================================================
          PasswordBoxEdit (implicit)
          ============================================================ -->
     <Style TargetType="dxe:PasswordBoxEdit">

@@ -7,17 +7,13 @@ using Accounting.Shared.Markers;
 using Accounting.Shared.Results;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Serilog;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace Accounting.Desktop.ViewModels;
 
-public partial class PeriodEditViewModel(
-    IPeriodService periodService ,
-    ICompanyService companyService ,
-    ILookupValueService lookupValueService ,
-    IMessageService messageService ,
-    IClock clock) : ObservableObject, ITransientService
+public partial class PeriodEditViewModel : ObservableObject, ITransientService
 {
     #region Constants
     private const int FallbackFoundationYear = 1900;
@@ -33,11 +29,11 @@ public partial class PeriodEditViewModel(
     #endregion Events
 
     #region Fields
-    private readonly IPeriodService _periodService = periodService;
-    private readonly ICompanyService _companyService = companyService;
-    private readonly ILookupValueService _lookupValueService = lookupValueService;
-    private readonly IMessageService _messageService = messageService;
-    private readonly IClock _clock = clock;
+    private readonly IPeriodService _periodService;
+    private readonly ICompanyService _companyService;
+    private readonly ILookupValueService _lookupValueService;
+    private readonly IMessageService _messageService;
+    private readonly IClock _clock;
 
     private Guid _companyId = Guid.Empty;
     private Guid _periodId = Guid.Empty;
@@ -49,9 +45,22 @@ public partial class PeriodEditViewModel(
 
     private DateTime _companyFoundationDate = DateTime.MinValue;
     private IReadOnlyList<Period> _existingPeriods = [];
-
     #endregion Fields
+
     #region Constructor
+    public PeriodEditViewModel(
+        IPeriodService periodService ,
+        ICompanyService companyService ,
+        ILookupValueService lookupValueService ,
+        IMessageService messageService ,
+        IClock clock)
+    {
+        _periodService = periodService;
+        _companyService = companyService;
+        _lookupValueService = lookupValueService;
+        _messageService = messageService;
+        _clock = clock;
+    }
     #endregion Constructor
 
     #region Properties
@@ -62,6 +71,7 @@ public partial class PeriodEditViewModel(
     private bool _isBusy;
 
     public bool IsNotBusy => !IsBusy;
+
     public bool IsEditMode
     {
         get => _isEditMode;
@@ -299,7 +309,7 @@ public partial class PeriodEditViewModel(
     }
 
     [ObservableProperty]
-    private int _journalStartNumber=1;
+    private int _journalStartNumber = 1;
 
     [ObservableProperty]
     private string _declarationType = string.Empty;
@@ -327,10 +337,10 @@ public partial class PeriodEditViewModel(
     private string _ledgerType = string.Empty;
 
     [ObservableProperty]
-    private int _incomeStartNumber=1;
+    private int _incomeStartNumber = 1;
 
     [ObservableProperty]
-    private int _expenseStartNumber=1;
+    private int _expenseStartNumber = 1;
 
     [ObservableProperty]
     private decimal _carryoverVat;
@@ -413,11 +423,17 @@ public partial class PeriodEditViewModel(
 
         _isInitializing = false;
         RecalculateDates();
+
+        Log.Information(
+            "[PeriodEditViewModel.Load] Bitti — CompanyId={CompanyId}, PeriodId={PeriodId}, IsEditMode={IsEditMode}, SelectedYear={Year}, SelectedMonth={Month}, StartDate={Start}, EndDate={End}, FoundationDate={Foundation}" ,
+            _companyId , _periodId , IsEditMode , SelectedYear , SelectedMonth?.Code ?? "null" , StartDate , EndDate , _companyFoundationDate);
     }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
+        RecalculateDates();
+
         string? validationError = Validate();
         if (validationError is not null)
         {
@@ -430,6 +446,10 @@ public partial class PeriodEditViewModel(
         try
         {
             Period period = BuildPeriodFromForm();
+
+            Log.Information(
+                "[PeriodEditViewModel.Save] POST edilecek — CompanyId={CompanyId}, Year={Year}, Month={Month}, Start={Start}, End={End}, FirmClass={Class}, IsSpecial={IsSpecial}, JournalStart={JournalStart}, IncomeStart={IncomeStart}, ExpenseStart={ExpenseStart}" ,
+                period.CompanyId , period.Year , period.MonthNumber , period.StartDate , period.EndDate , period.FirmClass , period.IsSpecial , period.JournalStartNumber , period.IncomeStartNumber , period.ExpenseStartNumber);
 
             Result result;
 
@@ -514,7 +534,7 @@ public partial class PeriodEditViewModel(
         VatAmount = 0m;
         StorageRate = 0m;
         StorageAmount = 0m;
-        JournalStartNumber = 0;
+        JournalStartNumber = 1;
         DeclarationType = string.Empty;
         VoucherSortMode = string.Empty;
         RenumberVouchers = false;
@@ -524,8 +544,8 @@ public partial class PeriodEditViewModel(
         ExchangeRateMode = string.Empty;
 
         LedgerType = string.Empty;
-        IncomeStartNumber = 0;
-        ExpenseStartNumber = 0;
+        IncomeStartNumber = 1;
+        ExpenseStartNumber = 1;
         CarryoverVat = 0m;
         IsVatTaxpayer = false;
         UseDbsStockLedger = false;
@@ -583,7 +603,9 @@ public partial class PeriodEditViewModel(
         int foundationYear = _companyFoundationDate.Year;
         int currentYear = _clock.Now.Year;
 
-        for (int year = foundationYear ; year <= currentYear ; year++)
+        int lastYear = Math.Max(currentYear , foundationYear);
+
+        for (int year = foundationYear ; year <= lastYear ; year++)
         {
             AvailableYears.Add(year);
         }
@@ -704,6 +726,18 @@ public partial class PeriodEditViewModel(
             endDate = new DateTime(SelectedYear , 12 , 31);
         }
 
+        if (startDate >= endDate)
+        {
+            if (IsSpecialPeriod)
+            {
+                endDate = startDate.AddMonths(PeriodMonthCount).AddDays(-1);
+            }
+            else
+            {
+                endDate = new DateTime(startDate.Year + 1 , 12 , 31);
+            }
+        }
+
         StartDate = startDate;
         EndDate = endDate;
     }
@@ -798,25 +832,25 @@ public partial class PeriodEditViewModel(
             IsActive = IsActive,
             IsSpecial = IsSpecialPeriod,
             FinalizationDate = FinalizationDate,
-            AccountingMethod = AccountingMethod,
+            AccountingMethod = AccountingMethod ?? string.Empty,
             FirmClass = FirmClass,
             OtherLoss = OtherLoss,
             ExceptionLoss = ExceptionLoss,
             GrossWage = GrossWage,
             NetWage = NetWage,
-            VatRate = VatRate,
+            VatRate = VatRate ?? string.Empty,
             VatAmount = VatAmount,
             StorageRate = StorageRate,
             StorageAmount = StorageAmount,
             JournalStartNumber = JournalStartNumber,
-            DeclarationType = DeclarationType,
-            VoucherSortMode = VoucherSortMode,
+            DeclarationType = DeclarationType ?? string.Empty,
+            VoucherSortMode = VoucherSortMode ?? string.Empty,
             RenumberVouchers = RenumberVouchers,
-            VoucherNumberLength = VoucherNumberLength,
+            VoucherNumberLength = VoucherNumberLength ?? string.Empty,
             UseForeignCurrency = UseForeignCurrency,
-            SystemCurrency = SystemCurrency,
-            ExchangeRateMode = ExchangeRateMode,
-            LedgerType = LedgerType,
+            SystemCurrency = SystemCurrency ?? string.Empty,
+            ExchangeRateMode = ExchangeRateMode ?? string.Empty,
+            LedgerType = LedgerType ?? string.Empty,
             IncomeStartNumber = IncomeStartNumber,
             ExpenseStartNumber = ExpenseStartNumber,
             CarryoverVat = CarryoverVat,

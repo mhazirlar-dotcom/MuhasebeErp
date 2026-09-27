@@ -4,6 +4,7 @@ using Accounting.Composition;
 using Accounting.Core.Business.Interfaces.Services;
 using Accounting.Shared.Results;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;
@@ -79,10 +80,41 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ResultActionFilter>();
+
+    // Non-nullable reference type'ları [Required] gibi davranmaktan çıkar.
+    // VatRate, SystemCurrency, ExchangeRateMode gibi alanlar boş string geçebilsin.
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 })
 .AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+});
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var modelErrors = context.ModelState
+            .Where(kv => kv.Value?.Errors.Count > 0)
+            .SelectMany(kv => kv.Value!.Errors.Select(e => new
+            {
+                Field = kv.Key ,
+                Message = string.IsNullOrWhiteSpace(e.ErrorMessage) ? "Geçersiz değer." : e.ErrorMessage ,
+                Exception = e.Exception?.Message
+            }))
+            .ToList();
+
+        Log.Warning("[ApiBehavior ModelState] {@Errors}" , modelErrors);
+
+        IReadOnlyList<Error> errorList = [.. modelErrors.Select(e => new Error(
+            ResultStatus.ValidationError ,
+            $"{e.Field}: {e.Message}" ,
+            ResultStatus.ValidationError ,
+            e.Field))];
+
+        return new BadRequestObjectResult(Result.ValidationFailure(errorList));
+    };
 });
 
 builder.Services.AddOpenApi();
