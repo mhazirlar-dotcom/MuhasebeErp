@@ -8,6 +8,7 @@ using Accounting.Shared.Results;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System.Collections.ObjectModel;
 
 namespace Accounting.Desktop.ViewModels;
@@ -127,14 +128,22 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
     public async Task OpenCompanyEditViewAsync(Guid companyId , string? initialSection = null)
     {
+        Log.Information(
+            "[ShellViewModel.OpenCompanyEditViewAsync] Çağrıldı — CompanyId={CompanyId}, InitialSection={InitialSection}" ,
+            companyId , initialSection ?? "null");
+
         _currentCompanyId = companyId;
+
+        Log.Information(
+            "[ShellViewModel.OpenCompanyEditViewAsync] _currentCompanyId set edildi — {CurrentCompanyId}" ,
+            _currentCompanyId);
 
         CompanyEditViewModel editViewModel = _serviceProvider.GetRequiredService<CompanyEditViewModel>();
         await editViewModel.LoadAsync(companyId , initialSection);
 
         Views.CompanyEditView view = new(editViewModel , this);
 
-        view.SaveCompleted += async (_ , _) => await OnCompanyEditSavedAsync();
+        view.SaveCompleted += async (_ , savedCompanyId) => await OnCompanyEditSavedAsync(savedCompanyId);
         view.Cancelled += (_ , _) => OnCompanyEditCancelled();
 
         CurrentView = view;
@@ -142,6 +151,10 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
     public async Task OpenPeriodEditViewAsync(Guid periodId)
     {
+        Log.Information(
+            "[ShellViewModel.OpenPeriodEditViewAsync] Çağrıldı — PeriodId={PeriodId}, _currentCompanyId={CurrentCompanyId}, HasCompany={HasCompany}" ,
+            periodId , _currentCompanyId , _currentCompanyId != Guid.Empty);
+
         if (_currentCompanyId == Guid.Empty)
         {
             _messageService.ShowWarning("Önce bir firma seçin.");
@@ -301,7 +314,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
         if (company is null)
         {
-            // Firma listede yoksa (yeni kaydedilmiş olabilir) listeyi tazele.
             await LoadCompaniesAsync();
 
             company = Companies.FirstOrDefault(c => c.Id == _currentCompanyId);
@@ -314,7 +326,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
         await LoadPeriodsAsync(company);
 
-        // SelectedCompany referansını listedeki gerçek instance ile eşleştir.
         if (SelectedCompany?.Id != company.Id)
         {
             _suppressCompanyChanged = true;
@@ -322,7 +333,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
             _suppressCompanyChanged = false;
         }
 
-        // En son eklenen (en yüksek yıl) dönemi otomatik seç.
         Period? lastPeriod = Periods
             .OrderByDescending(p => p.Year)
             .ThenByDescending(p => p.MonthNumber)
@@ -365,10 +375,25 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
         CurrentView = view;
     }
 
-    private async Task OnCompanyEditSavedAsync()
+    private async Task OnCompanyEditSavedAsync(Guid savedCompanyId)
     {
+        Log.Information(
+            "[ShellViewModel.OnCompanyEditSavedAsync] Çağrıldı — SavedCompanyId={SavedCompanyId}, _currentCompanyId (önce)={CurrentCompanyId}" ,
+            savedCompanyId , _currentCompanyId);
+
+        _currentCompanyId = savedCompanyId;
+
+        Log.Information(
+            "[ShellViewModel.OnCompanyEditSavedAsync] _currentCompanyId set edildi — {CurrentCompanyId}" ,
+            _currentCompanyId);
+
         await LoadCompaniesAsync();
         await ReloadPeriodsForCurrentCompanyAsync();
+
+        if (_currentCompanyId != Guid.Empty)
+        {
+            await OpenCompanyEditViewAsync(_currentCompanyId);
+        }
     }
 
     private void OnCompanyEditCancelled()

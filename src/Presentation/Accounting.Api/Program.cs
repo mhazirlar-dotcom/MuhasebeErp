@@ -10,6 +10,7 @@ using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Host
@@ -81,8 +82,6 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ResultActionFilter>();
 
-    // Non-nullable reference type'ları [Required] gibi davranmaktan çıkar.
-    // VatRate, SystemCurrency, ExchangeRateMode gibi alanlar boş string geçebilsin.
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 })
 .AddJsonOptions(options =>
@@ -122,9 +121,46 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-#region Startup Seeders
-await RunStartupSeedersAsync(app);
-#endregion Startup Seeders
+#region Startup Database Migrations + Seeders (Arka Planda)
+// Migration ve seed işlemleri Kestrel'i bloklamaz. API hemen dinlemeye başlar,
+// UI hızlıca bağlanır. Migration ve seed arka planda tamamlanır.
+_ = Task.Run(async () =>
+{
+    try
+    {
+        using IServiceScope scope = app.Services.CreateScope();
+        ICompanyDatabaseMigrator migrator = scope.ServiceProvider.GetRequiredService<ICompanyDatabaseMigrator>();
+        Result<int> migrateResult = await migrator.MigrateAllAsync();
+
+        if (migrateResult.IsFailure)
+        {
+            Log.Warning("[Startup] Firma veritabanları güncellenemedi — {Message}" , migrateResult.Message);
+        }
+
+        IEnumerable<IStartupSeeder> seeders = scope.ServiceProvider.GetServices<IStartupSeeder>();
+
+        foreach (IStartupSeeder seeder in seeders)
+        {
+            Result seedResult = await seeder.SeedAsync();
+
+            if (seedResult.IsSuccess)
+            {
+                Log.Information("Seed tamamlandı: {Seeder} — {Message}" , seeder.GetType().Name , seedResult.Message);
+            }
+            else
+            {
+                Log.Warning("Seed başarısız: {Seeder} — {Message}" , seeder.GetType().Name , seedResult.Message);
+            }
+        }
+
+        Log.Information("[Startup] Arka plan migration ve seed işlemleri tamamlandı.");
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex , "[Startup] Arka plan migration/seed sırasında hata oluştu.");
+    }
+});
+#endregion Startup Database Migrations + Seeders
 
 #region Pipeline
 if (app.Environment.IsDevelopment())
@@ -145,26 +181,3 @@ app.MapControllers();
 #endregion Pipeline
 
 app.Run();
-
-#region Helpers
-static async Task RunStartupSeedersAsync(WebApplication app)
-{
-    using IServiceScope scope = app.Services.CreateScope();
-
-    IEnumerable<IStartupSeeder> seeders = scope.ServiceProvider.GetServices<IStartupSeeder>();
-
-    foreach (IStartupSeeder seeder in seeders)
-    {
-        Result result = await seeder.SeedAsync();
-
-        if (result.IsSuccess)
-        {
-            Log.Information("Seed tamamlandı: {Seeder} — {Message}" , seeder.GetType().Name , result.Message);
-        }
-        else
-        {
-            Log.Warning("Seed başarısız: {Seeder} — {Message}" , seeder.GetType().Name , result.Message);
-        }
-    }
-}
-#endregion Helpers

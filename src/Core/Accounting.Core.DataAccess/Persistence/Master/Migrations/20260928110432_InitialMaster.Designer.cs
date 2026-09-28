@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accounting.Core.DataAccess.Persistence.Master.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20260927172215_InitialMaster")]
+    [Migration("20260928110432_InitialMaster")]
     partial class InitialMaster
     {
         /// <inheritdoc />

@@ -5,7 +5,7 @@
                  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
                  Title="İlk Kurulum"
                  Width="480"
-                 Height="520"
+                 Height="600"
                  WindowStartupLocation="CenterScreen"
                  ResizeMode="NoResize">
 
@@ -36,30 +36,40 @@
                    TextAlignment="Center"
                    Margin="0,0,0,24" />
 
-        <dxe:TextEdit Grid.Row="2"
-                      EditValue="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="Kullanıcı Adı"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="2"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="Kullanıcı Adı" />
+        </Border>
 
-        <dxe:TextEdit Grid.Row="3"
-                      EditValue="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="Ad Soyad"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="3"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="Ad Soyad" />
+        </Border>
 
-        <dxe:TextEdit Grid.Row="4"
-                      EditValue="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="E-posta"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="4"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="E-posta" />
+        </Border>
 
-        <dxe:PasswordBoxEdit Grid.Row="5"
-                             EditValue="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                             NullText="Şifre"
-                             Margin="0,0,0,12" />
+        <Border Grid.Row="5"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:PasswordBoxEdit EditValue="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                 NullText="Şifre" />
+        </Border>
 
-        <dxe:PasswordBoxEdit Grid.Row="6"
-                             EditValue="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}"
-                             NullText="Şifre Tekrar"
-                             Margin="0,0,0,20" />
+        <Border Grid.Row="6"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,20">
+            <dxe:PasswordBoxEdit EditValue="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}"
+                                 NullText="Şifre Tekrar" />
+        </Border>
 
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>

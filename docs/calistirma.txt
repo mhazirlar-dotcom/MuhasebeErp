@@ -7,6 +7,17 @@ Add-Migration InitialMaster -Project Accounting.Core.DataAccess -StartupProject 
 Update-Database -Project Accounting.Core.DataAccess -StartupProject Accounting.Api -Context MasterDbContext
 
 
+Add-Migration InitialCompany -Project Accounting.Core.DataAccess -StartupProject Accounting.Api -Context AppDbContext -OutputDir Persistence\Companies\Migrations
+
+
+
+
+
+
+Update-Database -Project Accounting.Core.DataAccess -StartupProject Accounting.Api -Context AppDbContext 
+
+
+
 dotnet ef migrations add InitialCompany --project src\Core\Accounting.Core.DataAccess\Accounting.Core.DataAccess.csproj --startup-project src\Presentation\Accounting.Api\Accounting.Api.csproj --context AppDbContext --output-dir Persistence\Companies\Migrations
 
 

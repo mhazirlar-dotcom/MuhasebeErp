@@ -1,6 +1,7 @@
 ﻿using Accounting.Composition;
 using Accounting.Core.Business.Interfaces.Services;
 using Accounting.Desktop.Extensions;
+using Accounting.Desktop.Services;
 using Accounting.Desktop.ViewModels;
 using Accounting.Desktop.Windows;
 using Accounting.Shared.Results;
@@ -17,6 +18,7 @@ public partial class App : Application
     #region Properties
     public static IServiceProvider Services { get; private set; } = null!;
     private static IHost _host = null!;
+    private static ApiProcessManager _apiProcessManager = null!;
     #endregion Properties
 
     #region Operations
@@ -33,12 +35,38 @@ public partial class App : Application
 
         Log.Information("Uygulama başladı.");
 
+        try
+        {
+            _apiProcessManager = new ApiProcessManager();
+            await _apiProcessManager.StartAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex , "API başlatılamadı.");
+            MessageBox.Show(
+                $"API başlatılamadı:\n\n{ex.GetType().Name}\n{ex.Message}" ,
+                "Başlangıç Hatası" , MessageBoxButton.OK , MessageBoxImage.Error);
+            Current.Shutdown();
+            return;
+        }
+
         await RunStartupFlowAsync();
     }
 
     protected override async void OnExit(ExitEventArgs e)
     {
         Log.Information("Uygulama kapanıyor.");
+
+        try
+        {
+            _apiProcessManager?.Dispose();
+            Log.Information("[App.OnExit] API process temizlendi.");
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex , "[App.OnExit] API process temizlenemedi.");
+        }
+
         await Log.CloseAndFlushAsync();
 
         if (_host is IDisposable disposable)

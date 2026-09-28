@@ -1,42 +1,83 @@
 <Project>
 
-  <!-- ============================================================ -->
-  <!-- ORTAK DERLEME AYARLARI                                        -->
-  <!-- ============================================================ -->
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-  </PropertyGroup>
+    <!-- ============================================================ -->
+    <!-- ORTAK DERLEME AYARLARI                                        -->
+    <!-- ============================================================ -->
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    </PropertyGroup>
 
-  <!-- ============================================================ -->
-  <!-- KOD ANALİZÖRLERİ                                              -->
-  <!-- ============================================================ -->
-  <PropertyGroup>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>latest</AnalysisLevel>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-  </PropertyGroup>
+    <!-- ============================================================ -->
+    <!-- KOD ANALİZÖRLERİ                                              -->
+    <!-- ============================================================ -->
+    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
 
-  <!-- ============================================================ -->
-  <!-- UYARI SUSTURMA                                                -->
-  <!-- ============================================================ -->
-  <PropertyGroup>
-    <NoWarn>$(NoWarn);DX1001,MVVMTK0042</NoWarn>
-  </PropertyGroup>
+    <!-- ============================================================ -->
+    <!-- UYARI SUSTURMA                                                -->
+    <!-- ============================================================ -->
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);DX1001,MVVMTK0042</NoWarn>
+    </PropertyGroup>
 
-  <!-- ============================================================ -->
-  <!-- DERLEME METADATA                                              -->
-  <!-- ============================================================ -->
-  <PropertyGroup>
-    <Company>Muhasebe ERP</Company>
-    <Product>Muhasebe ERP</Product>
-    <Version>1.0.0</Version>
-    <Authors>Muhasebe ERP Team</Authors>
-    <Copyright>Copyright © 2026</Copyright>
-  </PropertyGroup>
+    <!-- ============================================================ -->
+    <!-- DERLEME METADATA                                              -->
+    <!-- ============================================================ -->
+    <PropertyGroup>
+        <Company>Muhasebe ERP</Company>
+        <Product>Muhasebe ERP</Product>
+        <Version>1.0.0</Version>
+        <Authors>Muhasebe ERP Team</Authors>
+        <Copyright>Copyright © 2026</Copyright>
+    </PropertyGroup>
+
+    <!-- ============================================================ -->
+    <!-- WEB SDK PROJELERİ İÇİN KONSOL GİZLEME (KURAL 61)              -->
+    <!-- ============================================================ -->
+    <!--
+    Microsoft.NET.Sdk.Web kullanan projeler (Accounting.Api, Accounting.Web),
+    normalde çalıştırıldığında bir konsol penceresi açar.
+    OutputType=WinExe + DisableWinExeOutputInference=true kombinasyonu
+    bu pencereyi engeller.
+  -->
+    <PropertyGroup Condition="'$(UsingMicrosoftNETSdkWeb)' == 'true'">
+        <OutputType>WinExe</OutputType>
+        <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+    </PropertyGroup>
+
+    <!-- ============================================================ -->
+    <!-- BUILD ÖNCESİ ZOMBİ PROCESS TEMİZLİĞİ (KURAL 63)               -->
+    <!-- ============================================================ -->
+    <!--
+    Visual Studio bazen kapandığında Accounting.Api.exe process'ini
+    arkada bırakır. Bu process bin\Debug\net10.0\*.dll dosyalarını
+    kilitler ve bir sonraki build "file is locked" hatasıyla başarısız olur.
+
+    Aşağıdaki target, HER build'den önce çalışır ve varsa zombie
+    Accounting.Api.exe / Accounting.Desktop.exe process'lerini öldürür.
+
+    Bu target yalnızca Windows'ta etkindir ve hata durumunda build'i
+    ENGELLEMEZ (ContinueOnError=true).
+  -->
+    <Target Name="KillZombieProcesses"
+            BeforeTargets="Build"
+            Condition="'$(OS)' == 'Windows_NT'">
+        <Exec Command="taskkill /F /IM Accounting.Api.exe 2&gt;nul || exit 0"
+              ContinueOnError="true"
+              StandardOutputImportance="low"
+              StandardErrorImportance="low" />
+        <Exec Command="taskkill /F /IM Accounting.Desktop.exe 2&gt;nul || exit 0"
+              ContinueOnError="true"
+              StandardOutputImportance="low"
+              StandardErrorImportance="low" />
+    </Target>
 
 </Project>

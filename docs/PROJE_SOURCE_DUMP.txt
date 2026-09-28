@@ -1,7 +1,7 @@
 ﻿======================================================================
 MUHASEBE ERP - KAYNAK KOD DUMP
-Tarih: 2026-09-27 20:31:02
-Toplam Dosya: 226
+Tarih: 2026-09-28 20:40:41
+Toplam Dosya: 229
 ======================================================================
 
 ======================================================================
@@ -72,7 +72,6 @@ indent_size = 2
       }
     },
     "WriteTo": [
-      { "Name": "Console" },
       {
         "Name": "File",
         "Args": {
@@ -715,6 +714,24 @@ public interface IAuthService
     Task<Result<User>> LoginAsync(LoginRequest request , string ipAddress , CancellationToken cancellationToken = default);
 
     Task<Result<User>> CreateFirstAdminAsync(FirstSetupRequest request , CancellationToken cancellationToken = default);
+    #endregion Operations
+}
+
+
+======================================================================
+=== FILE: src\Core\Accounting.Core.Business\Interfaces\Services\ICompanyDatabaseMigrator.cs ===
+======================================================================
+
+using Accounting.Shared.Results;
+
+namespace Accounting.Core.Business.Interfaces.Services;
+
+public interface ICompanyDatabaseMigrator
+{
+    #region Operations
+    Task<Result<int>> MigrateAllAsync(CancellationToken cancellationToken = default);
+
+    Task<Result> MigrateOneAsync(Guid companyId , CancellationToken cancellationToken = default);
     #endregion Operations
 }
 
@@ -1801,6 +1818,7 @@ public sealed class PeriodValidator : AbstractValidator<Period>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.12" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
+        <PackageReference Include="Serilog" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -15657,11 +15675,16 @@ using Accounting.Shared.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace Accounting.Core.DataAccess.Services;
 
 public class CompanyDatabaseInitializer(IOptions<CompanyDatabaseOptions> options , IServiceProvider serviceProvider) : IDatabaseInitializer, IScopedService
 {
+    #region Constants
+    private const string MigrationsAssembly = "Accounting.Core.DataAccess";
+    #endregion Constants
+
     #region Operations
     public async Task<Result> InitializeCompanyDatabaseAsync(Company company , CancellationToken cancellationToken = default)
     {
@@ -15670,23 +15693,286 @@ public class CompanyDatabaseInitializer(IOptions<CompanyDatabaseOptions> options
             string connectionString = CompanyConnectionStringBuilder.BuildFromOptions(options.Value , company);
 
             DbContextOptionsBuilder<AppDbContext> optionsBuilder = new();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(
+                connectionString ,
+                sqlOptions => sqlOptions.MigrationsAssembly(MigrationsAssembly));
 
             IClock clock = serviceProvider.GetRequiredService<IClock>();
             ICurrentUser currentUser = serviceProvider.GetRequiredService<ICurrentUser>();
 
             AppDbContext dbContext = new(optionsBuilder.Options , clock , currentUser);
 
+            IEnumerable<string> pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync(cancellationToken);
+
+            if (!pendingMigrations.Any())
+            {
+                Log.Debug(
+                    "[CompanyDatabaseInitializer] Bekleyen migration yok, atlanıyor — CompanyId={CompanyId}, Database={Database}" ,
+                    company.Id , company.DatabaseName);
+
+                return Result.Success("Firma veritabanı güncel.");
+            }
+
+            Log.Information(
+                "[CompanyDatabaseInitializer] MigrateAsync başlıyor — CompanyId={CompanyId}, Database={Database}, PendingCount={PendingCount}, MigrationsAssembly={Assembly}" ,
+                company.Id , company.DatabaseName , pendingMigrations.Count() , MigrationsAssembly);
+
             await dbContext.Database.MigrateAsync(cancellationToken);
+
+            IEnumerable<string> appliedMigrations = await dbContext.Database.GetAppliedMigrationsAsync(cancellationToken);
+
+            Log.Information(
+                "[CompanyDatabaseInitializer] MigrateAsync tamamlandı — CompanyId={CompanyId}, AppliedCount={AppliedCount}" ,
+                company.Id , appliedMigrations.Count());
 
             return Result.Success("Firma veritabanı hazır.");
         }
         catch (Exception ex)
         {
+            Log.Error(ex ,
+                "[CompanyDatabaseInitializer] MigrateAsync hata — CompanyId={CompanyId}, Database={Database}" ,
+                company.Id , company.DatabaseName);
+
             return Result.Failure($"Veritabanı kurulumu başarısız: {ex.Message}" , ResultStatus.InternalError);
         }
     }
     #endregion Operations
+}
+
+
+======================================================================
+=== FILE: src\Core\Accounting.Core.DataAccess\Services\CompanyDatabaseMigrator.cs ===
+======================================================================
+
+using Accounting.Core.Business.Interfaces.Repositories;
+using Accounting.Core.Business.Interfaces.Services;
+using Accounting.Core.Domain.Entities;
+using Accounting.Shared.Markers;
+using Accounting.Shared.Results;
+using Serilog;
+using System.Reflection;
+using System.Text.Json;
+
+namespace Accounting.Core.DataAccess.Services;
+
+public sealed class CompanyDatabaseMigrator(
+    ICompanyRepository companyRepository ,
+    IDatabaseInitializer databaseInitializer) : ICompanyDatabaseMigrator, IScopedService
+{
+    #region Constants
+    private const string ManifestFileName = ".migration-manifest.json";
+    private const int ParallelismDegree = 8;
+    private static readonly TimeSpan ManifestTtl = TimeSpan.FromHours(1);
+    private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
+    #endregion Constants
+
+    #region Operations
+    public async Task<Result<int>> MigrateAllAsync(CancellationToken cancellationToken = default)
+    {
+        string manifestPath = ResolveManifestPath();
+        string currentFingerprint = ComputeFingerprint();
+
+        MigrationManifest? manifest = ReadManifest(manifestPath);
+
+        if (manifest is not null && IsManifestFresh(manifest , currentFingerprint))
+        {
+            Log.Information(
+                "[CompanyDatabaseMigrator] Migration manifest taze — son çalışma: {LastRun:O}, atlanıyor." ,
+                manifest.LastRunUtc);
+
+            return Result<int>.Success(0 , "Migration manifest taze, atlandı.");
+        }
+
+        Result<IReadOnlyList<Company>> companiesResult = await companyRepository.GetAllAsync(cancellationToken);
+
+        if (companiesResult.IsFailure)
+        {
+            return Result<int>.Failure(companiesResult.Message , companiesResult.Status);
+        }
+
+        IReadOnlyList<Company> companies = companiesResult.Data;
+
+        if (companies.Count == 0)
+        {
+            Log.Information("[CompanyDatabaseMigrator] Güncellenecek firma bulunamadı.");
+            WriteManifest(manifestPath , currentFingerprint , successCount: 0 , failureCount: 0);
+            return Result<int>.Success(0 , "Güncellenecek firma yok.");
+        }
+
+        Log.Information(
+            "[CompanyDatabaseMigrator] Migration başlıyor — Toplam {Count} firma, eşzamanlılık: {Parallelism}" ,
+            companies.Count , ParallelismDegree);
+
+        int successCount = 0;
+        int failureCount = 0;
+
+        using SemaphoreSlim throttler = new(ParallelismDegree);
+
+        IEnumerable<Task> tasks = companies.Select(async company =>
+        {
+            await throttler.WaitAsync(cancellationToken);
+
+            try
+            {
+                Result migrateResult = await databaseInitializer.InitializeCompanyDatabaseAsync(company , cancellationToken);
+
+                if (migrateResult.IsSuccess)
+                {
+                    Interlocked.Increment(ref successCount);
+
+                    Log.Information(
+                        "[CompanyDatabaseMigrator] Firma DB güncellendi — CompanyId={CompanyId}, ShortName={ShortName}, Database={Database}" ,
+                        company.Id , company.ShortName , company.DatabaseName);
+                }
+                else
+                {
+                    Interlocked.Increment(ref failureCount);
+
+                    Log.Warning(
+                        "[CompanyDatabaseMigrator] Firma DB güncellenemedi — CompanyId={CompanyId}, ShortName={ShortName}, Message={Message}" ,
+                        company.Id , company.ShortName , migrateResult.Message);
+                }
+            }
+            finally
+            {
+                throttler.Release();
+            }
+        });
+
+        await Task.WhenAll(tasks);
+
+        string summary = $"Toplam {companies.Count} firma — Başarılı: {successCount}, Başarısız: {failureCount}.";
+
+        if (failureCount == 0)
+        {
+            WriteManifest(manifestPath , currentFingerprint , successCount , failureCount);
+        }
+
+        if (failureCount > 0)
+        {
+            return Result<int>.Failure(summary , ResultStatus.InternalError);
+        }
+
+        Log.Information("[CompanyDatabaseMigrator] {Summary}" , summary);
+
+        return Result<int>.Success(successCount , summary);
+    }
+
+    public async Task<Result> MigrateOneAsync(Guid companyId , CancellationToken cancellationToken = default)
+    {
+        if (companyId == Guid.Empty)
+        {
+            return Result.Failure("Firma Id zorunludur." , ResultStatus.ValidationError);
+        }
+
+        Result<Company> companyResult = await companyRepository.GetByIdAsync(companyId , cancellationToken);
+
+        if (companyResult.IsFailure)
+        {
+            return Result.NotFound(companyResult.Message);
+        }
+
+        Company company = companyResult.Data;
+
+        Result migrateResult = await databaseInitializer.InitializeCompanyDatabaseAsync(company , cancellationToken);
+
+        if (migrateResult.IsSuccess)
+        {
+            Log.Information(
+                "[CompanyDatabaseMigrator] Firma DB güncellendi — CompanyId={CompanyId}, ShortName={ShortName}, Database={Database}" ,
+                company.Id , company.ShortName , company.DatabaseName);
+        }
+
+        return migrateResult;
+    }
+    #endregion Operations
+
+    #region Helpers
+    private static string ResolveManifestPath()
+    {
+        return Path.Combine(AppContext.BaseDirectory , ManifestFileName);
+    }
+
+    private static string ComputeFingerprint()
+    {
+        Assembly assembly = typeof(CompanyDatabaseMigrator).Assembly;
+
+        string assemblyName = assembly.GetName().Name ?? "unknown";
+        string assemblyVersion = assembly.GetName().Version?.ToString() ?? "0.0.0.0";
+        long assemblyTicks = File.GetLastWriteTimeUtc(assembly.Location).Ticks;
+
+        return $"{assemblyName}|{assemblyVersion}|{assemblyTicks}";
+    }
+
+    private static MigrationManifest? ReadManifest(string path)
+    {
+        try
+        {
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+
+            string json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<MigrationManifest>(json);
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex , "[CompanyDatabaseMigrator] Manifest okunamadı, sıfırdan çalıştırılacak.");
+            return null;
+        }
+    }
+
+    private static void WriteManifest(string path , string fingerprint , int successCount , int failureCount)
+    {
+        try
+        {
+            MigrationManifest manifest = new()
+            {
+                LastRunUtc = DateTime.UtcNow,
+                AssemblyFingerprint = fingerprint,
+                SuccessCount = successCount,
+                FailureCount = failureCount
+            };
+
+            string json = JsonSerializer.Serialize(manifest , JsonOptions);
+            File.WriteAllText(path , json);
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex , "[CompanyDatabaseMigrator] Manifest yazılamadı.");
+        }
+    }
+
+    private static bool IsManifestFresh(MigrationManifest manifest , string currentFingerprint)
+    {
+        if (manifest.FailureCount > 0)
+        {
+            return false;
+        }
+
+        if (!string.Equals(manifest.AssemblyFingerprint , currentFingerprint , StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        TimeSpan age = DateTime.UtcNow - manifest.LastRunUtc;
+
+        return age < ManifestTtl;
+    }
+    #endregion Helpers
+
+    #region Nested Types
+    private sealed class MigrationManifest
+    {
+        #region Properties
+        public DateTime LastRunUtc { get; set; }
+        public string AssemblyFingerprint { get; set; } = string.Empty;
+        public int SuccessCount { get; set; }
+        public int FailureCount { get; set; }
+        #endregion Properties
+    }
+    #endregion Nested Types
 }
 
 
@@ -16372,11 +16658,18 @@ public sealed class UserRole : BaseEntity
 
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+    <PropertyGroup>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishReadyToRunComposite>true</PublishReadyToRunComposite>
+        <PublishReadyToRunShowWarnings>false</PublishReadyToRunShowWarnings>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>false</SelfContained>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.12" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -16413,6 +16706,7 @@ public sealed class UserRole : BaseEntity
 ======================================================================
 
 {
+  "Urls": "http://localhost:5233",
   "ConnectionStrings": {
     "Master": "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
   },
@@ -16443,7 +16737,6 @@ public sealed class UserRole : BaseEntity
       }
     },
     "WriteTo": [
-      { "Name": "Console" },
       {
         "Name": "File",
         "Args": {
@@ -16511,7 +16804,7 @@ public abstract class CrudControllerBase<TEntity, TService>(TService service) : 
     [HttpPost]
     public virtual Task<Result<TEntity>> CreateAsync([FromBody] TEntity entity , CancellationToken cancellationToken)
     {
-        entity.Id = Guid.NewGuid();
+        //entity.Id = Guid.NewGuid();
         return _service.CreateAsync(entity , cancellationToken);
     }
 
@@ -16979,6 +17272,7 @@ using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Host
@@ -17050,8 +17344,6 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ResultActionFilter>();
 
-    // Non-nullable reference type'ları [Required] gibi davranmaktan çıkar.
-    // VatRate, SystemCurrency, ExchangeRateMode gibi alanlar boş string geçebilsin.
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 })
 .AddJsonOptions(options =>
@@ -17091,9 +17383,46 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-#region Startup Seeders
-await RunStartupSeedersAsync(app);
-#endregion Startup Seeders
+#region Startup Database Migrations + Seeders (Arka Planda)
+// Migration ve seed işlemleri Kestrel'i bloklamaz. API hemen dinlemeye başlar,
+// UI hızlıca bağlanır. Migration ve seed arka planda tamamlanır.
+_ = Task.Run(async () =>
+{
+    try
+    {
+        using IServiceScope scope = app.Services.CreateScope();
+        ICompanyDatabaseMigrator migrator = scope.ServiceProvider.GetRequiredService<ICompanyDatabaseMigrator>();
+        Result<int> migrateResult = await migrator.MigrateAllAsync();
+
+        if (migrateResult.IsFailure)
+        {
+            Log.Warning("[Startup] Firma veritabanları güncellenemedi — {Message}" , migrateResult.Message);
+        }
+
+        IEnumerable<IStartupSeeder> seeders = scope.ServiceProvider.GetServices<IStartupSeeder>();
+
+        foreach (IStartupSeeder seeder in seeders)
+        {
+            Result seedResult = await seeder.SeedAsync();
+
+            if (seedResult.IsSuccess)
+            {
+                Log.Information("Seed tamamlandı: {Seeder} — {Message}" , seeder.GetType().Name , seedResult.Message);
+            }
+            else
+            {
+                Log.Warning("Seed başarısız: {Seeder} — {Message}" , seeder.GetType().Name , seedResult.Message);
+            }
+        }
+
+        Log.Information("[Startup] Arka plan migration ve seed işlemleri tamamlandı.");
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex , "[Startup] Arka plan migration/seed sırasında hata oluştu.");
+    }
+});
+#endregion Startup Database Migrations + Seeders
 
 #region Pipeline
 if (app.Environment.IsDevelopment())
@@ -17115,28 +17444,6 @@ app.MapControllers();
 
 app.Run();
 
-#region Helpers
-static async Task RunStartupSeedersAsync(WebApplication app)
-{
-    using IServiceScope scope = app.Services.CreateScope();
-
-    IEnumerable<IStartupSeeder> seeders = scope.ServiceProvider.GetServices<IStartupSeeder>();
-
-    foreach (IStartupSeeder seeder in seeders)
-    {
-        Result result = await seeder.SeedAsync();
-
-        if (result.IsSuccess)
-        {
-            Log.Information("Seed tamamlandı: {Seeder} — {Message}" , seeder.GetType().Name , result.Message);
-        }
-        else
-        {
-            Log.Warning("Seed başarısız: {Seeder} — {Message}" , seeder.GetType().Name , result.Message);
-        }
-    }
-}
-#endregion Helpers
 
 
 ======================================================================
@@ -17154,19 +17461,9 @@ static async Task RunStartupSeedersAsync(WebApplication app)
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "https": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "https://localhost:7228;http://localhost:5233",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
   }
 }
-
 
 
 ======================================================================
@@ -17695,6 +17992,7 @@ public sealed class JwtTokenGenerator(
 using Accounting.Composition;
 using Accounting.Core.Business.Interfaces.Services;
 using Accounting.Desktop.Extensions;
+using Accounting.Desktop.Services;
 using Accounting.Desktop.ViewModels;
 using Accounting.Desktop.Windows;
 using Accounting.Shared.Results;
@@ -17711,6 +18009,7 @@ public partial class App : Application
     #region Properties
     public static IServiceProvider Services { get; private set; } = null!;
     private static IHost _host = null!;
+    private static ApiProcessManager _apiProcessManager = null!;
     #endregion Properties
 
     #region Operations
@@ -17727,12 +18026,38 @@ public partial class App : Application
 
         Log.Information("Uygulama başladı.");
 
+        try
+        {
+            _apiProcessManager = new ApiProcessManager();
+            await _apiProcessManager.StartAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex , "API başlatılamadı.");
+            MessageBox.Show(
+                $"API başlatılamadı:\n\n{ex.GetType().Name}\n{ex.Message}" ,
+                "Başlangıç Hatası" , MessageBoxButton.OK , MessageBoxImage.Error);
+            Current.Shutdown();
+            return;
+        }
+
         await RunStartupFlowAsync();
     }
 
     protected override async void OnExit(ExitEventArgs e)
     {
         Log.Information("Uygulama kapanıyor.");
+
+        try
+        {
+            _apiProcessManager?.Dispose();
+            Log.Information("[App.OnExit] API process temizlendi.");
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex , "[App.OnExit] API process temizlenemedi.");
+        }
+
         await Log.CloseAndFlushAsync();
 
         if (_host is IDisposable disposable)
@@ -18496,6 +18821,294 @@ public interface ITokenStore
     void Set(AuthResponse response);
     void Clear();
     #endregion Operations
+}
+
+
+======================================================================
+=== FILE: src\Presentation\Accounting.Desktop\Services\ApiProcessManager.cs ===
+======================================================================
+
+using Serilog;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Net.NetworkInformation;
+
+namespace Accounting.Desktop.Services;
+
+public sealed class ApiProcessManager : IDisposable
+{
+    #region Constants
+    private const string ApiBaseUrl = "http://localhost:5233";
+    private const string HealthCheckUrl = "http://localhost:5233/api/auth/has-user";
+    private const string DebugPath = @"src\Presentation\Accounting.Api\bin\Debug\net10.0\win-x64\Accounting.Api.exe";
+    private const string DebugPathFallback = @"src\Presentation\Accounting.Api\bin\Debug\net10.0\Accounting.Api.exe";
+    private const string ReleasePath = @"src\Presentation\Accounting.Api\bin\Release\net10.0\win-x64\Accounting.Api.exe";
+    private const int ApiPort = 5233;
+    private const int HealthCheckIntervalMs = 100;
+    private const int HealthCheckTimeoutSeconds = 90;
+    #endregion Constants
+
+    #region Fields
+    private Process? _apiProcess;
+    private bool _disposed = false;
+    #endregion Fields
+
+    #region Operations
+    public async Task StartAsync(CancellationToken cancellationToken = default)
+    {
+        if (await IsApiHealthyAsync(cancellationToken))
+        {
+            Log.Information("[ApiProcessManager] API zaten çalışıyor ve sağlıklı, başlatma atlandı.");
+            return;
+        }
+
+        if (IsPortInUse())
+        {
+            bool becameHealthy = await WaitForApiReadyAsync(cancellationToken);
+
+            if (becameHealthy)
+            {
+                Log.Information("[ApiProcessManager] Port zaten kullanımdaydı ve API sağlıklı hale geldi.");
+                return;
+            }
+
+            throw new InvalidOperationException(
+                $"Port {ApiPort} başka bir process tarafından kullanılıyor ama API sağlık kontrolü başarısız.\n\n" +
+                "Çözüm: Task Manager'da 'Accounting.Api.exe' process'lerini sonlandırın veya\n" +
+                $"komut: taskkill /F /IM Accounting.Api.exe\n\n" +
+                $"Adres: {HealthCheckUrl}");
+        }
+
+        string apiPath = ResolveApiExecutablePath();
+
+        if (!File.Exists(apiPath))
+        {
+            throw new FileNotFoundException(
+                $"API executable bulunamadı: {apiPath}\n\n" +
+                "Çözüm: Önce Accounting.Api projesini derleyin (Build > Build Solution)." ,
+                apiPath);
+        }
+
+        Log.Information("[ApiProcessManager] API başlatılıyor — Path={Path}" , apiPath);
+
+        ProcessStartInfo startInfo = new()
+        {
+            FileName = apiPath,
+            WorkingDirectory = Path.GetDirectoryName(apiPath)!,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+
+        startInfo.Environment["ASPNETCORE_ENVIRONMENT"] = "Development";
+        startInfo.Environment["DOTNET_ENVIRONMENT"] = "Development";
+
+        _apiProcess = new Process { StartInfo = startInfo };
+
+        _apiProcess.OutputDataReceived += OnApiOutput;
+        _apiProcess.ErrorDataReceived += OnApiError;
+
+        if (!_apiProcess.Start())
+        {
+            throw new InvalidOperationException("API process başlatılamadı.");
+        }
+
+        _apiProcess.BeginOutputReadLine();
+        _apiProcess.BeginErrorReadLine();
+
+        Log.Information("[ApiProcessManager] API başlatıldı — PID={Pid}" , _apiProcess.Id);
+
+        bool healthy = await WaitForApiReadyAsync(cancellationToken);
+
+        if (!healthy)
+        {
+            if (_apiProcess.HasExited)
+            {
+                throw new InvalidOperationException(
+                    $"API process başladıktan kısa süre sonra sonlandı (ExitCode={_apiProcess.ExitCode}).\n\n" +
+                    "Muhtemel sebep: Port 5233 başka bir process tarafından tutuluyor olabilir.\n\n" +
+                    "Çözüm: taskkill /F /IM Accounting.Api.exe\n\n" +
+                    "Detay için log dosyasına bakın:\n" +
+                    @"src\Presentation\Accounting.Api\logs\accounting-*.log");
+            }
+
+            throw new TimeoutException(
+                $"API {HealthCheckTimeoutSeconds} saniye içinde hazır olmadı.\n\n" +
+                $"Adres: {HealthCheckUrl}\n\n" +
+                "Detay için log dosyasına bakın:\n" +
+                @"src\Presentation\Accounting.Api\logs\accounting-*.log");
+        }
+
+        Log.Information("[ApiProcessManager] API hazır — {Url}" , ApiBaseUrl);
+    }
+
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        if (_apiProcess is { HasExited: false })
+        {
+            try
+            {
+                Log.Information("[ApiProcessManager] API process sonlandırılıyor — PID={Pid}" , _apiProcess.Id);
+                _apiProcess.Kill(entireProcessTree: true);
+                _apiProcess.WaitForExit(3000);
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex , "[ApiProcessManager] API process sonlandırılamadı.");
+            }
+        }
+
+        _apiProcess?.Dispose();
+        _apiProcess = null;
+        _disposed = true;
+
+        GC.SuppressFinalize(this);
+    }
+    #endregion Operations
+
+    #region Helpers
+    private static async Task<bool> IsApiHealthyAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            using HttpClient client = new() { Timeout = TimeSpan.FromSeconds(2) };
+            HttpResponseMessage response = await client.GetAsync(HealthCheckUrl , cancellationToken);
+            return response.IsSuccessStatusCode;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static bool IsPortInUse()
+    {
+        try
+        {
+            IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
+            var listeners = ipProperties.GetActiveTcpListeners();
+
+            foreach (var endpoint in listeners)
+            {
+                if (endpoint.Port == ApiPort)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex , "[ApiProcessManager] Port kontrolü başarısız oldu, güvenli taraf olarak 'kullanımda değil' varsayılıyor.");
+            return false;
+        }
+    }
+
+    private static async Task<bool> WaitForApiReadyAsync(CancellationToken cancellationToken)
+    {
+        using HttpClient client = new() { Timeout = TimeSpan.FromSeconds(2) };
+
+        DateTime deadline = DateTime.UtcNow.AddSeconds(HealthCheckTimeoutSeconds);
+
+        while (DateTime.UtcNow < deadline)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return false;
+            }
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(HealthCheckUrl , cancellationToken);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                // API henüz hazır değil, bekle
+            }
+
+            await Task.Delay(HealthCheckIntervalMs , cancellationToken);
+        }
+
+        return false;
+    }
+
+    private static string ResolveApiExecutablePath()
+    {
+        string currentDir = AppContext.BaseDirectory;
+
+        DirectoryInfo? solutionRoot = FindSolutionRoot(currentDir);
+
+        if (solutionRoot is null)
+        {
+            throw new DirectoryNotFoundException(
+                "Solution kökü bulunamadı. Beklenen: MuhasebeErp.slnx dosyasının bulunduğu dizin.");
+        }
+
+        string[] candidates =
+        [
+            Path.Combine(solutionRoot.FullName , DebugPath),
+            Path.Combine(solutionRoot.FullName , DebugPathFallback),
+            Path.Combine(solutionRoot.FullName , ReleasePath)
+        ];
+
+        foreach (string candidate in candidates)
+        {
+            if (File.Exists(candidate))
+            {
+                return candidate;
+            }
+        }
+
+        return Path.Combine(solutionRoot.FullName , DebugPathFallback);
+    }
+
+    private static DirectoryInfo? FindSolutionRoot(string startDirectory)
+    {
+        DirectoryInfo? dir = new(startDirectory);
+
+        while (dir is not null)
+        {
+            if (dir.GetFiles("MuhasebeErp.slnx").Length > 0)
+            {
+                return dir;
+            }
+
+            dir = dir.Parent;
+        }
+
+        return null;
+    }
+
+    private static void OnApiOutput(object sender , DataReceivedEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(e.Data))
+        {
+            Log.Debug("[API-OUT] {Data}" , e.Data);
+        }
+    }
+
+    private static void OnApiError(object sender , DataReceivedEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(e.Data))
+        {
+            Log.Warning("[API-ERR] {Data}" , e.Data);
+        }
+    }
+    #endregion Helpers
 }
 
 
@@ -19327,7 +19940,7 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
     #endregion Constants
 
     #region Events
-    public event EventHandler SaveCompleted = delegate { };
+    public event EventHandler<Guid> SaveCompleted = delegate { };
     public event EventHandler Cancelled = delegate { };
     #endregion Events
 
@@ -19623,7 +20236,7 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
 
         if (succeeded)
         {
-            SaveCompleted.Invoke(this , EventArgs.Empty);
+            SaveCompleted.Invoke(this , _companyId);
         }
     }
 
@@ -19761,27 +20374,27 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
     {
         Company company = new()
         {
-            ShortName = ShortName,
-            Name = Name,
-            IdentityNumber = IdentityNumber,
-            TaxNumber = TaxNumber,
-            LegalStatus = LegalStatus,
-            LegalNature = LegalNature,
-            Description = Description,
-            TaxOffice = TaxOffice,
+            ShortName = ShortName ?? string.Empty,
+            Name = Name ?? string.Empty,
+            IdentityNumber = IdentityNumber ?? string.Empty,
+            TaxNumber = TaxNumber ?? string.Empty,
+            LegalStatus = LegalStatus ?? string.Empty,
+            LegalNature = LegalNature ?? string.Empty,
+            Description = Description ?? string.Empty,
+            TaxOffice = TaxOffice ?? string.Empty,
             FoundationDate = FoundationDate,
-            ActivityCode = ActivityCode,
-            SocialSecurityInstitution = SocialSecurityInstitution,
-            ProfessionalOrganization = ProfessionalOrganization,
-            ProfessionalOrganizationMemberNumber = ProfessionalOrganizationMemberNumber,
-            TradeRegistryOffice = TradeRegistryOffice,
-            TradeRegistryNumber = TradeRegistryNumber,
-            RegistryNumber = RegistryNumber,
-            WithholdingDeclarationMethod = WithholdingDeclarationMethod,
-            Create302RecordForWithholding = Create302RecordForWithholding,
+            ActivityCode = ActivityCode ?? string.Empty,
+            SocialSecurityInstitution = SocialSecurityInstitution ?? string.Empty,
+            ProfessionalOrganization = ProfessionalOrganization ?? string.Empty,
+            ProfessionalOrganizationMemberNumber = ProfessionalOrganizationMemberNumber ?? string.Empty,
+            TradeRegistryOffice = TradeRegistryOffice ?? string.Empty,
+            TradeRegistryNumber = TradeRegistryNumber ?? string.Empty,
+            RegistryNumber = RegistryNumber ?? string.Empty,
+            WithholdingDeclarationMethod = WithholdingDeclarationMethod ?? string.Empty,
+            Create302RecordForWithholding = Create302RecordForWithholding ?? string.Empty,
             PayrollCutoffDate = PayrollCutoffDate,
-            MerisNumber = MerisNumber,
-            TaxAuthorityUsername = TaxAuthorityUsername,
+            MerisNumber = MerisNumber ?? string.Empty,
+            TaxAuthorityUsername = TaxAuthorityUsername ?? string.Empty,
             IsSpecialTaxpayer = IsSpecialTaxpayer,
             SendReceiptDescriptionForDbs = SendReceiptDescriptionForDbs,
             SendReceiptDescriptionForLedger = SendReceiptDescriptionForLedger,
@@ -21405,6 +22018,7 @@ using Accounting.Shared.Results;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System.Collections.ObjectModel;
 
 namespace Accounting.Desktop.ViewModels;
@@ -21524,14 +22138,22 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
     public async Task OpenCompanyEditViewAsync(Guid companyId , string? initialSection = null)
     {
+        Log.Information(
+            "[ShellViewModel.OpenCompanyEditViewAsync] Çağrıldı — CompanyId={CompanyId}, InitialSection={InitialSection}" ,
+            companyId , initialSection ?? "null");
+
         _currentCompanyId = companyId;
+
+        Log.Information(
+            "[ShellViewModel.OpenCompanyEditViewAsync] _currentCompanyId set edildi — {CurrentCompanyId}" ,
+            _currentCompanyId);
 
         CompanyEditViewModel editViewModel = _serviceProvider.GetRequiredService<CompanyEditViewModel>();
         await editViewModel.LoadAsync(companyId , initialSection);
 
         Views.CompanyEditView view = new(editViewModel , this);
 
-        view.SaveCompleted += async (_ , _) => await OnCompanyEditSavedAsync();
+        view.SaveCompleted += async (_ , savedCompanyId) => await OnCompanyEditSavedAsync(savedCompanyId);
         view.Cancelled += (_ , _) => OnCompanyEditCancelled();
 
         CurrentView = view;
@@ -21539,6 +22161,10 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
     public async Task OpenPeriodEditViewAsync(Guid periodId)
     {
+        Log.Information(
+            "[ShellViewModel.OpenPeriodEditViewAsync] Çağrıldı — PeriodId={PeriodId}, _currentCompanyId={CurrentCompanyId}, HasCompany={HasCompany}" ,
+            periodId , _currentCompanyId , _currentCompanyId != Guid.Empty);
+
         if (_currentCompanyId == Guid.Empty)
         {
             _messageService.ShowWarning("Önce bir firma seçin.");
@@ -21698,7 +22324,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
         if (company is null)
         {
-            // Firma listede yoksa (yeni kaydedilmiş olabilir) listeyi tazele.
             await LoadCompaniesAsync();
 
             company = Companies.FirstOrDefault(c => c.Id == _currentCompanyId);
@@ -21711,7 +22336,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
 
         await LoadPeriodsAsync(company);
 
-        // SelectedCompany referansını listedeki gerçek instance ile eşleştir.
         if (SelectedCompany?.Id != company.Id)
         {
             _suppressCompanyChanged = true;
@@ -21719,7 +22343,6 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
             _suppressCompanyChanged = false;
         }
 
-        // En son eklenen (en yüksek yıl) dönemi otomatik seç.
         Period? lastPeriod = Periods
             .OrderByDescending(p => p.Year)
             .ThenByDescending(p => p.MonthNumber)
@@ -21762,10 +22385,25 @@ public partial class ShellViewModel : ObservableObject, IScopedService, IDisposa
         CurrentView = view;
     }
 
-    private async Task OnCompanyEditSavedAsync()
+    private async Task OnCompanyEditSavedAsync(Guid savedCompanyId)
     {
+        Log.Information(
+            "[ShellViewModel.OnCompanyEditSavedAsync] Çağrıldı — SavedCompanyId={SavedCompanyId}, _currentCompanyId (önce)={CurrentCompanyId}" ,
+            savedCompanyId , _currentCompanyId);
+
+        _currentCompanyId = savedCompanyId;
+
+        Log.Information(
+            "[ShellViewModel.OnCompanyEditSavedAsync] _currentCompanyId set edildi — {CurrentCompanyId}" ,
+            _currentCompanyId);
+
         await LoadCompaniesAsync();
         await ReloadPeriodsForCurrentCompanyAsync();
+
+        if (_currentCompanyId != Guid.Empty)
+        {
+            await OpenCompanyEditViewAsync(_currentCompanyId);
+        }
     }
 
     private void OnCompanyEditCancelled()
@@ -22208,7 +22846,7 @@ namespace Accounting.Desktop.Views;
 public partial class CompanyEditView : UserControl
 {
     #region Events
-    public event EventHandler SaveCompleted = delegate { };
+    public event EventHandler<Guid> SaveCompleted = delegate { };
     public event EventHandler Cancelled = delegate { };
     #endregion Events
 
@@ -22262,9 +22900,9 @@ public partial class CompanyEditView : UserControl
         _periodListViewInitialized = true;
     }
 
-    private void OnSaveCompleted(object sender , EventArgs e)
+    private void OnSaveCompleted(object sender , Guid companyId)
     {
-        SaveCompleted.Invoke(this , EventArgs.Empty);
+        SaveCompleted.Invoke(this , companyId);
     }
 
     private void OnCancelled(object sender , EventArgs e)
@@ -23134,7 +23772,7 @@ public partial class WelcomeView : UserControl
                  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
                  Title="İlk Kurulum"
                  Width="480"
-                 Height="520"
+                 Height="600"
                  WindowStartupLocation="CenterScreen"
                  ResizeMode="NoResize">
 
@@ -23165,30 +23803,40 @@ public partial class WelcomeView : UserControl
                    TextAlignment="Center"
                    Margin="0,0,0,24" />
 
-        <dxe:TextEdit Grid.Row="2"
-                      EditValue="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="Kullanıcı Adı"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="2"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="Kullanıcı Adı" />
+        </Border>
 
-        <dxe:TextEdit Grid.Row="3"
-                      EditValue="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="Ad Soyad"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="3"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="Ad Soyad" />
+        </Border>
 
-        <dxe:TextEdit Grid.Row="4"
-                      EditValue="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                      NullText="E-posta"
-                      Margin="0,0,0,12" />
+        <Border Grid.Row="4"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:TextEdit EditValue="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                          NullText="E-posta" />
+        </Border>
 
-        <dxe:PasswordBoxEdit Grid.Row="5"
-                             EditValue="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                             NullText="Şifre"
-                             Margin="0,0,0,12" />
+        <Border Grid.Row="5"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,12">
+            <dxe:PasswordBoxEdit EditValue="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                 NullText="Şifre" />
+        </Border>
 
-        <dxe:PasswordBoxEdit Grid.Row="6"
-                             EditValue="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}"
-                             NullText="Şifre Tekrar"
-                             Margin="0,0,0,20" />
+        <Border Grid.Row="6"
+                Style="{StaticResource FieldBorderStyle}"
+                Margin="0,0,0,20">
+            <dxe:PasswordBoxEdit EditValue="{Binding ConfirmPassword, UpdateSourceTrigger=PropertyChanged}"
+                                 NullText="Şifre Tekrar" />
+        </Border>
 
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>

@@ -23,7 +23,7 @@ public abstract class CrudControllerBase<TEntity, TService>(TService service) : 
     [HttpPost]
     public virtual Task<Result<TEntity>> CreateAsync([FromBody] TEntity entity , CancellationToken cancellationToken)
     {
-        entity.Id = Guid.NewGuid();
+        //entity.Id = Guid.NewGuid();
         return _service.CreateAsync(entity , cancellationToken);
     }
 

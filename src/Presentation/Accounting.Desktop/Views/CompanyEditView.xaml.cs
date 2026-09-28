@@ -7,7 +7,7 @@ namespace Accounting.Desktop.Views;
 public partial class CompanyEditView : UserControl
 {
     #region Events
-    public event EventHandler SaveCompleted = delegate { };
+    public event EventHandler<Guid> SaveCompleted = delegate { };
     public event EventHandler Cancelled = delegate { };
     #endregion Events
 
@@ -61,9 +61,9 @@ public partial class CompanyEditView : UserControl
         _periodListViewInitialized = true;
     }
 
-    private void OnSaveCompleted(object sender , EventArgs e)
+    private void OnSaveCompleted(object sender , Guid companyId)
     {
-        SaveCompleted.Invoke(this , EventArgs.Empty);
+        SaveCompleted.Invoke(this , companyId);
     }
 
     private void OnCancelled(object sender , EventArgs e)

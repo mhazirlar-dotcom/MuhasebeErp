@@ -1,7 +1,7 @@
 =====================================================================
 MUHASEBE PROJESİ - BAĞLAM DOSYASI
 =====================================================================
-Son güncelleme: 2026-09-27 (Dönem kaydetme çözüldü + Kural 58/59)
+Son güncelleme: 2026-09-28 (API Cold Start Çözümü + R2R + Splash Bekliyor)
 Durum: 
        ✅ Faz 0-2C (Core + Firma + Dönem + Shell)
        ✅ IDbContextLock (kaldırıldı, Faz G'de)
@@ -22,44 +22,21 @@ Durum:
        ✅ Faz H-2: Refresh Token Retry
        ✅ Faz G: Desktop'tan DbContext Kaldırma
        ✅ Faz G+1: Desktop Referans Temizliği
-       ✅ Firma pasif/aktif çalışıyor (PUT /api/companies/{id}/active)
-       ✅ Faz F (temizlik): CopyFields'e IsActive + CompanyEditViewModel IsActive state
-       ✅ Faz A: Dönem master-detail (bug'lar çözüldü)
-       ✅ Firma Listesi çift tıklama ile detay açma
-       ✅ Directory.Build.props: Nullable=enable + ImplicitUsings=enable
-       ✅ AŞAMA 1: Canlı Kuruluş Tarihi Uyarısı (MinFoundationDateBehavior)
-       ✅ AŞAMA 2: Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
-       ✅ Tutar alanları sağa dayalı (form + grid)
-       ✅ Tarih alanları boş gösterim (nullable pattern, global kural)
-       ✅ Kural 54: Çıkış butonu özel PNG ikonu (ExitButton.png + Login.png)
-       ✅ SQL Server bağlantı düzeltmesi (DESKTOP-DFL2OBF)
-       ✅ Migration + Veritabanı sıfırlama tamamlandı
-       ✅ Firma kaydetme çalışıyor (UpdateSourceTrigger düzeltmesi)
-       ✅ Models\ klasörü silindi (AddPeriodDialog kalıntısı)
-       ✅ Kural 55: DateEdit UpdateSourceTrigger=PropertyChanged (firma kaydetme)
-       ✅ Dönem ComboBox DisplayMember düzeltmesi (Name → DisplayName)
-       ✅ ShellViewModel ReloadPeriodsForCurrentCompanyAsync (dönem ekleme sonrası tazeleme)
-       ✅ Kural 56: Period.IsSpecial + IsStandard + onay akışı
-       ✅ Kural 57: Yevmiye/Gelir/Gider Başlangıç No default = 1
-       ✅ PeriodConfiguration IsSpecial + IsStandard Ignore
-       ✅ PeriodService EnsureSpecialPeriodUniqueAsync (aynı yıl tek özel dönem)
-       ✅ PeriodEditViewModel SaveAsync öncesi RecalculateDates
-       ✅ PeriodEditViewModel özel dönem onay akışı (Confirm)
-       ✅ PeriodEditViewModel özel dönem Ocak ayı reddi
-       ✅ Migration sıfırlama başarılı (InitialMaster + InitialCompany yeniden üretildi)
-       ✅ Kural 58: MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
-       ✅ Kural 59: Nullable string alanlar için ?? string.Empty koruması
-       ✅ Program.cs PropertyNameCaseInsensitive + ApiBehaviorOptions
-       ✅ ResultActionFilter hata loglama
-       ✅ PeriodEditViewModel tüm string alanlar ?? string.Empty
-       ✅ PeriodEditViewModel PopulateYears Math.Max düzeltmesi
-       ✅ PeriodEditViewModel RecalculateDates startDate >= endDate düzeltmesi
-       ✅ DÖNEM KAYDETME ÇALIŞIYOR ✅ (20:20 ve 20:25 testleri 200 OK)
-       ⏳ BEKLEYEN: Özel Dönem tam akış testi (kod hazır, uçtan uca doğrulanacak)
-       ⏳ BEKLEYEN: 2. Sınıf dönem testi
-       ⏳ BEKLEYEN: Kapanış tarihi dolu dönem testi
-       ⏳ BEKLEYEN: TextEdit → SpinEdit geçişi (başlangıç numaraları için)
-       ⏳ BEKLEYEN: Faz A eksikleri (XAML gözden geçirme)
+       ✅ Firma pasif/aktif çalışıyor
+       ✅ Faz F (temizlik): CopyFields.IsActive
+       ✅ Faz A: Dönem master-detail
+       ✅ Kural 42-63 arası tüm kurallar uygulandı
+       ✅ KURAL 60: CrudControllerBase Id overwrite yasak
+       ✅ KURAL 61: ApiProcessManager (API child process)
+       ✅ KURAL 62: Visual Studio Single Startup Project
+       ✅ KURAL 63: KillZombieProcesses (MSBuild target)
+       ✅ KURAL 64: appsettings.json "Urls" (port 5233)
+       ✅ KURAL 65: Migration Manifest Cache + Paralel Migrate
+       ✅ KURAL 66: GetPendingMigrationsAsync (boşsa atla)
+       ✅ R2R (ReadyToRun) publish ÇALIŞIYOR — 18sn → 4.7sn
+       ⏳ BEKLEYEN: Desktop'ı Release publish binary'sine yönlendirme
+       ⏳ BEKLEYEN: Splash Screen (opsiyonel)
+       ⏳ BEKLEYEN: Test (2. Sınıf, Özel Dönem, Kapanış)
        ⏳ BEKLEYEN: Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
        ⏳ BEKLEYEN: Lookup Admin Ekranı
        ⏳ BEKLEYEN: Genel Muhasebe (Hesap Planı + Yevmiye)
@@ -88,38 +65,30 @@ Her modül kendi Domain + Business + DataAccess projelerine sahiptir.
 - EF Core 10 (Code First)
 - WPF (Desktop) + ASP.NET Core Web API (aktif) + Blazor (sonra)
 - UI: DevExpress v26.1.3 (WPF Controls) — LİSANSLI
-  * Paketler: DevExpress.Wpf.Core, DevExpress.Wpf.Grid, DevExpress.Images
-  * Tema: Office2019Colorful
+- Tema: Office2019Colorful
 - Mimari: Modüler Monolit
 - Çok kullanıcılı, ÇOK FİRMALI, çok dönem
 - DI: Microsoft.Extensions.DependencyInjection + Host.CreateDefaultBuilder
-- Assembly scanning: Scrutor (params Assembly[] destekli)
-- Loglama: Serilog (Console + File)
+- Assembly scanning: Scrutor
+- Loglama: Serilog (File only, Console sink kaldırıldı)
 - WPF MVVM: CommunityToolkit.Mvvm 8.4.2
 - Test: xUnit + FluentAssertions
-- Validasyon: FluentValidation 12.1.1 (Business katmanı)
+- Validasyon: FluentValidation 12.1.1
 - İsimlendirme: İngilizce
-- Solution adı: MuhasebeErp.slnx
+- Solution: MuhasebeErp.slnx
 - JWT: Microsoft.AspNetCore.Authentication.JwtBearer 10.0.12
 - EF Tools: dotnet-ef 10.0.12
 - Ortak derleme: Directory.Build.props (solution kökünde)
 
 DevExpress Lisans:
 - Versiyon: v26.1.3 (Licensed Active)
-- Lisans dosyası: %AppData%\DevExpress\DevExpress_License.txt
 - DX1001 uyarısı NoWarn ile susturuldu
 
-DevExpress Ikon Kullanımı:
-- Hazır ikonlar: dx:DXImage Image=... (16x16, 32x32)
-- Özel PNG ikonlar: Resources/Icons/ altında, Build Action = Resource
-- Kural 54: Çıkış butonu özel PNG kullanır (DevExpress hazır setinde eşleşme yok)
-
 Çalıştırma:
-- Geliştirme sırasında Ctrl+F5 (Start Without Debugging)
-- API: dotnet run --project src/Presentation/Accounting.Api
-- Desktop: dotnet run --project src/Presentation/Accounting.Desktop
-- TÜM KOMUTLAR Package Manager Console (PMC) üzerinden verilir (Kural 34)
-- PMC Host Version: 7.10.0.40 (VS 2026 ile gelen sürüm)
+- KURAL 62: Visual Studio'da Single Startup Project = Accounting.Desktop
+- API, Desktop tarafından child process olarak başlatılır (KURAL 61)
+- Konsol penceresi HİÇ AÇILMAZ (KURAL 61 + 64)
+- R2R publish: 18 saniye → 4.7 saniye
 
 ---------------------------------------------------------------------
 3. MİMARİ KURALLARI
@@ -136,24 +105,13 @@ Bağımlılık yönü (tek yönlü):
     → Presentation (Desktop / Api / Web)
 
 AĞAÇ YAPISI:
-    IEntityOperations<TEntity>           (Interfaces/)
-      ↑                                    GetById, Create, Delete
-      ├── IRepository<TEntity>           (DataAccess katmanı)
-      │     + GetByIdForUpdate, GetAll×2, HasAny, HasReferences,
-      │       SaveChanges
-      │     (UpdateAsync YOK)
-      │
-      └── ICrudOperations<TEntity>       (Business katmanı)
-            + UpdateAsync
-            ↑
-            ├── ICompanyService
-            ├── IPeriodService
-            ├── ILookupValueService
-            └── (gelecek modüller)
+    IEntityOperations<TEntity>
+      ↑
+      ├── IRepository<TEntity>
+      └── ICrudOperations<TEntity>
 
-    RepositoryBase<TEntity, TContext>    (abstract base — DataAccess)
-    ServiceBase<TEntity, TRepository>    (abstract base — Business,
-                                          opsiyonel IValidator<TEntity>)
+    RepositoryBase<TEntity, TContext>
+    ServiceBase<TEntity, TRepository>
 
 ---------------------------------------------------------------------
 4. PROJE KURALLARI (GLOBAL - DEĞİŞMEZ)
@@ -164,8 +122,7 @@ AĞAÇ YAPISI:
 4. Kurumsal ve profesyonel standart
 5. Dosya bazlı ilerleme
 6. Kullanıcı onayı olmadan dosya/komut/script oluşturulmaz
-7. `?` (nullable) KULLANILIR (`<Nullable>enable</Nullable>` —
-   Directory.Build.props merkezi)
+7. `?` (nullable) KULLANILIR
 8. Boş bloklar süslü parantezlerle alt alta
 9. Region kullanılır, #endregion yanına isim
 10. Bir dosya = bir class/interface (iç içe tip YOK)
@@ -183,7 +140,7 @@ AĞAÇ YAPISI:
 22. GLOBAL: Kapanmış dönemde finansal işlem yapılamaz
 23. GLOBAL: Concrete entity'ler ve servisler `sealed`
 24. GLOBAL: Company tek entity
-25. GLOBAL: DbContext eşzamanlı erişim YASAK (Faz G'de Desktop'tan kaldırıldı)
+25. GLOBAL: DbContext eşzamanlı erişim YASAK
 26. GLOBAL: Shell footer 2 kolonlu
 27. GLOBAL: Section save dispatcher
 28. GLOBAL: Sohbet bağlamı yönetimi
@@ -197,268 +154,173 @@ AĞAÇ YAPISI:
 36. GLOBAL: PROJE.txt güncelleme — kural 31'in uygulanması
 37. GLOBAL: İş kuralı + validasyon Business katmanında
 38. GLOBAL: Merkezi IMessageService
-39. GLOBAL: ViewModel Lifetime ayrımı (Root=Scoped, Geçici=Transient)
-40. GLOBAL: Parametreler, metot imzaları ve TÜM ÇAĞRILAR TEK SATIRDA
+39. GLOBAL: ViewModel Lifetime ayrımı
+40. GLOBAL: Parametreler TEK SATIRDA
 41. GLOBAL: Entity default değerleri LookupCodes sabitleri
 42. GLOBAL: BaseEntity.Id = Guid.NewGuid() default
 43. GLOBAL: Desktop HTTP Client (Faz H-1)
 44. GLOBAL: Refresh Token Retry (Faz H-2)
-45. GLOBAL: JSON Cycle (Faz H-2) - ReferenceHandler.IgnoreCycles
-46. GLOBAL: HTTPS Redirect (Faz H-2) - sadece Production
-47. GLOBAL: Firma silme = soft delete via PUT /active endpoint
-48. GLOBAL: SetActiveAsync pattern (Faz G sonrası)
-49. GLOBAL: Kuruluş tarihi zorunludur (Faz A)
-50. GLOBAL: Uygulamadaki tüm tarihler kuruluş tarihinden önce olamaz (Faz A)
-    * UI: MinFoundationDateBehavior (attached behavior, DateEdit.Tag = alan adı)
-    * Business: CompanyValidator + PeriodService.EnsureDatesAfterFoundation
-    * Kaynak: ITenantContext.CurrentCompany.FoundationDate
+45. GLOBAL: JSON Cycle (ReferenceHandler.IgnoreCycles)
+46. GLOBAL: HTTPS Redirect sadece Production
+47. GLOBAL: Firma silme = soft delete via PUT /active
+48. GLOBAL: SetActiveAsync pattern
+49. GLOBAL: Kuruluş tarihi zorunludur
+50. GLOBAL: Uygulamadaki tüm tarihler kuruluş tarihinden önce olamaz
 51. GLOBAL: Merkezi derleme ayarları — Directory.Build.props
 52. GLOBAL: Tarih alanları — değer yoksa BOŞ gösterilir
-    * Pattern: XxxNullable computed property (DateTime.MinValue → null)
-    * DateEdit.EditValue = DateTime? kabul eder → null = boş
-    * CompanyEditViewModel: FoundationDateNullable, PayrollCutoffDateNullable
-    * Period: StartDateNullable, EndDateNullable, FinalizationDateNullable
 53. GLOBAL: Tutar alanları SAĞA DAYALI gösterilir
-    * Form: NumericEditStyle.HorizontalContentAlignment = Right
-    * Grid: EditSettings.HorizontalContentAlignment = Right
-    (optimized mode uyumlu — LightweightCellEditor CellStyle KULLANILMAZ)
-54. GLOBAL: Çıkış butonu ikonu — özel PNG (kırmızı power-off)
-    * Uygulama noktaları: ShellWindow.xaml (alt bar) + LoginWindow.xaml
-    * Yerleşim: Resources/Icons/ExitButton.png
-    * Giriş butonu ikonu: Resources/Icons/Login.png
-    * Build Action: Resource
-    * Bağlama: SimpleButton.Glyph="/Resources/Icons/ExitButton.png"
-    * Bağlama: SimpleButton.Glyph="/Resources/Icons/Login.png"
-    * DevExpress hazır ikon setinde birebir eşleşme YOK
-    * ✅ TAMAMLANDI (2026-09-26)
+54. GLOBAL: Çıkış butonu ikonu — özel PNG
 55. GLOBAL: Tarih alanlarında UpdateSourceTrigger=PropertyChanged ZORUNLU
-    * DateEdit.EditValue binding'lerinde varsayılan LostFocus'tur
-    * Kullanıcı tarih seçip başka alana tıklamadan Kaydet'e basarsa,
-      ViewModel güncellenmemiş olur → API 400 ValidationError
-    * Çözüm: DateEdit binding'lerine
-      UpdateSourceTrigger=PropertyChanged eklenir
-    * Geçerli alanlar:
-      - CompanyEditView.xaml: FoundationDateNullable, PayrollCutoffDateNullable
-      - PeriodEditView.xaml: StartDateNullable (OneWay), EndDateNullable (OneWay),
-                            FinalizationDateNullable
-    * ✅ TAMAMLANDI (2026-09-26) — Firma kaydetme düzeltildi
 56. GLOBAL: Özel Dönem (IsSpecial) akışı
-    * Period.IsSpecial (bool, default false) + Period.IsStandard (computed)
-    * UI: PeriodEditView "Özel Dönem" checkbox + Warning_16x16 ikon + ToolTip
-    * Onay akışı: IsSpecialPeriod=true set edildiğinde IMessageService.Confirm
-      çağrılır. Reddedilirse değer false'a döner (_suppressSpecialConfirm
-      bayrağı ile Load/Reset programatik setlerde devre dışı bırakılır).
-    * İş kuralı: Aynı firma + aynı yıl için yalnızca BİR özel dönem olabilir.
-      PeriodService.EnsureSpecialPeriodUniqueAsync (Create + Update).
-    * Validasyon: Özel dönemde ay Ocak (1) olamaz (PeriodEditViewModel.Validate).
-    * Tarih hesabı: Özel dönem = StartDate.AddMonths(12).AddDays(-1);
-      Standart dönem = 31.12.YYYY.
-    * EF: PeriodConfiguration.IsSpecial bit IsRequired;
-      Period.IsStandard → builder.Ignore (computed).
-    * ✅ TAMAMLANDI (2026-09-27) — Kod + Migration + Test
 57. GLOBAL: Dönem başlangıç numaraları varsayılan 1
-    * JournalStartNumber, IncomeStartNumber, ExpenseStartNumber
-    * Entity: Period.cs default = 1
-    * ViewModel: PeriodEditViewModel [ObservableProperty] default = 1,
-      Reset() içinde = 1
-    * FillFromPeriod: kaydedilmiş değer ne ise yüklenir
-    * DB migration GEREKMEZ (C# default, DB constraint yok)
-    * ✅ TAMAMLANDI (2026-09-27)
-58. GLOBAL: ASP.NET Core JSON ve ModelState Yapılandırması
-    * Program.cs'de AddControllers zincirine eklenir:
-      - MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true
-        → Non-nullable string alanlar otomatik [Required] gibi davranmaz
-        → Boş string ("") gönderilebilir, 400 vermez
-        → ApiBehaviorOptions'ta DEĞİL, MvcOptions'ta bulunur
-      - JsonSerializerOptions.PropertyNameCaseInsensitive = true
-        → JSON camelCase ↔ C# PascalCase eşleşmesi
-      - JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
-    * ApiBehaviorOptions.InvalidModelStateResponseFactory:
-      - [ApiController] ModelState hatalarını Serilog ile loglar
-      - Hataları Result.ValidationFailure formatında döner
-      - Böylece Desktop Result<T> olarak deserialize edebilir
-    * Neden gerekli:
-      - Period entity'sinde string alanlar non-nullable (VatRate,
-        SystemCurrency, ExchangeRateMode, vb.)
-      - [ApiController] + <Nullable>enable</Nullable> kombinasyonunda
-        bu alanlar otomatik Required kabul edilir
-      - Desktop boş string gönderdiğinde 400 ValidationError oluşur
-      - SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
-        bu davranışı kapatır
-    * ✅ TAMAMLANDI (2026-09-27)
+58. GLOBAL: MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
 59. GLOBAL: Nullable string alanlar için ?? string.Empty koruması
-    * DevExpress ComboBoxEdit, kullanıcı seçim yapmadığında EditValue = null
-    * CommunityToolkit [ObservableProperty] private string _x = string.Empty;
-      tanımlı olsa bile, ComboBoxEdit null gönderdiğinde setter null yazar
-    * PeriodEditViewModel.BuildPeriodFromForm'da tüm string alanlar:
-      - AccountingMethod ?? string.Empty
-      - DeclarationType ?? string.Empty
-      - VoucherSortMode ?? string.Empty
-      - VoucherNumberLength ?? string.Empty
-      - VatRate ?? string.Empty
-      - SystemCurrency ?? string.Empty
-      - ExchangeRateMode ?? string.Empty
-      - LedgerType ?? string.Empty
-    * Aksi halde SQL'e NULL gider → "Cannot insert NULL" hatası
-    * ✅ TAMAMLANDI (2026-09-27)
+60. GLOBAL: CrudControllerBase.CreateAsync entity.Id overwrite YASAK
+61. GLOBAL: ApiProcessManager ile API child process
+    * Desktop, API'yi kendi başlatır (konsol görünmez)
+    * Health check: GET /api/auth/has-user
+    * Path adayları: Release publish R2R > Release R2R > Debug R2R > Debug
+    * Dispose: Kill(entireProcessTree: true)
+    * ✅ TAMAMLANDI (2026-09-28)
+62. GLOBAL: Visual Studio Single Startup Project = Accounting.Desktop
+    * API, Desktop tarafından başlatılır
+    * ✅ TAMAMLANDI (2026-09-28)
+63. GLOBAL: KillZombieProcesses (MSBuild target)
+    * Her build öncesi zombie Accounting.Api.exe öldürülür
+    * Directory.Build.props'ta BeforeTargets="Build"
+    * taskkill /F /IM Accounting.Api.exe || exit 0
+    * ✅ TAMAMLANDI (2026-09-28)
+64. GLOBAL: appsettings.json "Urls" anahtarı
+    * API portu 5233 sabit
+    * launchSettings.json yerine appsettings.json'dan
+    * .exe doğrudan çalıştırıldığında da geçerli
+    * ✅ TAMAMLANDI (2026-09-28)
+65. GLOBAL: Migration Manifest Cache
+    * CompanyDatabaseMigrator manifest cache kullanır
+    * .migration-manifest.json (bin/ yanında)
+    * TTL: 1 saat + assembly fingerprint kontrolü
+    * Fingerprint: assemblyName|version|ticks
+    * 100+ firma için kritik
+    * Paralel migrate: SemaphoreSlim(8)
+    * ✅ TAMAMLANDI (2026-09-28)
+66. GLOBAL: GetPendingMigrationsAsync Ön Kontrolü
+    * CompanyDatabaseInitializer MigrateAsync öncesi kontrol
+    * Bekleyen migration yoksa MigrateAsync atlanır
+    * Log.Debug seviyesinde (gürültü yok)
+    * ✅ TAMAMLANDI (2026-09-28)
+67. GLOBAL: ReadyToRun (R2R) Publish
+    * Accounting.Api.csproj'da PublishReadyToRun
+    * dotnet publish -c Release -r win-x64 --self-contained false -p:PublishReadyToRun=true
+    * İlk çalıştırma: 18sn → 4.7sn
+    * Sonraki çalıştırmalar: 1.4sn (manifest cache)
+    * Debug F5'te etkisiz (sadece Release publish)
+    * ✅ TAMAMLANDI (2026-09-28)
+68. GLOBAL: Web SDK OutputType=WinExe
+    * Directory.Build.props: UsingMicrosoftNETSdkWeb=true koşulunda
+    * OutputType=WinExe + DisableWinExeOutputInference=true
+    * Konsol penceresi açılmaz
+    * ✅ TAMAMLANDI (2026-09-28)
 
 ---------------------------------------------------------------------
 5. SOLUTION YAPISI
 ---------------------------------------------------------------------
 MuhasebeErp.slnx
-├── Directory.Build.props                   (FİZİKSEL - solution kökü)
+├── Directory.Build.props                   (Nullable=enable, WinExe, KillZombie)
 ├── .editorconfig
-├── docs/                                   (FİZİKSEL klasör)
+├── docs/
 │   ├── PROJE.txt                           (bu dosya)
 │   ├── PROJE_SOURCE_DUMP.txt
 │   ├── calistirma.txt
 │   ├── export-source.ps1
 │   ├── create-seed-files.ps1
-│   ├── convert-nace.ps1
-│   ├── meslek-gruplari.txt
-│   └── sql/
-│       └── seed-test-company.sql
-├── config/                                 (FİZİKSEL klasör)
-│   ├── appsettings.json                    (Server=DESKTOP-DFL2OBF)
-│   └── appsettings.Development.json        (Server=DESKTOP-DFL2OBF)
+│   └── sql/seed-test-company.sql
+├── config/
+│   ├── appsettings.json
+│   └── appsettings.Development.json
 ├── src/
-│   ├── Shared/
-│   │   └── Accounting.Shared
-│   │       ├── Markers/                    (IScopedService, ISingletonService,
-│   │       │                                ITransientService,
-│   │       │                                ILocalSingletonService, IApiClient)
-│   │       ├── Dtos/
-│   │       │   ├── Auth/                   (LoginRequest, FirstSetupRequest,
-│   │       │   │                            RefreshTokenRequest, AuthResponse)
-│   │       │   └── Master/                 (SetCompanyActiveRequest)
-│   │       └── Results/                    (IResult, IDataResult, ResultStatus,
-│   │                                        Error, Result, Result<T>,
-│   │                                        PagedResult, ResultExtensions)
+│   ├── Shared/Accounting.Shared
+│   │   ├── Markers/ (5 interface)
+│   │   ├── Dtos/Auth/, Dtos/Master/
+│   │   └── Results/ (IResult, Error, Result, Result<T>, PagedResult, Extensions)
 │   ├── Core/
 │   │   ├── Accounting.Core.Domain
-│   │   │   ├── Common/                     (BaseEntity, AuditableEntity, IAuditable)
-│   │   │   ├── Constants/                  (LookupTypes, LookupCodes, FirmClasses)
-│   │   │   └── Entities/                   (hepsi sealed)
-│   │   │       ├── Company (IsActive, 22 alan)
-│   │   │       ├── LookupValue (Type, Code, Name, ParentId)
+│   │   │   ├── Common/ (BaseEntity, AuditableEntity, IAuditable)
+│   │   │   ├── Constants/ (LookupTypes, LookupCodes, FirmClasses)
+│   │   │   └── Entities/ (sealed)
+│   │   │       ├── Company (22 alan)
+│   │   │       ├── LookupValue
 │   │   │       ├── Period (32 alan + IsSpecial + computed)
-│   │   │       │   * DisplayName, FirmClassDisplay
-│   │   │       │   * IsClass1, IsClass2, IsStandard
-│   │   │       │   * StartDateNullable, EndDateNullable,
-│   │   │       │     FinalizationDateNullable
 │   │   │       ├── RefreshToken
-│   │   │       ├── User, UserCompany, Role, UserRole,
-│   │   │       │   Permission, RolePermission
+│   │   │       ├── User, UserCompany, Role, UserRole, Permission, RolePermission
 │   │   │       └── Setting, NumberSequence, AuditLog
 │   │   ├── Accounting.Core.Business
-│   │   │   ├── Extensions/
-│   │   │   │   └── ValidationExtensions.cs
+│   │   │   ├── Extensions/ValidationExtensions.cs
 │   │   │   ├── Interfaces/
-│   │   │   │   ├── IEntityOperations.cs
-│   │   │   │   ├── ICrudOperations.cs
-│   │   │   │   ├── CrossCutting/           (IClock, ICurrentUser,
-│   │   │   │   │                            ISecretProtector, IPasswordHasher,
-│   │   │   │   │                            ITenantContext, ITenantConnectionResolver,
-│   │   │   │   │                            IMessageService)
-│   │   │   │   ├── Repositories/           (IRepository, IUserRepository,
-│   │   │   │   │                            ICompanyRepository,
-│   │   │   │   │                            ILookupValueRepository,
-│   │   │   │   │                            IPeriodRepository,
-│   │   │   │   │                            IRefreshTokenRepository)
-│   │   │   │   └── Services/               (IAuthService, IDatabaseInitializer,
-│   │   │   │                                IStartupSeeder, ILookupValueService,
-│   │   │   │                                IPeriodService, ICompanyService)
-│   │   │   ├── Options/                    (CompanyDatabaseOptions)
-│   │   │   ├── Validators/
-│   │   │   │   ├── Master/                 (Company, Period, LookupValue)
-│   │   │   │   └── Auth/                   (LoginRequest, FirstSetupRequest)
-│   │   │   └── Services/
-│   │   │       (SystemClock, IdentityPasswordHasher, CurrentUser,
-│   │   │        TenantContext, ServiceBase, AuthService, LookupValueService,
-│   │   │        PeriodService, CompanyService)
+│   │   │   │   ├── IEntityOperations, ICrudOperations
+│   │   │   │   ├── CrossCutting/ (IClock, ICurrentUser, IMessageService, ...)
+│   │   │   │   ├── Repositories/ (IRepository, IUserRepository, ...)
+│   │   │   │   └── Services/ (IAuthService, ICompanyService, IPeriodService, ...)
+│   │   │   ├── Options/CompanyDatabaseOptions.cs
+│   │   │   ├── Validators/Master/, Validators/Auth/
+│   │   │   └── Services/ (SystemClock, TenantContext, AuthService, CompanyService,
+│   │   │                    PeriodService, LookupValueService, ServiceBase, ...)
 │   │   └── Accounting.Core.DataAccess
-│   │       ├── Extensions/                 (QueryableExtensions)
+│   │       ├── Extensions/QueryableExtensions.cs
 │   │       ├── Persistence/
-│   │       │   ├── BaseDbContext.cs
+│   │       │   ├── BaseDbContext.cs (AuditInfo + AuditLog)
 │   │       │   ├── BaseEntityConfiguration.cs
 │   │       │   ├── AuditableEntityConfiguration.cs
 │   │       │   ├── CompanyConnectionStringBuilder.cs
-│   │       │   ├── Constants/              (TableNames, SqlTypes)
-│   │       │   ├── DesignTime/             (Factories, Clock, CurrentUser)
-│   │       │   │   * AppDbContextFactory → Server=DESKTOP-DFL2OBF
-│   │       │   │   * MasterDbContextFactory → Server=DESKTOP-DFL2OBF
-│   │       │   ├── Master/                 (MasterDbContext + Configs)
-│   │       │   │   * PeriodConfiguration → Ignore (computed property'ler)
-│   │       │   │   * Migrations/           (InitialMaster - yenilendi)
-│   │       │   └── Companies/              (AppDbContext + Configs)
-│   │       │       * Migrations/           (InitialCompany - yenilendi)
-│   │       ├── Seeds/                      (23 JSON, LookupValueSeeder)
-│   │       ├── Repositories/               (RepositoryBase, UserRepository,
-│   │       │                                CompanyRepository,
-│   │       │                                LookupValueRepository,
-│   │       │                                PeriodRepository,
-│   │       │                                RefreshTokenRepository)
+│   │       │   ├── Constants/ (TableNames, SqlTypes)
+│   │       │   ├── DesignTime/ (AppDbContextFactory, MasterDbContextFactory)
+│   │       │   ├── Master/ (MasterDbContext + Configs + Migrations)
+│   │       │   └── Companies/ (AppDbContext + Configs + Migrations)
+│   │       ├── Seeds/ (23 JSON + LookupValueSeeder)
+│   │       ├── Repositories/ (RepositoryBase, UserRepository, ...)
 │   │       └── Services/
-│   │           (DataProtectionSecretProtector, TenantConnectionResolver,
-│   │            CompanyDatabaseInitializer)
-│   ├── Modules/
-│   │   └── GeneralAccounting/
-│   │       ├── Accounting.GeneralAccounting.Domain
-│   │       ├── Accounting.GeneralAccounting.Business
-│   │       └── Accounting.GeneralAccounting.DataAccess
-│   ├── Composition/
-│   │   └── Accounting.Composition
-│   │       └── ServiceRegistration.cs      (AddAccountingLocal + AddAccountingApi)
+│   │           ├── DataProtectionSecretProtector
+│   │           ├── TenantConnectionResolver
+│   │           ├── CompanyDatabaseInitializer (GetPendingMigrationsAsync)
+│   │           └── CompanyDatabaseMigrator (Manifest Cache + Paralel)
+│   ├── Modules/GeneralAccounting/
+│   │   ├── Accounting.GeneralAccounting.Domain
+│   │   ├── Accounting.GeneralAccounting.Business
+│   │   └── Accounting.GeneralAccounting.DataAccess
+│   ├── Composition/Accounting.Composition
+│   │   └── ServiceRegistration.cs (AddAccountingLocal / AddAccountingApi)
 │   └── Presentation/
-│       ├── Accounting.Desktop               (WPF + DevExpress)
-│       │   ├── Resources/                   (Kural 54)
-│       │   │   └── Icons/
-│       │   │       ├── ExitButton.png       (Çıkış butonu)
-│       │   │       └── Login.png            (Giriş butonu)
-│       │   ├── Windows/                     (Login, FirstSetup, Shell, Message)
-│       │   ├── Views/                       (Welcome, Empty, CompanyEdit,
-│       │   │                                CompanyList, PeriodEdit,
-│       │   │                                PeriodList)
-│       │   ├── ViewModels/                  (Login, FirstSetup, Shell, Welcome,
-│       │   │                                CompanyEdit, CompanyList, Message,
-│       │   │                                PeriodEdit, PeriodList,
-│       │   │                                FirmClassItem)
-│       │   ├── Converters/                  (StringToVisibilityConverter,
-│       │   │                                MinValueToEmptyConverter)
-│       │   ├── Enums/                       (MessageType)
-│       │   ├── Interfaces/                  (ITokenStore, IAuthTokenRefresher)
-│       │   ├── Services/                    (MessageService, InMemoryTokenStore,
-│       │   │                                Http/AuthTokenHandler,
-│       │   │                                Http/AuthTokenRefresher,
-│       │   │                                Http/HttpAuthService,
-│       │   │                                Http/HttpCompanyService,
-│       │   │                                Http/HttpPeriodService,
-│       │   │                                Http/HttpLookupValueService)
-│       │   ├── Extensions/                  (HttpResponseExtensions,
-│       │   │                                DesktopHttpClientExtensions)
-│       │   ├── Behaviors/                   (ProperCaseBehavior,
-│       │   │                                ComboBoxContainsFilterBehavior,
-│       │   │                                MinFoundationDateBehavior)
-│       │   ├── Styles/                      (ControlStyles.xaml)
-│       │   ├── App.xaml / App.xaml.cs
-│       │   └── .editorconfig
+│       ├── Accounting.Desktop
+│       │   ├── Resources/Icons/ (ExitButton.png, Login.png)
+│       │   ├── Windows/ (Login, FirstSetup, Shell, Message)
+│       │   ├── Views/ (Welcome, Empty, CompanyEdit, CompanyList,
+│       │   │           PeriodEdit, PeriodList)
+│       │   ├── ViewModels/ (Login, Shell, Welcome, CompanyEdit,
+│       │   │               CompanyList, PeriodEdit, PeriodList, ...)
+│       │   ├── Converters/, Enums/, Interfaces/
+│       │   ├── Services/
+│       │   │   ├── ApiProcessManager.cs (KURAL 61 - R2R yollar)
+│       │   │   ├── MessageService, InMemoryTokenStore
+│       │   │   └── Http/ (AuthTokenHandler, AuthTokenRefresher,
+│       │   │            HttpAuthService, HttpCompanyService, ...)
+│       │   ├── Extensions/, Behaviors/, Styles/
+│       │   └── App.xaml.cs (ApiProcessManager entegrasyonu)
 │       ├── Accounting.Api
-│       │   ├── Controllers/                 (Common + Master: 4 controller)
-│       │   ├── Options/                     (JwtSettings)
-│       │   ├── Interfaces/                  (IJwtTokenGenerator, IAuthTokenService)
-│       │   ├── Services/                    (JwtTokenGenerator, AuthTokenService,
-│       │   │                                HttpCurrentUser, HttpTenantContext)
-│       │   ├── Filters/                     (ResultActionFilter)
-│       │   ├── Extensions/                  (ResultExtensions, HttpContextExtensions)
-│       │   ├── Program.cs
-│       │   ├── appsettings.json             (Server=DESKTOP-DFL2OBF)
-│       │   └── Properties/launchSettings.json
-│       └── Accounting.Web                   (Blazor - henüz aktif değil)
-├── tests/
-│   ├── Accounting.Core.UnitTests
-│   ├── Accounting.GeneralAccounting.UnitTests
-│   └── Accounting.IntegrationTests
-└── Directory.Build.props
+│       │   ├── Controllers/Common/ (ApiControllerBase, CrudControllerBase)
+│       │   ├── Controllers/Master/ (Auth, Companies, Lookups, Periods)
+│       │   ├── Options/JwtSettings.cs
+│       │   ├── Interfaces/ (IJwtTokenGenerator, IAuthTokenService)
+│       │   ├── Services/ (JwtTokenGenerator, AuthTokenService,
+│       │   │              HttpCurrentUser, HttpTenantContext)
+│       │   ├── Filters/ResultActionFilter.cs
+│       │   ├── Extensions/ (ResultExtensions, HttpContextExtensions)
+│       │   ├── Program.cs (arka plan migration)
+│       │   ├── appsettings.json (Urls=5233, Jwt, Serilog)
+│       │   └── Properties/launchSettings.json (Executable)
+│       └── Accounting.Web (Blazor - henüz aktif değil)
+└── tests/
+    ├── Accounting.Core.UnitTests
+    ├── Accounting.GeneralAccounting.UnitTests
+    └── Accounting.IntegrationTests
 
 ---------------------------------------------------------------------
 6. RESULT PATTERN (MERKEZİ)
@@ -469,48 +331,20 @@ Yapı:
 - IResult: IsSuccess, IsFailure, Status, Message, Errors
 - IDataResult<T> : IResult: + Data
 - ResultStatus (const string):
-  * Success, ValidationError, Unauthorized, Forbidden, NotFound,
-    Conflict, BusinessRuleViolation, InternalError
+  Success, ValidationError, Unauthorized, Forbidden, NotFound,
+  Conflict, BusinessRuleViolation, InternalError
 - Error (record): Code, Message, Status, Field
-- Result (non-generic): [JsonConstructor], factory metotlar
-- Result<T> : Result, IDataResult<T>: [JsonConstructor]
-- PagedResult<T> : Result, IDataResult<IReadOnlyList<T>>
+- Result, Result<T>, PagedResult<T>
 
-ResultExtensions (Shared/Results):
-- MapFailureAsync, EnsureAsync, EnsureFalseAsync
-- ThenAsync (3 overload: generic, non-generic→generic, non-generic zincir)
+Extensions:
+- MapFailureAsync, EnsureAsync, EnsureFalseAsync, ThenAsync
+- FirstOrNotFoundAsync
+- ValidateErrorsAsync, ValidateAsync
 
-QueryableExtensions (Core.DataAccess/Extensions):
-- FirstOrNotFoundAsync<T>(predicate, message, ct) → Result<T>
-
-ValidationExtensions (Core.Business/Extensions):
-- ValidateErrorsAsync<TRequest> → IReadOnlyList<Error>?
-- ValidateAsync<TRequest> → Result<TRequest>
-
-ResultExtensions (Api/Extensions):
-- ToActionResult(this IResult) → IActionResult
-- Status → HTTP mapping:
-  ValidationError→400, Unauthorized→401, Forbidden→403,
-  NotFound→404, Conflict→409, BusinessRuleViolation→422,
-  InternalError→500
-
-ResultActionFilter (Api/Filters):
-- Global filter: IAsyncActionFilter
-- Result/Result<T> → ToActionResult() otomatik
-- KURAL 58: Hata durumunda Serilog ile detay loglama:
-  * "[ResultActionFilter] {Method} {Path} → {Status} | Message: {Message} | Errors: {Errors}"
-  * Kapsam: result.IsFailure durumunda
-
-ApiBehaviorOptions (Api/Program.cs):
-- InvalidModelStateResponseFactory override
-- [ApiController] ModelState hatalarını loglar + Result.ValidationFailure döner
-- "[ApiBehavior ModelState] {@Errors}" formatında Serilog log
-
-HttpResponseExtensions (Desktop/Extensions):
-- ReadResultAsync<T>(HttpResponseMessage, ct) → Result<T>
-- ReadResultAsync(HttpResponseMessage, ct) → Result
-- PropertyNameCaseInsensitive = true
-- JsonException yakalama → InternalError
+ResultActionFilter:
+- IAsyncActionFilter (Global)
+- Result/Result<T> → ToActionResult()
+- hata durumunda Serilog log
 
 ---------------------------------------------------------------------
 7. REPOSITORY PATTERN
@@ -518,332 +352,90 @@ HttpResponseExtensions (Desktop/Extensions):
 Interface hiyerarşisi:
     IEntityOperations<TEntity>
       → GetByIdAsync, CreateAsync, DeleteAsync
-        ↑
     IRepository<TEntity>
       → + GetByIdForUpdateAsync, GetAllAsync (×2),
         HasAnyAsync, HasReferencesAsync, SaveChangesAsync
-      (UpdateAsync YOK)
 
 Base: RepositoryBase<TEntity, TContext>
-- abstract, IScopedService
-- Primary constructor: (TContext context)
-- Fields: _context, _set (protected readonly)
-- Tüm metotlar virtual
-- HasReferencesAsync ABSTRACT → her repo override etmek zorunda
-
 Somut Repository'ler:
-- UserRepository (GetByUserName, GetByEmail)
-- CompanyRepository (GetByUserId, AddWithUser)
-- LookupValueRepository (GetByType, GetByTypeAndCode, GetChildren)
-- PeriodRepository (GetByCompanyId, GetByCompanyAndYear)
-- RefreshTokenRepository (GetByTokenHash)
+- UserRepository, CompanyRepository, LookupValueRepository,
+  PeriodRepository, RefreshTokenRepository
 
 ---------------------------------------------------------------------
 8. CROSS-CUTTING SERVİSLER
 ---------------------------------------------------------------------
 Core.Business/Interfaces/CrossCutting:
-- IClock → UtcNow, Now (Singleton)
-- ISecretProtector → Protect, Unprotect (Singleton)
-- IPasswordHasher → Hash, Verify (Singleton)
-- ICurrentUser → UserId, UserName, IsAuthenticated, IpAddress, SetUser, Clear
-  * Desktop: CurrentUser (ILocalSingletonService)
-  * API: HttpCurrentUser (IScopedService)
-- ITenantContext → CurrentCompany, CurrentCompanyId, HasCompany,
-                     CurrentPeriod, CurrentPeriodId, HasPeriod,
-                     SetCompany, SetPeriod, ClearPeriod, Clear
-- ITenantConnectionResolver → ResolveMasterConnection, ResolveCompanyConnection
-- IMessageService → ShowSuccess/Info/Warning/Error, ShowErrors, Confirm
+- IClock, ISecretProtector, IPasswordHasher, ICurrentUser,
+  ITenantContext, ITenantConnectionResolver, IMessageService
 
 Desktop/Interfaces:
-- ITokenStore → Current, HasToken, Set, Clear
-  * Event: LoggedOut (Faz H-2)
-- IAuthTokenRefresher → TryRefreshAsync(ct) → Result<bool>
-
-Core.Business/Services:
-- SystemClock, IdentityPasswordHasher, CurrentUser, TenantContext
-- LookupValueService, PeriodService, CompanyService
-- AuthService
-
-Core.DataAccess/Services:
-- DataProtectionSecretProtector, TenantConnectionResolver
-- CompanyDatabaseInitializer
-
-Api/Services:
-- JwtTokenGenerator, AuthTokenService
-- HttpCurrentUser, HttpTenantContext
-- ResultActionFilter
+- ITokenStore, IAuthTokenRefresher
 
 Desktop/Services:
+- ApiProcessManager (KURAL 61)
 - MessageService, InMemoryTokenStore
 - Http/AuthTokenHandler, Http/AuthTokenRefresher
-- Http/HttpAuthService, Http/HttpCompanyService
-- Http/HttpPeriodService, Http/HttpLookupValueService
+- Http/HttpAuthService, Http/HttpCompanyService,
+  Http/HttpPeriodService, Http/HttpLookupValueService
 
 Desktop/Behaviors:
-- ProperCaseBehavior (TextEdit için global proper-case)
-- ComboBoxContainsFilterBehavior (ComboBox için Contains filtresi)
-- MinFoundationDateBehavior (AŞAMA 1 — kuruluş tarihi öncesi uyarı)
+- ProperCaseBehavior
+- ComboBoxContainsFilterBehavior
+- MinFoundationDateBehavior
 
 ---------------------------------------------------------------------
 9. FİRMA MODELİ (Company)
 ---------------------------------------------------------------------
 Company (sealed) : AuditableEntity
-├── Kimlik: ShortName, Name, IdentityNumber, TaxNumber
-├── Hukuki: LegalStatus (Code), LegalNature (Code), Description
-├── Vergi: TaxOffice (Code), FoundationDate, ActivityCode (Code)
-├── SGK/Meslek: SocialSecurityInstitution, ProfessionalOrganization,
-│              ProfessionalOrganizationMemberNumber
-├── Ticaret: TradeRegistryOffice, TradeRegistryNumber, RegistryNumber
-├── Muhtasar: WithholdingDeclarationMethod, Create302RecordForWithholding,
-│             PayrollCutoffDate
-├── Entegrasyon: MerisNumber, TaxAuthorityUsername, IsSpecialTaxpayer
-├── Bayraklar: SendReceiptDescriptionForDbs,
-│              SendReceiptDescriptionForLedger, AdminOnlyAccess
-├── Sistem: ServerName, DatabaseName, DbUserName,
-│           DbPasswordEncrypted, IntegratedSecurity, IsActive
-└── Relations: UserCompanies, Periods
-
-Default değerler (LookupCodes):
-- LegalStatus = "OZEL"
-- SocialSecurityInstitution = "SGK"
-- WithholdingDeclarationMethod = "SIRKET_BAZINDA"
-- Create302RecordForWithholding = "OLUSTUR"
+Kimlik, Hukuki, Vergi, SGK/Meslek, Ticaret, Muhtasar,
+Entegrasyon, Bayraklar, Sistem alanları.
 
 Unique Index'ler:
-- IX_Companies_ShortName (unique)
-- IX_Companies_DatabaseName (unique)
-- IX_Companies_IdentityNumber (filtered unique)
-- IX_Companies_TaxNumber (unique)
+- IX_Companies_ShortName, IX_Companies_DatabaseName,
+  IX_Companies_IdentityNumber (filtered), IX_Companies_TaxNumber
 
-Firma Silme = Soft Delete (GLOBAL KURAL):
+Firma Silme = Soft Delete:
 - DELETE /api/companies/{id} → 422 BusinessRuleViolation
-- PUT /api/companies/{id}/active { isActive: false } → pasif
-- PUT /api/companies/{id}/active { isActive: true } → aktif
-
-VALIDASYON KURALLARI (CompanyValidator):
-- ShortName: NotEmpty, Max 64
-- Name: NotEmpty, Max 256
-- TaxNumber: NotEmpty, Max 10
-- IdentityNumber: Max 11 (boş olabilir)
-- Description: Max 1024
-- FoundationDate: ZORUNLU (DateTime.MinValue olamaz)
-- PayrollCutoffDate: Boş veya ≥ FoundationDate
-
-UI NOTLARI (Firma sekmesi):
-- Kuruluş Tarihi: `*` zorunlu işareti, `DateEdit` + `FoundationDateNullable`
-  → UpdateSourceTrigger=PropertyChanged (Kural 55)
-- Bordro Kesinleşme Tarihi: `DateEdit` + `PayrollCutoffDateNullable`
-  → UpdateSourceTrigger=PropertyChanged (Kural 55)
-- Her ikisi de boş gösterim (MinValue → null → boş)
-- TC Kimlik No: `TcKimlikNumericStyle` (11 rakam max)
-- Vergi No: `VergiNoNumericStyle` (10 rakam max)
-- Tüm tutar alanları sağa dayalı (Kural 53)
-
-CANLI TARİH UYARISI (AŞAMA 1 — TAMAMLANDI):
-- `MinFoundationDateBehavior` (attached behavior, global)
-- Kullanım: <dxe:DateEdit Tag="Alan Adı" behaviors:MinFoundationDateBehavior.IsEnabled="True" />
-- Kaynak: `ITenantContext.CurrentCompany.FoundationDate`
-- Firma yoksa veya kuruluş tarihi MinValue ise sessizce geçer
-- Mesaj: "{Tag} (dd.MM.yyyy) kuruluş tarihinden (dd.MM.yyyy) önce olamaz."
-- Bağlı alanlar:
-  * Bordro Kesinleşme Tarihi (Firma sekmesi)
-  * Kapanış Tarihi (PeriodEditView — Dönem detay)
+- PUT /api/companies/{id}/active → pasif/aktif
 
 ---------------------------------------------------------------------
 10. PERIOD MODELİ (Dönem)
 ---------------------------------------------------------------------
 Period (sealed) : AuditableEntity — 32 alan + IsSpecial + computed
 
-ORTAK:
-- CompanyId (Guid), Year (int), MonthNumber (int, 1-12)
-- StartDate, EndDate (DateTime)
-- IsClosed, IsActive (bool)
-- IsSpecial (bool, default false)              [KURAL 56 — 2026-09-27]
-- FinalizationDate (DateTime)
-- AccountingMethod (string Code)
-- FirmClass (int, 1 veya 2)
+ORTAK: CompanyId, Year, MonthNumber, StartDate, EndDate,
+       IsClosed, IsActive, IsSpecial, FinalizationDate,
+       AccountingMethod, FirmClass
 
-GEÇMİŞ YIL ZARARLARI:
-- OtherLoss, ExceptionLoss (decimal)
+Computed: DisplayName, FirmClassDisplay, IsClass1, IsClass2,
+          IsStandard, StartDateNullable, EndDateNullable,
+          FinalizationDateNullable
 
-1. SINIF ALANLARI:
-- GrossWage, NetWage, VatAmount, StorageAmount (decimal)
-- VatRate, DeclarationType, VoucherSortMode, VoucherNumberLength,
-  SystemCurrency, ExchangeRateMode (string Code)
-- StorageRate (decimal 18,4)
-- JournalStartNumber (int, default = 1)        [KURAL 57 — 2026-09-27]
-- RenumberVouchers, UseForeignCurrency (bool)
+İş Kuralları (PeriodService):
+- Create: aynı firma+yıl conflict, kuruluş tarihi kontrolü,
+  özel dönem tekilliği
+- Update: aynı + kendi Id'si hariç
 
-2. SINIF ALANLARI:
-- LedgerType (string Code)
-- IncomeStartNumber (int, default = 1)         [KURAL 57 — 2026-09-27]
-- ExpenseStartNumber (int, default = 1)        [KURAL 57 — 2026-09-27]
-- CarryoverVat (decimal)
-- IsVatTaxpayer, UseDbsStockLedger (bool)
-
-Computed (EF Core ignore):
-- DisplayName => "{StartDate:dd.MM.yyyy} - {EndDate:dd.MM.yyyy}"
-- FirmClassDisplay => "1. Sınıf" / "2. Sınıf"
-- IsClass1 => FirmClass == 1
-- IsClass2 => FirmClass == 2
-- IsStandard => !IsSpecial                    [KURAL 56 — 2026-09-27]
-- StartDateNullable => StartDate == MinValue ? null : StartDate
-- EndDateNullable => EndDate == MinValue ? null : EndDate
-- FinalizationDateNullable => FinalizationDate == MinValue ? null : FinalizationDate
-
-Validasyon (PeriodValidator):
-- CompanyId: NotEmpty
-- Year: GreaterThan(0)
-- MonthNumber: InclusiveBetween(1, 12)
-- EndDate: GreaterThan(StartDate)
-- FirmClass: Must(1 veya 2)
-- When(IsClass1): GrossWage/NetWage/VatAmount/StorageAmount >= 0,
-                  JournalStartNumber >= 0
-- When(IsClass2): IncomeStartNumber/ExpenseStartNumber >= 0,
-                  CarryoverVat >= 0
-
-İŞ KURALLARI (PeriodService):
-- CreateAsync: 
-  * Aynı firma + aynı yıl için dönem zaten mevcutsa → Conflict
-  * StartDate / EndDate / FinalizationDate ≥ Company.FoundationDate
-    değilse → BusinessRuleViolation
-  * IsSpecial=true ve aynı firma + aynı yıl için başka özel dönem
-    varsa → BusinessRuleViolation (EnsureSpecialPeriodUniqueAsync)  [KURAL 56]
-- UpdateAsync: Aynı tarih + özel dönem kontrolü (kendi Id'si hariç tutulur)
-
-DÖNEM AKIŞI (AŞAMA 2 — MEVCUT):
-- Yeni ayrı sayfa: PeriodEditView (Dialog DEĞİL)
-- PeriodEditView: yıl seç → Başlangıç/Bitiş otomatik (readonly)
-- Özel Dönem checkbox: işaretlenirse Ay ComboBox görünür
-- Firma Sınıfı ComboBox: 1/2 → ilgili bölüm (1. Sınıf / 2. Sınıf) görünür
-- Hesaplamalar (otomatik + override):
-  * VatAmount = GrossWage × VatRate / 100
-  * StorageAmount = GrossWage × StorageRate / 100
-- Kaydet → Dönem listesine geri dön (aynı firma, Dönem sekmesi açık)
-
-TARİH HESAPLAMA (AŞAMA 2):
-- İlk dönem (kuruluş yılı veya hiç dönem yoksa):
-  * StartDate = max(kuruluş tarihi, 01.01.YYYY)
-  * EndDate = 31.12.YYYY
-- Sonraki dönemler (standart):
-  * StartDate = 01.01.YYYY
-  * EndDate = 31.12.YYYY
-- Özel dönem (IsSpecial = true):
-  * StartDate = 01.{Ay}.{Yıl}
-  * EndDate = StartDate.AddMonths(12).AddDays(-1)
-- startDate >= endDate durumunda (kuruluş tarihi yıl sonundan sonra):
-  * Standart: endDate = startDate.Year+1 31.12.YYYY
-  * Özel: endDate = startDate.AddMonths(12).AddDays(-1)
-
-YIL SINIRI:
-- Yıl listesi: kuruluş yılı → max(currentYear, foundationYear)
-- Düzenleme modunda Yıl readonly (unique index + fiş numaralandırma)
-
-DÖNEM LİSTESİ (AŞAMA 2):
-- CompanyEditView → Dönem sekmesi → PeriodListView (gömülü, code-behind ile)
-- Toolbar: Dönem Ekle / Düzenle / Sil
-- Grid: DisplayName, FirmClassDisplay, 3 sayısal başlangıç no, GrossWage,
-        IsClosed, IsActive
-- Sil kuralı: IsClosed = true olan silinemez, onay diyalogu
-- Çift tıklama → Düzenle
-
-ÖZEL DÖNEM AKIŞI (AŞAMA 3 — TAMAMLANDI):
-- "Özel Dönem" checkbox'a basıldığında IMessageService.Confirm ile onay
-- Onay reddi: değer false'a döner (_suppressSpecialConfirm koruması)
-- Özel dönemde Ocak ayı seçilirse kaydetme reddedilir (Validate)
-- Aynı firma + aynı yıl için ikinci özel dönem engellenir (PeriodService)
-- Period.IsSpecial bayrağı eklendi + migration + test edildi
-- ✅ TAMAMLANDI (2026-09-27)
-
-KURAL 56 (ÖZEL DÖNEM) — ÖZET:
-- Onay akışı + iş kuralı + validasyon tek çatı altında
-- UI: Warning_16x16 ikon + ToolTip (PeriodEditView)
-- Business: EnsureSpecialPeriodUniqueAsync (PeriodService)
-- EF: IsSpecial (bit, IsRequired), IsStandard → Ignore
-
-KURAL 57 (BAŞLANGIÇ NUMARALARI) — ÖZET:
-- JournalStartNumber, IncomeStartNumber, ExpenseStartNumber default = 1
-- Entity + ViewModel + Reset() senkron
-- FillFromPeriod mevcut değeri korur
-
-KURAL 59 (NULLABLE STRING KORUMASI) — ÖZET:
-- BuildPeriodFromForm'da tüm string alanlar ?? string.Empty
-- ComboBoxEdit null gönderdiğinde SQL NULL hatası önlenir
+Özel Dönem akışı: KURAL 56
 
 ---------------------------------------------------------------------
 11. WPF MİMARİSİ (DevExpress v26.1.3)
 ---------------------------------------------------------------------
-Pencereler:
-- LoginWindow, FirstSetupWindow, ShellWindow, MessageWindow
+Pencereler: LoginWindow, FirstSetupWindow, ShellWindow, MessageWindow
+Views: WelcomeView, EmptyView, CompanyEditView, CompanyListView,
+       PeriodListView, PeriodEditView
+ShellWindow: Menu + Firma/Dönem ComboBox + Tamam + ContentControl +
+             Footer (2 kolon)
 
-Views:
-- WelcomeView, EmptyView
-- CompanyEditView (Firma/Ortaklar/Adres/İletişim/Kontak)
-- CompanyListView (Firma Listesi + 3 filtre)
-- PeriodListView (Dönem Listesi — CompanyEditView içine gömülü)
-- PeriodEditView (Dönem Ekle/Düzenle — ayrı sayfa)
-
-ShellWindow (3 satır, footer 2 kolon):
-- Row 0: Menu + Firma ComboBox + Dönem ComboBox + Tamam
-- Row 1: ContentControl (CurrentView)
-- Row 2: Sol (UserDisplayName + Çıkış) + Sağ (FooterContent)
-- Footer DataTemplate'ler:
-  * CompanyEditViewModel → [Liste] [Kaydet]
-  * CompanyListViewModel → [Yeni Firma] [Sil] [Aktifleştir] [Detay]
-  * PeriodEditViewModel → [Vazgeç] [Kaydet]
-- Çıkış butonu → /Resources/Icons/ExitButton.png (Kural 54 ✅)
-
-DÖNEM COMBOBOX DÜZELTMESİ (2026-09-27):
-- ShellWindow.xaml → DisplayMember="Name" → "DisplayName"
-- Sebep: Period entity'sinde Name property'si yok
-- Width: 180 → 220 (DisplayName formatı daha uzun)
-
-STARTUP AKIŞI:
+Startup Akışı:
 1. Tema: Office2019Colorful
 2. Host + Serilog + AddAccountingLocal + AddDesktopHttpClients
-3. IAuthService.HasAnyUserAsync (API üzerinden)
-   - FALSE → FirstSetupWindow
-   - TRUE → LoginWindow
-4. Login döngüsü
-5. Shell açılır → LoadAsync → Firma combo doldur
-6. Firma seç → dönemler yüklenir
-7. Dönem seç + Tamam → tenantContext.Set* → WelcomeView
-8. Menü: Yönetici → Firma Girişi/Listesi
-
-DÖNEM SEKMESİ AKIŞI (AŞAMA 2):
-1. CompanyEditView → Dönem sekmesi
-2. `CompanyEditViewModel.SelectSectionAsync("Dönem")` → `PeriodList.LoadAsync(companyId)`
-3. `CompanyEditView.Loaded` → `DonemContent.Content = new PeriodListView(PeriodList)`
-4. "Dönem Ekle" → `PeriodList.AddRequested` → Shell `OpenPeriodEditViewAsync(Guid.Empty)`
-5. `PeriodEditView` açılır → `PeriodEditViewModel.LoadAsync(companyId, Guid.Empty)`
-6. Kaydet → `SaveCompleted` → Shell `OpenCompanyEditViewAsync(_currentCompanyId, "Dönem")`
-7. CompanyEditView yeniden açılır, Dönem sekmesi otomatik aktif → liste yenilenir
-
-DÖNEM EKLEME SONRASI COMBO TAZELEME (2026-09-27):
-- ShellViewModel.OnPeriodEditSavedAsync → ReloadPeriodsForCurrentCompanyAsync
-- Aynı: OnPeriodEditCancelledAsync, OnCompanyEditSavedAsync
-- ReloadPeriodsForCurrentCompanyAsync:
-  * _currentCompanyId üzerinden firma bul (yoksa LoadCompaniesAsync)
-  * LoadPeriodsAsync(company)
-  * SelectedCompany referansını listeyle senkronla (_suppressCompanyChanged)
-  * En son dönemi (en yüksek yıl + ay) otomatik seç
-
-FORMAT/STİL ALTYAPISI (ControlStyles.xaml):
-- FieldBorderStyle — Border
-- NumericTextEditStyle — Sadece rakam, sınırsız (TextEdit için)
-- TcKimlikNumericStyle — TC Kimlik No (11 max)
-- VergiNoNumericStyle — Vergi No (10 rakam max)
-- NumericEditStyle — 0,00 formatlı (n2, tr-TR) + SAĞA DAYALI
-- IntegerEditStyle — SpinEdit ile TAM SAYI (0-999999, n0) [KURAL 57 — 2026-09-27]
-  * Henüz PeriodEditView'de kullanılmıyor (spin geçişi bekliyor)
-- FilteringComboBoxStyle — IncrementalFiltering + Contains
-- DateEdit implicit — dd.MM.yyyy (DateTimeAdvancingCaret)
-- NumericGridCellStyle → KALDIRILDI (optimized mode uyumsuz)
-
-GRID SAYISAL KOLON HİZALAMA (Kural 53):
-- `CellStyle` KULLANILMAZ (optimized mode'da desteklenmiyor)
-- `EditSettings.HorizontalContentAlignment = Right` kullanılır
-- Örnek: SpinEditSettings, TextEditSettings
+3. ApiProcessManager.StartAsync() → R2R binary tercih edilir
+4. IAuthService.HasAnyUserAsync (API üzerinden)
+5. FirstSetup veya Login
+6. Shell → Firma combo → dönemler
+7. Dönem seç + Tamam → tenantContext.Set*
+8. OnExit → ApiProcessManager.Dispose()
 
 ---------------------------------------------------------------------
 12. DI LIFETIME
@@ -851,167 +443,131 @@ GRID SAYISAL KOLON HİZALAMA (Kural 53):
 Desktop: CurrentUser, TenantContext, InMemoryTokenStore,
          AuthTokenRefresher → ILocalSingletonService
 Desktop VM:
-- Root (Login, FirstSetup, Shell) → IScopedService
-- Geçici (CompanyEdit, CompanyList, PeriodEdit, PeriodList, Welcome)
-  → ITransientService
+- Root → IScopedService
+- Geçici → ITransientService
 - MessageService → ISingletonService
+ApiProcessManager → App.OnStartup'ta new (DI kayıtlı değil)
+
 API: HttpCurrentUser, HttpTenantContext → IScopedService
 DbContext, Repository, Service → SCOPED
 
 ---------------------------------------------------------------------
 13. CONNECTION STRING YÖNETİMİ
 ---------------------------------------------------------------------
-**SQL Server Örnek Adı: DESKTOP-DFL2OBF** (2026-09-26 güncellemesi)
+SQL Server Örnek Adı: DESKTOP-DFL2OBF
 
 config/appsettings.json:
-{
-  "ConnectionStrings": {
-    "Master": "Server=DESKTOP-DFL2OBF;Database=Accounting_Master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
-  },
-  "CompanyDatabase": {
-    "ServerName": "DESKTOP-DFL2OBF",
-    "IntegratedSecurity": true,
-    "DbUserName": "",
-    "DbPassword": "",
-    "DatabaseNameTemplate": "Accounting_{Id}"
-  },
-  "Api": {
-    "BaseUrl": "http://localhost:5233"
-  }
-}
+- Master: Accounting_Master
+- CompanyDatabase.ServerName: DESKTOP-DFL2OBF
+- Api.BaseUrl: http://localhost:5233
 
-config/appsettings.Development.json:
-{
-  "ConnectionStrings": {
-    "Company": "Server=DESKTOP-DFL2OBF;Database=Accounting_DesignTime;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"
-  }
-}
-
-Api/appsettings.json ek alanı:
-"Jwt": {
-  "Issuer": "Accounting.Api",
-  "Audience": "Accounting.Desktop",
-  "SecretKey": "<env var prod'da>",
-  "AccessTokenMinutes": 60,
-  "RefreshTokenDays": 30
-}
+Accounting.Api/appsettings.json:
+- Urls: http://localhost:5233  (KURAL 64)
+- Jwt: Issuer, Audience, SecretKey
+- Serilog: File only (Console kaldırıldı)
 
 Design-Time Factory'ler:
-- AppDbContextFactory.cs → Server=DESKTOP-DFL2OBF
-- MasterDbContextFactory.cs → Server=DESKTOP-DFL2OBF
-
-CompanyConnectionStringBuilder:
-- BuildFromOptions(CompanyDatabaseOptions, Company)
-- BuildFromCompany(Company, decryptedPassword)
-
-NOT: Yerel makinede çalışan SQL Server örnek adı DEĞİŞEBİLİR.
-Kontrol: services.msc veya sqlcmd -L
+- AppDbContextFactory → Server=DESKTOP-DFL2OBF
+- MasterDbContextFactory → Server=DESKTOP-DFL2OBF
 
 ---------------------------------------------------------------------
 14. LOOKUPVALUE MİMARİSİ
 ---------------------------------------------------------------------
 Entity: LookupValue (sealed) : AuditableEntity
-- Type, Code, Name, ParentId (Guid?), DisplayOrder, IsActive
-- DisplayText (computed): "{Code} - {Name}"
-- Relations: Parent, Children
+- Type, Code, Name, ParentId, DisplayOrder, IsActive
+- DisplayText (computed)
 
-LookupTypes (23 tip):
-1. AccountingMethod
-2. ActivityCode
-3. AddressType
-4. City
-5. ContactType
-6. Country
-7. Create302Record
-8. Currency
-9. DeclarationType
-10. District
-11. ExchangeRateMode
-12. LedgerType
-13. LegalNature
-14. LegalStatus
-15. MonthName
-16. ProfessionalOrganization
-17. SocialSecurityInstitution
-18. TaxOffice
-19. TradeRegistryOffice
-20. VatRate
-21. VoucherNumberLength
-22. VoucherSortMode
-23. WithholdingDeclarationMethod
+23 tip: AccountingMethod, ActivityCode, AddressType, City,
+        ContactType, Country, Create302Record, Currency,
+        DeclarationType, District, ExchangeRateMode, LedgerType,
+        LegalNature, LegalStatus, MonthName, ProfessionalOrganization,
+        SocialSecurityInstitution, TaxOffice, TradeRegistryOffice,
+        VatRate, VoucherNumberLength, VoucherSortMode,
+        WithholdingDeclarationMethod
 
 Seed: 23 dosya, INSERT-ONLY, EmbeddedResource
-
-CRUD (Admin - PLANLANAN):
-- CREATE: Type + Code + Name zorunlu
-- UPDATE: Type ve Code IMMUTABLE
-- DELETE: YASAK (IsActive = false)
+CRUD: CREATE (Type+Code+Name zorunlu), UPDATE (Type+Code IMMUTABLE),
+      DELETE YASAK (IsActive=false)
 
 ---------------------------------------------------------------------
 15. AUTHENTICATION (JWT + Refresh Token)
 ---------------------------------------------------------------------
-IAuthService:
-- HasAnyUserAsync() → Result<bool>
-- LoginAsync(LoginRequest, ipAddress, ct) → Result<User>
-- CreateFirstAdminAsync(FirstSetupRequest, ct) → Result<User>
-
+IAuthService: HasAnyUserAsync, LoginAsync, CreateFirstAdminAsync
 API Endpoints:
-- POST /api/auth/login
-- POST /api/auth/first-setup
-- POST /api/auth/refresh (rotation: eski iptal, yeni üretilir)
-- POST /api/auth/revoke
+- POST /api/auth/login, /api/auth/first-setup
+- POST /api/auth/refresh, /api/auth/revoke
 - GET  /api/auth/has-user
 
-JWT:
-- Access 60 dk, Refresh 30 gün
-- Refresh token SHA256 hash (DB'de plain YOK)
-- MapInboundClaims = false
-- ClockSkew = 1 dakika
+JWT: Access 60dk, Refresh 30gün, SHA256 hash (DB'de plain YOK),
+     MapInboundClaims=false, ClockSkew=1dk
 
 Desktop Token Yönetimi:
 - ITokenStore (in-memory)
-- AuthTokenHandler: Authorization header + X-Company-Id + X-Period-Id
+- AuthTokenHandler: Authorization + X-Company-Id + X-Period-Id
 - 401 → AuthTokenRefresher.TryRefreshAsync → retry
-- Refresh başarısız → tokenStore.Clear() → LoggedOut event → Shell kapanır
+- Refresh fail → tokenStore.Clear() → LoggedOut → Shell kapanır
 
 ---------------------------------------------------------------------
-16. YAPILACAKLAR SIRASI (Sonraki Adımlar)
+16. API COLD START ÇÖZÜMÜ (2026-09-28)
 ---------------------------------------------------------------------
-**DÖNEM KAYDETME SORUNU ÇÖZÜLDÜ ✅ (2026-09-27)**
-Çözülen sorunlar sırasıyla:
-1. Migration sorunu (InitialMaster + IsSpecial kolonu) → çözüldü
-2. [ApiController] non-nullable string zorunluluğu → KURAL 58
-3. SystemCurrency NULL insert hatası → KURAL 59
-Test sonuçları (2026-09-27 akşam):
-- 20:20:40 POST /api/periods responded 200
-- 20:25:08 POST /api/periods responded 200
+SORUN: İlk çalıştırmada 18-20 saniye gecikme
 
-**ÖNCELİK 1 — Diğer Dönem Senaryoları Testi**
-- Özel Dönem tam akış testi (checkbox + onay + tarih hesabı)
-- 2. Sınıf dönem testi (IncomeStartNumber, ExpenseStartNumber, LedgerType)
-- Kapanış tarihi dolu dönem testi
-- Aynı yıla ikinci dönem → Conflict (409) testi
-- Özel dönemde Ocak ayı → reddedilmeli (KURAL 56)
-- İkinci özel dönem aynı yıl → engellenmeli (KURAL 56)
+KÖK NEDENLER:
+1. JIT compilation (~5-7sn) - .NET assembly loading
+2. Assembly loading (~5-7sn) - 25+ DLL
+3. DI container + FluentValidation reflection (~4-6sn)
 
-**ÖNCELİK 2 — TextEdit → SpinEdit Geçişi**
-- PeriodEditView.xaml → JournalStartNumber, IncomeStartNumber,
-  ExpenseStartNumber TextEdit → SpinEdit
-- IntegerEditStyle zaten hazır (ControlStyles.xaml)
-- Sebep: TextEdit + int binding potansiyel binding sorunları
-- Rebuild + test
+ÇÖZÜMLER:
+- KURAL 61: ApiProcessManager (child process yönetimi)
+- KURAL 63: KillZombieProcesses (build temizliği)
+- KURAL 64: appsettings.json Urls (port sabitleme)
+- KURAL 65: Migration Manifest Cache (tekrar migrate engeli)
+- KURAL 66: GetPendingMigrationsAsync (boşsa atla)
+- KURAL 67: ReadyToRun (R2R) Publish
 
-**ÖNCELİK 3 — Faz A eksikleri**
-- PeriodEditView XAML gözden geçirme (tüm alanlar var, doğrula)
-- Hesaplamalar → TAMAMLANDI (PeriodEditViewModel.RecalculateAmounts)
+SONUÇ:
+- İlk çalıştırma: 18sn → 4.7sn (R2R sayesinde) ✅
+- Sonraki çalıştırmalar: 1.4sn (manifest + OS cache)
+
+R2R Publish Komutu:
+dotnet publish src/Presentation/Accounting.Api/Accounting.Api.csproj `
+    -c Release -r win-x64 --self-contained false `
+    -p:PublishReadyToRun=true
+
+NOT: R2R sadece Release publish'te çalışır. Debug F5'te etkisiz.
+
+---------------------------------------------------------------------
+17. YAPILACAKLAR SIRASI (Sonraki Adımlar)
+---------------------------------------------------------------------
+**ÖNCELİK 1 — Desktop'ı Release Publish Binary'sine Yönlendirme**
+- ApiProcessManager.ResolveApiExecutablePath adaylar:
+  * bin\Release\net10.0\win-x64\publish\Accounting.Api.exe (ilk)
+  * bin\Release\net10.0\win-x64\Accounting.Api.exe
+  * bin\Debug\net10.0\win-x64\Accounting.Api.exe
+  * bin\Debug\net10.0\Accounting.Api.exe (fallback)
+- Log'da seçilen yol görünür
+- Test: F5 → 4-5 saniye açılış
+
+**ÖNCELİK 2 — Diğer Dönem Senaryoları Testi**
+- Özel Dönem tam akış (checkbox + onay + tarih hesabı)
+- 2. Sınıf dönem (IncomeStartNumber, ExpenseStartNumber)
+- Kapanış tarihi dolu dönem
+- Aynı yıla ikinci dönem → Conflict
+- Özel dönemde Ocak ayı → red
+
+**ÖNCELİK 3 — PeriodEditView SpinEdit Testi**
+- JournalStartNumber, IncomeStartNumber, ExpenseStartNumber
+- IntegerEditStyle zaten hazır
+
+**ÖNCELİK 4 — Splash Screen (opsiyonel)**
+- Kullanıcı 4-5 saniye beklerken "Yükleniyor" göster
+- 10 dakikada entegre olur
 
 **Firma Detayları (D)**
 - Ortaklar / Adres / İletişim / Kontak sekmeleri
-- Şu an placeholder
 
 **Lookup Admin Ekranı (C)**
-- CRUD
-- HttpLookupValueService stub'ları doldurulacak
+- CRUD, HttpLookupValueService stub'ları
 
 **Genel Muhasebe (E)**
 - Hesap Planı + Yevmiye
@@ -1019,146 +575,58 @@ Test sonuçları (2026-09-27 akşam):
 **Faz J (Test)**
 
 ---------------------------------------------------------------------
-17. DEĞİŞİKLİK GÜNLÜĞÜ (Son 7 Gün)
+18. DEĞİŞİKLİK GÜNLÜĞÜ (Son 7 Gün)
 ---------------------------------------------------------------------
 2026-09-18: Faz C + F + I
 2026-09-19: Faz D + D-4 + D-5 + D-1 + E + H-1 + H-2
-2026-09-19: Faz G (Desktop DbContext kaldırma) + G+1 (referans temizliği)
-2026-09-19: Firma pasif bug'ı çözüldü (PUT /active endpoint + SetCompanyActiveRequest)
-2026-09-20: Faz F (temizlik) — CopyFields.IsActive + CompanyEditViewModel.IsActive
-2026-09-20: Faz A (Dönem master-detail) — kısmen uygulandı, bug'lar bekliyordu
-2026-09-23: Faz A tamamlandı
-2026-09-24: Directory.Build.props merkezi yapılandırma
-
-2026-09-25: AŞAMA 1 — Canlı Kuruluş Tarihi Uyarısı
-  - MinFoundationDateBehavior (attached behavior, global)
-  - CompanyEditView → Bordro Kesinleşme Tarihi bağlandı
-  - CompanyValidator mesaj düzeltmesi (Kesilme → Kesinleşme)
-  - Kural 50 netleştirildi (UI + Business + kaynak)
-
-2026-09-25: AŞAMA 2 — Yıl Bazlı Dönem + Ayrı Sayfa Mimarisi
-  - Period entity → StartDateNullable, EndDateNullable, FinalizationDateNullable
-  - PeriodConfiguration → Ignore düzeltmesi
-  - Kural 52 eklendi (tarih alanları boş gösterim)
-  - Kural 53 eklendi (tutar alanları sağa dayalı)
-  - ControlStyles.xaml → NumericEditStyle.HorizontalContentAlignment = Right
-  - ControlStyles.xaml → NumericGridCellStyle KALDIRILDI (optimized mode uyumsuz)
-  - CompanyEditView grid → EditSettings.HorizontalContentAlignment = Right
-  - AddPeriodDialog (popup) → KALDIRILDI, yerine PeriodEditView (ayrı sayfa)
-  - PeriodEditViewModel (yıl + özel dönem + hesaplamalar + kayıt)
-  - PeriodEditView.xaml + .cs (yeni tam sayfa)
-  - PeriodListViewModel + PeriodListView (grid + toolbar)
-  - CompanyEditViewModel → dönem kodu temizlendi, PeriodList property eklendi
-  - CompanyEditViewModel.LoadAsync(companyId, initialSection = null)
-  - CompanyEditView → Dönem sekmesi ContentControl (code-behind'da PeriodListView)
-  - ShellViewModel → OpenPeriodEditViewAsync, _currentCompanyId state
-  - ShellViewModel → OpenCompanyEditViewAsync(companyId, initialSection = null)
-  - ShellWindow.xaml → PeriodEditViewModel footer DataTemplate
-  - Build: 11 succeeded, 0 failed
-
-2026-09-25 (devam): Kural 54 — Çıkış butonu ikonu notu
-  - Kullanıcı özel kırmızı power-off PNG sağlayacak
-  - Uygulama noktaları: ShellWindow + LoginWindow
-  - Yerleşim: Resources/Icons/ExitButton.png
-  - Build Action: Resource
-  - DevExpress hazır ikon setinde birebir eşleşme yok
-  - ⏳ Henüz uygulanmadı
-
-2026-09-26: Kural 54 TAMAMLANDI + Migration + SQL bağlantı + Firma kaydetme
-  - Resources/Icons/ExitButton.png oluşturuldu (kullanıcı sağladı)
-  - Resources/Icons/Login.png oluşturuldu (kullanıcı sağladı)
-  - ShellWindow.xaml → Çıkış butonu Glyph güncellendi
-  - LoginWindow.xaml → Giriş + Çıkış butonu Glyph güncellendi
-  - Accounting.Desktop.csproj → <Resource Include="Resources\Icons\*.png" /> eklendi
-  - Models\ klasörü silindi (boş kalmıştı)
-  - SQL Server örnek adı tespit edildi: DESKTOP-DFL2OBF
-  - config/appsettings.json → Server=DESKTOP-DFL2OBF
-  - config/appsettings.Development.json → Server=DESKTOP-DFL2OBF
-  - src/Presentation/Accounting.Api/appsettings.json → Server=DESKTOP-DFL2OBF
-  - src/Presentation/Accounting.Api/appsettings.Development.json → Server=DESKTOP-DFL2OBF
-  - AppDbContextFactory.cs → DesignTimeCompanyConnection = DESKTOP-DFL2OBF
-  - MasterDbContextFactory.cs → DesignTimeMasterConnection = DESKTOP-DFL2OBF
-  - Accounting_Master + Accounting_DesignTime veritabanları silindi
-  - InitialMaster migration oluşturuldu
-  - InitialCompany migration oluşturuldu
-  - Update-Database (MasterDbContext) çalıştırıldı
-  - Update-Database (AppDbContext) çalıştırıldı
-  - Firma kaydetme sorunu: FoundationDate boş gidiyordu → API 400
-  - KÖK NEDEN: DateEdit.EditValue binding varsayılan LostFocus
-  - ÇÖZÜM: UpdateSourceTrigger=PropertyChanged eklendi (Kural 55)
-  - CompanyEditView.xaml → FoundationDateNullable + PayrollCutoffDateNullable
-  - Firma kaydetme ÇALIŞIYOR ✅
-
-2026-09-27: AŞAMA 3 (Kod) + IsSpecial + Kural 56/57 + Dönem combo düzeltmesi
-  - Period.cs → IsSpecial eklendi (bool, default false)
-  - Period.cs → IsStandard computed eklendi
-  - Period.cs → JournalStartNumber/IncomeStartNumber/ExpenseStartNumber default = 1
-  - PeriodConfiguration.cs → IsSpecial bit IsRequired + IsStandard Ignore
-  - PeriodService.cs → CopyFields.IsSpecial + EnsureSpecialPeriodUniqueAsync
-  - PeriodService.cs → Create + Update'te özel dönem tekillik kontrolü
-  - PeriodEditViewModel.cs → IsSpecialPeriod setter'ında Confirm onay akışı
-  - PeriodEditViewModel.cs → _suppressSpecialConfirm bayrağı
-  - PeriodEditViewModel.cs → Validate → özel dönemde Ocak ayı reddi
-  - PeriodEditViewModel.cs → BuildPeriodFromForm → IsSpecial eklendi
-  - PeriodEditViewModel.cs → FillFromPeriod → IsSpecial yüklendi
-  - PeriodEditViewModel.cs → RecalculateDates → Save öncesi çağrı
-  - PeriodEditViewModel.cs → 3 başlangıç no default = 1
-  - PeriodEditView.xaml → Özel Dönem Warning ikon + ToolTip
-  - PeriodEditView.xaml → Year ComboBox Mode=TwoWay
-  - ShellWindow.xaml → Dönem ComboBox DisplayMember Name → DisplayName
-  - ShellWindow.xaml → Dönem ComboBox Width 180 → 220
-  - ShellViewModel.cs → OnPeriodEditSavedAsync → ReloadPeriodsForCurrentCompanyAsync
-  - ShellViewModel.cs → OnPeriodEditCancelledAsync → ReloadPeriodsForCurrentCompanyAsync
-  - ShellViewModel.cs → OnCompanyEditSavedAsync → LoadCompanies + ReloadPeriods
-  - ShellViewModel.cs → ReloadPeriodsForCurrentCompanyAsync (yeni metot)
-  - ShellViewModel.cs → SelectedCompany referans senkronu (_suppressCompanyChanged)
-  - Kural 56 eklendi (Özel Dönem akışı — UI + Business + EF)
-  - Kural 57 eklendi (Başlangıç numaraları default = 1)
-
-2026-09-27 (akşam): DÖNEM KAYDETME SORUNU ÇÖZÜLDÜ
-  Sorun 1: Migration uyumsuzluğu
-    - 'Invalid column name IsSpecial' hatası
-    - AddIsSpecialToPeriods migration boş üretildi
-    - Çözüm: Tüm migration klasörleri temizlendi, DB silindi,
-      InitialMaster + InitialCompany yeniden üretildi + uygulandı
-
-  Sorun 2: [ApiController] non-nullable string zorunluluğu
-    - VatRate, SystemCurrency, ExchangeRateMode için 400 ValidationError
-    - KÖK NEDEN: <Nullable>enable</Nullable> + [ApiController] kombinasyonu
-      non-nullable string'leri otomatik [Required] gibi işliyor
-    - Çözüm: Program.cs → MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true (KURAL 58)
-
-  Sorun 3: SystemCurrency NULL insert hatası
-    - ComboBoxEdit seçim yapılmadığında EditValue = null
-    - CommunityToolkit [ObservableProperty] private string _x = string.Empty
-      korumuyor çünkü ComboBoxEdit null gönderiyor
-    - Çözüm: PeriodEditViewModel.BuildPeriodFromForm'da tüm string alanlara
-      ?? string.Empty (KURAL 59)
-
-  Ek değişiklikler:
-    - Program.cs → JsonSerializerOptions.PropertyNameCaseInsensitive = true
-    - Program.cs → ApiBehaviorOptions.InvalidModelStateResponseFactory
-      (ModelState hatalarını logla + Result formatında dön)
-    - ResultActionFilter.cs → result.IsFailure durumunda Serilog log
-    - PeriodEditViewModel.cs → RecalculateDates başta çağrılıyor
-    - PeriodEditViewModel.cs → RecalculateDates startDate >= endDate düzeltmesi
-    - PeriodEditViewModel.cs → PopulateYears Math.Max(currentYear, foundationYear)
-    - ControlStyles.xaml → IntegerEditStyle (SpinEdit için, hazır)
-    - ControlStyles.xaml → NumericTextEditStyle (TextEdit için, korundu)
-
-  Test sonuçları:
-    - 20:20:40 POST /api/periods responded 200
-    - 20:25:08 POST /api/periods responded 200
-    - DÖNEM KAYDETME ÇALIŞIYOR ✅
-
-  Açık kalan teşhis log satırları (kalıcı):
-    - [PeriodEditViewModel.Load] ve [PeriodEditViewModel.Save] log satırları
-      → Gelecekteki hataları hızlı teşhis için faydalı
-    - [ResultActionFilter] ve [ApiBehavior ModelState] log satırları
-      → Global hata loglama (kalıcı)
+2026-09-19: Faz G + G+1
+2026-09-20: Faz A (Dönem master-detail)
+2026-09-25: AŞAMA 1 (MinFoundationDateBehavior)
+2026-09-25: AŞAMA 2 (Period ayrı sayfa)
+2026-09-26: Kural 54 (ExitButton.png, Login.png)
+2026-09-26: SQL bağlantı düzeltmesi (DESKTOP-DFL2OBF)
+2026-09-26: Kural 55 (UpdateSourceTrigger=PropertyChanged)
+2026-09-27: Kural 56 (Özel Dönem)
+2026-09-27: Kural 57 (Başlangıç numaraları = 1)
+2026-09-27: Dönem kaydetme çözüldü (KURAL 58 + 59)
+2026-09-28: Kural 60 (Id overwrite yasak)
+2026-09-28: KURAL 61 (ApiProcessManager)
+2026-09-28: KURAL 62 (Single Startup Project)
+2026-09-28: KURAL 63 (KillZombieProcesses)
+2026-09-28: KURAL 64 (appsettings Urls)
+2026-09-28: KURAL 65 (Migration Manifest Cache)
+2026-09-28: KURAL 66 (GetPendingMigrationsAsync)
+2026-09-28: KURAL 67 (ReadyToRun Publish — 18sn → 4.7sn)
+2026-09-28: KURAL 68 (Web SDK OutputType=WinExe)
 
 ---------------------------------------------------------------------
-18. SONRAKİ SOHBET BAŞLATMA TALİMATI
+19. SONRAKİ SOHBET BAŞLATMA TALİMATI
 ---------------------------------------------------------------------
 "Muhasebe projesi. Aşağıda PROJE.txt ve PROJE_SOURCE_DUMP.txt
 içeriği var.
+
+Şu an durum:
+- R2R publish ÇALIŞIYOR (18sn → 4.7sn)
+- Migration Manifest Cache aktif (sonraki çalıştırmalar 1.4sn)
+- ApiProcessManager child process yönetimi aktif
+- KillZombieProcesses build target aktif
+- Zombie process sorunu çözüldü
+
+Devam edilecek konular (öncelik sırası):
+1. Desktop'ı Release publish binary'sine yönlendir
+2. R2R açılış testi (4-5 saniye hedef)
+3. Özel Dönem tam akış testi
+4. 2. Sınıf dönem testi
+5. Kapanış tarihi dolu dönem testi
+6. SpinEdit geçişi testi
+7. Splash Screen (opsiyonel)
+8. Firma Detayları (Ortaklar/Adres/İletişim/Kontak)
+9. Lookup Admin Ekranı
+10. Genel Muhasebe (Hesap Planı + Yevmiye)
+11. Faz J (Test)
+
+Not:
+- PROJE.txt'de değişiklik yapıldığında Kural 31 gereği EKSİKSİZ TAM
+  yazılır.
+- Yeni özellik eklemeden önce mevcut durumu doğrula.
+- Sorun çıkarsa önce log dosyasına bak, sonra kod."

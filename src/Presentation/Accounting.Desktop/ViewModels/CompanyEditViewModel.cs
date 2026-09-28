@@ -27,7 +27,7 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
     #endregion Constants
 
     #region Events
-    public event EventHandler SaveCompleted = delegate { };
+    public event EventHandler<Guid> SaveCompleted = delegate { };
     public event EventHandler Cancelled = delegate { };
     #endregion Events
 
@@ -323,7 +323,7 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
 
         if (succeeded)
         {
-            SaveCompleted.Invoke(this , EventArgs.Empty);
+            SaveCompleted.Invoke(this , _companyId);
         }
     }
 
@@ -461,27 +461,27 @@ public partial class CompanyEditViewModel : ObservableObject, ITransientService
     {
         Company company = new()
         {
-            ShortName = ShortName,
-            Name = Name,
-            IdentityNumber = IdentityNumber,
-            TaxNumber = TaxNumber,
-            LegalStatus = LegalStatus,
-            LegalNature = LegalNature,
-            Description = Description,
-            TaxOffice = TaxOffice,
+            ShortName = ShortName ?? string.Empty,
+            Name = Name ?? string.Empty,
+            IdentityNumber = IdentityNumber ?? string.Empty,
+            TaxNumber = TaxNumber ?? string.Empty,
+            LegalStatus = LegalStatus ?? string.Empty,
+            LegalNature = LegalNature ?? string.Empty,
+            Description = Description ?? string.Empty,
+            TaxOffice = TaxOffice ?? string.Empty,
             FoundationDate = FoundationDate,
-            ActivityCode = ActivityCode,
-            SocialSecurityInstitution = SocialSecurityInstitution,
-            ProfessionalOrganization = ProfessionalOrganization,
-            ProfessionalOrganizationMemberNumber = ProfessionalOrganizationMemberNumber,
-            TradeRegistryOffice = TradeRegistryOffice,
-            TradeRegistryNumber = TradeRegistryNumber,
-            RegistryNumber = RegistryNumber,
-            WithholdingDeclarationMethod = WithholdingDeclarationMethod,
-            Create302RecordForWithholding = Create302RecordForWithholding,
+            ActivityCode = ActivityCode ?? string.Empty,
+            SocialSecurityInstitution = SocialSecurityInstitution ?? string.Empty,
+            ProfessionalOrganization = ProfessionalOrganization ?? string.Empty,
+            ProfessionalOrganizationMemberNumber = ProfessionalOrganizationMemberNumber ?? string.Empty,
+            TradeRegistryOffice = TradeRegistryOffice ?? string.Empty,
+            TradeRegistryNumber = TradeRegistryNumber ?? string.Empty,
+            RegistryNumber = RegistryNumber ?? string.Empty,
+            WithholdingDeclarationMethod = WithholdingDeclarationMethod ?? string.Empty,
+            Create302RecordForWithholding = Create302RecordForWithholding ?? string.Empty,
             PayrollCutoffDate = PayrollCutoffDate,
-            MerisNumber = MerisNumber,
-            TaxAuthorityUsername = TaxAuthorityUsername,
+            MerisNumber = MerisNumber ?? string.Empty,
+            TaxAuthorityUsername = TaxAuthorityUsername ?? string.Empty,
             IsSpecialTaxpayer = IsSpecialTaxpayer,
             SendReceiptDescriptionForDbs = SendReceiptDescriptionForDbs,
             SendReceiptDescriptionForLedger = SendReceiptDescriptionForLedger,
